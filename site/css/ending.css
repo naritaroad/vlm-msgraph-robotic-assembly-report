@@ -59,19 +59,36 @@ a.cite:hover { background: var(--accent-wash); text-decoration: underline; }
 .thanks-gears { position: absolute; inset: 0; width: 100%; height: 100%; opacity: .5; }
 .thanks-inner { position: relative; max-width: 980px; }
 .thanks-kicker { font-family: var(--font-mono); font-size: var(--fs-note); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
-.thanks-title { margin-top: var(--s-4); display: grid; gap: var(--s-2); font-family: var(--font-display); line-height: .95; }
-.thanks-title .t-zh {
-  font-size: clamp(3.5rem, 2rem + 8vw, 9rem);
+/* The title follows the interface language: English shows "Thank you", Chinese shows 感謝聆聽, both shows
+   "Thank you" large with 感謝聆聽 as a spaced line under it. One line is the hero, the other (only in both) the echo. */
+.thanks-title { margin-top: var(--s-4); display: grid; justify-items: center; gap: var(--s-3); font-family: var(--font-display); line-height: .95; }
+.thanks-title > span { display: none; }
+html[data-lang="en"] .thanks-title .t-en, html:not([data-lang]) .thanks-title .t-en,
+html[data-lang="zh"] .thanks-title .t-zh,
+html[data-lang="both"] .thanks-title .t-en,
+html[data-lang="both"] .thanks-title .t-zh { display: block; }
+/* the hero: big, with the light sweeping across it */
+html[data-lang="en"] .thanks-title .t-en, html:not([data-lang]) .thanks-title .t-en, html[data-lang="both"] .thanks-title .t-en,
+html[data-lang="zh"] .thanks-title .t-zh {
   font-weight: 800;
-  letter-spacing: .04em;
   background: linear-gradient(100deg, var(--ink) 0%, var(--ink) 30%, var(--brand-tile) 50%, var(--spark) 62%, var(--ink) 80%);
   background-size: 260% 100%;
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
   animation: thanks-shine 7s var(--ease) infinite;
+  padding-bottom: .06em;   /* keep descenders (y) inside the clipped background */
 }
-.thanks-title .t-en { font-size: clamp(1.5rem, 1rem + 2.2vw, 3rem); font-weight: 600; letter-spacing: .3em; text-transform: uppercase; color: var(--ink-2); }
+.thanks-title .t-en { font-size: clamp(3.25rem, 1.8rem + 7.4vw, 8.5rem); letter-spacing: -.015em; }
+.thanks-title .t-zh { font-size: clamp(3.5rem, 2rem + 8vw, 9rem); letter-spacing: .04em; }
+/* the echo under it, only when both languages show */
+html[data-lang="both"] .thanks-title .t-zh {
+  font-size: clamp(1.5rem, 1rem + 2.2vw, 3rem);
+  font-weight: 600;
+  letter-spacing: .42em;
+  margin-right: -.42em;    /* the tracking after the last character would push it off centre */
+  color: var(--ink-2);
+}
 @keyframes thanks-shine { 0%, 15% { background-position: 100% 0; } 60%, 100% { background-position: 0 0; } }
 .thanks-meta { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--s-3) var(--s-6); margin-top: var(--s-6); }
 .thanks-meta > div { display: grid; gap: 2px; }
@@ -85,7 +102,7 @@ a.cite:hover { background: var(--accent-wash); text-decoration: underline; }
 .thanks .reveal { opacity: 0; transform: translateY(18px); transition: opacity 700ms var(--ease-out), transform 700ms var(--ease-out); }
 .thanks.is-in .reveal { opacity: 1; transform: none; }
 @media (prefers-reduced-motion: reduce) {
-  .thanks-bg i, .thanks-title .t-zh { animation: none; }
+  .thanks-bg i, .thanks-title > span { animation: none; }
   .thanks .reveal { opacity: 1; transform: none; transition: none; }
 }
 

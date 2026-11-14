@@ -869,7 +869,7 @@ export async function mount(el, ctx = {}) {
       });
     }
     root.dataset.state = 'ready';
-    try { window.__labDebug = lab.debug; } catch { /* tools only */ }
+    try { window.__labDebug = lab.debug; window.__lab = lab; } catch { /* tools only */ }
     lab.onOrbit?.((on) => paintOrbit(on));
     const p0 = call((l) => l.getParams?.());
     if (p0 && typeof p0 === 'object') for (const [k, v] of Object.entries(p0)) if (k in params && Number.isFinite(v)) { params[k] = v; knobs[k]?.set(v); }

@@ -643,6 +643,14 @@ export async function createModelViewer(container, opts = {}) {
   const handle = {
     setModel, explode, toggleExplode, reset, pick, dispose, resize, info,
     get model() { return model; },
+    /** Camera eye and orbit target, for tools that copy one viewer's view to another. */
+    getView() { return { p: camera.position.toArray(), t: controls.target.toArray() }; },
+    setView(v) {
+      if (!v || !Array.isArray(v.p) || !Array.isArray(v.t)) return;
+      camera.position.fromArray(v.p); controls.target.fromArray(v.t); controls.update(); wake();
+    },
+    /** Key of the picked part (its group), or null. */
+    get picked() { return selected === null ? null : (parts.find((p) => p.group === selected)?.def.key ?? null); },
     get canvas() { return canvas; },
     /** The WebGL canvas behind this viewer (shared unless `dedicated`). For tests of context loss. */
     get glCanvas() { return stage.canvas; },

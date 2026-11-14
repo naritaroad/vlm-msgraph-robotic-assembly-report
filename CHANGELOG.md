@@ -14,6 +14,8 @@ All notable changes to this repository are documented here. The format follows [
 
 ### Changed
 
+- The thank-you title follows the interface language: English shows only "Thank you", Chinese shows only 感謝聆聽, and the bilingual view shows a large "Thank you" with a smaller, letter-spaced 感謝聆聽 under it.
+- The model viewer exposes its camera view and picked part, and the lab panel exposes the lab handle, for tools that mirror one window into another.
 - README cover screenshot (`docs/assets/cover.jpg`) retaken with the new QR code.
 - The README banner is now a render of the lab's xArm6 placing the blue gear, with the Fig. 7 triples (`docs/assets/banner.webp`, replacing `banner.svg`).
 
