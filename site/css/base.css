@@ -1,0 +1,311 @@
+/* base.css — reset, type, language switching, focus, and the small parts every page shares
+   (tags, buttons, dialogs, readouts). Colours and sizes come from tokens.css. */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  background: var(--paper);
+  scroll-padding-top: calc(var(--sticky-top, 0px) + var(--s-4));
+  scroll-padding-bottom: calc(var(--hud-h) + var(--s-4));
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  font-kerning: normal;
+  text-rendering: optimizeLegibility;
+  overflow-wrap: break-word;
+}
+
+h1, h2, h3, h4, p, figure, dl, dd, ol, ul, blockquote { margin: 0; }
+ol, ul { padding: 0; list-style: none; }
+img, video, canvas, svg { max-width: 100%; }
+img, video { height: auto; display: block; }
+table { border-collapse: collapse; border-spacing: 0; }
+button, input, select, textarea { font: inherit; color: inherit; }
+button { background: none; border: 0; padding: 0; cursor: pointer; text-align: inherit; }
+button:disabled { cursor: not-allowed; }
+a { color: var(--link); text-underline-offset: .18em; text-decoration-thickness: 1px; }
+a:hover { text-decoration-thickness: 2px; }
+summary { cursor: pointer; }
+[hidden] { display: none !important; }
+
+h1, h2, h3 {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  line-height: var(--lh-tight);
+  letter-spacing: -.01em;
+  text-wrap: balance;
+}
+p, li, dd, figcaption { text-wrap: pretty; }
+
+:lang(zh-Hant) { line-height: var(--lh-zh); letter-spacing: .01em; }
+h1 :lang(zh-Hant), h2 :lang(zh-Hant), h3 :lang(zh-Hant),
+button :lang(zh-Hant), th :lang(zh-Hant), dt :lang(zh-Hant), small :lang(zh-Hant) { line-height: inherit; letter-spacing: 0; }
+
+code, kbd, samp, output, .mono {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "zero" 0;
+}
+kbd {
+  display: inline-block;
+  min-width: 1.7em;
+  padding: 0 .4em;
+  border: 1px solid var(--rule-strong);
+  border-bottom-width: 2px;
+  border-radius: var(--r-2);
+  background: var(--card);
+  font-size: .82em;
+  line-height: 1.5;
+  text-align: center;
+}
+
+/* ── focus: 2 px accent ring, 2 px away from the control ── */
+:focus { outline: none; }
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+  border-radius: var(--r-1);
+}
+
+.skip {
+  position: absolute;
+  left: var(--s-2);
+  top: -100px;
+  z-index: 100;
+  padding: var(--s-3) var(--s-4);
+  background: var(--ink);
+  color: var(--paper);
+  font-weight: 600;
+  text-decoration: none;
+}
+.skip:focus { top: var(--s-2); }
+
+.vh {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  margin: -1px; padding: 0; border: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* ── three languages: en, zh, both (docs/content-guide.md §2) ── */
+html[data-lang="en"] .zh,
+html:not([data-lang]) .zh { display: none !important; }
+html[data-lang="zh"] .en { display: none !important; }
+
+html[data-lang="both"] .zh {
+  font-size: .82em;
+  color: var(--ink-2);
+  margin-inline-start: .45em;
+}
+/* In running text the Chinese sits on its own line under the English. */
+html[data-lang="both"] :is(h1, h2, h3, p, li, dd, figcaption, summary, .do-note, .lede) > span.zh,
+html[data-lang="both"] :is(p, div, li).zh {
+  display: block;
+  margin-inline-start: 0;
+  margin-block-start: .2em;
+}
+html[data-lang="both"] :is(h1, h2, h3) > span.zh {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: .56em;
+  line-height: 1.5;
+  letter-spacing: 0;
+  margin-block-start: .5em;
+}
+/* Bold lead-ins ("The paper:" / "論文寫：") keep one language so the line does not start twice. */
+html[data-lang="both"] b.zh, html[data-lang="both"] strong.zh { display: none; }
+.bay .zh, .on-bay .zh { color: inherit; }
+html[data-lang="both"] :is(.bay, .on-bay) .zh { color: var(--bay-muted); }
+
+/* ── evidence tags: ten kinds, each a text/background pair from the tokens ── */
+.tag {
+  --tag-fg: var(--t-notstated-fg);
+  --tag-bg: var(--t-notstated-bg);
+  display: inline-flex;
+  align-items: center;
+  gap: .4em;
+  padding: .12em .5em .14em;
+  border-radius: var(--r-1);
+  background: var(--tag-bg);
+  color: var(--tag-fg);
+  font-family: var(--font-mono);
+  font-size: var(--fs-note);
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: .01em;
+  white-space: nowrap;
+  vertical-align: .08em;
+}
+.tag::before {
+  content: "";
+  width: .5em; height: .5em;
+  background: currentColor;
+  flex: none;
+}
+[data-tag="Paper"]      { --tag-fg: var(--t-paper-fg);     --tag-bg: var(--t-paper-bg); }
+[data-tag="Derived"]    { --tag-fg: var(--t-derived-fg);   --tag-bg: var(--t-derived-bg); }
+[data-tag="Not stated"] { --tag-fg: var(--t-notstated-fg); --tag-bg: var(--t-notstated-bg); }
+[data-tag="Mismatch"]   { --tag-fg: var(--t-mismatch-fg);  --tag-bg: var(--t-mismatch-bg); }
+[data-tag="Loose"]      { --tag-fg: var(--t-loose-fg);     --tag-bg: var(--t-loose-bg); }
+[data-tag="Citation"]   { --tag-fg: var(--t-citation-fg);  --tag-bg: var(--t-citation-bg); }
+[data-tag="Demo"]       { --tag-fg: var(--t-demo-fg);      --tag-bg: var(--t-demo-bg); }
+[data-tag="Local run"]  { --tag-fg: var(--t-localrun-fg);  --tag-bg: var(--t-localrun-bg); }
+[data-tag="External"]   { --tag-fg: var(--t-external-fg);  --tag-bg: var(--t-external-bg); }
+[data-tag="My view"]    { --tag-fg: var(--t-myview-fg);    --tag-bg: var(--t-myview-bg); }
+/* The marker shape repeats the family, so colour is not the only cue:
+   square = from the paper, ring = a gap or problem in the paper, diamond = ours. */
+.tag:is([data-tag="Not stated"], [data-tag="Mismatch"], [data-tag="Loose"], [data-tag="Citation"])::before {
+  background: none;
+  border: 2px solid currentColor;
+  border-radius: 50%;
+}
+.tag:is([data-tag="Demo"], [data-tag="Local run"], [data-tag="My view"], [data-tag="External"])::before {
+  transform: rotate(45deg) scale(.85);
+}
+
+/* ── kinds of quantity ── */
+.kind {
+  --kind: var(--muted);
+  display: inline-flex;
+  align-items: center;
+  gap: .4em;
+  color: var(--kind);
+  font-family: var(--font-mono);
+  font-size: var(--fs-note);
+  font-weight: 600;
+  white-space: nowrap;
+}
+.kind::before { content: ""; width: .55em; height: .55em; background: currentColor; flex: none; }
+.kind[data-kind="data"]     { --kind: var(--kind-data); }
+.kind[data-kind="data"]::before { border-radius: 50%; }
+.kind[data-kind="setting"]  { --kind: var(--kind-setting); }
+.kind[data-kind="setting"]::before { transform: rotate(45deg) scale(.9); }
+.kind[data-kind="computed"] { --kind: var(--kind-computed); }
+.kind[data-kind="computed"]::before { clip-path: polygon(50% 0, 100% 100%, 0 100%); }
+.kind[data-kind="model"]    { --kind: var(--kind-model); }
+
+/* ── live values (data-bind). Empty until an instrument writes to them. ── */
+output[data-bind] {
+  display: inline-block;
+  min-width: 2.5ch;
+  padding: 0 .35em;
+  border-radius: var(--r-1);
+  background: var(--paper-2);
+  box-shadow: inset 2px 0 0 var(--read);
+  color: var(--ink);
+  font-size: .9em;
+  white-space: nowrap;
+  transition: background-color var(--t-flash) var(--ease);
+}
+output[data-bind]:empty::before { content: "—"; color: var(--muted); }
+output[data-bind].is-fresh { background: var(--accent-wash); transition: none; }
+output[data-bind] .u { margin-inline-start: .3em; color: var(--muted); font-size: .88em; }
+output[data-bind] .mx {
+  display: inline-grid;
+  grid-template-columns: repeat(var(--cols, 3), auto);
+  gap: 0 .9ch;
+  padding: .15em .5ch;
+  border-inline: 1px solid currentColor;
+  border-radius: 3px;
+  text-align: right;
+  line-height: 1.4;
+  vertical-align: middle;
+}
+output[data-bind]:has(.mx) { white-space: normal; padding-block: .25em; }
+
+/* ── buttons ── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s-2);
+  min-height: var(--hit);
+  padding: var(--s-2) var(--s-4);
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--r-2);
+  background: var(--card);
+  color: var(--ink);
+  font-size: var(--fs-small);
+  font-weight: 600;
+  line-height: 1.25;
+  text-decoration: none;
+  transition: background-color var(--t-press) var(--ease), border-color var(--t-press) var(--ease);
+}
+.btn:hover { border-color: var(--ink-2); }
+.btn:active { background: var(--paper-2); }
+.btn-primary { border-color: var(--accent); background: var(--accent); color: var(--accent-ink); }
+.btn-primary:hover { border-color: var(--accent-text); filter: brightness(1.08); }
+.btn-primary:active { background: var(--accent); filter: brightness(.94); }
+.btn[disabled], .btn[aria-disabled="true"] { opacity: .5; }
+
+.icon-btn {
+  display: inline-grid;
+  place-items: center;
+  width: var(--hit);
+  height: var(--hit);
+  border-radius: var(--r-2);
+  color: inherit;
+  transition: background-color var(--t-press) var(--ease);
+}
+.icon-btn:hover { background: color-mix(in srgb, currentColor 12%, transparent); }
+.icon-btn svg, .btn svg { width: 20px; height: 20px; flex: none; fill: none; stroke: currentColor; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; }
+
+/* ── dialogs: figure zoom, keyboard help ── */
+dialog {
+  max-width: min(96vw, 1200px);
+  max-height: 92vh;
+  max-height: 92dvh;
+  padding: 0;
+  border: 1px solid var(--rule);
+  border-radius: var(--r-3);
+  background: var(--card);
+  color: var(--ink);
+  box-shadow: var(--shadow-pop);
+}
+dialog::backdrop { background: var(--scrim); }
+.dialog-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-4);
+  padding: var(--s-2) var(--s-2) var(--s-2) var(--s-5);
+  border-bottom: 1px solid var(--rule);
+}
+.dialog-head h2 { font-family: var(--font-sans); font-size: var(--fs-body); letter-spacing: 0; }
+.dialog-body { padding: var(--s-5); overflow: auto; max-height: calc(92vh - 64px); max-height: calc(92dvh - 64px); }
+
+.zoom-dialog { background: var(--bay); color: var(--bay-ink); border-color: var(--bay-rule); width: min(96vw, 1400px); }
+.zoom-dialog .dialog-head { border-color: var(--bay-rule); }
+.zoom-dialog .dialog-body { padding: var(--s-4); }
+.zoom-dialog img { margin: 0 auto; max-height: calc(92vh - 150px); max-height: calc(92dvh - 150px); width: auto; background: #fff; }
+.zoom-dialog figcaption { margin-top: var(--s-3); color: var(--bay-muted); font-size: var(--fs-small); }
+
+.keys-table { width: 100%; font-size: var(--fs-small); }
+.keys-table th, .keys-table td { padding: var(--s-2) var(--s-3) var(--s-2) 0; border-bottom: 1px solid var(--rule); text-align: left; vertical-align: baseline; }
+.keys-table th { width: 11em; font-weight: 400; white-space: nowrap; }
+
+/* ── KaTeX fit inside narrow columns ── */
+.katex { font-size: 1.08em; line-height: 1.25; }
+.katex-display { margin: 0; text-align: left; }
+.katex-display > .katex { text-align: left; white-space: nowrap; }
+[data-tex]:not(.is-typeset) { font-family: var(--font-mono); font-size: .85em; }
+[data-tex]:not(.is-typeset):empty::before { content: attr(data-tex); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
+}

@@ -1,0 +1,34 @@
+{
+ "about": "Expected vs detected counts at box_threshold 0.35 / text_threshold 0.25 (detected = boxes after per-prompt NMS at IoU 0.5). 'correct' and 'top1_correct' are a manual visual check of each box against the photo, done after the run by the agent that ran it; they are not model output. 'partial' = box covers only part of the right object. In the assembled still the parts are inside or on other parts, so a box on the whole assembled pen is counted as correct for a part of that pen.",
+ "sceneA_still": [
+  {"prompt": "scissors", "expected": 1, "detected": 3, "correct": 1, "top1_correct": true, "wrong_boxes_on": ["adjustable wrench", "alligator clip"]},
+  {"prompt": "silver adjustable wrench", "expected": 1, "detected": 1, "correct": 1, "top1_correct": true},
+  {"prompt": "silver utility knife", "expected": 1, "detected": 1, "correct": 1, "top1_correct": true},
+  {"prompt": "thin metal rod", "expected": 1, "detected": 1, "correct": 1, "top1_correct": true},
+  {"prompt": "nail clipper", "expected": 1, "detected": 6, "correct": 1, "top1_correct": false, "correct_rank": 3, "wrong_boxes_on": ["spring clip (rank 1)", "adjustable wrench", "stapler", "utility knife", "alligator clip"]},
+  {"prompt": "stapler", "expected": 1, "detected": 0, "correct": 0, "top1_correct": false, "fallback_0.25": {"detected": 1, "correct": 1, "score": 0.276}},
+  {"prompt": "metal clip", "expected": 2, "detected": 5, "correct": 2, "top1_correct": false, "correct_ranks": [2, 5], "wrong_boxes_on": ["adjustable wrench (rank 1)", "utility knife", "nail clipper"]},
+  {"prompt": "small silver hexagonal nut", "expected": 6, "detected": 6, "correct": 6, "top1_correct": true, "note": "all six scores between 0.356 and 0.387, just above the 0.35 cut"},
+  {"prompt": "steel ruler", "expected": 1, "detected": 1, "correct": 1, "top1_correct": true}
+ ],
+ "sceneB_disassembled": [
+  {"prompt": "transparent pen barrel with black clip", "expected": 1, "detected": 3, "correct": 0, "top1_correct": false, "wrong_boxes_on": ["black refill (rank 1)", "red grip", "black grip"]},
+  {"prompt": "transparent pen barrel with red clip", "expected": 1, "detected": 2, "correct": 0, "partial": 1, "top1_correct": false, "wrong_boxes_on": ["red grip (rank 1)"], "note": "rank 2 box covers only the red clip end of the red-clip barrel"},
+  {"prompt": "black pen refill", "expected": 1, "detected": 3, "correct": 1, "top1_correct": false, "correct_rank": 2, "wrong_boxes_on": ["purple refill (rank 1, 0.638 vs 0.634)", "black grip"]},
+  {"prompt": "purple pen refill", "expected": 1, "detected": 6, "correct": 1, "top1_correct": true, "wrong_boxes_on": ["every other pen part (5 boxes)"]},
+  {"prompt": "black rubber pen grip", "expected": 1, "detected": 4, "correct": 1, "top1_correct": false, "correct_rank": 3, "wrong_boxes_on": ["purple refill", "black refill", "black-clip barrel"]},
+  {"prompt": "red rubber pen grip", "expected": 1, "detected": 6, "correct": 1, "top1_correct": false, "correct_rank": 3, "wrong_boxes_on": ["purple refill", "black refill", "red-clip barrel", "black grip", "black-clip barrel"]},
+  {"prompt": "silver three-lobed spinner", "expected": 1, "detected": 3, "correct": 1, "top1_correct": true, "wrong_boxes_on": ["cap 1", "cap 2"]},
+  {"prompt": "small round metal cap", "expected": 2, "detected": 2, "correct": 2, "top1_correct": true}
+ ],
+ "sceneB_assembled": [
+  {"prompt": "transparent pen barrel with black clip", "expected": 1, "detected": 3, "correct": 1, "partial": 1, "top1_correct": false, "wrong_boxes_on": ["spinner (rank 1, 0.636)"], "note": "rank 2 = whole black pen, rank 3 = its clip end"},
+  {"prompt": "transparent pen barrel with red clip", "expected": 1, "detected": 4, "correct": 1, "partial": 1, "top1_correct": false, "wrong_boxes_on": ["spinner (rank 1)", "whole black pen"]},
+  {"prompt": "black pen refill", "expected": 1, "detected": 2, "correct": 1, "top1_correct": true, "wrong_boxes_on": ["whole red pen"], "note": "box = whole black pen, which holds the black refill (orange tail visible through the barrel); the refill itself is not localised separately"},
+  {"prompt": "purple pen refill", "expected": 1, "detected": 2, "correct": 1, "top1_correct": "tie", "wrong_boxes_on": ["whole black pen"], "note": "two boxes, one per whole pen, both 0.711 to 3 decimals; the purple refill is in the red pen (visible through the barrel), which is listed first; the refill itself is not localised separately"},
+  {"prompt": "black rubber pen grip", "expected": 1, "detected": 2, "correct": 1, "top1_correct": true, "wrong_boxes_on": ["whole red pen"], "note": "box = whole black pen, not the grip"},
+  {"prompt": "red rubber pen grip", "expected": 1, "detected": 2, "correct": 1, "top1_correct": true, "wrong_boxes_on": ["whole black pen"], "note": "box = whole red pen, not the grip"},
+  {"prompt": "silver three-lobed spinner", "expected": 1, "detected": 1, "correct": 1, "top1_correct": true},
+  {"prompt": "small round metal cap", "expected": 2, "detected": 1, "correct": 0, "top1_correct": false, "note": "caps are mounted on the spinner; the single box covers the whole spinner"}
+ ]
+}

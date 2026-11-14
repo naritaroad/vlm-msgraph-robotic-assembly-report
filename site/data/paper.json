@@ -1,0 +1,23 @@
+{
+  "source": "docs/facts.md (checked against the paper PDF/Markdown)",
+  "table1": [
+    {"model": "GPT-4o", "rT": 30.25, "mrT": 28.35, "rP": 58.03, "mrP": 62.49, "rA": 58.11, "mrA": 59.95},
+    {"model": "GPT-4omini", "rT": 22.85, "mrT": 19.44, "rP": 53.10, "mrP": 56.90, "rA": 48.51, "mrA": 51.76},
+    {"model": "Llama3V & Llama3.1", "rT": 7.56, "mrT": 5.82, "rP": 30.76, "mrP": 35.12, "rA": 25.57, "mrA": 27.96},
+    {"model": "Llama-adapter2 & Llama3.1", "rT": 3.79, "mrT": 3.09, "rP": 12.23, "mrP": 12.32, "rA": 8.75, "mrA": 10.17}
+  ],
+  "table2": [
+    {"product": 1, "without": 12, "with": 17},
+    {"product": 2, "without": 18, "with": 20},
+    {"product": 3, "without": 19, "with": 20},
+    {"product": 4, "without": 13, "with": 18},
+    {"product": 5, "without": 7, "with": 15}
+  ],
+  "table3": [
+    {"step": 1, "prompt": "red large gear", "success": 7},
+    {"step": 2, "prompt": "green medium gear", "success": 9},
+    {"step": 3, "prompt": "yellow medium gear", "success": 8},
+    {"step": 4, "prompt": "blue large gear", "success": 7},
+    {"step": 5, "prompt": "white tiny hexagonal nut", "success": 7}
+  ]
+}

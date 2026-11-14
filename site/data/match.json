@@ -1,0 +1,808 @@
+{
+ "ablation": [
+  "ablation"
+ ],
+ "accuracy": [
+  "accuracy"
+ ],
+ "action-narrator": [
+  "action narrator"
+ ],
+ "agent": [
+  "agent",
+  "agents"
+ ],
+ "analysis-agent": [
+  "analysis agent",
+  "analysis agents"
+ ],
+ "annotation": [
+  "annotation",
+  "annotations",
+  "標註"
+ ],
+ "anygrasp": [
+  "AnyGrasp"
+ ],
+ "api": [
+  "API"
+ ],
+ "argument": [
+  "argument",
+  "arguments",
+  "引數"
+ ],
+ "assembled-state": [
+  "assembled state",
+  "組好狀態"
+ ],
+ "assembly-benchmark": [
+  "assembly benchmark",
+  "基準"
+ ],
+ "assembly-drawing": [
+  "assembly drawing",
+  "assembly drawings",
+  "組裝圖"
+ ],
+ "assembly-drawing-dataset": [
+  "assembly drawing dataset",
+  "data set",
+  "dataset",
+  "資料集"
+ ],
+ "assembly-sequence": [
+  "assembly sequence",
+  "assembly sequences",
+  "組裝順序"
+ ],
+ "assembly-sequence-learning": [
+  "assembly sequence learning"
+ ],
+ "back-projection": [
+  "back-projection",
+  "back-project",
+  "back projection",
+  "回投影"
+ ],
+ "base-searcher": [
+  "base searcher"
+ ],
+ "baseline": [
+  "baseline",
+  "基線"
+ ],
+ "binomial-coefficient": [],
+ "bounding-box": [
+  "bounding box",
+  "bounding boxes",
+  "bounding-box"
+ ],
+ "breadth-first-search": [
+  "breadth-first search",
+  "breadth-first",
+  "BFS"
+ ],
+ "calibration": [
+  "camera calibration",
+  "calibration",
+  "calibrated",
+  "標定"
+ ],
+ "camera-pose": [
+  "camera pose",
+  "camera poses",
+  "extrinsics"
+ ],
+ "camera-view": [
+  "camera view",
+  "camera views",
+  "視角"
+ ],
+ "cartesian-space": [
+  "Cartesian space",
+  "Cartesian",
+  "笛卡兒"
+ ],
+ "centroid": [
+  "centroid",
+  "centroids",
+  "質心"
+ ],
+ "chain-of-thought": [
+  "chain-of-thought"
+ ],
+ "clopper-pearson": [
+  "Clopper–Pearson",
+  "Clopper-Pearson"
+ ],
+ "closed-loop-control": [
+  "closed-loop control",
+  "closed-loop",
+  "closed loop",
+  "閉迴路"
+ ],
+ "collision-free": [
+  "collision-free"
+ ],
+ "confidence-interval": [
+  "confidence interval",
+  "confidence intervals",
+  "Clopper–Pearson interval",
+  "Clopper-Pearson interval",
+  "區間"
+ ],
+ "convergence": [
+  "convergence",
+  "converged",
+  "收斂"
+ ],
+ "coordinate-frame": [
+  "common frame",
+  "world-coordinate",
+  "世界座標",
+  "共同座標",
+  "相機座標"
+ ],
+ "degrees-of-freedom": [
+  "degrees of freedom",
+  "7-DoF",
+  "DoF",
+  "自由度"
+ ],
+ "depth-camera": [
+  "depth camera",
+  "深度相機"
+ ],
+ "depth-map": [
+  "depth map",
+  "depth maps"
+ ],
+ "diffredmax": [
+  "DiffRedMax"
+ ],
+ "disassembled-state": [
+  "disassembled state",
+  "拆開狀態"
+ ],
+ "domain-knowledge": [
+  "domain knowledge",
+  "領域知識"
+ ],
+ "edge": [
+  "edge",
+  "edges"
+ ],
+ "end-effector": [
+  "end-effector",
+  "end effector"
+ ],
+ "euler-angles": [
+  "Euler angles",
+  "Euler angle",
+  "歐拉角"
+ ],
+ "f1": [
+  "F1",
+  "F1 score"
+ ],
+ "few-shot": [
+  "few-shot",
+  "few shot"
+ ],
+ "fisher-exact-test": [
+  "Fisher's exact test",
+  "Fisher's"
+ ],
+ "fitness": [
+  "fitness"
+ ],
+ "focal-length": [
+  "focal length",
+  "focal lengths",
+  "焦距"
+ ],
+ "frustum": [
+  "視錐",
+  "frustum"
+ ],
+ "function": [
+  "function",
+  "functions",
+  "函數"
+ ],
+ "gear": [
+  "gear",
+  "gears",
+  "齒輪"
+ ],
+ "gearbox": [
+  "gearbox",
+  "gearboxes",
+  "齒輪箱"
+ ],
+ "gemma3": [
+  "gemma3:4b"
+ ],
+ "generalization": [
+  "generalization",
+  "transferability"
+ ],
+ "gpt-4o": [
+  "GPT-4o"
+ ],
+ "gpt-4o-mini": [
+  "GPT-4o-mini",
+  "GPT-4omini",
+  "gpt-4o-mini"
+ ],
+ "grasp-pose": [
+  "grasp pose",
+  "grasp poses",
+  "夾取姿態"
+ ],
+ "gripper": [
+  "gripper",
+  "grippers",
+  "夾爪"
+ ],
+ "ground-truth": [
+  "ground truth",
+  "ground-truth",
+  "answer key",
+  "answer-key",
+  "標準答案"
+ ],
+ "grounding-dino": [
+  "Grounding DINO"
+ ],
+ "hallucination": [
+  "hallucination",
+  "hallucinations",
+  "hallucinatory"
+ ],
+ "hand-eye-calibration": [
+  "hand-eye calibration",
+  "hand-eye",
+  "手眼標定"
+ ],
+ "hat-notation": [
+  "帽子"
+ ],
+ "hexagonal-nut": [
+  "hexagonal nut",
+  "六角螺帽",
+  "螺帽"
+ ],
+ "high-level-planning": [
+  "high-level task planning",
+  "high-level planning",
+  "high-level",
+  "high level"
+ ],
+ "hit": [
+  "hit",
+  "hits",
+  "命中"
+ ],
+ "homogeneous-coordinates": [
+  "homogeneous coordinates",
+  "homogeneous coordinate",
+  "homogeneous matrix"
+ ],
+ "hook-marks": [
+  "purple ticks",
+  "purple tick",
+  "green ticks",
+  "green tick",
+  "cyan ticks",
+  "cyan tick",
+  "grey ticks",
+  "grey tick",
+  "gray tick",
+  "綠勾",
+  "紫勾",
+  "青勾",
+  "灰勾",
+  "tick marks"
+ ],
+ "icp": [
+  "ICP",
+  "Iterative Closest Point"
+ ],
+ "image-centre": [
+  "image centre",
+  "image center",
+  "影像中心",
+  "principal point"
+ ],
+ "image-narrator": [
+  "image narrator"
+ ],
+ "implication-arrow": [
+  "implication arrow",
+  "蘊涵箭號",
+  "蘊涵"
+ ],
+ "inference": [
+  "inference"
+ ],
+ "interpretability": [
+  "interpretability"
+ ],
+ "intrinsic-matrix": [
+  "camera intrinsic matrix",
+  "intrinsic matrix"
+ ],
+ "inverse-dynamics": [
+  "inverse dynamics"
+ ],
+ "inverse-kinematics": [
+  "inverse kinematics"
+ ],
+ "joint-angle": [
+  "joint angle",
+  "joint angles",
+  "關節角",
+  "關節"
+ ],
+ "label": [
+  "標籤",
+  "detection label",
+  "detection labels"
+ ],
+ "llama-adapter": [
+  "Llama-adapter2",
+  "Llama-adapter"
+ ],
+ "llama3-1": [
+  "Llama3.1"
+ ],
+ "llama3v": [
+  "Llama3V"
+ ],
+ "llm": [
+  "LLM",
+  "LLMs"
+ ],
+ "loss": [
+  "loss"
+ ],
+ "low-level-memory": [
+  "low-level memory",
+  "low-level",
+  "low level"
+ ],
+ "mask": [
+  "mask",
+  "masks"
+ ],
+ "match-level": [
+  "match level",
+  "match levels",
+  "match-level",
+  "@Triple",
+  "@Pair",
+  "@Action",
+  "比對層級"
+ ],
+ "matrix": [
+  "matrix",
+  "matrices",
+  "矩陣"
+ ],
+ "mean-recall": [
+  "mean recall",
+  "mR"
+ ],
+ "meshing": [
+  "meshing",
+  "meshed with"
+ ],
+ "minimisation": [
+  "minimisation",
+  "minimise",
+  "最小化"
+ ],
+ "mobile-base": [
+  "mobile base",
+  "Agilex Ranger Mini 3",
+  "Ranger Mini 3",
+  "移動底盤",
+  "底盤"
+ ],
+ "msgraph": [
+  "MSGraph",
+  "Multi-hierarchical Scene Graph"
+ ],
+ "narrator": [
+  "narrator",
+  "narrators"
+ ],
+ "nearest-point": [
+  "nearest point",
+  "nearest points",
+  "最近點"
+ ],
+ "node": [
+  "node",
+  "nodes",
+  "節點"
+ ],
+ "noise": [
+  "noise",
+  "雜訊"
+ ],
+ "object": [
+  "受詞"
+ ],
+ "object-detection": [
+  "detector",
+  "detection"
+ ],
+ "object-instance": [
+  "3D object instance",
+  "3D object instances",
+  "object instance",
+  "object instances"
+ ],
+ "open-loop": [
+  "open-loop",
+  "open loop",
+  "開迴路"
+ ],
+ "open-vocabulary-detection": [
+  "open-vocabulary detection",
+  "open-vocabulary",
+  "open vocabulary"
+ ],
+ "open-weight-model": [
+  "open-weight",
+  "open model",
+  "開放權重"
+ ],
+ "open3d": [
+  "Open3D"
+ ],
+ "optical-axis": [
+  "optical axis",
+  "光軸"
+ ],
+ "order-matching": [
+  "order ignored",
+  "order kept",
+  "不看順序",
+  "看順序"
+ ],
+ "parallel-jaw-gripper": [
+  "parallel-jaw gripper",
+  "parallel-jaw"
+ ],
+ "part-list": [
+  "part list",
+  "part lists",
+  "零件清單",
+  "BOM"
+ ],
+ "pixel": [
+  "pixel",
+  "pixels",
+  "像素"
+ ],
+ "point-cloud": [
+  "point cloud",
+  "point clouds",
+  "點雲"
+ ],
+ "pose": [
+  "pose",
+  "poses",
+  "姿態",
+  "位姿"
+ ],
+ "precision": [
+  "precision"
+ ],
+ "predicate": [
+  "predicate",
+  "predicates",
+  "謂詞"
+ ],
+ "pretrained": [
+  "pretrained",
+  "pre-trained"
+ ],
+ "prompt": [
+  "prompt",
+  "prompts",
+  "提示詞"
+ ],
+ "r-at-action": [
+  "R@Action",
+  "mR@Action"
+ ],
+ "r-at-pair": [
+  "R@Pair",
+  "mR@Pair"
+ ],
+ "r-at-triple": [
+  "R@Triple",
+  "mR@Triple"
+ ],
+ "radian": [
+  "rad"
+ ],
+ "rag": [
+  "RAG",
+  "retrieval-augmented generation"
+ ],
+ "realsense": [
+  "RealSense D455",
+  "RealSense",
+  "D455"
+ ],
+ "recall": [
+  "recall"
+ ],
+ "relation-narrator": [
+  "relation narrator"
+ ],
+ "relation-word": [
+  "relation word",
+  "relation words",
+  "關係詞"
+ ],
+ "rendering": [
+  "rendered",
+  "rendering",
+  "渲染"
+ ],
+ "retrieval": [
+  "retrieval",
+  "retriever"
+ ],
+ "rgb-d": [
+  "RGB-D"
+ ],
+ "rigid-body": [
+  "rigid body",
+  "rigid-body",
+  "剛體"
+ ],
+ "rigid-transform": [
+  "rigid transform",
+  "rigid body motion"
+ ],
+ "rmse": [
+  "RMSE"
+ ],
+ "robot-base": [
+  "robot base",
+  "camera-to-base",
+  "底座"
+ ],
+ "rotation-matrix": [
+  "rotation matrix",
+  "rotation matrices",
+  "旋轉矩陣"
+ ],
+ "rotational-symmetry": [
+  "rotation-symmetric",
+  "旋轉對稱"
+ ],
+ "rough-translation": [
+  "rough translation",
+  "粗平移"
+ ],
+ "sam": [
+  "SAM 2.1",
+  "Grounded SAM",
+  "GroundedSAM-v2",
+  "SAM"
+ ],
+ "sampling-error": [
+  "sampling error",
+  "抽樣誤差",
+  "抽樣"
+ ],
+ "scalar": [
+  "scalar",
+  "純量"
+ ],
+ "scene-graph": [
+  "scene graph",
+  "scene graphs"
+ ],
+ "segmentation": [
+  "segmentation",
+  "segmenter"
+ ],
+ "semantic-feature": [
+  "semantic feature",
+  "semantic features"
+ ],
+ "set": [
+  "集合"
+ ],
+ "signed-distance-field": [
+  "signed-distance-field",
+  "signed distance field",
+  "SDF"
+ ],
+ "simulation": [
+  "physics simulation",
+  "physics simulator",
+  "simulator",
+  "物理模擬"
+ ],
+ "so3": [
+  "SO(3)",
+  "special orthogonal group"
+ ],
+ "standard-deviation": [
+  "standard deviation",
+  "標準差"
+ ],
+ "statistical-test": [
+  "statistical test",
+  "statistical tests",
+  "統計檢定",
+  "檢定"
+ ],
+ "string-comparison": [
+  "string comparison",
+  "字串比對"
+ ],
+ "subject": [
+  "主詞"
+ ],
+ "subscript": [
+  "subscript",
+  "下標"
+ ],
+ "success-rate": [
+  "success rate",
+  "success rates",
+  "成功率"
+ ],
+ "summation": [],
+ "superscript": [
+  "superscript",
+  "上標"
+ ],
+ "synthetic-data": [
+  "synthetic data",
+  "synthetic",
+  "合成資料"
+ ],
+ "tag-citation": [],
+ "tag-demo": [],
+ "tag-derived": [],
+ "tag-external": [],
+ "tag-local-run": [],
+ "tag-loose": [],
+ "tag-mismatch": [],
+ "tag-my-view": [],
+ "tag-not-stated": [],
+ "tag-paper": [],
+ "taxonomy": [
+  "assembly taxonomy",
+  "taxonomy"
+ ],
+ "tcp": [
+  "TCP"
+ ],
+ "temperature": [
+  "temperature"
+ ],
+ "text-prompt": [
+  "text prompt",
+  "text prompts",
+  "textual prompt",
+  "textual prompts",
+  "文字提示"
+ ],
+ "threshold": [
+  "threshold",
+  "門檻"
+ ],
+ "time-step": [
+  "time step",
+  "time steps",
+  "時間步"
+ ],
+ "training": [
+  "training",
+  "訓練"
+ ],
+ "trajectory": [
+  "trajectory",
+  "trajectories",
+  "軌跡"
+ ],
+ "transformation-matrix": [
+  "4×4 矩陣",
+  "4×4 matrix"
+ ],
+ "translation": [
+  "translation vector",
+  "translation",
+  "平移向量",
+  "平移"
+ ],
+ "trial": [
+  "trial",
+  "trials",
+  "試驗"
+ ],
+ "triple": [
+  "triple",
+  "triples",
+  "triplet",
+  "triplets"
+ ],
+ "triple-extractor": [
+  "triple extractor"
+ ],
+ "two-sided": [
+  "two-sided",
+  "雙尾"
+ ],
+ "union": [
+  "union",
+  "聯集"
+ ],
+ "vector": [
+  "column vector",
+  "行向量",
+  "vector",
+  "vectors",
+  "向量"
+ ],
+ "video-frame": [
+  "影格",
+  "video frame"
+ ],
+ "vlm": [
+  "VLM",
+  "VLMs"
+ ],
+ "voxel-downsampling": [
+  "voxel down-sampling",
+  "voxel downsampling",
+  "down-sampling",
+  "抽稀",
+  "voxel"
+ ],
+ "waypoint": [
+  "waypoint",
+  "waypoints",
+  "路點"
+ ],
+ "weights": [
+  "weights",
+  "weight",
+  "權重"
+ ],
+ "white-cover": [
+  "white cover",
+  "蓋板"
+ ],
+ "with-base": [
+  "with base",
+  "without base",
+  "有 base",
+  "沒有 base"
+ ],
+ "workspace": [
+  "workspace"
+ ],
+ "xarm6": [
+  "UFACTORY xARM6",
+  "xarm6"
+ ],
+ "zero-shot": [
+  "zero-shot",
+  "zero shot"
+ ]
+}

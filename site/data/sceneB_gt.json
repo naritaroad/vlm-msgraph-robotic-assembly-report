@@ -1,0 +1,275 @@
+{
+ "note": "Ground truth written by the presenter BEFORE running any model (recording-guide.html, 2026-11-12), then checked against the assembly video. Alternative orders count as correct; the best-matching one is used.",
+ "parts": [
+  "pen barrel with black clip",
+  "pen barrel with red clip",
+  "black ink refill",
+  "purple ink refill",
+  "black rubber front grip",
+  "red rubber front grip",
+  "spinner body with bearing",
+  "stud cap",
+  "threaded cap"
+ ],
+ "video_steps": [
+  {
+   "t0": 2.0,
+   "t1": 12.0,
+   "triple": [
+    "black ink refill",
+    "inserted into",
+    "pen barrel with black clip"
+   ]
+  },
+  {
+   "t0": 12.0,
+   "t1": 20.0,
+   "triple": [
+    "black rubber front grip",
+    "screw",
+    "pen barrel with black clip"
+   ]
+  },
+  {
+   "t0": 20.0,
+   "t1": 26.0,
+   "triple": [
+    "purple ink refill",
+    "inserted into",
+    "pen barrel with red clip"
+   ]
+  },
+  {
+   "t0": 26.0,
+   "t1": 34.5,
+   "triple": [
+    "red rubber front grip",
+    "screw",
+    "pen barrel with red clip"
+   ]
+  },
+  {
+   "t0": 36.0,
+   "t1": 41.0,
+   "triple": [
+    "stud cap",
+    "goes through",
+    "spinner body with bearing"
+   ]
+  },
+  {
+   "t0": 41.0,
+   "t1": 47.5,
+   "triple": [
+    "threaded cap",
+    "screw",
+    "stud cap"
+   ]
+  }
+ ],
+ "alternatives": [
+  "spinner region first, then pens (regions have no order constraint)",
+  "refills swapped between the two identical pens",
+  "steps 5-6 reversed: threaded cap first, then <stud cap, screw, threaded cap>"
+ ],
+ "gts": [
+  [
+   [
+    "black ink refill",
+    "inserted into",
+    "pen barrel with black clip"
+   ],
+   [
+    "black rubber front grip",
+    "screw",
+    "pen barrel with black clip"
+   ],
+   [
+    "purple ink refill",
+    "inserted into",
+    "pen barrel with red clip"
+   ],
+   [
+    "red rubber front grip",
+    "screw",
+    "pen barrel with red clip"
+   ],
+   [
+    "stud cap",
+    "goes through",
+    "spinner body with bearing"
+   ],
+   [
+    "threaded cap",
+    "screw",
+    "stud cap"
+   ]
+  ],
+  [
+   [
+    "stud cap",
+    "goes through",
+    "spinner body with bearing"
+   ],
+   [
+    "threaded cap",
+    "screw",
+    "stud cap"
+   ],
+   [
+    "black ink refill",
+    "inserted into",
+    "pen barrel with black clip"
+   ],
+   [
+    "black rubber front grip",
+    "screw",
+    "pen barrel with black clip"
+   ],
+   [
+    "purple ink refill",
+    "inserted into",
+    "pen barrel with red clip"
+   ],
+   [
+    "red rubber front grip",
+    "screw",
+    "pen barrel with red clip"
+   ]
+  ],
+  [
+   [
+    "purple ink refill",
+    "inserted into",
+    "pen barrel with black clip"
+   ],
+   [
+    "black rubber front grip",
+    "screw",
+    "pen barrel with black clip"
+   ],
+   [
+    "black ink refill",
+    "inserted into",
+    "pen barrel with red clip"
+   ],
+   [
+    "red rubber front grip",
+    "screw",
+    "pen barrel with red clip"
+   ],
+   [
+    "stud cap",
+    "goes through",
+    "spinner body with bearing"
+   ],
+   [
+    "threaded cap",
+    "screw",
+    "stud cap"
+   ]
+  ],
+  [
+   [
+    "black ink refill",
+    "inserted into",
+    "pen barrel with black clip"
+   ],
+   [
+    "black rubber front grip",
+    "screw",
+    "pen barrel with black clip"
+   ],
+   [
+    "purple ink refill",
+    "inserted into",
+    "pen barrel with red clip"
+   ],
+   [
+    "red rubber front grip",
+    "screw",
+    "pen barrel with red clip"
+   ],
+   [
+    "threaded cap",
+    "goes through",
+    "spinner body with bearing"
+   ],
+   [
+    "stud cap",
+    "screw",
+    "threaded cap"
+   ]
+  ]
+ ],
+ "aliases": {
+  "pen barrel with black clip": [
+   "black pen barrel",
+   "black clip pen barrel",
+   "barrel with black clip",
+   "black-clip pen barrel",
+   "pen barrel (black clip)",
+   "black upper barrel",
+   "transparent pen barrel with black clip"
+  ],
+  "pen barrel with red clip": [
+   "red pen barrel",
+   "red clip pen barrel",
+   "barrel with red clip",
+   "red-clip pen barrel",
+   "pen barrel (red clip)",
+   "red upper barrel",
+   "transparent pen barrel with red clip"
+  ],
+  "black ink refill": [
+   "black refill",
+   "black pen refill"
+  ],
+  "purple ink refill": [
+   "purple refill",
+   "purple pen refill"
+  ],
+  "black rubber front grip": [
+   "black front grip",
+   "black rubber grip",
+   "black grip",
+   "black front section"
+  ],
+  "red rubber front grip": [
+   "red front grip",
+   "red rubber grip",
+   "red grip",
+   "red front section"
+  ],
+  "spinner body with bearing": [
+   "spinner body",
+   "spinner",
+   "bearing",
+   "fidget spinner",
+   "spinner bearing"
+  ],
+  "stud cap": [
+   "stud",
+   "stud cap (bottom)"
+  ],
+  "threaded cap": [
+   "threaded cap (top)"
+  ]
+ },
+ "relation_aliases": {},
+ "colour_blind": {
+  "note": "Second reading: colour/clip words are ignored, so 'pen barrel' matches either barrel and 'red ink refill' counts as a refill. Strict reading is the default.",
+  "map": {
+   "pen barrel with black clip": "pen barrel",
+   "pen barrel with red clip": "pen barrel",
+   "black ink refill": "ink refill",
+   "purple ink refill": "ink refill",
+   "red ink refill": "ink refill",
+   "ink refill": "ink refill",
+   "black rubber front grip": "front grip",
+   "red rubber front grip": "front grip",
+   "pen barrels": "pen barrel",
+   "refill": "ink refill"
+  }
+ }
+}

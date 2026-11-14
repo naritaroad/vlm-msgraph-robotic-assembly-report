@@ -1,0 +1,3284 @@
+{
+ "generated": "2026-11-12T15:56:05.068Z",
+ "note": "Triple Extractor replies of the Fig. 5 prompt chain run on our rendered lab picture (media/lab/lab_assembly_view.jpg). Local run on our picture, not the paper's drawings. \"pair_hits_of_5\" and \"in_order_of_5\" compare with the five triples of the paper's Fig. 7.",
+ "reference": [
+  [
+   "red large gear",
+   "attached to",
+   "white cover"
+  ],
+  [
+   "green medium gear",
+   "attached to",
+   "white cover"
+  ],
+  [
+   "yellow medium gear",
+   "attached to",
+   "white cover"
+  ],
+  [
+   "blue large gear",
+   "attached to",
+   "green medium gear"
+  ],
+  [
+   "white tiny hexagonal nut",
+   "attached to",
+   "blue large gear"
+  ]
+ ],
+ "summary": [
+  {
+   "model": "gemma3:4b · T=0.7",
+   "variant": "with_base",
+   "runs": 3,
+   "n": [
+    6,
+    6,
+    6
+   ],
+   "unknown_object": [
+    2,
+    6,
+    1
+   ],
+   "off_list_relation": [
+    6,
+    6,
+    5
+   ],
+   "pair_hits_of_5": [
+    3,
+    0,
+    3
+   ],
+   "in_order_of_5": [
+    0,
+    0,
+    3
+   ],
+   "seated_subject_enough": [
+    0,
+    0,
+    0
+   ],
+   "seated_strict": [
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "model": "gemma3:4b · T=0.7",
+   "variant": "without_base",
+   "runs": 3,
+   "n": [
+    5,
+    6,
+    5
+   ],
+   "unknown_object": [
+    5,
+    6,
+    0
+   ],
+   "off_list_relation": [
+    0,
+    6,
+    5
+   ],
+   "pair_hits_of_5": [
+    0,
+    0,
+    3
+   ],
+   "in_order_of_5": [
+    0,
+    0,
+    3
+   ],
+   "seated_subject_enough": [
+    5,
+    0,
+    0
+   ],
+   "seated_strict": [
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "model": "gemma3:4b · T=0",
+   "variant": "with_base",
+   "runs": 3,
+   "n": [
+    6,
+    6,
+    6
+   ],
+   "unknown_object": [
+    3,
+    6,
+    6
+   ],
+   "off_list_relation": [
+    6,
+    0,
+    0
+   ],
+   "pair_hits_of_5": [
+    0,
+    0,
+    0
+   ],
+   "in_order_of_5": [
+    0,
+    0,
+    0
+   ],
+   "seated_subject_enough": [
+    0,
+    5,
+    5
+   ],
+   "seated_strict": [
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "model": "gemma3:4b · T=0",
+   "variant": "without_base",
+   "runs": 3,
+   "n": [
+    6,
+    6,
+    6
+   ],
+   "unknown_object": [
+    6,
+    6,
+    6
+   ],
+   "off_list_relation": [
+    6,
+    6,
+    6
+   ],
+   "pair_hits_of_5": [
+    0,
+    0,
+    0
+   ],
+   "in_order_of_5": [
+    0,
+    0,
+    0
+   ],
+   "seated_subject_enough": [
+    0,
+    0,
+    0
+   ],
+   "seated_strict": [
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "model": "gemma3:4b · T=1.2",
+   "variant": "with_base",
+   "runs": 3,
+   "n": [
+    5,
+    6,
+    5
+   ],
+   "unknown_object": [
+    0,
+    3,
+    5
+   ],
+   "off_list_relation": [
+    5,
+    5,
+    4
+   ],
+   "pair_hits_of_5": [
+    3,
+    0,
+    0
+   ],
+   "in_order_of_5": [
+    3,
+    0,
+    0
+   ],
+   "seated_subject_enough": [
+    0,
+    0,
+    0
+   ],
+   "seated_strict": [
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "model": "gemma3:4b · T=1.2",
+   "variant": "without_base",
+   "runs": 2,
+   "n": [
+    5,
+    6
+   ],
+   "unknown_object": [
+    5,
+    6
+   ],
+   "off_list_relation": [
+    0,
+    5
+   ],
+   "pair_hits_of_5": [
+    0,
+    0
+   ],
+   "in_order_of_5": [
+    0,
+    0
+   ],
+   "seated_subject_enough": [
+    5,
+    0
+   ],
+   "seated_strict": [
+    0,
+    0
+   ]
+  },
+  {
+   "model": "gpt-4o-mini",
+   "variant": "with_base",
+   "runs": 1,
+   "n": [
+    6
+   ],
+   "unknown_object": [
+    2
+   ],
+   "off_list_relation": [
+    2
+   ],
+   "pair_hits_of_5": [
+    2
+   ],
+   "in_order_of_5": [
+    1
+   ],
+   "seated_subject_enough": [
+    0
+   ],
+   "seated_strict": [
+    0
+   ]
+  },
+  {
+   "model": "gpt-4o",
+   "variant": "with_base",
+   "runs": 3,
+   "n": [
+    14,
+    9,
+    15
+   ],
+   "unknown_object": [
+    11,
+    5,
+    10
+   ],
+   "off_list_relation": [
+    9,
+    0,
+    1
+   ],
+   "pair_hits_of_5": [
+    0,
+    1,
+    2
+   ],
+   "in_order_of_5": [
+    0,
+    0,
+    0
+   ],
+   "seated_subject_enough": [
+    0,
+    5,
+    5
+   ],
+   "seated_strict": [
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "model": "gpt-4o",
+   "variant": "without_base",
+   "runs": 3,
+   "n": [
+    6,
+    8,
+    12
+   ],
+   "unknown_object": [
+    4,
+    5,
+    10
+   ],
+   "off_list_relation": [
+    0,
+    1,
+    0
+   ],
+   "pair_hits_of_5": [
+    0,
+    2,
+    0
+   ],
+   "in_order_of_5": [
+    0,
+    0,
+    0
+   ],
+   "seated_subject_enough": [
+    3,
+    5,
+    5
+   ],
+   "seated_strict": [
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "model": "gpt-4o · no part list",
+   "variant": "with_base",
+   "runs": 3,
+   "n": [
+    13,
+    33,
+    7
+   ],
+   "unknown_object": [
+    9,
+    30,
+    5
+   ],
+   "off_list_relation": [
+    3,
+    10,
+    0
+   ],
+   "pair_hits_of_5": [
+    0,
+    2,
+    1
+   ],
+   "in_order_of_5": [
+    0,
+    0,
+    0
+   ],
+   "seated_subject_enough": [
+    0,
+    3,
+    4
+   ],
+   "seated_strict": [
+    0,
+    0,
+    0
+   ]
+  }
+ ],
+ "plans": [
+  {
+   "id": "gemma3-4b__t0.7/with_base/1",
+   "label": "gemma3:4b · T=0.7 · with Base Searcher · run 1",
+   "model": "gemma3:4b · T=0.7",
+   "variant": "with_base",
+   "run": 1,
+   "source": "local-run",
+   "backend": "ollama",
+   "temperature": 0.7,
+   "parts": true,
+   "image": "media/lab/lab_assembly_view.jpg",
+   "utc": "2026-11-12T15:35:02+00:00",
+   "served": [
+    "gemma3:4b"
+   ],
+   "triples": [
+    [
+     "red large gear",
+     "placed onto",
+     "table surface"
+    ],
+    [
+     "green medium gear",
+     "positioned onto",
+     "white cover"
+    ],
+    [
+     "yellow medium gear",
+     "positioned onto",
+     "white cover"
+    ],
+    [
+     "blue large gear",
+     "positioned onto",
+     "white cover"
+    ],
+    [
+     "white tiny hexagonal nut",
+     "secured onto",
+     "blue large gear"
+    ],
+    [
+     "white cover",
+     "placed onto",
+     "table surface"
+    ]
+   ],
+   "raw": "(red large gear, placed onto, table surface)\n(green medium gear, positioned onto, white cover)\n(yellow medium gear, positioned onto, white cover)\n(blue large gear, positioned onto, white cover)\n(white tiny hexagonal nut, secured onto, blue large gear)\n(white cover, placed onto, table surface)",
+   "file": "data/vlm/raw/L/gemma3-4b__t0.7/with_base/run1.json",
+   "check": {
+    "n": 6,
+    "unknown_object": 2,
+    "off_list_relation": 6,
+    "pair_hits_of_5": 3,
+    "in_order_of_5": 0
+   },
+   "sim": {
+    "subject_enough": {
+     "success": 0,
+     "fail": 0,
+     "skipped": 6,
+     "seated": 0,
+     "seated_parts": [],
+     "steps": [
+      "skipped: unknown relation",
+      "skipped: unknown relation",
+      "skipped: unknown relation",
+      "skipped: unknown relation",
+      "skipped: unknown relation",
+      "skipped: fixed part"
+     ]
+    },
+    "strict": {
+     "success": 0,
+     "fail": 0,
+     "skipped": 6,
+     "seated": 0,
+     "seated_parts": [],
+     "steps": [
+      "skipped: unknown object",
+      "skipped: unknown relation",
+      "skipped: unknown relation",
+      "skipped: unknown relation",
+      "skipped: unknown relation",
+      "skipped: fixed part"
+     ]
+    }
+   }
+  },
+  {
+   "id": "gemma3-4b__t0.7/with_base/2",
+   "label": "gemma3:4b · T=0.7 · with Base Searcher · run 2",
+   "model": "gemma3:4b · T=0.7",
+   "variant": "with_base",
+   "run": 2,
+   "source": "local-run",
+   "backend": "ollama",
+   "temperature": 0.7,
+   "parts": true,
+   "image": "media/lab/lab_assembly_view.jpg",
+   "utc": "2026-11-12T15:35:16+00:00",
+   "served": [
+    "gemma3:4b"
+   ],
+   "triples": [
+    [
+     "Red Large Gear",
+     "positioned onto",
+     "Central Axle"
+    ],
+    [
+     "Green Medium Gear",
+     "positioned onto",
+     "Central Axle"
+    ],
+    [
+     "Yellow Medium Gear",
+     "positioned onto",
+     "Central Axle"
+    ],
+    [
+     "Blue Large Gear",
+     "positioned onto",
+     "Central Axle"
+    ],
+    [
+     "White Cover",
+     "placed on top of",
+     "assembled Gears and Axle"
+    ],
+    [
+     "White Tiny Hexagonal Nut",
+     "tightened onto",
+     "Central Axle"
+    ]
+   ],
+   "raw": "(Red Large Gear, positioned onto, Central Axle)\n(Green Medium Gear, positioned onto, Central Axle)\n(Yellow Medium Gear, positioned onto, Central Axle)\n(Blue Large Gear, positioned onto, Central Axle)\n(White Cover, placed on top of, assembled Gears and Axle)\n(White Tiny Hexagonal Nut, tightened onto, Central Axle)",
+   "file": "data/vlm/raw/L/gemma3-4b__t0.7/with_base/run2.json",
+   "check": {
+    "n": 6,
+    "unknown_object": 6,
+    "off_list_relation": 6,
+    "pair_hits_of_5": 0,
+    "in_order_of_5": 0
+   },
+   "sim": {
+    "subject_enough": {
+     "success": 0,
+     "fail": 0,
+     "skipped": 6,
+     "seated": 0,
+     "seated_parts": [],
+     "steps": [
+      "skipped: unknown relation",
+      "skipped: unknown relation",
+      "skipped: unknown relation",
+      "skipped: unknown relation",
+      "skipped: fixed part",
+      "skipped: unknown relation"
+     ]
+    },
+    "strict": {
+     "success": 0,
+     "fail": 0,
+     "skipped": 6,
+     "seated": 0,
+     "seated_parts": [],
+     "steps": [
+      "skipped: unknown object",
+      "skipped: unknown object",
+      "skipped: unknown object",
+      "skipped: unknown object",
+      "skipped: fixed part",
+      "skipped: unknown object"
+     ]
+    }
+   }
+  },
+  {
+   "id": "gemma3-4b__t0.7/with_base/3",
+   "label": "gemma3:4b · T=0.7 · with Base Searcher · run 3",
+   "model": "gemma3:4b · T=0.7",
+   "variant": "with_base",
+   "run": 3,
+   "source": "local-run",
+   "backend": "ollama",
+   "temperature": 0.7,
+   "parts": true,
+   "image": "media/lab/lab_assembly_view.jpg",
+   "utc": "2026-11-12T15:35:32+00:00",
+   "served": [
+    "gemma3:4b"
+   ],
+   "triples": [
+    [
+     "red large gear",
+     "placed next to",
+     "base"
+    ],
+    [
+     "green medium gear",
+     "placed next to",
+     "base"
+    ],
+    [
+     "yellow medium gear",
+     "placed next to",
+     "base"
+    ],
+    [
+     "blue large gear",
+     "placed next to",
+     "base"
+    ],
+    [
+     "white tiny hexagonal nut",
+     "attached to",
+     "base"
+    ],
+    [
+     "white cover",
+     "placed on top of",
+     "assembled gears"
+    ]
+   ],
+   "raw": "(red large gear, placed next to, base)\n(green medium gear, placed next to, base)\n(yellow medium gear, placed next to, base)\n(blue large gear, placed next to, base)\n(white tiny hexagonal nut, attached to, base)\n(white cover, placed on top of, assembled gears)",
+   "file": "data/vlm/raw/L/gemma3-4b__t0.7/with_base/run3.json",
+   "check": {
+    "n": 6,
+    "unknown_object": 1,
+    "off_list_relation": 5,
+    "pair_hits_of_5": 3,
+    "in_order_of_5": 3
+   },
+   "sim": {
+    "subject_enough": {
+     "success": 0,
+     "fail": 1,
+     "skipped": 5,
+     "seated": 0,
+     "seated_parts": [],
+     "steps": [
+      "skipped: unknown relation",
+      "skipped: unknown relation",
+      "skipped: unknown relation",
+      "skipped: unknown relation",
+      "fail: not seated",
+      "skipped: fixed part"
+     ]
+    },
+    "strict": {
+     "success": 0,
+     "fail": 1,
+     "skipped": 5,
+     "seated": 0,
+     "seated_parts": [],
+     "steps": [
+      "skipped: unknown relation",
+      "skipped: unknown relation",
+      "skipped: unknown relation",
+      "skipped: unknown relation",
+      "fail: not seated",
+      "skipped: fixed part"
+     ]
+    }
+   }
+  },
+  {
+   "id": "gemma3-4b__t0.7/without_base/1",
+   "label": "gemma3:4b · T=0.7 · without Base Searcher · run 1",
+   "model": "gemma3:4b · T=0.7",
+   "variant": "without_base",
+   "run": 1,
+   "source": "local-run",
+   "backend": "ollama",
+   "temperature": 0.7,
+   "parts": true,
+   "image": "media/lab/lab_assembly_view.jpg",
+   "utc": "2026-11-12T15:36:12+00:00",
+   "served": [
+    "gemma3:4b"
+   ],
+   "triples": [
+    [
+     "red large gear",
+     "attached to",
+     "central mounting plate"
+    ],
+    [
+     "green medium gear",
+     "attached to",
+     "central mounting plate"
+    ],
+    [
+     "yellow medium gear",
+     "attached to",
+     "central mounting plate"
+    ],
+    [
+     "blue large gear",
+     "attached to",
+     "central mounting plate"
+    ],
+    [
+     "white tiny hexagonal nut",
+     "attached to",
+     "central mounting plate"
+    ]
+   ],
+   "raw": "(red large gear, attached to, central mounting plate)\n(green medium gear, attached to, central mounting plate)\n(yellow medium gear, attached to, central mounting plate)\n(blue large gear, attached to, central mounting plate)\n(white tiny hexagonal nut, attached to, central mounting plate)",
+   "file": "data/vlm/raw/L/gemma3-4b__t0.7/without_base/run1.json",
+   "check": {
+    "n": 5,
+    "unknown_object": 5,
+    "off_list_relation": 0,
+    "pair_hits_of_5": 0,
+    "in_order_of_5": 0
+   },
+   "sim": {
+    "subject_enough": {
+     "success": 5,
+     "fail": 0,
+     "skipped": 0,
+     "seated": 5,
+     "seated_parts": [
+      "red",
+      "green",
+      "yellow",
+      "blue",
+      "nut"
+     ],
+     "steps": [
+      "success",
+      "success",
+      "success",
+      "success",
+      "success"
+     ]
+    },
+    "strict": {
+     "success": 0,
+     "fail": 0,
+     "skipped": 5,
+     "seated": 0,
+     "seated_parts": [],
+     "steps": [
+      "skipped: unknown object",
+      "skipped: unknown object",
+      "skipped: unknown object",
+      "skipped: unknown object",
+      "skipped: unknown object"
+     ]
+    }
+   }
+  },
+  {
+   "id": "gemma3-4b__t0.7/without_base/2",
+   "label": "gemma3:4b · T=0.7 · without Base Searcher · run 2",
+   "model": "gemma3:4b · T=0.7",
+   "variant": "without_base",
+   "run": 2,
+   "source": "local-run",
+   "backend": "ollama",
+   "temperature": 0.7,
+   "parts": true,
+   "image": "media/lab/lab_assembly_view.jpg",
+   "utc": "2026-11-12T15:36:20+00:00",
+   "served": [
+    "gemma3:4b"
+   ],
+   "triples": [
+    [
+     "red large gear",
+     "placed onto",
+     "central support"
+    ],
+    [
+     "green medium gear",
+     "placed onto",
+     "central support"
+    ],
+    [
+     "yellow medium gear",
+     "placed onto",
+     "central support"
+    ],
+    [
+     "blue large gear",
+     "placed onto",
+     "central support"
+    ],
+    [
+     "white cover",
+     "placed over",
+     "assembled gears"
+    ],
+    [
+     "white tiny hexagonal nut",
+     "secured onto",
+     "central support"
+    ]
+   ],
+   "raw": "(red large gear, placed onto, central support)\n(green medium gear, placed onto, central support)\n(yellow medium gear, placed onto, central support)\n(blue large gear, placed onto, central support)\n(white cover, placed over, assembled gears)\n(white tiny hexagonal nut, secured onto, central support)",
+   "file": "data/vlm/raw/L/gemma3-4b__t0.7/without_base/run2.json",
+   "check": {
+    "n": 6,
+    "unknown_object": 6,
+    "off_list_relation": 6,
+    "pair_hits_of_5": 0,
+    "in_order_of_5": 0
+   },
+   "sim": {
+    "subject_enough": {
+     "success": 0,
+     "fail": 0,
+     "skipped": 6,
+     "seated": 0,
+     "seated_parts": [],
+     "steps": [
+      "skipped: unknown relation",
+      "skipped: unknown relation",
+      "skipped: unknown relation",
+      "skipped: unknown relation",
+      "skipped: fixed part",
+      "skipped: unknown relation"
+     ]
+    },
+    "strict": {
+     "success": 0,
+     "fail": 0,
+     "skipped": 6,
+     "seated": 0,
+     "seated_parts": [],
+     "steps": [
+      "skipped: unknown object",
+      "skipped: unknown object",
+      "skipped: unknown object",
+      "skipped: unknown object",
+      "skipped: fixed part",
+      "skipped: unknown object"
+     ]
+    }
+   }
+  },
+  {
+   "id": "gemma3-4b__t0.7/without_base/3",
+   "label": "gemma3:4b · T=0.7 · without Base Searcher · run 3",
+   "model": "gemma3:4b · T=0.7",
+   "variant": "without_base",
+   "run": 3,
+   "source": "local-run",
+   "backend": "ollama",
+   "temperature": 0.7,
+   "parts": true,
+   "image": "media/lab/lab_assembly_view.jpg",
+   "utc": "2026-11-12T15:36:29+00:00",
+   "served": [
+    "gemma3:4b"
+   ],
+   "triples": [
+    [
+     "red large gear",
+     "placed on",
+     "white cover"
+    ],
+    [
+     "green medium gear",
+     "placed on",
+     "white cover"
+    ],
+    [
+     "yellow medium gear",
+     "placed on",
+     "white cover"
+    ],
+    [
+     "blue large gear",
+     "placed on",
+     "white cover"
+    ],
+    [
+     "white tiny hexagonal nut",
+     "secured onto",
+     "white cover"
+    ]
+   ],
+   "raw": "(red large gear, placed on, white cover)\n(green medium gear, placed on, white cover)\n(yellow medium gear, placed on, white cover)\n(blue large gear, placed on, white cover)\n(white tiny hexagonal nut, secured onto, white cover)",
+   "file": "data/vlm/raw/L/gemma3-4b__t0.7/without_base/run3.json",
+   "check": {
+    "n": 5,
+    "unknown_object": 0,
+    "off_list_relation": 5,
+    "pair_hits_of_5": 3,
+    "in_order_of_5": 3
+   },
+   "sim": {
+    "subject_enough": {
+     "success": 0,
+     "fail": 0,
+     "skipped": 5,
+     "seated": 0,
+     "seated_parts": [],
+     "steps": [
+      "skipped: unknown relation",
+      "skipped: unknown relation",
+      "skipped: unknown relation",
+      "skipped: unknown relation",
+      "skipped: unknown relation"
+     ]
+    },
+    "strict": {
+     "success": 0,
+     "fail": 0,
+     "skipped": 5,
+     "seated": 0,
+     "seated_parts": [],
+     "steps": [
+      "skipped: unknown relation",
+      "skipped: unknown relation",
+      "skipped: unknown relation",
+      "skipped: unknown relation",
+      "skipped: unknown relation"
+     ]
+    }
+   }
+  },
+  {
+   "id": "gemma3-4b__t0/with_base/1",
+   "label": "gemma3:4b · T=0 · with Base Searcher · run 1",
+   "model": "gemma3:4b · T=0",
+   "variant": "with_base",
+   "run": 1,
+   "source": "local-run",
+   "backend": "ollama",
+   "temperature": 0,
+   "parts": true,
+   "image": "media/lab/lab_assembly_view.jpg",
+   "utc": "2026-11-12T15:33:31+00:00",
+   "served": [
+    "gemma3:4b"
+   ],
+   "triples": [
+    [
+     "red large gear",
+     "placed onto",
+     "central shaft"
+    ],
+    [
+     "green medium gear",
+     "positioned adjacent to",
+     "red large gear"
+    ],
+    [
+     "yellow medium gear",
+     "positioned adjacent to",
+     "green medium gear"
+    ],
+    [
+     "blue large gear",
+     "positioned adjacent to",
+     "yellow medium gear"
+    ],
+    [
+     "white cover",
+     "placed over",
+     "assembled gears and shaft"
+    ],
+    [
+     "white tiny hexagonal nut",
+     "secured onto",
+     "shaft"
+    ]
+   ],
+   "raw": "(red large gear, placed onto, central shaft)\n(green medium gear, positioned adjacent to, red large gear)\n(yellow medium gear, positioned adjacent to, green medium gear)\n(blue large gear, positioned adjacent to, yellow medium gear)\n(white cover, placed over, assembled gears and shaft)\n(white tiny hexagonal nut, secured onto, shaft)",
+   "file": "data/vlm/raw/L/gemma3-4b__t0/with_base/run1.json",
+   "check": {
+    "n": 6,
+    "unknown_object": 3,
+    "off_list_relation": 6,
+    "pair_hits_of_5": 0,
+    "in_order_of_5": 0
+   },
+   "sim": {
+    "subject_enough": {
+     "success": 0,
+     "fail": 0,
+     "skipped": 6,
+     "seated": 0,
+     "seated_parts": [],
+     "steps": [
+      "skipped: unknown relation",
+      "skipped: unknown relation",
+      "skipped: unknown relation",
+      "skipped: unknown relation",
+      "skipped: fixed part",
+      "skipped: unknown relation"
+     ]
+    },
+    "strict": {
+     "success": 0,
+     "fail": 0,
+     "skipped": 6,
+     "seated": 0,
+     "seated_parts": [],
+     "steps": [
+      "skipped: unknown object",
+      "skipped: unknown relation",
+      "skipped: unknown relation",
+      "skipped: unknown relation",
+      "skipped: fixed part",
+      "skipped: unknown object"
+     ]
+    }
+   }
+  },
+  {
+   "id": "gemma3-4b__t0/with_base/2",
+   "label": "gemma3:4b · T=0 · with Base Searcher · run 2",
+   "model": "gemma3:4b · T=0",
+   "variant": "with_base",
+   "run": 2,
+   "source": "local-run",
+   "backend": "ollama",
+   "temperature": 0,
+   "parts": true,
+   "image": "media/lab/lab_assembly_view.jpg",
+   "utc": "2026-11-12T15:33:56+00:00",
+   "served": [
+    "gemma3:4b"
+   ],
+   "triples": [
+    [
+     "Red Large Gear",
+     "attached to",
+     "central shaft"
+    ],
+    [
+     "Green Medium Gear",
+     "attached to",
+     "central shaft"
+    ],
+    [
+     "Yellow Medium Gear",
+     "attached to",
+     "central shaft"
+    ],
+    [
+     "Blue Large Gear",
+     "attached to",
+     "central shaft"
+    ],
+    [
+     "White Cover",
+     "attached to",
+     "assembled gears and shaft"
+    ],
+    [
+     "White Tiny Hexagonal Nut",
+     "attached to",
+     "central shaft"
+    ]
+   ],
+   "raw": "(Red Large Gear, attached to, central shaft)\n(Green Medium Gear, attached to, central shaft)\n(Yellow Medium Gear, attached to, central shaft)\n(Blue Large Gear, attached to, central shaft)\n(White Cover, attached to, assembled gears and shaft)\n(White Tiny Hexagonal Nut, attached to, central shaft)",
+   "file": "data/vlm/raw/L/gemma3-4b__t0/with_base/run2.json",
+   "check": {
+    "n": 6,
+    "unknown_object": 6,
+    "off_list_relation": 0,
+    "pair_hits_of_5": 0,
+    "in_order_of_5": 0
+   },
+   "sim": {
+    "subject_enough": {
+     "success": 5,
+     "fail": 0,
+     "skipped": 1,
+     "seated": 5,
+     "seated_parts": [
+      "red",
+      "green",
+      "yellow",
+      "blue",
+      "nut"
+     ],
+     "steps": [
+      "success",
+      "success",
+      "success",
+      "success",
+      "skipped: fixed part",
+      "success"
+     ]
+    },
+    "strict": {
+     "success": 0,
+     "fail": 0,
+     "skipped": 6,
+     "seated": 0,
+     "seated_parts": [],
+     "steps": [
+      "skipped: unknown object",
+      "skipped: unknown object",
+      "skipped: unknown object",
+      "skipped: unknown object",
+      "skipped: fixed part",
+      "skipped: unknown object"
+     ]
+    }
+   }
+  },
+  {
+   "id": "gemma3-4b__t0/with_base/3",
+   "label": "gemma3:4b · T=0 · with Base Searcher · run 3",
+   "model": "gemma3:4b · T=0",
+   "variant": "with_base",
+   "run": 3,
+   "source": "local-run",
+   "backend": "ollama",
+   "temperature": 0,
+   "parts": true,
+   "image": "media/lab/lab_assembly_view.jpg",
+   "utc": "2026-11-12T15:34:17+00:00",
+   "served": [
+    "gemma3:4b"
+   ],
+   "triples": [
+    [
+     "Red Large Gear",
+     "attached to",
+     "central shaft"
+    ],
+    [
+     "Green Medium Gear",
+     "attached to",
+     "central shaft"
+    ],
+    [
+     "Yellow Medium Gear",
+     "attached to",
+     "central shaft"
+    ],
+    [
+     "Blue Large Gear",
+     "attached to",
+     "central shaft"
+    ],
+    [
+     "White Cover",
+     "attached to",
+     "assembled gears and shaft"
+    ],
+    [
+     "White Tiny Hexagonal Nut",
+     "attached to",
+     "central shaft"
+    ]
+   ],
+   "raw": "(Red Large Gear, attached to, central shaft)\n(Green Medium Gear, attached to, central shaft)\n(Yellow Medium Gear, attached to, central shaft)\n(Blue Large Gear, attached to, central shaft)\n(White Cover, attached to, assembled gears and shaft)\n(White Tiny Hexagonal Nut, attached to, central shaft)",
+   "file": "data/vlm/raw/L/gemma3-4b__t0/with_base/run3.json",
+   "check": {
+    "n": 6,
+    "unknown_object": 6,
+    "off_list_relation": 0,
+    "pair_hits_of_5": 0,
+    "in_order_of_5": 0
+   },
+   "sim": {
+    "subject_enough": {
+     "success": 5,
+     "fail": 0,
+     "skipped": 1,
+     "seated": 5,
+     "seated_parts": [
+      "red",
+      "green",
+      "yellow",
+      "blue",
+      "nut"
+     ],
+     "steps": [
+      "success",
+      "success",
+      "success",
+      "success",
+      "skipped: fixed part",
+      "success"
+     ]
+    },
+    "strict": {
+     "success": 0,
+     "fail": 0,
+     "skipped": 6,
+     "seated": 0,
+     "seated_parts": [],
+     "steps": [
+      "skipped: unknown object",
+      "skipped: unknown object",
+      "skipped: unknown object",
+      "skipped: unknown object",
+      "skipped: fixed part",
+      "skipped: unknown object"
+     ]
+    }
+   }
+  },
+  {
+   "id": "gemma3-4b__t0/without_base/1",
+   "label": "gemma3:4b · T=0 · without Base Searcher · run 1",
+   "model": "gemma3:4b · T=0",
+   "variant": "without_base",
+   "run": 1,
+   "source": "local-run",
+   "backend": "ollama",
+   "temperature": 0,
+   "parts": true,
+   "image": "media/lab/lab_assembly_view.jpg",
+   "utc": "2026-11-12T15:34:36+00:00",
+   "served": [
+    "gemma3:4b"
+   ],
+   "triples": [
+    [
+     "red large gear",
+     "placed onto",
+     "central shaft"
+    ],
+    [
+     "green medium gear",
+     "placed onto",
+     "central shaft"
+    ],
+    [
+     "yellow medium gear",
+     "placed onto",
+     "central shaft"
+    ],
+    [
+     "blue large gear",
+     "placed onto",
+     "central shaft"
+    ],
+    [
+     "white cover",
+     "placed over",
+     "assembled gears and shaft"
+    ],
+    [
+     "white tiny hexagonal nut",
+     "secured onto",
+     "shaft"
+    ]
+   ],
+   "raw": "(red large gear, placed onto, central shaft)\n(green medium gear, placed onto, central shaft)\n(yellow medium gear, placed onto, central shaft)\n(blue large gear, placed onto, central shaft)\n(white cover, placed over, assembled gears and shaft)\n(white tiny hexagonal nut, secured onto, shaft)",
+   "file": "data/vlm/raw/L/gemma3-4b__t0/without_base/run1.json",
+   "check": {
+    "n": 6,
+    "unknown_object": 6,
+    "off_list_relation": 6,
+    "pair_hits_of_5": 0,
+    "in_order_of_5": 0
+   },
+   "sim": {
+    "subject_enough": {
+     "success": 0,
+     "fail": 0,
+     "skipped": 6,
+     "seated": 0,
+     "seated_parts": [],
+     "steps": [
+      "skipped: unknown relation",
+      "skipped: unknown relation",
+      "skipped: unknown relation",
+      "skipped: unknown relation",
+      "skipped: fixed part",
+      "skipped: unknown relation"
+     ]
+    },
+    "strict": {
+     "success": 0,
+     "fail": 0,
+     "skipped": 6,
+     "seated": 0,
+     "seated_parts": [],
+     "steps": [
+      "skipped: unknown object",
+      "skipped: unknown object",
+      "skipped: unknown object",
+      "skipped: unknown object",
+      "skipped: fixed part",
+      "skipped: unknown object"
+     ]
+    }
+   }
+  },
+  {
+   "id": "gemma3-4b__t0/without_base/2",
+   "label": "gemma3:4b · T=0 · without Base Searcher · run 2",
+   "model": "gemma3:4b · T=0",
+   "variant": "without_base",
+   "run": 2,
+   "source": "local-run",
+   "backend": "ollama",
+   "temperature": 0,
+   "parts": true,
+   "image": "media/lab/lab_assembly_view.jpg",
+   "utc": "2026-11-12T15:34:44+00:00",
+   "served": [
+    "gemma3:4b"
+   ],
+   "triples": [
+    [
+     "red large gear",
+     "placed onto",
+     "central shaft"
+    ],
+    [
+     "green medium gear",
+     "placed onto",
+     "central shaft"
+    ],
+    [
+     "yellow medium gear",
+     "placed onto",
+     "central shaft"
+    ],
+    [
+     "blue large gear",
+     "placed onto",
+     "central shaft"
+    ],
+    [
+     "white cover",
+     "placed over",
+     "assembled gears and shaft"
+    ],
+    [
+     "white tiny hexagonal nut",
+     "secured onto",
+     "shaft"
+    ]
+   ],
+   "raw": "(red large gear, placed onto, central shaft)\n(green medium gear, placed onto, central shaft)\n(yellow medium gear, placed onto, central shaft)\n(blue large gear, placed onto, central shaft)\n(white cover, placed over, assembled gears and shaft)\n(white tiny hexagonal nut, secured onto, shaft)",
+   "file": "data/vlm/raw/L/gemma3-4b__t0/without_base/run2.json",
+   "check": {
+    "n": 6,
+    "unknown_object": 6,
+    "off_list_relation": 6,
+    "pair_hits_of_5": 0,
+    "in_order_of_5": 0
+   },
+   "sim": {
+    "subject_enough": {
+     "success": 0,
+     "fail": 0,
+     "skipped": 6,
+     "seated": 0,
+     "seated_parts": [],
+     "steps": [
+      "skipped: unknown relation",
+      "skipped: unknown relation",
+      "skipped: unknown relation",
+      "skipped: unknown relation",
+      "skipped: fixed part",
+      "skipped: unknown relation"
+     ]
+    },
+    "strict": {
+     "success": 0,
+     "fail": 0,
+     "skipped": 6,
+     "seated": 0,
+     "seated_parts": [],
+     "steps": [
+      "skipped: unknown object",
+      "skipped: unknown object",
+      "skipped: unknown object",
+      "skipped: unknown object",
+      "skipped: fixed part",
+      "skipped: unknown object"
+     ]
+    }
+   }
+  },
+  {
+   "id": "gemma3-4b__t0/without_base/3",
+   "label": "gemma3:4b · T=0 · without Base Searcher · run 3",
+   "model": "gemma3:4b · T=0",
+   "variant": "without_base",
+   "run": 3,
+   "source": "local-run",
+   "backend": "ollama",
+   "temperature": 0,
+   "parts": true,
+   "image": "media/lab/lab_assembly_view.jpg",
+   "utc": "2026-11-12T15:34:53+00:00",
+   "served": [
+    "gemma3:4b"
+   ],
+   "triples": [
+    [
+     "red large gear",
+     "placed onto",
+     "central shaft"
+    ],
+    [
+     "green medium gear",
+     "placed onto",
+     "central shaft"
+    ],
+    [
+     "yellow medium gear",
+     "placed onto",
+     "central shaft"
+    ],
+    [
+     "blue large gear",
+     "placed onto",
+     "central shaft"
+    ],
+    [
+     "white cover",
+     "placed over",
+     "assembled gears and shaft"
+    ],
+    [
+     "white tiny hexagonal nut",
+     "secured onto",
+     "shaft"
+    ]
+   ],
+   "raw": "(red large gear, placed onto, central shaft)\n(green medium gear, placed onto, central shaft)\n(yellow medium gear, placed onto, central shaft)\n(blue large gear, placed onto, central shaft)\n(white cover, placed over, assembled gears and shaft)\n(white tiny hexagonal nut, secured onto, shaft)",
+   "file": "data/vlm/raw/L/gemma3-4b__t0/without_base/run3.json",
+   "check": {
+    "n": 6,
+    "unknown_object": 6,
+    "off_list_relation": 6,
+    "pair_hits_of_5": 0,
+    "in_order_of_5": 0
+   },
+   "sim": {
+    "subject_enough": {
+     "success": 0,
+     "fail": 0,
+     "skipped": 6,
+     "seated": 0,
+     "seated_parts": [],
+     "steps": [
+      "skipped: unknown relation",
+      "skipped: unknown relation",
+      "skipped: unknown relation",
+      "skipped: unknown relation",
+      "skipped: fixed part",
+      "skipped: unknown relation"
+     ]
+    },
+    "strict": {
+     "success": 0,
+     "fail": 0,
+     "skipped": 6,
+     "seated": 0,
+     "seated_parts": [],
+     "steps": [
+      "skipped: unknown object",
+      "skipped: unknown object",
+      "skipped: unknown object",
+      "skipped: unknown object",
+      "skipped: fixed part",
+      "skipped: unknown object"
+     ]
+    }
+   }
+  },
+  {
+   "id": "gemma3-4b__t1.2/with_base/1",
+   "label": "gemma3:4b · T=1.2 · with Base Searcher · run 1",
+   "model": "gemma3:4b · T=1.2",
+   "variant": "with_base",
+   "run": 1,
+   "source": "local-run",
+   "backend": "ollama",
+   "temperature": 1.2,
+   "parts": true,
+   "image": "media/lab/lab_assembly_view.jpg",
+   "utc": "2026-11-12T15:36:41+00:00",
+   "served": [
+    "gemma3:4b"
+   ],
+   "triples": [
+    [
+     "red large gear",
+     "placed onto",
+     "white cover"
+    ],
+    [
+     "green medium gear",
+     "placed onto",
+     "white cover"
+    ],
+    [
+     "yellow medium gear",
+     "placed onto",
+     "white cover"
+    ],
+    [
+     "blue large gear",
+     "placed onto",
+     "white cover"
+    ],
+    [
+     "white tiny hexagonal nut",
+     "positioned around",
+     "white cover"
+    ]
+   ],
+   "raw": "(red large gear, placed onto, white cover)\n(green medium gear, placed onto, white cover)\n(yellow medium gear, placed onto, white cover)\n(blue large gear, placed onto, white cover)\n(white tiny hexagonal nut, positioned around, white cover)",
+   "file": "data/vlm/raw/L/gemma3-4b__t1.2/with_base/run1.json",
+   "check": {
+    "n": 5,
+    "unknown_object": 0,
+    "off_list_relation": 5,
+    "pair_hits_of_5": 3,
+    "in_order_of_5": 3
+   },
+   "sim": {
+    "subject_enough": {
+     "success": 0,
+     "fail": 0,
+     "skipped": 5,
+     "seated": 0,
+     "seated_parts": [],
+     "steps": [
+      "skipped: unknown relation",
+      "skipped: unknown relation",
+      "skipped: unknown relation",
+      "skipped: unknown relation",
+      "skipped: unknown relation"
+     ]
+    },
+    "strict": {
+     "success": 0,
+     "fail": 0,
+     "skipped": 5,
+     "seated": 0,
+     "seated_parts": [],
+     "steps": [
+      "skipped: unknown relation",
+      "skipped: unknown relation",
+      "skipped: unknown relation",
+      "skipped: unknown relation",
+      "skipped: unknown relation"
+     ]
+    }
+   }
+  },
+  {
+   "id": "gemma3-4b__t1.2/with_base/2",
+   "label": "gemma3:4b · T=1.2 · with Base Searcher · run 2",
+   "model": "gemma3:4b · T=1.2",
+   "variant": "with_base",
+   "run": 2,
+   "source": "local-run",
+   "backend": "ollama",
+   "temperature": 1.2,
+   "parts": true,
+   "image": "media/lab/lab_assembly_view.jpg",
+   "utc": "2026-11-12T15:36:54+00:00",
+   "served": [
+    "gemma3:4b"
+   ],
+   "triples": [
+    [
+     "red large gear",
+     "placed on",
+     "top plate"
+    ],
+    [
+     "green medium gear",
+     "positioned beside",
+     "red large gear"
+    ],
+    [
+     "yellow medium gear",
+     "placed beside",
+     "green medium gear"
+    ],
+    [
+     "blue large gear",
+     "arranged beside",
+     "red large gear"
+    ],
+    [
+     "white cover",
+     "placed on",
+     "gears and plate"
+    ],
+    [
+     "white tiny hexagonal nut",
+     "attached to",
+     "gear shafts"
+    ]
+   ],
+   "raw": "(red large gear, placed on, top plate)\n(green medium gear, positioned beside, red large gear)\n(yellow medium gear, placed beside, green medium gear)\n(blue large gear, arranged beside, red large gear)\n(white cover, placed on, gears and plate)\n(white tiny hexagonal nut, attached to, gear shafts)\n",
+   "file": "data/vlm/raw/L/gemma3-4b__t1.2/with_base/run2.json",
+   "check": {
+    "n": 6,
+    "unknown_object": 3,
+    "off_list_relation": 5,
+    "pair_hits_of_5": 0,
+    "in_order_of_5": 0
+   },
+   "sim": {
+    "subject_enough": {
+     "success": 0,
+     "fail": 1,
+     "skipped": 5,
+     "seated": 0,
+     "seated_parts": [],
+     "steps": [
+      "skipped: unknown relation",
+      "skipped: unknown relation",
+      "skipped: unknown relation",
+      "skipped: unknown relation",
+      "skipped: fixed part",
+      "fail: not seated"
+     ]
+    },
+    "strict": {
+     "success": 0,
+     "fail": 0,
+     "skipped": 6,
+     "seated": 0,
+     "seated_parts": [],
+     "steps": [
+      "skipped: unknown object",
+      "skipped: unknown relation",
+      "skipped: unknown relation",
+      "skipped: unknown relation",
+      "skipped: fixed part",
+      "skipped: unknown object"
+     ]
+    }
+   }
+  },
+  {
+   "id": "gemma3-4b__t1.2/with_base/3",
+   "label": "gemma3:4b · T=1.2 · with Base Searcher · run 3",
+   "model": "gemma3:4b · T=1.2",
+   "variant": "with_base",
+   "run": 3,
+   "source": "local-run",
+   "backend": "ollama",
+   "temperature": 1.2,
+   "parts": true,
+   "image": "media/lab/lab_assembly_view.jpg",
+   "utc": "2026-11-12T15:37:07+00:00",
+   "served": [
+    "gemma3:4b"
+   ],
+   "triples": [
+    [
+     "red large gear",
+     "placed on",
+     "leftmost axis"
+    ],
+    [
+     "green medium gear",
+     "positioned on",
+     "middle axis"
+    ],
+    [
+     "yellow medium gear",
+     "placed on",
+     "rightmost axis"
+    ],
+    [
+     "white cover",
+     "attached to",
+     "three gears"
+    ],
+    [
+     "white tiny hexagonal nut",
+     "secured to",
+     "base mounting point of the gears"
+    ]
+   ],
+   "raw": "(red large gear, placed on, leftmost axis)\n(green medium gear, positioned on, middle axis)\n(yellow medium gear, placed on, rightmost axis)\n(white cover, attached to, three gears)\n(white tiny hexagonal nut, secured to, base mounting point of the gears)",
+   "file": "data/vlm/raw/L/gemma3-4b__t1.2/with_base/run3.json",
+   "check": {
+    "n": 5,
+    "unknown_object": 5,
+    "off_list_relation": 4,
+    "pair_hits_of_5": 0,
+    "in_order_of_5": 0
+   },
+   "sim": {
+    "subject_enough": {
+     "success": 0,
+     "fail": 0,
+     "skipped": 5,
+     "seated": 0,
+     "seated_parts": [],
+     "steps": [
+      "skipped: unknown relation",
+      "skipped: unknown relation",
+      "skipped: unknown relation",
+      "skipped: fixed part",
+      "skipped: unknown relation"
+     ]
+    },
+    "strict": {
+     "success": 0,
+     "fail": 0,
+     "skipped": 5,
+     "seated": 0,
+     "seated_parts": [],
+     "steps": [
+      "skipped: unknown object",
+      "skipped: unknown object",
+      "skipped: unknown object",
+      "skipped: fixed part",
+      "skipped: unknown object"
+     ]
+    }
+   }
+  },
+  {
+   "id": "gemma3-4b__t1.2/without_base/1",
+   "label": "gemma3:4b · T=1.2 · without Base Searcher · run 1",
+   "model": "gemma3:4b · T=1.2",
+   "variant": "without_base",
+   "run": 1,
+   "source": "local-run",
+   "backend": "ollama",
+   "temperature": 1.2,
+   "parts": true,
+   "image": "media/lab/lab_assembly_view.jpg",
+   "utc": "2026-11-12T15:37:22+00:00",
+   "served": [
+    "gemma3:4b"
+   ],
+   "triples": [
+    [
+     "red large gear",
+     "attached to",
+     "left motor"
+    ],
+    [
+     "green medium gear",
+     "attached to",
+     "right motor"
+    ],
+    [
+     "yellow medium gear",
+     "attached to",
+     "right motor"
+    ],
+    [
+     "blue large gear",
+     "attached to",
+     "left motor"
+    ],
+    [
+     "white tiny hexagonal nut",
+     "attached to",
+     "center shaft"
+    ]
+   ],
+   "raw": "(red large gear, attached to, left motor)\n(green medium gear, attached to, right motor)\n(yellow medium gear, attached to, right motor)\n(blue large gear, attached to, left motor)\n(white tiny hexagonal nut, attached to, center shaft)",
+   "file": "data/vlm/raw/L/gemma3-4b__t1.2/without_base/run1.json",
+   "check": {
+    "n": 5,
+    "unknown_object": 5,
+    "off_list_relation": 0,
+    "pair_hits_of_5": 0,
+    "in_order_of_5": 0
+   },
+   "sim": {
+    "subject_enough": {
+     "success": 5,
+     "fail": 0,
+     "skipped": 0,
+     "seated": 5,
+     "seated_parts": [
+      "red",
+      "green",
+      "yellow",
+      "blue",
+      "nut"
+     ],
+     "steps": [
+      "success",
+      "success",
+      "success",
+      "success",
+      "success"
+     ]
+    },
+    "strict": {
+     "success": 0,
+     "fail": 0,
+     "skipped": 5,
+     "seated": 0,
+     "seated_parts": [],
+     "steps": [
+      "skipped: unknown object",
+      "skipped: unknown object",
+      "skipped: unknown object",
+      "skipped: unknown object",
+      "skipped: unknown object"
+     ]
+    }
+   }
+  },
+  {
+   "id": "gemma3-4b__t1.2/without_base/2",
+   "label": "gemma3:4b · T=1.2 · without Base Searcher · run 2",
+   "model": "gemma3:4b · T=1.2",
+   "variant": "without_base",
+   "run": 2,
+   "source": "local-run",
+   "backend": "ollama",
+   "temperature": 1.2,
+   "parts": true,
+   "image": "media/lab/lab_assembly_view.jpg",
+   "utc": "2026-11-12T15:37:29+00:00",
+   "served": [
+    "gemma3:4b"
+   ],
+   "triples": [
+    [
+     "red large gear",
+     "positioned onto",
+     "left side mount"
+    ],
+    [
+     "green medium gear",
+     "positioned above",
+     "left slide"
+    ],
+    [
+     "yellow medium gear",
+     "positioned closer to",
+     "side slide"
+    ],
+    [
+     "blue large gear",
+     "positioned above",
+     "mounting board"
+    ],
+    [
+     "white cover",
+     "placed over",
+     "all the gear assemblies"
+    ],
+    [
+     "white tiny hexagonal nut",
+     "attached to",
+     "one of the gears"
+    ]
+   ],
+   "raw": "(red large gear, positioned onto, left side mount)\n(green medium gear, positioned above, left slide)\n(yellow medium gear, positioned closer to, side slide)\n(blue large gear, positioned above, mounting board)\n(white cover, placed over, all the gear assemblies)\n(white tiny hexagonal nut, attached to, one of the gears)",
+   "file": "data/vlm/raw/L/gemma3-4b__t1.2/without_base/run2.json",
+   "check": {
+    "n": 6,
+    "unknown_object": 6,
+    "off_list_relation": 5,
+    "pair_hits_of_5": 0,
+    "in_order_of_5": 0
+   },
+   "sim": {
+    "subject_enough": {
+     "success": 0,
+     "fail": 1,
+     "skipped": 5,
+     "seated": 0,
+     "seated_parts": [],
+     "steps": [
+      "skipped: unknown relation",
+      "skipped: unknown relation",
+      "skipped: unknown relation",
+      "skipped: unknown relation",
+      "skipped: fixed part",
+      "fail: not seated"
+     ]
+    },
+    "strict": {
+     "success": 0,
+     "fail": 0,
+     "skipped": 6,
+     "seated": 0,
+     "seated_parts": [],
+     "steps": [
+      "skipped: unknown object",
+      "skipped: unknown object",
+      "skipped: unknown object",
+      "skipped: unknown object",
+      "skipped: fixed part",
+      "skipped: unknown object"
+     ]
+    }
+   }
+  },
+  {
+   "id": "gpt-4o-mini/with_base/1",
+   "label": "gpt-4o-mini · with Base Searcher · run 1",
+   "model": "gpt-4o-mini",
+   "variant": "with_base",
+   "run": 1,
+   "source": "local-run",
+   "backend": "openai",
+   "temperature": null,
+   "parts": true,
+   "image": "media/lab/lab_assembly_view.jpg",
+   "utc": "2026-11-12T15:46:08+00:00",
+   "served": [
+    "gpt-4o-mini-2024-07-18"
+   ],
+   "triples": [
+    [
+     "white cover",
+     "below",
+     "work surface"
+    ],
+    [
+     "red large gear",
+     "on",
+     "white cover"
+    ],
+    [
+     "green medium gear",
+     "attached to",
+     "red large gear"
+    ],
+    [
+     "blue large gear",
+     "meshed with",
+     "green medium gear"
+    ],
+    [
+     "yellow medium gear",
+     "meshed with",
+     "blue large gear"
+    ],
+    [
+     "white tiny hexagonal nut",
+     "secured to",
+     "central shaft"
+    ]
+   ],
+   "raw": "(white cover, below, work surface)  \n(red large gear, on, white cover)  \n(green medium gear, attached to, red large gear)  \n(blue large gear, meshed with, green medium gear)  \n(yellow medium gear, meshed with, blue large gear)  \n(white tiny hexagonal nut, secured to, central shaft)  ",
+   "file": "data/vlm/raw/L/gpt-4o-mini/with_base/run1.json",
+   "check": {
+    "n": 6,
+    "unknown_object": 2,
+    "off_list_relation": 2,
+    "pair_hits_of_5": 2,
+    "in_order_of_5": 1
+   },
+   "sim": {
+    "subject_enough": {
+     "success": 0,
+     "fail": 3,
+     "skipped": 3,
+     "seated": 0,
+     "seated_parts": [],
+     "steps": [
+      "skipped: fixed part",
+      "skipped: unknown relation",
+      "fail: not seated",
+      "fail: not seated",
+      "fail: not seated",
+      "skipped: unknown relation"
+     ]
+    },
+    "strict": {
+     "success": 0,
+     "fail": 3,
+     "skipped": 3,
+     "seated": 0,
+     "seated_parts": [],
+     "steps": [
+      "skipped: fixed part",
+      "skipped: unknown relation",
+      "fail: not seated",
+      "fail: not seated",
+      "fail: not seated",
+      "skipped: unknown object"
+     ]
+    }
+   }
+  },
+  {
+   "id": "gpt-4o/with_base/1",
+   "label": "gpt-4o · with Base Searcher · run 1",
+   "model": "gpt-4o",
+   "variant": "with_base",
+   "run": 1,
+   "source": "local-run",
+   "backend": "openai",
+   "temperature": null,
+   "parts": true,
+   "image": "media/lab/lab_assembly_view.jpg",
+   "utc": "2026-11-12T15:28:48+00:00",
+   "served": [
+    "gpt-4o-2024-08-06"
+   ],
+   "triples": [
+    [
+     "white cover",
+     "placed on",
+     "table"
+    ],
+    [
+     "red large gear",
+     "attached to",
+     "largest central peg"
+    ],
+    [
+     "largest central peg",
+     "on",
+     "white cover"
+    ],
+    [
+     "blue large gear",
+     "positioned onto",
+     "adjacent peg"
+    ],
+    [
+     "adjacent peg",
+     "on",
+     "white cover"
+    ],
+    [
+     "blue large gear",
+     "meshed with",
+     "red large gear"
+    ],
+    [
+     "green medium gear",
+     "inserted into",
+     "smallest peg"
+    ],
+    [
+     "smallest peg",
+     "on",
+     "white cover"
+    ],
+    [
+     "green medium gear",
+     "meshed with",
+     "blue large gear"
+    ],
+    [
+     "yellow medium gear",
+     "placed onto",
+     "remaining peg"
+    ],
+    [
+     "remaining peg",
+     "on",
+     "white cover"
+    ],
+    [
+     "yellow medium gear",
+     "meshed with",
+     "red large gear"
+    ],
+    [
+     "white tiny hexagonal nut",
+     "secure",
+     "gears"
+    ],
+    [
+     "white tiny hexagonal nut",
+     "on",
+     "central threads"
+    ]
+   ],
+   "raw": "(white cover, placed on, table)  \n(red large gear, attached to, largest central peg)  \n(largest central peg, on, white cover)  \n(blue large gear, positioned onto, adjacent peg)  \n(adjacent peg, on, white cover)  \n(blue large gear, meshed with, red large gear)  \n(green medium gear, inserted into, smallest peg)  \n(smallest peg, on, white cover)  \n(green medium gear, meshed with, blue large gear)  \n(yellow medium gear, placed onto, remaining peg)  \n(remaining peg, on, white cover)  \n(yellow medium gear, meshed with, red large gear)  \n(white tiny hexagonal nut, secure, gears)  \n(white tiny hexagonal nut, on, central threads)",
+   "file": "data/vlm/raw/L/gpt-4o/with_base/run1.json",
+   "check": {
+    "n": 14,
+    "unknown_object": 11,
+    "off_list_relation": 9,
+    "pair_hits_of_5": 0,
+    "in_order_of_5": 0
+   },
+   "sim": {
+    "subject_enough": {
+     "success": 1,
+     "fail": 4,
+     "skipped": 9,
+     "seated": 0,
+     "seated_parts": [],
+     "steps": [
+      "skipped: fixed part",
+      "success",
+      "skipped: unknown object",
+      "skipped: unknown relation",
+      "skipped: unknown object",
+      "fail: not seated",
+      "fail: not seated",
+      "skipped: unknown object",
+      "fail: object not detected",
+      "skipped: unknown relation",
+      "skipped: unknown object",
+      "fail: not seated",
+      "skipped: unknown relation",
+      "skipped: unknown relation"
+     ]
+    },
+    "strict": {
+     "success": 0,
+     "fail": 3,
+     "skipped": 11,
+     "seated": 0,
+     "seated_parts": [],
+     "steps": [
+      "skipped: fixed part",
+      "skipped: unknown object",
+      "skipped: unknown object",
+      "skipped: unknown object",
+      "skipped: unknown object",
+      "fail: not seated",
+      "skipped: unknown object",
+      "skipped: unknown object",
+      "fail: not seated",
+      "skipped: unknown object",
+      "skipped: unknown object",
+      "fail: not seated",
+      "skipped: unknown object",
+      "skipped: unknown object"
+     ]
+    }
+   }
+  },
+  {
+   "id": "gpt-4o/with_base/2",
+   "label": "gpt-4o · with Base Searcher · run 2",
+   "model": "gpt-4o",
+   "variant": "with_base",
+   "run": 2,
+   "source": "local-run",
+   "backend": "openai",
+   "temperature": null,
+   "parts": true,
+   "image": "media/lab/lab_assembly_view.jpg",
+   "utc": "2026-11-12T15:30:53+00:00",
+   "served": [
+    "gpt-4o-2024-08-06"
+   ],
+   "triples": [
+    [
+     "white cover",
+     "below",
+     "pegs"
+    ],
+    [
+     "red large gear",
+     "attached to",
+     "leftmost peg"
+    ],
+    [
+     "yellow medium gear",
+     "attached to",
+     "middle peg"
+    ],
+    [
+     "green medium gear",
+     "attached to",
+     "rightmost peg"
+    ],
+    [
+     "blue large gear",
+     "meshed with",
+     "red large gear"
+    ],
+    [
+     "blue large gear",
+     "meshed with",
+     "green medium gear"
+    ],
+    [
+     "blue large gear",
+     "above",
+     "red large gear"
+    ],
+    [
+     "blue large gear",
+     "above",
+     "green medium gear"
+    ],
+    [
+     "white tiny hexagonal nut",
+     "screw",
+     "top center peg"
+    ]
+   ],
+   "raw": "(white cover, below, pegs)\n(red large gear, attached to, leftmost peg)\n(yellow medium gear, attached to, middle peg)\n(green medium gear, attached to, rightmost peg)\n(blue large gear, meshed with, red large gear)\n(blue large gear, meshed with, green medium gear)\n(blue large gear, above, red large gear)\n(blue large gear, above, green medium gear)\n(white tiny hexagonal nut, screw, top center peg)",
+   "file": "data/vlm/raw/L/gpt-4o/with_base/run2.json",
+   "check": {
+    "n": 9,
+    "unknown_object": 5,
+    "off_list_relation": 0,
+    "pair_hits_of_5": 1,
+    "in_order_of_5": 0
+   },
+   "sim": {
+    "subject_enough": {
+     "success": 5,
+     "fail": 0,
+     "skipped": 4,
+     "seated": 5,
+     "seated_parts": [
+      "red",
+      "green",
+      "yellow",
+      "blue",
+      "nut"
+     ],
+     "steps": [
+      "skipped: fixed part",
+      "success",
+      "success",
+      "success",
+      "success",
+      "skipped: already placed",
+      "skipped: already placed",
+      "skipped: already placed",
+      "success"
+     ]
+    },
+    "strict": {
+     "success": 0,
+     "fail": 4,
+     "skipped": 5,
+     "seated": 0,
+     "seated_parts": [],
+     "steps": [
+      "skipped: fixed part",
+      "skipped: unknown object",
+      "skipped: unknown object",
+      "skipped: unknown object",
+      "fail: not seated",
+      "fail: not seated",
+      "fail: not seated",
+      "fail: not seated",
+      "skipped: unknown object"
+     ]
+    }
+   }
+  },
+  {
+   "id": "gpt-4o/with_base/3",
+   "label": "gpt-4o · with Base Searcher · run 3",
+   "model": "gpt-4o",
+   "variant": "with_base",
+   "run": 3,
+   "source": "local-run",
+   "backend": "openai",
+   "temperature": null,
+   "parts": true,
+   "image": "media/lab/lab_assembly_view.jpg",
+   "utc": "2026-11-12T15:32:55+00:00",
+   "served": [
+    "gpt-4o-2024-08-06"
+   ],
+   "triples": [
+    [
+     "white cover",
+     "placed flat on",
+     "surface"
+    ],
+    [
+     "yellow medium gear",
+     "inserted into",
+     "leftmost peg"
+    ],
+    [
+     "leftmost peg",
+     "attached to",
+     "white cover"
+    ],
+    [
+     "green medium gear",
+     "inserted into",
+     "middle peg"
+    ],
+    [
+     "middle peg",
+     "attached to",
+     "white cover"
+    ],
+    [
+     "green medium gear",
+     "meshed with",
+     "yellow medium gear"
+    ],
+    [
+     "red large gear",
+     "inserted into",
+     "rightmost peg"
+    ],
+    [
+     "rightmost peg",
+     "attached to",
+     "white cover"
+    ],
+    [
+     "red large gear",
+     "meshed with",
+     "green medium gear"
+    ],
+    [
+     "blue large gear",
+     "inserted into",
+     "central peg"
+    ],
+    [
+     "central peg",
+     "above",
+     "green medium gear"
+    ],
+    [
+     "blue large gear",
+     "meshed with",
+     "green medium gear"
+    ],
+    [
+     "blue large gear",
+     "meshed with",
+     "red large gear"
+    ],
+    [
+     "white tiny hexagonal nut",
+     "screw",
+     "central peg"
+    ],
+    [
+     "white tiny hexagonal nut",
+     "above",
+     "blue large gear"
+    ]
+   ],
+   "raw": "(white cover, placed flat on, surface)  \n(yellow medium gear, inserted into, leftmost peg)  \n(leftmost peg, attached to, white cover)  \n(green medium gear, inserted into, middle peg)  \n(middle peg, attached to, white cover)  \n(green medium gear, meshed with, yellow medium gear)  \n(red large gear, inserted into, rightmost peg)  \n(rightmost peg, attached to, white cover)  \n(red large gear, meshed with, green medium gear)  \n(blue large gear, inserted into, central peg)  \n(central peg, above, green medium gear)  \n(blue large gear, meshed with, green medium gear)  \n(blue large gear, meshed with, red large gear)  \n(white tiny hexagonal nut, screw, central peg)  \n(white tiny hexagonal nut, above, blue large gear)  ",
+   "file": "data/vlm/raw/L/gpt-4o/with_base/run3.json",
+   "check": {
+    "n": 15,
+    "unknown_object": 10,
+    "off_list_relation": 1,
+    "pair_hits_of_5": 2,
+    "in_order_of_5": 0
+   },
+   "sim": {
+    "subject_enough": {
+     "success": 5,
+     "fail": 0,
+     "skipped": 10,
+     "seated": 5,
+     "seated_parts": [
+      "red",
+      "green",
+      "yellow",
+      "blue",
+      "nut"
+     ],
+     "steps": [
+      "skipped: fixed part",
+      "success",
+      "skipped: unknown object",
+      "success",
+      "skipped: unknown object",
+      "skipped: already placed",
+      "success",
+      "skipped: unknown object",
+      "skipped: already placed",
+      "success",
+      "skipped: unknown object",
+      "skipped: already placed",
+      "skipped: already placed",
+      "success",
+      "skipped: already placed"
+     ]
+    },
+    "strict": {
+     "success": 0,
+     "fail": 5,
+     "skipped": 10,
+     "seated": 0,
+     "seated_parts": [],
+     "steps": [
+      "skipped: fixed part",
+      "skipped: unknown object",
+      "skipped: unknown object",
+      "skipped: unknown object",
+      "skipped: unknown object",
+      "fail: not seated",
+      "skipped: unknown object",
+      "skipped: unknown object",
+      "fail: not seated",
+      "skipped: unknown object",
+      "skipped: unknown object",
+      "fail: not seated",
+      "fail: not seated",
+      "skipped: unknown object",
+      "fail: not detected"
+     ]
+    }
+   }
+  },
+  {
+   "id": "gpt-4o/without_base/1",
+   "label": "gpt-4o · without Base Searcher · run 1",
+   "model": "gpt-4o",
+   "variant": "without_base",
+   "run": 1,
+   "source": "local-run",
+   "backend": "openai",
+   "temperature": null,
+   "parts": true,
+   "image": "media/lab/lab_assembly_view.jpg",
+   "utc": "2026-11-12T15:42:29+00:00",
+   "served": [
+    "gpt-4o-2024-08-06"
+   ],
+   "triples": [
+    [
+     "white cover",
+     "below",
+     "flat surface"
+    ],
+    [
+     "red large gear",
+     "inserted into",
+     "rightmost peg"
+    ],
+    [
+     "green medium gear",
+     "inserted into",
+     "middle peg"
+    ],
+    [
+     "yellow medium gear",
+     "inserted into",
+     "leftmost peg"
+    ],
+    [
+     "blue large gear",
+     "above",
+     "red large gear"
+    ],
+    [
+     "blue large gear",
+     "attached to",
+     "white tiny hexagonal nut"
+    ]
+   ],
+   "raw": "1. (white cover, below, flat surface)  \n2. (red large gear, inserted into, rightmost peg)  \n3. (green medium gear, inserted into, middle peg)  \n4. (yellow medium gear, inserted into, leftmost peg)  \n5. (blue large gear, above, red large gear)  \n6. (blue large gear, attached to, white tiny hexagonal nut)",
+   "file": "data/vlm/raw/L/gpt-4o/without_base/run1.json",
+   "check": {
+    "n": 6,
+    "unknown_object": 4,
+    "off_list_relation": 0,
+    "pair_hits_of_5": 0,
+    "in_order_of_5": 0
+   },
+   "sim": {
+    "subject_enough": {
+     "success": 3,
+     "fail": 2,
+     "skipped": 1,
+     "seated": 3,
+     "seated_parts": [
+      "red",
+      "green",
+      "yellow"
+     ],
+     "steps": [
+      "skipped: fixed part",
+      "success",
+      "success",
+      "success",
+      "fail: not seated",
+      "fail: not seated"
+     ]
+    },
+    "strict": {
+     "success": 0,
+     "fail": 2,
+     "skipped": 4,
+     "seated": 0,
+     "seated_parts": [],
+     "steps": [
+      "skipped: fixed part",
+      "skipped: unknown object",
+      "skipped: unknown object",
+      "skipped: unknown object",
+      "fail: not seated",
+      "fail: not seated"
+     ]
+    }
+   }
+  },
+  {
+   "id": "gpt-4o/without_base/2",
+   "label": "gpt-4o · without Base Searcher · run 2",
+   "model": "gpt-4o",
+   "variant": "without_base",
+   "run": 2,
+   "source": "local-run",
+   "backend": "openai",
+   "temperature": null,
+   "parts": true,
+   "image": "media/lab/lab_assembly_view.jpg",
+   "utc": "2026-11-12T15:43:42+00:00",
+   "served": [
+    "gpt-4o-2024-08-06"
+   ],
+   "triples": [
+    [
+     "white cover",
+     "placed on",
+     "surface"
+    ],
+    [
+     "red large gear",
+     "inserted into",
+     "right peg"
+    ],
+    [
+     "green medium gear",
+     "inserted into",
+     "center peg"
+    ],
+    [
+     "yellow medium gear",
+     "inserted into",
+     "left peg"
+    ],
+    [
+     "blue large gear",
+     "meshed with",
+     "green gear"
+    ],
+    [
+     "blue large gear",
+     "meshed with",
+     "red gear"
+    ],
+    [
+     "blue large gear",
+     "inserted into",
+     "unoccupied peg"
+    ],
+    [
+     "white tiny hexagonal nut",
+     "screw",
+     "blue large gear"
+    ]
+   ],
+   "raw": "(white cover, placed on, surface)\n(red large gear, inserted into, right peg)\n(green medium gear, inserted into, center peg)\n(yellow medium gear, inserted into, left peg)\n(blue large gear, meshed with, green gear)\n(blue large gear, meshed with, red gear)\n(blue large gear, inserted into, unoccupied peg)\n(white tiny hexagonal nut, screw, blue large gear)",
+   "file": "data/vlm/raw/L/gpt-4o/without_base/run2.json",
+   "check": {
+    "n": 8,
+    "unknown_object": 5,
+    "off_list_relation": 1,
+    "pair_hits_of_5": 2,
+    "in_order_of_5": 0
+   },
+   "sim": {
+    "subject_enough": {
+     "success": 5,
+     "fail": 0,
+     "skipped": 3,
+     "seated": 5,
+     "seated_parts": [
+      "red",
+      "green",
+      "yellow",
+      "blue",
+      "nut"
+     ],
+     "steps": [
+      "skipped: fixed part",
+      "success",
+      "success",
+      "success",
+      "success",
+      "skipped: already placed",
+      "skipped: already placed",
+      "success"
+     ]
+    },
+    "strict": {
+     "success": 0,
+     "fail": 3,
+     "skipped": 5,
+     "seated": 0,
+     "seated_parts": [],
+     "steps": [
+      "skipped: fixed part",
+      "skipped: unknown object",
+      "skipped: unknown object",
+      "skipped: unknown object",
+      "fail: not seated",
+      "fail: not seated",
+      "skipped: unknown object",
+      "fail: not seated"
+     ]
+    }
+   }
+  },
+  {
+   "id": "gpt-4o/without_base/3",
+   "label": "gpt-4o · without Base Searcher · run 3",
+   "model": "gpt-4o",
+   "variant": "without_base",
+   "run": 3,
+   "source": "local-run",
+   "backend": "openai",
+   "temperature": null,
+   "parts": true,
+   "image": "media/lab/lab_assembly_view.jpg",
+   "utc": "2026-11-12T15:44:55+00:00",
+   "served": [
+    "gpt-4o-2024-08-06"
+   ],
+   "triples": [
+    [
+     "white cover",
+     "below",
+     "pegs"
+    ],
+    [
+     "red large gear",
+     "attached to",
+     "first peg"
+    ],
+    [
+     "white cover",
+     "attached to",
+     "first peg"
+    ],
+    [
+     "green medium gear",
+     "attached to",
+     "second peg"
+    ],
+    [
+     "white cover",
+     "attached to",
+     "second peg"
+    ],
+    [
+     "yellow medium gear",
+     "attached to",
+     "third peg"
+    ],
+    [
+     "white cover",
+     "attached to",
+     "third peg"
+    ],
+    [
+     "blue large gear",
+     "meshed with",
+     "red large gear"
+    ],
+    [
+     "blue large gear",
+     "attached to",
+     "top peg"
+    ],
+    [
+     "white cover",
+     "attached to",
+     "top peg"
+    ],
+    [
+     "blue large gear",
+     "screw",
+     "white tiny hexagonal nut"
+    ],
+    [
+     "white tiny hexagonal nut",
+     "above",
+     "top peg"
+    ]
+   ],
+   "raw": "(white cover, below, pegs)  \n(red large gear, attached to, first peg)  \n(white cover, attached to, first peg)  \n(green medium gear, attached to, second peg)  \n(white cover, attached to, second peg)  \n(yellow medium gear, attached to, third peg)  \n(white cover, attached to, third peg)  \n(blue large gear, meshed with, red large gear)  \n(blue large gear, attached to, top peg)  \n(white cover, attached to, top peg)  \n(blue large gear, screw, white tiny hexagonal nut)  \n(white tiny hexagonal nut, above, top peg)  ",
+   "file": "data/vlm/raw/L/gpt-4o/without_base/run3.json",
+   "check": {
+    "n": 12,
+    "unknown_object": 10,
+    "off_list_relation": 0,
+    "pair_hits_of_5": 0,
+    "in_order_of_5": 0
+   },
+   "sim": {
+    "subject_enough": {
+     "success": 5,
+     "fail": 0,
+     "skipped": 7,
+     "seated": 5,
+     "seated_parts": [
+      "red",
+      "green",
+      "yellow",
+      "blue",
+      "nut"
+     ],
+     "steps": [
+      "skipped: fixed part",
+      "success",
+      "skipped: fixed part",
+      "success",
+      "skipped: fixed part",
+      "success",
+      "skipped: fixed part",
+      "success",
+      "skipped: already placed",
+      "skipped: fixed part",
+      "skipped: already placed",
+      "success"
+     ]
+    },
+    "strict": {
+     "success": 0,
+     "fail": 2,
+     "skipped": 10,
+     "seated": 0,
+     "seated_parts": [],
+     "steps": [
+      "skipped: fixed part",
+      "skipped: unknown object",
+      "skipped: fixed part",
+      "skipped: unknown object",
+      "skipped: fixed part",
+      "skipped: unknown object",
+      "skipped: fixed part",
+      "fail: not seated",
+      "skipped: unknown object",
+      "skipped: fixed part",
+      "fail: not seated",
+      "skipped: unknown object"
+     ]
+    }
+   }
+  },
+  {
+   "id": "gpt-4o__noparts/with_base/1",
+   "label": "gpt-4o · no part list · with Base Searcher · run 1",
+   "model": "gpt-4o · no part list",
+   "variant": "with_base",
+   "run": 1,
+   "source": "local-run",
+   "backend": "openai",
+   "temperature": null,
+   "parts": false,
+   "image": "media/lab/lab_assembly_view.jpg",
+   "utc": "2026-11-12T15:48:40+00:00",
+   "served": [
+    "gpt-4o-2024-08-06"
+   ],
+   "triples": [
+    [
+     "baseplate",
+     "lay",
+     "workspace"
+    ],
+    [
+     "yellow gear",
+     "inserted into",
+     "leftmost peg"
+    ],
+    [
+     "yellow gear",
+     "inserted into",
+     "baseplate"
+    ],
+    [
+     "blue gear",
+     "inserted into",
+     "central peg"
+    ],
+    [
+     "blue gear",
+     "meshed with",
+     "yellow gear"
+    ],
+    [
+     "red gear",
+     "inserted into",
+     "rightmost peg"
+    ],
+    [
+     "red gear",
+     "meshed with",
+     "blue gear"
+    ],
+    [
+     "green gear",
+     "inserted into",
+     "peg"
+    ],
+    [
+     "green gear",
+     "meshed with",
+     "yellow gear"
+    ],
+    [
+     "green gear",
+     "meshed with",
+     "red gear"
+    ],
+    [
+     "cover",
+     "positioned above",
+     "gears"
+    ],
+    [
+     "cover",
+     "aligned with",
+     "baseplate holes"
+    ],
+    [
+     "screws",
+     "inserted into",
+     "cover holes"
+    ]
+   ],
+   "raw": "(baseplate, lay, workspace)  \n(yellow gear, inserted into, leftmost peg)  \n(yellow gear, inserted into, baseplate)  \n(blue gear, inserted into, central peg)  \n(blue gear, meshed with, yellow gear)  \n(red gear, inserted into, rightmost peg)  \n(red gear, meshed with, blue gear)  \n(green gear, inserted into, peg)  \n(green gear, meshed with, yellow gear)  \n(green gear, meshed with, red gear)  \n(cover, positioned above, gears)  \n(cover, aligned with, baseplate holes)  \n(screws, inserted into, cover holes)",
+   "file": "data/vlm/raw/L/gpt-4o__noparts/with_base/run1.json",
+   "check": {
+    "n": 13,
+    "unknown_object": 9,
+    "off_list_relation": 3,
+    "pair_hits_of_5": 0,
+    "in_order_of_5": 0
+   },
+   "sim": {
+    "subject_enough": {
+     "success": 1,
+     "fail": 7,
+     "skipped": 5,
+     "seated": 0,
+     "seated_parts": [],
+     "steps": [
+      "skipped: unknown object",
+      "success",
+      "skipped: already placed",
+      "fail: not seated",
+      "fail: not seated",
+      "fail: not seated",
+      "fail: not seated",
+      "fail: not seated",
+      "fail: not seated",
+      "fail: not seated",
+      "skipped: fixed part",
+      "skipped: fixed part",
+      "skipped: unknown object"
+     ]
+    },
+    "strict": {
+     "success": 0,
+     "fail": 4,
+     "skipped": 9,
+     "seated": 0,
+     "seated_parts": [],
+     "steps": [
+      "skipped: unknown object",
+      "skipped: unknown object",
+      "skipped: unknown object",
+      "skipped: unknown object",
+      "fail: not seated",
+      "skipped: unknown object",
+      "fail: not seated",
+      "skipped: unknown object",
+      "fail: not seated",
+      "fail: not seated",
+      "skipped: fixed part",
+      "skipped: fixed part",
+      "skipped: unknown object"
+     ]
+    }
+   }
+  },
+  {
+   "id": "gpt-4o__noparts/with_base/2",
+   "label": "gpt-4o · no part list · with Base Searcher · run 2",
+   "model": "gpt-4o · no part list",
+   "variant": "with_base",
+   "run": 2,
+   "source": "local-run",
+   "backend": "openai",
+   "temperature": null,
+   "parts": false,
+   "image": "media/lab/lab_assembly_view.jpg",
+   "utc": "2026-11-12T15:50:43+00:00",
+   "served": [
+    "gpt-4o-2024-08-06"
+   ],
+   "triples": [
+    [
+     "base plate",
+     "placed on",
+     "flat surface"
+    ],
+    [
+     "yellow gear",
+     "placed on",
+     "leftmost peg"
+    ],
+    [
+     "yellow gear",
+     "placed on",
+     "base plate"
+    ],
+    [
+     "green gear",
+     "placed on",
+     "middle peg"
+    ],
+    [
+     "green gear",
+     "placed on",
+     "base plate"
+    ],
+    [
+     "red gear",
+     "placed on",
+     "rightmost peg"
+    ],
+    [
+     "red gear",
+     "placed on",
+     "base plate"
+    ],
+    [
+     "blue gear",
+     "placed on",
+     "green gear"
+    ],
+    [
+     "blue gear",
+     "aligned with",
+     "central peg"
+    ],
+    [
+     "blue gear",
+     "placed on",
+     "base plate"
+    ],
+    [
+     "washer",
+     "goes through",
+     "peg"
+    ],
+    [
+     "washer",
+     "attached to",
+     "yellow gear"
+    ],
+    [
+     "screw",
+     "goes through",
+     "washer"
+    ],
+    [
+     "screw",
+     "attached to",
+     "yellow gear"
+    ],
+    [
+     "yellow gear",
+     "meshed with",
+     "peg"
+    ],
+    [
+     "yellow gear",
+     "attached to",
+     "base plate"
+    ],
+    [
+     "washer",
+     "goes through",
+     "peg"
+    ],
+    [
+     "washer",
+     "attached to",
+     "green gear"
+    ],
+    [
+     "screw",
+     "goes through",
+     "washer"
+    ],
+    [
+     "screw",
+     "attached to",
+     "green gear"
+    ],
+    [
+     "green gear",
+     "meshed with",
+     "peg"
+    ],
+    [
+     "green gear",
+     "attached to",
+     "base plate"
+    ],
+    [
+     "washer",
+     "goes through",
+     "peg"
+    ],
+    [
+     "washer",
+     "attached to",
+     "red gear"
+    ],
+    [
+     "screw",
+     "goes through",
+     "washer"
+    ],
+    [
+     "screw",
+     "attached to",
+     "red gear"
+    ],
+    [
+     "red gear",
+     "meshed with",
+     "peg"
+    ],
+    [
+     "red gear",
+     "attached to",
+     "base plate"
+    ],
+    [
+     "nut",
+     "goes through",
+     "peg"
+    ],
+    [
+     "nut",
+     "attached to",
+     "blue gear"
+    ],
+    [
+     "blue gear",
+     "above",
+     "green gear"
+    ],
+    [
+     "blue gear",
+     "meshed with",
+     "peg"
+    ],
+    [
+     "blue gear",
+     "attached to",
+     "base plate"
+    ]
+   ],
+   "raw": "(base plate, placed on, flat surface)  \n(yellow gear, placed on, leftmost peg)  \n(yellow gear, placed on, base plate)  \n(green gear, placed on, middle peg)  \n(green gear, placed on, base plate)  \n(red gear, placed on, rightmost peg)  \n(red gear, placed on, base plate)  \n(blue gear, placed on, green gear)  \n(blue gear, aligned with, central peg)  \n(blue gear, placed on, base plate)  \n(washer, goes through, peg)  \n(washer, attached to, yellow gear)  \n(screw, goes through, washer)  \n(screw, attached to, yellow gear)  \n(yellow gear, meshed with, peg)  \n(yellow gear, attached to, base plate)  \n(washer, goes through, peg)  \n(washer, attached to, green gear)  \n(screw, goes through, washer)  \n(screw, attached to, green gear)  \n(green gear, meshed with, peg)  \n(green gear, attached to, base plate)  \n(washer, goes through, peg)  \n(washer, attached to, red gear)  \n(screw, goes through, washer)  \n(screw, attached to, red gear)  \n(red gear, meshed with, peg)  \n(red gear, attached to, base plate)  \n(nut, goes through, peg)  \n(nut, attached to, blue gear)  \n(blue gear, above, green gear)  \n(blue gear, meshed with, peg)  \n(blue gear, attached to, base plate)  ",
+   "file": "data/vlm/raw/L/gpt-4o__noparts/with_base/run2.json",
+   "check": {
+    "n": 33,
+    "unknown_object": 30,
+    "off_list_relation": 10,
+    "pair_hits_of_5": 2,
+    "in_order_of_5": 0
+   },
+   "sim": {
+    "subject_enough": {
+     "success": 3,
+     "fail": 5,
+     "skipped": 25,
+     "seated": 3,
+     "seated_parts": [
+      "red",
+      "green",
+      "yellow"
+     ],
+     "steps": [
+      "skipped: unknown object",
+      "skipped: unknown relation",
+      "skipped: unknown relation",
+      "skipped: unknown relation",
+      "skipped: unknown relation",
+      "skipped: unknown relation",
+      "skipped: unknown relation",
+      "skipped: unknown relation",
+      "skipped: unknown relation",
+      "skipped: unknown relation",
+      "skipped: unknown object",
+      "skipped: unknown object",
+      "skipped: unknown object",
+      "skipped: unknown object",
+      "success",
+      "skipped: already placed",
+      "skipped: unknown object",
+      "skipped: unknown object",
+      "skipped: unknown object",
+      "skipped: unknown object",
+      "success",
+      "skipped: already placed",
+      "skipped: unknown object",
+      "skipped: unknown object",
+      "skipped: unknown object",
+      "skipped: unknown object",
+      "success",
+      "skipped: already placed",
+      "fail: not seated",
+      "fail: not seated",
+      "fail: not detected",
+      "fail: not detected",
+      "fail: not detected"
+     ]
+    },
+    "strict": {
+     "success": 0,
+     "fail": 2,
+     "skipped": 31,
+     "seated": 0,
+     "seated_parts": [],
+     "steps": [
+      "skipped: unknown object",
+      "skipped: unknown object",
+      "skipped: unknown object",
+      "skipped: unknown object",
+      "skipped: unknown object",
+      "skipped: unknown object",
+      "skipped: unknown object",
+      "skipped: unknown relation",
+      "skipped: unknown object",
+      "skipped: unknown object",
+      "skipped: unknown object",
+      "skipped: unknown object",
+      "skipped: unknown object",
+      "skipped: unknown object",
+      "skipped: unknown object",
+      "skipped: unknown object",
+      "skipped: unknown object",
+      "skipped: unknown object",
+      "skipped: unknown object",
+      "skipped: unknown object",
+      "skipped: unknown object",
+      "skipped: unknown object",
+      "skipped: unknown object",
+      "skipped: unknown object",
+      "skipped: unknown object",
+      "skipped: unknown object",
+      "skipped: unknown object",
+      "skipped: unknown object",
+      "skipped: unknown object",
+      "fail: not seated",
+      "fail: not detected",
+      "skipped: unknown object",
+      "skipped: unknown object"
+     ]
+    }
+   }
+  },
+  {
+   "id": "gpt-4o__noparts/with_base/3",
+   "label": "gpt-4o · no part list · with Base Searcher · run 3",
+   "model": "gpt-4o · no part list",
+   "variant": "with_base",
+   "run": 3,
+   "source": "local-run",
+   "backend": "openai",
+   "temperature": null,
+   "parts": false,
+   "image": "media/lab/lab_assembly_view.jpg",
+   "utc": "2026-11-12T15:52:47+00:00",
+   "served": [
+    "gpt-4o-2024-08-06"
+   ],
+   "triples": [
+    [
+     "yellow gear",
+     "meshed with",
+     "leftmost peg"
+    ],
+    [
+     "green gear",
+     "meshed with",
+     "middle peg"
+    ],
+    [
+     "red gear",
+     "meshed with",
+     "rightmost peg"
+    ],
+    [
+     "blue gear",
+     "above",
+     "green gear"
+    ],
+    [
+     "washer",
+     "above",
+     "blue gear"
+    ],
+    [
+     "screws",
+     "screw",
+     "base plate"
+    ],
+    [
+     "cover",
+     "above",
+     "green gear"
+    ]
+   ],
+   "raw": "1. (yellow gear, meshed with, leftmost peg)\n2. (green gear, meshed with, middle peg)\n3. (red gear, meshed with, rightmost peg)\n4. (blue gear, above, green gear)\n5. (washer, above, blue gear)\n6. (screws, screw, base plate)\n7. (cover, above, green gear)",
+   "file": "data/vlm/raw/L/gpt-4o__noparts/with_base/run3.json",
+   "check": {
+    "n": 7,
+    "unknown_object": 5,
+    "off_list_relation": 0,
+    "pair_hits_of_5": 1,
+    "in_order_of_5": 0
+   },
+   "sim": {
+    "subject_enough": {
+     "success": 4,
+     "fail": 0,
+     "skipped": 3,
+     "seated": 4,
+     "seated_parts": [
+      "red",
+      "green",
+      "yellow",
+      "blue"
+     ],
+     "steps": [
+      "success",
+      "success",
+      "success",
+      "success",
+      "skipped: unknown object",
+      "skipped: unknown object",
+      "skipped: fixed part"
+     ]
+    },
+    "strict": {
+     "success": 0,
+     "fail": 1,
+     "skipped": 6,
+     "seated": 0,
+     "seated_parts": [],
+     "steps": [
+      "skipped: unknown object",
+      "skipped: unknown object",
+      "skipped: unknown object",
+      "fail: not seated",
+      "skipped: unknown object",
+      "skipped: unknown object",
+      "skipped: fixed part"
+     ]
+    }
+   }
+  }
+ ]
+}

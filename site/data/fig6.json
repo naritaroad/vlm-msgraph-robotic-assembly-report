@@ -1,0 +1,65 @@
+{
+ "source": "Li et al., RCIM 94 (2025) 102978, Fig. 6, p.6. Transcribed row by row from site/media/figures/fig6.jpg on 2026-11-12 and cross-checked against the v1 deck data and the reading notes (experiments.md).",
+ "note": "tick = colour of the mark printed in front of each predicted triple: g green, p purple, c cyan, x grey. The paper prints no per-row score. All 34 triple rows are legible at the resolution of fig6.jpg. Rows with legible=false are left out of every calculation.",
+ "tick_legend": {
+  "g": {"colour": "green", "paper_text": "p.6 left: 'green hook' = subject and object confused", "on_figure": "all 10 green rows are identical to a ground-truth row (P53)"},
+  "p": {"colour": "purple", "paper_text": "p.6 left: relation worded differently from the ground truth", "on_figure": "3 rows; same two names, different predicate"},
+  "c": {"colour": "cyan", "paper_text": "not named in the text (P54)", "on_figure": "3 rows; the object is replaced by another name"},
+  "x": {"colour": "grey", "paper_text": "p.6 left: 'reversed assembly sequences'", "on_figure": "1 row; a ground-truth triple moved two rows earlier (P55)"}
+ },
+ "products": [
+  {
+   "id": "left",
+   "label": "Left example (2D drawing)",
+   "gt": [
+    {"t": ["BASE", "attached to", "work surface"], "legible": true},
+    {"t": ["BRACKET", "attached to", "BASE"], "legible": true},
+    {"t": ["SPINDLE", "inserted into", "BRACKET"], "legible": true},
+    {"t": ["ROLLER", "above", "SPINDLE"], "legible": true},
+    {"t": ["BUSH", "inside", "ROLLER"], "legible": true},
+    {"t": ["LUBRICATING NIPPLE", "goes through", "SPINDLE"], "legible": true},
+    {"t": ["HEX BOLT", "screw", "BRACKET"], "legible": true}
+   ],
+   "pred": [
+    {"t": ["BASE", "attached to", "work surface"], "tick": "g", "legible": true},
+    {"t": ["BRACKET", "above", "BASE"], "tick": "p", "legible": true},
+    {"t": ["SPINDLE", "inserted into", "BRACKET"], "tick": "g", "legible": true},
+    {"t": ["ROLLER", "above", "SPINDLE"], "tick": "g", "legible": true},
+    {"t": ["BUSH", "inside", "ROLLER"], "tick": "g", "legible": true},
+    {"t": ["LUBRICATING NIPPLE", "goes through", "SPINDLE"], "tick": "g", "legible": true},
+    {"t": ["HEX BOLT", "screw", "components"], "tick": "c", "legible": true}
+   ]
+  },
+  {
+   "id": "right",
+   "label": "Right example (3D model)",
+   "gt": [
+    {"t": ["Linear rolling guides", "goes through", "Slide blocks"], "legible": true},
+    {"t": ["Linear rolling guides", "goes through", "Slide blocks"], "legible": true},
+    {"t": ["Nut bracket", "attached to", "Slide blocks"], "legible": true},
+    {"t": ["Screw-nut joints", "screwed", "Nut bracket"], "legible": true},
+    {"t": ["Screw shaft", "attached to", "Screw-nut joints"], "legible": true},
+    {"t": ["Upper-end bearing joints", "attached to", "Screw shaft"], "legible": true},
+    {"t": ["Servo motor", "attached to", "Upper-end bearing joints"], "legible": true},
+    {"t": ["Screw shaft", "goes through", "Lower-end bearing joints"], "legible": true},
+    {"t": ["Spindle system", "attached to", "Slide blocks"], "legible": true},
+    {"t": ["Spindle unit", "goes through", "Spindle system"], "legible": true}
+   ],
+   "pred": [
+    {"t": ["Linear rolling guides", "goes through", "Slide blocks"], "tick": "g", "legible": true},
+    {"t": ["Linear rolling guides", "goes through", "Slide blocks"], "tick": "g", "legible": true},
+    {"t": ["Nut bracket", "attached to", "Slide blocks"], "tick": "g", "legible": true},
+    {"t": ["Screw-nut joints", "goes through", "Nut bracket"], "tick": "p", "legible": true},
+    {"t": ["Screw shaft", "attached to", "Nut bracket"], "tick": "c", "legible": true},
+    {"t": ["Screw shaft", "goes through", "Lower-end bearing joints"], "tick": "x", "legible": true},
+    {"t": ["Upper-end bearing joints", "attached to", "Screw shaft"], "tick": "g", "legible": true},
+    {"t": ["Servo motor", "above", "Upper-end bearing joints"], "tick": "p", "legible": true},
+    {"t": ["Spindle system", "attached to", "Slide blocks"], "tick": "g", "legible": true},
+    {"t": ["Spindle unit", "goes through", "Nut bracket"], "tick": "c", "legible": true}
+   ]
+  }
+ ],
+ "pending": [
+  {"where": "left example, parts table inside the drawing", "what": "quantities (BUSH 2, HEX BOLT 4 per facts-audit P57) and the title-block text are too small to read in fig6.jpg", "used_in_scores": false}
+ ]
+}

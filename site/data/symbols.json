@@ -1,0 +1,1593 @@
+{
+ "A_t": {
+  "en": "Low-level action for one planned robot action: three numbers of movement, three Euler angles, one gripper state.",
+  "kind": "computed",
+  "shape": "7×1",
+  "src": "§3.2, p.5 left",
+  "tex": "\\vec{A}^{\\,i}_{t}",
+  "zh": "對應一個規劃動作的低層動作：三個位移、三個歐拉角、一個夾爪狀態。"
+ },
+ "Bsear": {
+  "en": "The Base Searcher, as spelled in print. Superscript LLM: its inputs are text only.",
+  "kind": "model",
+  "shape": "function: text in, text out",
+  "src": "Eq. (2), p.3 right",
+  "tex": "\\mathrm{Bsear}^{LLM}",
+  "zh": "Base Searcher，印刷的拼法就是 Bsear。上標 LLM：輸入只有文字。"
+ },
+ "E_t": {
+  "en": "Edges: the action predicates between those objects in time step t. Whether it holds one edge or all edges so far is not stated.",
+  "kind": "model",
+  "shape": "set of labelled arrows",
+  "src": "§3.1, p.4 left",
+  "tex": "E_t",
+  "zh": "edge：時間步 t、這些物體之間的動作 predicate。裡面是一條，還是到目前為止的全部，論文沒寫。"
+ },
+ "G_nar1": {
+  "en": "The graph that the stage-1 output is translated into. How the two narrators' outputs are merged is not stated.",
+  "kind": "computed",
+  "shape": "graph: nodes and edges",
+  "src": "§3.1, p.3 left; Eq. (2)",
+  "tex": "G_{nar1}",
+  "zh": "階段 1 的輸出轉成的圖。兩個 narrator 的輸出怎麼合併，論文沒寫。"
+ },
+ "G_t": {
+  "en": "The high-level task plan as a graph: the pair (N_t, E_t).",
+  "kind": "computed",
+  "shape": "pair: (set of nodes, set of edges)",
+  "src": "§3.1, p.4 left",
+  "tex": "G_t",
+  "zh": "寫成圖的 high-level 任務計劃：(N_t, E_t) 這一對。"
+ },
+ "Gamma_any": {
+  "en": "Grasp poses that AnyGrasp outputs for all observed objects, with their transformation matrix.",
+  "kind": "model",
+  "shape": "4×4 each",
+  "src": "§3.2, p.5 left",
+  "tex": "\\Gamma_{any}",
+  "zh": "AnyGrasp 替看到的所有物體輸出的夾取姿態，附變換矩陣。"
+ },
+ "Gamma_c_b": {
+  "en": "Transformation from the camera to the robot base, obtained via hand-eye calibration.",
+  "kind": "setting",
+  "shape": "4×4",
+  "src": "§3.2, p.5 left",
+  "tex": "\\Gamma^{c}_{b}",
+  "zh": "相機到機器人底座的轉換，由 hand-eye calibration 得到。"
+ },
+ "Gamma_grasp": {
+  "en": "The grasp poses that fall inside the target part's mask. Which one is finally used is not stated.",
+  "kind": "model",
+  "shape": "4×4 each",
+  "src": "§3.2, p.5 left",
+  "tex": "\\Gamma_{grasp}",
+  "zh": "落在目標零件 mask 裡的夾取姿態。最後用哪一個，論文沒寫。"
+ },
+ "Gamma_obj": {
+  "en": "The grasp pose of the part in what the paper calls world coordinates: Γ_obj = Γ^c_b × Γ_grasp.",
+  "kind": "computed",
+  "shape": "4×4",
+  "src": "§3.2, p.5 left",
+  "tex": "\\Gamma_{obj}",
+  "zh": "零件的夾取姿態，論文稱在 world 座標：Γ_obj = Γ^c_b × Γ_grasp。"
+ },
+ "Gamma_t": {
+  "en": "Camera pose at frame t: maps camera coordinates to the common reference frame.",
+  "kind": "data",
+  "shape": "4×4",
+  "src": "Eq. (5), p.4 right",
+  "tex": "\\Gamma_t",
+  "zh": "畫面 t 的相機姿態：把相機座標換到共同參考座標。"
+ },
+ "I_rgb_j": {
+  "en": "Colour value of pixel (u, v) in view j. In Eq. (6) it is tested against the mask, which does not fit by type.",
+  "kind": "data",
+  "shape": "3 numbers",
+  "src": "Eq. (6), p.4 right",
+  "tex": "I^{rgb}_j(u,v)",
+  "zh": "視角 j 裡 pixel (u, v) 的顏色值。式 (6) 拿它去比 mask，型別對不上。"
+ },
+ "K": {
+  "en": "Camera intrinsic matrix. Values not stated in the paper; the lab uses f = 385 px and centre (320, 240) px.",
+  "kind": "setting",
+  "shape": "3×3, px",
+  "src": "Eq. (4), p.4 right; lab values are Demo",
+  "tex": "K",
+  "zh": "相機的 intrinsic matrix。論文沒有印數值；實驗室用 f = 385 px、中心 (320, 240) px。"
+ },
+ "K_inv": {
+  "en": "The inverse of K: it undoes K. Applied to [u, v, 1] it gives the ray direction ((u − c_x)/f_x, (v − c_y)/f_y, 1), with no unit. Multiplying by depth then gives the point.",
+  "kind": "computed",
+  "shape": "3×3",
+  "src": "Eq. (4), p.4 right",
+  "tex": "K^{-1}",
+  "zh": "K 的反矩陣：把 K 做的事倒回去。乘上 [u, v, 1] 得到射線方向 ((u − c_x)/f_x, (v − c_y)/f_y, 1)，沒有單位。再乘深度就得到那個點。"
+ },
+ "Longrightarrow": {
+  "en": "Printed between the two sides of Eq. (2). Not defined in the paper; read here as “produces”.",
+  "kind": "setting",
+  "shape": "—",
+  "src": "Eq. (2), p.3 right",
+  "tex": "\\Longrightarrow",
+  "zh": "印在式 (2) 兩邊之間。論文沒有定義；這裡讀成「產生」。"
+ },
+ "M_tasks": {
+  "en": "Number of tasks averaged in mR. What one task is, the paper does not state; the data set has 127 drawings.",
+  "kind": "data",
+  "shape": "count",
+  "src": "§4.1, p.5 right",
+  "tex": "M",
+  "zh": "mR 平均的任務數。一個任務指什麼，論文沒寫；資料集有 127 張組裝圖。"
+ },
+ "N_points": {
+  "en": "Number of points of the disassembled cloud. The centroid divides by N and the ICP sum runs over i = 1 … N. Not the node set N_t.",
+  "kind": "data",
+  "shape": "count",
+  "src": "External; reference [32]",
+  "tex": "N",
+  "zh": "拆開那團點雲的點數。質心除以 N，ICP 的總和從 i = 1 加到 N。不是 node 的集合 N_t。"
+ },
+ "N_t": {
+  "en": "Nodes: the sets of objects in the triples.",
+  "kind": "model",
+  "shape": "set of part names (text)",
+  "src": "§3.1, p.4 left",
+  "tex": "N_t",
+  "zh": "node：triple 裡的物體所成的集合。"
+ },
+ "Nar1_short": {
+  "en": "The stage-1 narrator written as one function. The text has two agents, Relation Narrator and Image Narrator.",
+  "kind": "model",
+  "shape": "function",
+  "src": "Eq. (1), p.3 left",
+  "tex": "\\mathrm{Nar}_1",
+  "zh": "階段 1 的 narrator，寫成一個函數。正文其實有兩個 agent：Relation Narrator 和 Image Narrator。"
+ },
+ "Nar_1": {
+  "en": "The stage-1 narrator, written as one function. The text describes two agents, Relation Narrator and Image Narrator.",
+  "kind": "model",
+  "shape": "function: picture and text in, text out",
+  "src": "Eq. (1), p.3 left",
+  "tex": "\\mathrm{Nar}_1^{VLM}",
+  "zh": "階段 1 的 narrator，式子寫成一個函數。正文描述的是兩個 agent：Relation Narrator 與 Image Narrator。"
+ },
+ "Nar_2": {
+  "en": "The stage-2 narrator, called Action Narrator in the text. Superscript VLM: the call receives the picture.",
+  "kind": "model",
+  "shape": "function: picture and text in, text out",
+  "src": "Eq. (3), p.3 right",
+  "tex": "\\mathrm{Nar}_2^{VLM}",
+  "zh": "階段 2 的 narrator，正文叫 Action Narrator。上標 VLM：這次呼叫有拿到圖。"
+ },
+ "O_dis": {
+  "en": "Observations of the disassembly states of the η parts, each from k views.",
+  "kind": "data",
+  "shape": "η × k images",
+  "src": "§3.2, p.4 right",
+  "tex": "O_{dis}",
+  "zh": "η 個零件拆開狀態的觀測，各 k 個視角。"
+ },
+ "O_s": {
+  "en": "Observations of the assembly states of the η parts, each from k views. Where they come from is not stated.",
+  "kind": "data",
+  "shape": "η × k images",
+  "src": "§3.2, p.4 right",
+  "tex": "O_s",
+  "zh": "η 個零件組好狀態的觀測，各 k 個視角。怎麼取得，論文沒寫。"
+ },
+ "O_t": {
+  "en": "One observation at time t: a colour image and a depth map. The paper later reuses O_t for a set of k images.",
+  "kind": "data",
+  "shape": "[h×w×3, h×w]",
+  "src": "§3.2, p.4 left; reused p.4 right",
+  "tex": "O_t",
+  "zh": "時間 t 的一次觀測：一張彩色影像加一張 depth map。論文後面又把 O_t 拿來指 k 張影像的集合。"
+ },
+ "P_bold_t": {
+  "en": "Called the homogeneous matrix in the paper. For the product with Γ_t to be a point it must be [P_t; 1], a 4×1 vector (my reading).",
+  "kind": "computed",
+  "shape": "4×1 (my reading)",
+  "src": "Eq. (5), p.4 right",
+  "tex": "\\boldsymbol{P}_t",
+  "zh": "論文稱 homogeneous matrix。要和 Γ_t 乘出一個點，它得是 [P_t; 1]，4×1 的向量（我的讀法）。"
+ },
+ "P_cal_i": {
+  "en": "Point cloud of part i, merged from k views. Printed as p_i inside ζ_i.",
+  "kind": "computed",
+  "shape": "n_i×3, m",
+  "src": "Eq. (6), p.4 right",
+  "tex": "\\mathcal{P}_i",
+  "zh": "零件 i 的點雲，由 k 個視角合併。在 ζ_i 裡印成 p_i。"
+ },
+ "P_i_alone": {
+  "en": "Spatial relation stored for part i: the pair {R, T}. Not a point and not a point cloud.",
+  "kind": "computed",
+  "shape": "{3×3, 3×1}",
+  "src": "§3.2, p.4 right",
+  "tex": "P_i",
+  "zh": "替零件 i 存下的空間關係：{R, T} 這一對。不是點，也不是點雲。"
+ },
+ "P_i_memory": {
+  "en": "The spatial relation stored for part i: one rotation and one translation between its disassembly and assembly states. Not a point and not a point cloud.",
+  "kind": "computed",
+  "shape": "{3×3, 3×1}",
+  "src": "§3.2, p.4 right",
+  "tex": "P_i=\\{R,T\\}",
+  "zh": "替零件 i 存下的空間關係：拆開狀態和組好狀態之間的一個旋轉加一個平移。不是點，也不是點雲。"
+ },
+ "P_t": {
+  "en": "3D point of pixel (u, v) in the camera frame.",
+  "kind": "computed",
+  "shape": "3×1, m",
+  "src": "Eq. (4), p.4 right",
+  "tex": "P_t(u,v)",
+  "zh": "pixel (u, v) 在相機座標裡的 3D 點。"
+ },
+ "P_t_short": {
+  "en": "The 3D point in camera coordinates from Eq. (4), written without (u, v) in the worked example.",
+  "kind": "computed",
+  "shape": "3×1, m",
+  "src": "Eq. (4), p.4 right",
+  "tex": "P_t",
+  "zh": "式 (4) 得到、在相機座標裡的 3D 點，例子裡省略了 (u, v)。"
+ },
+ "P_vec": {
+  "en": "The adjacent gripper location where the approach of Eq. (7) starts. Which point exactly is not stated.",
+  "kind": "data",
+  "shape": "3",
+  "src": "Eq. (7), p.5 left",
+  "tex": "\\vec{P}",
+  "zh": "式 (7) 進場起點的鄰近夾爪位置。確切是哪一點，論文沒寫。"
+ },
+ "P_w_t": {
+  "en": "The same point in the common reference frame. Which frame that is, the paper does not state.",
+  "kind": "computed",
+  "shape": "3×1, m",
+  "src": "Eq. (5), p.4 right",
+  "tex": "P^{w}_t(u,v)",
+  "zh": "同一個點在共同參考座標裡的位置。是哪一個座標，論文沒寫。"
+ },
+ "Pr_x": {
+  "alt": [
+   "\\Pr(a)",
+   "\\Pr(7)"
+  ],
+  "en": "Probability of the table whose first count is x, when the successes are dealt at random. Pr(a) is the probability of the table we actually saw; for Product 5, Pr(7) = 0.0106.",
+  "kind": "computed",
+  "shape": "probability, 0 to 1",
+  "src": "Derived; not in the paper",
+  "tex": "\\Pr(x)",
+  "zh": "第一格是 x 的那張表出現的機率（成功次數隨機分配時）。Pr(a) 是實際看到的那張表的機率；Product 5 的 Pr(7) = 0.0106。"
+ },
+ "Prompt": {
+  "en": "The instruction text for this call.",
+  "kind": "setting",
+  "shape": "text",
+  "src": "Eq. (1)(2)(3), p.3; Fig. 5, p.6",
+  "tex": "\\mathit{Prompt}",
+  "zh": "這次呼叫用的指示文字。"
+ },
+ "R0_vec": {
+  "en": "The orientation the gripper arrives with, before it turns to the grasp orientation R. Our reading of the second waypoint; the paper does not name it.",
+  "kind": "data",
+  "shape": "3",
+  "tex": "\\vec{R}_0",
+  "zh": "夾爪進場時的朝向，還沒轉到夾取朝向 R 之前。這是我們對第二個路點的讀法；論文沒有替它取名字。"
+ },
+ "R3": {
+  "en": "Lists of three real numbers. T ∈ ℝ^3 means T has three numbers, one per axis.",
+  "kind": "setting",
+  "shape": "3",
+  "src": "§3.2, p.4 right",
+  "tex": "\\mathbb{R}^{3}",
+  "zh": "三個實數排成的串。T ∈ ℝ^3 表示 T 有三個數，一個軸一個。"
+ },
+ "R7": {
+  "en": "Lists of seven real numbers. A_t has seven: dx, dy, dz, rx, ry, rz and s_t.",
+  "kind": "setting",
+  "shape": "7",
+  "src": "§3.2, p.5 left",
+  "tex": "\\mathbb{R}^{7}",
+  "zh": "七個實數排成的串。A_t 有七個：dx、dy、dz、rx、ry、rz、s_t。"
+ },
+ "RMSE_sym": {
+  "en": "Root mean square error of the matched pairs: the ICP sum divided by N, then the square root. Not in the paper.",
+  "kind": "computed",
+  "shape": "scalar, mm",
+  "tex": "\\mathrm{RMSE}",
+  "zh": "配對點的均方根誤差：ICP 的總和除以 N，再開根號。論文沒有。"
+ },
+ "R_at_k": {
+  "en": "Recall at level k for one task: hits over answers. Not the rotation matrix R of §3.2.",
+  "kind": "computed",
+  "shape": "0–1 (Table 1: %)",
+  "src": "Derived from §4.1, p.5–6",
+  "tex": "R@k",
+  "zh": "一個任務在層級 k 的 Recall：命中數除以答案數。不是 §3.2 的旋轉矩陣 R。"
+ },
+ "R_grasp": {
+  "en": "The rotation part of Γ_grasp: the orientation the gripper must have to hold the part. Used in the 'gripper turned' reading of the second waypoint.",
+  "kind": "computed",
+  "shape": "3×3",
+  "tex": "R_{grasp}",
+  "zh": "Γ_grasp 的旋轉部分：夾爪要夾住零件所需的朝向。用在第二個路點「只轉向」的讀法。"
+ },
+ "R_m": {
+  "en": "Recall of task m at level k. mR@k is the average of these over the M tasks.",
+  "kind": "computed",
+  "shape": "0–1",
+  "tex": "R_m@k",
+  "zh": "任務 m 在層級 k 的 Recall。mR@k 是 M 個任務的這個值取平均。"
+ },
+ "R_rot": {
+  "en": "Rotation matrix in SO(3). Not Recall (§4.1) and not the Euler-angle vector of Eq. (7).",
+  "kind": "computed",
+  "shape": "3×3",
+  "src": "§3.2, p.4 right",
+  "tex": "R",
+  "zh": "SO(3) 裡的旋轉矩陣。不是 Recall（§4.1），也不是式 (7) 的歐拉角向量。"
+ },
+ "R_vec": {
+  "en": "Gripper rotation [rx, ry, rz] in Euler angles, derived from Γ_obj. Not the 3×3 matrix R of the memory and not Recall.",
+  "kind": "computed",
+  "shape": "3",
+  "src": "§3.2, p.5 left",
+  "tex": "\\vec{R}",
+  "zh": "夾爪的旋轉 [rx, ry, rz]，歐拉角，由 Γ_obj 得來。不是記憶裡的 3×3 矩陣 R，也不是 Recall。"
+ },
+ "SO3": {
+  "en": "The set of all 3D rotation matrices. R ∈ SO(3) says R is a proper rotation: R^T R = I and det R = 1.",
+  "kind": "setting",
+  "shape": "set of 3×3",
+  "src": "§3.2, p.4 right",
+  "tex": "SO(3)",
+  "zh": "所有 3D 旋轉矩陣的集合。R ∈ SO(3) 表示 R 是旋轉：R^T R = I 且 det R = 1。"
+ },
+ "T_hat": {
+  "en": "The list of triples the model predicted for one task.",
+  "kind": "model",
+  "shape": "list of triples",
+  "src": "Derived from §4.1, p.5–6",
+  "tex": "\\hat{\\mathcal{T}}",
+  "zh": "模型替一個任務預測的那串 triple。"
+ },
+ "T_rou": {
+  "en": "Rough translation vector. The paper bases it on the distance between the two centroids; read here as their difference.",
+  "kind": "computed",
+  "shape": "3×1, m",
+  "src": "§3.2, p.4 right (text); formula Derived",
+  "tex": "T_{rou}",
+  "zh": "粗平移向量。論文說由兩個質心的距離算出；這裡讀成兩個質心的差。"
+ },
+ "T_star": {
+  "en": "The ground-truth list of triples for the same task.",
+  "kind": "data",
+  "shape": "list of triples",
+  "src": "§4.1, p.5 right; Fig. 6",
+  "tex": "\\mathcal{T}^{*}",
+  "zh": "同一個任務的 ground truth triple。"
+ },
+ "T_trans": {
+  "en": "Translation, a column vector. Not the time index t and not the gripper move of Eq. (7).",
+  "kind": "computed",
+  "shape": "3×1, m",
+  "src": "§3.2, p.4 right",
+  "tex": "T",
+  "zh": "平移，行向量。不是時間下標 t，也不是式 (7) 的夾爪位移。"
+ },
+ "T_vec": {
+  "en": "Gripper movement [dx, dy, dz] in Cartesian space, derived from Γ_obj. Not the translation T that ICP returns.",
+  "kind": "computed",
+  "shape": "3",
+  "src": "§3.2, p.5 left",
+  "tex": "\\vec{T}",
+  "zh": "夾爪在笛卡兒空間的位移 [dx, dy, dz]，由 Γ_obj 得來。不是 ICP 給的平移 T。"
+ },
+ "_kp": {
+  "kp02": [
+   "G_t",
+   "N_t",
+   "E_t",
+   "t_step"
+  ],
+  "kp03": [
+   "Nar_1",
+   "nu",
+   "epsilon",
+   "Prompt",
+   "kappa",
+   "spo_hat",
+   "i_step",
+   "sup_VLM",
+   "Nar1_short",
+   "s_hat",
+   "p_hat",
+   "o_hat"
+  ],
+  "kp04": [
+   "Bsear",
+   "G_nar1",
+   "Longrightarrow",
+   "r_j",
+   "varrho",
+   "sigma",
+   "Nar_2",
+   "i_set",
+   "fisher_abcd",
+   "fisher_p",
+   "sup_VLM",
+   "s_hat",
+   "p_hat",
+   "o_hat",
+   "r_chain",
+   "varrho_sigma",
+   "nu_prompt",
+   "rightarrow",
+   "in",
+   "mid",
+   "fisher_ab",
+   "fisher_cd",
+   "n_fisher",
+   "x_fisher",
+   "Pr_x",
+   "le",
+   "f_7",
+   "f_15",
+   "f_20",
+   "f_40",
+   "f_22",
+   "f_0106"
+  ],
+  "kp06": [
+   "T_hat",
+   "T_star",
+   "k_level",
+   "match_k",
+   "R_at_k",
+   "M_tasks",
+   "mR_at_k",
+   "lvert",
+   "in",
+   "n_gt",
+   "hits",
+   "R_m",
+   "m_task",
+   "key_levels",
+   "s_key",
+   "p_key",
+   "o_key",
+   "level_names"
+  ],
+  "kp07": [
+   "O_t",
+   "c_i",
+   "m_i",
+   "eta",
+   "K",
+   "p_bold",
+   "d_t",
+   "P_t",
+   "Gamma_t",
+   "P_bold_t",
+   "P_w_t",
+   "P_cal_i",
+   "k_views",
+   "I_rgb_j",
+   "uv",
+   "u_pix",
+   "v_pix",
+   "f_x",
+   "f_y",
+   "c_x",
+   "c_y",
+   "K_inv",
+   "top",
+   "one_h",
+   "cdot",
+   "x_cam",
+   "y_cam",
+   "z_cam",
+   "h_img",
+   "w_img",
+   "j_view",
+   "t_frame",
+   "i_part",
+   "m_ij",
+   "P_t_short",
+   "lvert",
+   "unit_m",
+   "unit_px",
+   "ex_70",
+   "ex_60",
+   "ex_100",
+   "ex_50",
+   "ex_40",
+   "ex_02",
+   "ex_04",
+   "ex_2",
+   "ex_14",
+   "rightarrow",
+   "in",
+   "mid"
+  ],
+  "kp08": [
+   "P_i_memory",
+   "zeta_i",
+   "zeta_i_s",
+   "zeta_i_dis",
+   "O_s",
+   "O_dis",
+   "T_rou",
+   "R_rot",
+   "T_trans",
+   "p_i_point",
+   "q_i_point",
+   "c_bar",
+   "unit_m",
+   "unit_mm",
+   "unit_deg",
+   "in",
+   "SO3",
+   "R3",
+   "P_i_alone",
+   "zeta_i_alone",
+   "c_bar_s",
+   "c_bar_dis",
+   "c_bar_pair",
+   "N_points",
+   "i_point",
+   "lnorm",
+   "RMSE_sym",
+   "theta",
+   "trou_ex"
+  ],
+  "kp09": [
+   "Gamma_any",
+   "Gamma_grasp",
+   "Gamma_c_b",
+   "Gamma_obj",
+   "A_t",
+   "T_vec",
+   "R_vec",
+   "s_t",
+   "P_vec",
+   "eq7_coeffs",
+   "unit_m",
+   "unit_mm",
+   "unit_deg",
+   "in",
+   "times",
+   "langle",
+   "R7",
+   "dxyz",
+   "rxyz",
+   "R0_vec",
+   "R_grasp",
+   "w_i",
+   "c08",
+   "c092",
+   "c096",
+   "ex_004",
+   "ex_0096",
+   "wp3_calc",
+   "wp3_val",
+   "wp4_val",
+   "wp5_val",
+   "wp6_val",
+   "i_action",
+   "blacktriangleright"
+  ],
+  "kp10": [
+   "n_trials",
+   "k_success",
+   "alpha",
+   "p_L",
+   "p_U",
+   "i_sum_ci",
+   "alpha_half",
+   "p_hat_rate"
+  ]
+ },
+ "alpha": {
+  "en": "Error level of the interval; 0.05 gives a 95% interval.",
+  "kind": "setting",
+  "shape": "0.05",
+  "src": "Derived; not in the paper",
+  "tex": "\\alpha",
+  "zh": "區間的錯誤水準；0.05 對應 95% 區間。"
+ },
+ "alpha_half": {
+  "en": "Probability allowed in each tail: α/2 = 0.025 for a 95% interval.",
+  "kind": "setting",
+  "shape": "probability",
+  "src": "Derived",
+  "tex": "\\frac{\\alpha}{2}",
+  "zh": "每一尾允許的機率：95% 區間時 α/2 = 0.025。"
+ },
+ "blacktriangleright": {
+  "en": "Marker in our lab panel: the waypoint the gripper is at now. Not in the paper.",
+  "kind": "setting",
+  "shape": "marker",
+  "tex": "\\blacktriangleright",
+  "zh": "我們實驗室面板上的記號：夾爪現在走到的路點。論文沒有。"
+ },
+ "c08": {
+  "en": "Fraction of T for the third waypoint, P + 0.8 T. The paper prints it in Eq. (7) and gives no reason for the value.",
+  "kind": "setting",
+  "shape": "0–1",
+  "src": "Eq. (7), p.5 left",
+  "tex": "0.8",
+  "zh": "第三個路點 P + 0.8 T 裡 T 的比例。論文在式 (7) 印出這個數，沒有說明為什麼是這個值。"
+ },
+ "c092": {
+  "en": "Fraction of T for the fourth waypoint, P + 0.92 T. The step from 0.8 to 0.92 is 0.12 T. The paper gives no reason for the value.",
+  "kind": "setting",
+  "shape": "0–1",
+  "src": "Eq. (7), p.5 left",
+  "tex": "0.92",
+  "zh": "第四個路點 P + 0.92 T 裡 T 的比例。從 0.8 到 0.92 這一段是 0.12 T。論文沒有說明為什麼是這個值。"
+ },
+ "c096": {
+  "en": "Fraction of T for the fifth waypoint, P + 0.96 T. The last two steps are 0.04 T each. The paper gives no reason for the value.",
+  "kind": "setting",
+  "shape": "0–1",
+  "src": "Eq. (7), p.5 left",
+  "tex": "0.96",
+  "zh": "第五個路點 P + 0.96 T 裡 T 的比例。最後兩段各 0.04 T。論文沒有說明為什麼是這個值。"
+ },
+ "c_bar": {
+  "en": "Centroid of a point cloud.",
+  "kind": "computed",
+  "shape": "3×1, m",
+  "src": "§3.2, p.4 right; Fig. 3",
+  "tex": "\\bar{c}",
+  "zh": "一團點雲的質心。"
+ },
+ "c_bar_dis": {
+  "en": "Centroid of the disassembled-state cloud ζ_{i,dis}. The symbol is ours.",
+  "kind": "computed",
+  "shape": "3×1, m",
+  "src": "§3.2, p.4 right (the centroids); the symbol is ours",
+  "tex": "\\bar{c}_{dis}",
+  "zh": "拆開狀態點雲 ζ_{i,dis} 的質心。符號是我們的。"
+ },
+ "c_bar_pair": {
+  "en": "The two centroids: assembled (s) and disassembled (dis). T_rou is their difference.",
+  "kind": "computed",
+  "shape": "3×1, m each",
+  "src": "§3.2, p.4 right (the centroids); the symbols are ours",
+  "tex": "\\bar{c}_{s},\\ \\bar{c}_{dis}",
+  "zh": "兩個質心：組好的（s）和拆開的（dis）。T_rou 是它們的差。"
+ },
+ "c_bar_s": {
+  "en": "Centroid of the assembled-state cloud ζ_{i,s}. The paper names the centroids; the symbol is ours.",
+  "kind": "computed",
+  "shape": "3×1, m",
+  "src": "§3.2, p.4 right (the centroids); the symbol is ours",
+  "tex": "\\bar{c}_{s}",
+  "zh": "組好狀態點雲 ζ_{i,s} 的質心。論文提到了質心；這個符號是我們的。"
+ },
+ "c_i": {
+  "en": "Label and bounding box of part i from Grounding DINO. One symbol holds both.",
+  "kind": "model",
+  "shape": "text label + 4 px",
+  "src": "§3.2, p.4 left",
+  "tex": "c_i",
+  "zh": "Grounding DINO 給零件 i 的標籤和 bounding box。一個符號裝了兩樣東西。"
+ },
+ "c_x": {
+  "en": "Image centre, x part: the column where the optical axis meets the image. Not printed in the paper. Worked example 50 px; our lab 320 px.",
+  "kind": "setting",
+  "shape": "scalar, px",
+  "tex": "c_x",
+  "zh": "影像中心的 x：光軸穿過影像的那一欄。論文沒有印。例子 50 px，我們的實驗室 320 px。"
+ },
+ "c_y": {
+  "en": "Image centre, y part: the row where the optical axis meets the image. Not printed in the paper. Worked example 40 px; our lab 240 px.",
+  "kind": "setting",
+  "shape": "scalar, px",
+  "tex": "c_y",
+  "zh": "影像中心的 y：光軸穿過影像的那一列。論文沒有印。例子 40 px，我們的實驗室 240 px。"
+ },
+ "cdot": {
+  "cls": "bin",
+  "en": "Multiplication dot. In Eq. (4) it scales the vector K^{-1} p by the depth d. In Eq. (5) it is a matrix times a vector.",
+  "kind": "computed",
+  "shape": "operator",
+  "src": "Eq. (4)(5), p.4 right",
+  "tex": "\\cdot",
+  "zh": "乘號。式 (4) 用它把向量 K^{-1} p 乘上深度 d；式 (5) 是矩陣乘向量。"
+ },
+ "d_t": {
+  "en": "Depth value at pixel (u, v) in frame t. Unit not stated; metres in the lab.",
+  "kind": "data",
+  "shape": "scalar",
+  "src": "§3.2, p.4 right",
+  "tex": "d_t(u,v)",
+  "zh": "畫面 t 裡 pixel (u, v) 的深度值。論文沒寫單位；實驗室用公尺。"
+ },
+ "dxyz": {
+  "alt": [
+   "d^{y}_{t}",
+   "d^{z}_{t}",
+   "dx",
+   "dy",
+   "dz"
+  ],
+  "en": "Gripper movement along x, along y and along z: the three numbers of T. Taken from Γ_obj. The paper gives no unit; our lab uses metres.",
+  "kind": "computed",
+  "shape": "scalar each, m (lab)",
+  "src": "§3.2, p.5 left",
+  "tex": "d^{x}_{t}",
+  "zh": "夾爪沿 x、沿 y、沿 z 的位移：T 的三個數。取自 Γ_obj。論文沒有寫單位；我們的實驗室用公尺。"
+ },
+ "epsilon": {
+  "en": "The part list. Under Eq. (1) it is called examples in the part list; §3.1 describes names and quantities.",
+  "kind": "data",
+  "shape": "text list",
+  "src": "Eq. (1), p.3 left; §3.1, p.2 right",
+  "tex": "\\epsilon",
+  "zh": "part list。式 (1) 下方稱為 examples in the part list；§3.1 說的是名稱與數量。"
+ },
+ "eq7_coeffs": {
+  "en": "Fixed fractions of T in Eq. (7). No source or sensitivity test is given.",
+  "kind": "setting",
+  "shape": "3 numbers",
+  "src": "Eq. (7), p.5 left",
+  "tex": "0.8,\\ 0.92,\\ 0.96",
+  "zh": "式 (7) 裡 T 的固定比例。沒有來源，也沒有敏感度測試。"
+ },
+ "eta": {
+  "en": "Number of mechanical parts; i runs from 1 to η.",
+  "kind": "data",
+  "shape": "count",
+  "src": "§3.2, p.4 left",
+  "tex": "\\eta",
+  "zh": "機械零件的個數；i 從 1 到 η。"
+ },
+ "ex_004": {
+  "en": "Worked example: 0.8 × 0.05 m: the shift of the y coordinate at the third waypoint.",
+  "kind": "computed",
+  "shape": "m",
+  "tex": "0.04",
+  "zh": "例子：0.8 × 0.05 m，第三個路點 y 座標的位移。"
+ },
+ "ex_0096": {
+  "en": "Worked example: 0.8 × 0.12 m: the drop of the z coordinate at the third waypoint, since T_z = −0.12 m.",
+  "kind": "computed",
+  "shape": "m",
+  "tex": "0.096",
+  "zh": "例子：0.8 × 0.12 m，第三個路點 z 座標下降的量，因為 T_z = −0.12 m。"
+ },
+ "ex_02": {
+  "en": "Worked example: 20 px / 100 px = 0.2. It is the x and y part of the ray direction through the pixel, with no unit.",
+  "kind": "computed",
+  "shape": "none",
+  "tex": "0.2",
+  "zh": "例子：20 px / 100 px = 0.2。是穿過這個 pixel 的射線方向的 x、y 分量，沒有單位。"
+ },
+ "ex_04": {
+  "en": "Worked example: depth 2 m times 0.2 = 0.4 m. It is the x and y of the 3D point.",
+  "kind": "computed",
+  "shape": "m",
+  "tex": "0.4",
+  "zh": "例子：深度 2 m 乘 0.2 = 0.4 m。是 3D 點的 x 和 y。"
+ },
+ "ex_100": {
+  "en": "Worked example: f_x = f_y = 100 px. It is the denominator of (u − c_x)/f_x and (v − c_y)/f_y.",
+  "kind": "setting",
+  "shape": "px",
+  "tex": "100",
+  "zh": "例子：f_x = f_y = 100 px。它是 (u − c_x)/f_x 和 (v − c_y)/f_y 的分母。"
+ },
+ "ex_14": {
+  "en": "Worked example: x = 0.4 m plus the 1 m shift of Γ_t along x.",
+  "kind": "computed",
+  "shape": "m",
+  "tex": "1.4",
+  "zh": "例子：x = 0.4 m 加上 Γ_t 沿 x 的 1 m 平移。"
+ },
+ "ex_2": {
+  "en": "Worked example: depth d = 2 m. It is also the z of the 3D point.",
+  "kind": "data",
+  "shape": "m",
+  "tex": "2",
+  "zh": "例子：深度 d = 2 m。也是 3D 點的 z。"
+ },
+ "ex_40": {
+  "en": "Worked example: image centre c_y = 40 px, so 60 − 40 = 20 px.",
+  "kind": "setting",
+  "shape": "px",
+  "tex": "40",
+  "zh": "例子：影像中心 c_y = 40 px，所以 60 − 40 = 20 px。"
+ },
+ "ex_50": {
+  "en": "Worked example: image centre c_x = 50 px, so 70 − 50 = 20 px.",
+  "kind": "setting",
+  "shape": "px",
+  "tex": "50",
+  "zh": "例子：影像中心 c_x = 50 px，所以 70 − 50 = 20 px。"
+ },
+ "ex_60": {
+  "en": "Worked example: pixel row v = 60 px.",
+  "kind": "data",
+  "shape": "px",
+  "tex": "60",
+  "zh": "例子：pixel 的列 v = 60 px。"
+ },
+ "ex_70": {
+  "en": "Worked example: pixel column u = 70 px (our own numbers, not the paper's).",
+  "kind": "data",
+  "shape": "px",
+  "tex": "70",
+  "zh": "例子：pixel 的欄 u = 70 px（我們自己取的數，不是論文的）。"
+ },
+ "f_0106": {
+  "en": "Chance of exactly this table: 77520 × 15504 ÷ 113380261800 ≈ 0.0106. Our calculation.",
+  "kind": "computed",
+  "shape": "probability",
+  "src": "Derived",
+  "tex": "0.0106",
+  "zh": "剛好是這張表的機率：77520 × 15504 ÷ 113380261800 ≈ 0.0106。我們的計算。"
+ },
+ "f_15": {
+  "en": "15 = a + c − x = 22 − 7: successes left for the 'with base' group. It equals c for Product 5.",
+  "kind": "computed",
+  "shape": "count",
+  "src": "Derived from Table 2, p.7",
+  "tex": "15",
+  "zh": "15 = a + c − x = 22 − 7：留給「有 base」那組的成功次數。Product 5 剛好等於 c。"
+ },
+ "f_20": {
+  "en": "Trials per group: 20 for each product, with and without the base (Table 2).",
+  "kind": "setting",
+  "shape": "count",
+  "src": "§4.1, p.7 left; Table 2",
+  "tex": "20",
+  "zh": "每組的試驗次數：每件產品有 base、沒有 base 各 20 次（表 2）。"
+ },
+ "f_22": {
+  "en": "All successes of Product 5: 7 + 15.",
+  "kind": "computed",
+  "shape": "count",
+  "src": "Derived from Table 2, p.7",
+  "tex": "22",
+  "zh": "Product 5 全部的成功次數：7 + 15。"
+ },
+ "f_40": {
+  "en": "All trials of Product 5: 20 + 20.",
+  "kind": "computed",
+  "shape": "count",
+  "src": "Derived",
+  "tex": "40",
+  "zh": "Product 5 全部的試驗次數：20 + 20。"
+ },
+ "f_7": {
+  "en": "Product 5 without base: 7 successes out of 20 (Table 2). This is a in Pr(7).",
+  "kind": "data",
+  "shape": "count",
+  "src": "Table 2, p.7",
+  "tex": "7",
+  "zh": "Product 5 沒有 base：20 次成功 7 次（表 2）。就是 Pr(7) 裡的 a。"
+ },
+ "f_x": {
+  "en": "Focal length along x, in pixels, not millimetres. The paper prints no value. The worked example uses 100 px; our lab uses 385 px.",
+  "kind": "setting",
+  "shape": "scalar, px",
+  "tex": "f_x",
+  "zh": "x 方向的焦距，單位是 pixel，不是毫米。論文沒有印數值。例子用 100 px，我們的實驗室用 385 px。"
+ },
+ "f_y": {
+  "en": "Focal length along y, in pixels. The paper prints no value. The worked example uses 100 px; our lab uses 385 px.",
+  "kind": "setting",
+  "shape": "scalar, px",
+  "tex": "f_y",
+  "zh": "y 方向的焦距，單位是 pixel。論文沒有印數值。例子用 100 px，我們的實驗室用 385 px。"
+ },
+ "fisher_ab": {
+  "en": "a successes and b failures without the Base Searcher, out of 20 trials. Product 5: a = 7, b = 13 (Table 2).",
+  "kind": "data",
+  "shape": "counts",
+  "src": "Table 2, p.7",
+  "tex": "a,\\ b",
+  "zh": "沒有 Base Searcher 時，20 次裡 a 次成功、b 次失敗。Product 5：a = 7、b = 13（表 2）。"
+ },
+ "fisher_abcd": {
+  "en": "Counts in a 2×2 table: successes and failures without the base (a, b) and with it (c, d).",
+  "kind": "data",
+  "shape": "counts",
+  "src": "Table 2, p.7; failures are 20 minus successes",
+  "tex": "a,\\ b,\\ c,\\ d",
+  "zh": "2×2 表的四個次數：沒有 base 的成功、失敗（a、b），有 base 的成功、失敗（c、d）。"
+ },
+ "fisher_cd": {
+  "en": "c successes and d failures with the Base Searcher, out of 20 trials. Product 5: c = 15, d = 5 (Table 2).",
+  "kind": "data",
+  "shape": "counts",
+  "src": "Table 2, p.7",
+  "tex": "c,\\ d",
+  "zh": "有 Base Searcher 時，20 次裡 c 次成功、d 次失敗。Product 5：c = 15、d = 5（表 2）。"
+ },
+ "fisher_p": {
+  "en": "Two-sided p-value of Fisher's exact test. Not the predicate p̂ of Eq. (1).",
+  "kind": "computed",
+  "shape": "probability, 0 to 1",
+  "src": "Our calculation; not in the paper",
+  "tex": "p",
+  "zh": "Fisher's exact test 的雙尾 p 值。不是式 (1) 的 predicate p̂。"
+ },
+ "h_img": {
+  "en": "Image height in pixels. The paper gives no value; our lab uses 480.",
+  "kind": "setting",
+  "shape": "scalar, px",
+  "src": "§3.2, p.4 left (the size h×w)",
+  "tex": "h",
+  "zh": "影像高度，單位 pixel。論文沒有給數值；我們的實驗室用 480。"
+ },
+ "hits": {
+  "en": "Number of predicted triples that match an answer at the chosen level. R = hits / n_gt. Extra wrong triples do not change it.",
+  "kind": "computed",
+  "shape": "count",
+  "tex": "\\text{hits}",
+  "zh": "預測的 triple 中，在選定層級上和答案對上的條數。R = hits / n_gt。多寫的錯 triple 不會改變它。"
+ },
+ "i_action": {
+  "en": "The i of A^i_t. The paper does not say what i counts; I read it as the number of the planned action.",
+  "kind": "data",
+  "shape": "integer",
+  "src": "§3.2, p.5 left; the paper does not define i",
+  "tex": "i",
+  "zh": "A^i_t 的 i。論文沒有說 i 在數什麼；我讀成第幾個規劃動作。"
+ },
+ "i_part": {
+  "en": "Part number, from 1 to η, in c_i, m_i and the point cloud of part i.",
+  "kind": "data",
+  "shape": "integer",
+  "src": "§3.2, p.4 left",
+  "tex": "i",
+  "zh": "零件編號，從 1 到 η，用在 c_i、m_i 和零件 i 的點雲。"
+ },
+ "i_point": {
+  "en": "Point number, from 1 to N, in the centroid and ICP sums. In ζ_i the i counts parts.",
+  "kind": "data",
+  "shape": "integer",
+  "tex": "i",
+  "zh": "點的編號，從 1 到 N，用在質心和 ICP 的總和裡。ζ_i 裡的 i 數的是零件。"
+ },
+ "i_set": {
+  "en": "The condition in Eq. (3) that selects steps. The set is not defined in the paper.",
+  "kind": "setting",
+  "shape": "not defined",
+  "src": "Eq. (3), p.3 right",
+  "tex": "i\\in\\{\\sigma\\rightarrow\\varrho\\}",
+  "zh": "式 (3) 裡挑選步驟的條件。這個集合論文沒有定義。"
+ },
+ "i_step": {
+  "en": "Step number in Eq. (1), from 1 to κ. In §3.2 the same letter numbers the parts, from 1 to η.",
+  "kind": "model",
+  "shape": "whole number",
+  "src": "Eq. (1), p.3 left; p.4 left",
+  "tex": "i",
+  "zh": "式 (1) 的步驟編號，1 到 κ。§3.2 用同一個字母編零件，1 到 η。"
+ },
+ "i_sum_ci": {
+  "en": "Summation index: the number of successes counted in the binomial sum, from k to n in the lower-end equation and from 0 to k in the upper-end equation.",
+  "kind": "computed",
+  "shape": "integer",
+  "src": "Derived from Table 3, p.7",
+  "tex": "i",
+  "zh": "加總的指標：二項分配裡被計入的成功次數，下限那條式子從 k 加到 n，上限那條從 0 加到 k。"
+ },
+ "in": {
+  "cls": "rel",
+  "en": "'Is an element of'. i ∈ {σ→ϱ}: step i is on the path. k ∈ {Triple, Pair, Action}: the level is one of three. (u, v) ∈ m_i: the pixel lies in the mask. R ∈ SO(3): R is a rotation. A ∈ ℝ^7: A has seven numbers.",
+  "kind": "setting",
+  "shape": "relation",
+  "src": "Eq. (3), p.3 right; Eq. (6), p.4 right; §3.2, p.4 right and p.5 left",
+  "tex": "\\in",
+  "zh": "「屬於」。i ∈ {σ→ϱ}：第 i 步在這條路徑上。k ∈ {Triple, Pair, Action}：層級是三種之一。(u, v) ∈ m_i：這個 pixel 落在 mask 裡。R ∈ SO(3)：R 是旋轉。A ∈ ℝ^7：A 有七個數。"
+ },
+ "j_view": {
+  "en": "View number, from 1 to k. Eq. (4) and (5) write t in the same place. Not the j of r_j in KP 04.",
+  "kind": "data",
+  "shape": "integer",
+  "src": "Eq. (6), p.4 right",
+  "tex": "j",
+  "zh": "視角編號，從 1 到 k。式 (4)(5) 同一個位置寫的是 t。不是 KP 04 r_j 的 j。"
+ },
+ "k_level": {
+  "en": "Match level: Triple, Pair or Action. Not the number of camera views in Eq. (6).",
+  "kind": "setting",
+  "shape": "one of 3",
+  "src": "§4.1, p.6 left",
+  "tex": "k",
+  "zh": "比對層級：Triple、Pair 或 Action。不是式 (6) 的相機視角數。"
+ },
+ "k_success": {
+  "en": "Number of successful trials out of n. Not the number of camera views of Eq. (6).",
+  "kind": "data",
+  "shape": "count",
+  "src": "Table 3, p.7",
+  "tex": "k",
+  "zh": "n 次裡成功的次數。不是式 (6) 的相機視角數。"
+ },
+ "k_views": {
+  "en": "Number of camera views per observation. Value not stated; default 3 in the lab.",
+  "kind": "setting",
+  "shape": "count",
+  "src": "§3.2, p.4 right; Eq. (6)",
+  "tex": "k",
+  "zh": "每次觀測的相機視角數。論文沒寫數值；實驗室預設 3。"
+ },
+ "kappa": {
+  "en": "Number of assembly steps. No value is given for any product.",
+  "kind": "model",
+  "shape": "whole number",
+  "src": "Eq. (1), p.3 left",
+  "tex": "\\kappa",
+  "zh": "組裝步驟的數目。論文沒有給任何產品的值。"
+ },
+ "key_levels": {
+  "alt": [
+   "\\mathrm{key}_{Pair}",
+   "\\mathrm{key}_{Action}"
+  ],
+  "en": "Which fields must be equal for a hit: Triple (s, p, o), Pair (s, o), Action (p, {s, o}). This is our reading of the paper's three names.",
+  "kind": "setting",
+  "shape": "tuple",
+  "tex": "\\mathrm{key}_{Triple}",
+  "zh": "命中時哪幾格要相同：Triple 是 (s, p, o)，Pair 是 (s, o)，Action 是 (p, {s, o})。這是我們對論文三個名字的讀法。"
+ },
+ "langle": {
+  "alt": [
+   "\\rangle"
+  ],
+  "en": "Angle brackets: an ordered list. Eq. (7) lists six waypoints in order. The paper also uses them for triples ⟨subject, predicate, object⟩.",
+  "kind": "setting",
+  "shape": "ordered list",
+  "src": "Eq. (7), p.5 left",
+  "tex": "\\langle",
+  "zh": "角括號：有順序的一串。式 (7) 依序列出六個路點。論文也拿它寫 triple ⟨subject, predicate, object⟩。"
+ },
+ "le": {
+  "cls": "rel",
+  "en": "Less than or equal to. In the p sum, add every table with Pr(x) ≤ Pr(a): no more likely than the observed one.",
+  "kind": "setting",
+  "shape": "relation",
+  "tex": "\\le",
+  "zh": "小於或等於。算 p 時，把 Pr(x) ≤ Pr(a) 的表全部加起來：機率不高於實際觀察到的那張。"
+ },
+ "level_names": {
+  "alt": [
+   "\\mathrm{Pair}",
+   "\\mathrm{Action}"
+  ],
+  "en": "The three match levels of the paper: Triple (whole triple), Pair (the two objects), Action (objects and relation).",
+  "kind": "setting",
+  "shape": "label",
+  "src": "§4.1, p.6 left",
+  "tex": "\\mathrm{Triple}",
+  "zh": "論文的三個比對層級：Triple（整條）、Pair（兩個物體）、Action（物體加關係）。"
+ },
+ "lnorm": {
+  "alt": [
+   "\\rVert"
+  ],
+  "en": "Double bars: the length of a vector. ‖R p_i + T − q_i‖ is the distance between the moved point and its partner; ‖T_rou‖ is the length of the rough shift.",
+  "kind": "computed",
+  "shape": "length",
+  "src": "External; reference [32]",
+  "tex": "\\lVert",
+  "zh": "雙線：向量的長度。‖R p_i + T − q_i‖ 是搬動後的點和它的配對點的距離；‖T_rou‖ 是粗平移的長度。"
+ },
+ "lvert": {
+  "alt": [
+   "\\rvert",
+   "\\left|",
+   "\\right|"
+  ],
+  "en": "Single bars: the number of items in a set. |match_k| is the number of hits, |T*| the number of answer triples, |𝒫_i| the number of points of a cloud.",
+  "kind": "computed",
+  "shape": "count",
+  "src": "Derived; the formulas are ours",
+  "tex": "\\lvert",
+  "zh": "單線：集合裡有幾個東西。|match_k| 是命中數，|T*| 是答案 triple 的條數，|𝒫_i| 是一團點雲的點數。"
+ },
+ "mR_at_k": {
+  "en": "Mean of the per-task R@k values.",
+  "kind": "computed",
+  "shape": "0–1 (Table 1: %)",
+  "src": "Derived from §4.1, p.5–6",
+  "tex": "mR@k",
+  "zh": "各任務 R@k 的平均。"
+ },
+ "m_i": {
+  "en": "Mask of part i from GroundedSAM-v2: the pixels that lie on the part. The paper calls it a semantic feature.",
+  "kind": "model",
+  "shape": "h×w of 0/1",
+  "src": "§3.2, p.4 left – right",
+  "tex": "m_i",
+  "zh": "GroundedSAM-v2 給零件 i 的 mask：落在零件上的那些 pixel。論文把它叫 semantic feature。"
+ },
+ "m_ij": {
+  "en": "Mask of part i in view j. This is our reading: the printed Eq. (6) writes m_i with no view index, though each view has its own mask.",
+  "kind": "computed",
+  "shape": "h×w, 0/1",
+  "tex": "m_{i,j}",
+  "zh": "零件 i 在視角 j 的 mask。這是我們的讀法：式 (6) 印的是沒有視角下標的 m_i，但每個視角各有一張 mask。"
+ },
+ "m_task": {
+  "en": "Task number, from 1 to M, in the average mR@k. Not the mask m_i of KP 07.",
+  "kind": "data",
+  "shape": "integer",
+  "tex": "m",
+  "zh": "任務編號，從 1 到 M，用在平均 mR@k。不是 KP 07 的 mask m_i。"
+ },
+ "match_k": {
+  "en": "Number of ground-truth triples matched one to one by a predicted triple at level k.",
+  "kind": "computed",
+  "shape": "count",
+  "src": "Derived; the paper does not say how a hit is decided",
+  "tex": "\\mathrm{match}_k",
+  "zh": "在層級 k 下，被預測一對一配到的 ground truth triple 條數。"
+ },
+ "mid": {
+  "cls": "rel",
+  "en": "Read 'such that' or 'where'. In {x | condition} the part after the bar is the condition each item must meet: in Eq. (3), steps i on the path; in Eq. (6), points whose pixel lies in the mask.",
+  "kind": "setting",
+  "shape": "relation",
+  "src": "Eq. (3), p.3 right; Eq. (6), p.4 right",
+  "tex": "\\mid",
+  "zh": "讀作「滿足」或「其中」。{x | 條件} 裡，直線後面是每個元素要滿足的條件：式 (3) 是在路徑上的步驟 i；式 (6) 是 pixel 落在 mask 裡的點。"
+ },
+ "n_fisher": {
+  "en": "All trials of both groups: a + b + c + d. For one product, 20 + 20 = 40. Not the n of Table 3 in KP 10.",
+  "kind": "data",
+  "shape": "count",
+  "src": "Derived from Table 2, p.7",
+  "tex": "n",
+  "zh": "兩組全部的試驗次數：a + b + c + d。一件產品是 20 + 20 = 40。不是 KP 10 表 3 的 n。"
+ },
+ "n_gt": {
+  "en": "Number of ground-truth triples of the task: the denominator of R. Our notation; the paper prints no formula for R.",
+  "kind": "data",
+  "shape": "count",
+  "tex": "n_{gt}",
+  "zh": "這個任務的 ground truth triple 條數：R 的分母。這是我們的記法；論文沒有印 R 的公式。"
+ },
+ "n_trials": {
+  "en": "Number of trials per step in Table 3.",
+  "kind": "setting",
+  "shape": "count",
+  "src": "§4.2, p.7 right; Table 3",
+  "tex": "n",
+  "zh": "表 3 每一步試的次數。"
+ },
+ "nu": {
+  "en": "Visual input: an assembly drawing or a picture of the workspace.",
+  "kind": "data",
+  "shape": "one image; size not stated",
+  "src": "Eq. (1), p.3 left; §3, p.2 right",
+  "tex": "\\nu",
+  "zh": "視覺輸入：組裝圖，或現場的畫面。"
+ },
+ "nu_prompt": {
+  "en": "The picture ν and the instruction text Prompt: the inputs of the Action Narrator besides ϱ.",
+  "kind": "data",
+  "shape": "image; text",
+  "src": "Eq. (3), p.3 right",
+  "tex": "\\nu,\\ \\mathit{Prompt}",
+  "zh": "圖 ν 和指示文字 Prompt：Action Narrator 除了 ϱ 以外的輸入。"
+ },
+ "o_hat": {
+  "en": "Object of step i: the part the subject is joined onto.",
+  "kind": "model",
+  "shape": "text",
+  "src": "Eq. (1), p.3 left",
+  "tex": "\\hat{o}_i",
+  "zh": "第 i 步的 object：subject 要接上去的那個零件。"
+ },
+ "o_key": {
+  "en": "Object of a triple in the key (s, p, o): the part it is joined onto.",
+  "kind": "data",
+  "shape": "text",
+  "tex": "o",
+  "zh": "key (s, p, o) 裡 triple 的 object：接上去的那個零件。"
+ },
+ "one_h": {
+  "en": "The 1 added to a vector or a matrix: p = [u, v, 1], the last entry of [x, y, z, 1], and the corner of Γ_t. It lets one 4×4 matrix shift a point. In the example Γ_t, the 1 in the right column is a shift of 1 m along x.",
+  "kind": "setting",
+  "shape": "1",
+  "src": "Eq. (4)(5), p.4 right; the homogeneous 1 itself is External",
+  "tex": "1",
+  "zh": "加在向量或矩陣裡的那個 1：p = [u, v, 1]、[x, y, z, 1] 的最後一個數、Γ_t 的右下角。有了它，一個 4×4 矩陣就能平移一個點。例子的 Γ_t 右欄那個 1，是沿 x 平移 1 m。"
+ },
+ "p_L": {
+  "en": "Lower end of the interval: the rate at which k or more successes have probability α/2.",
+  "kind": "computed",
+  "shape": "0–1",
+  "src": "Derived from Table 3",
+  "tex": "p_L",
+  "zh": "區間下限：讓「成功 k 次以上」的機率等於 α/2 的那個成功率。"
+ },
+ "p_U": {
+  "en": "Upper end of the interval: the rate at which k or fewer successes have probability α/2.",
+  "kind": "computed",
+  "shape": "0–1",
+  "src": "Derived from Table 3",
+  "tex": "p_U",
+  "zh": "區間上限：讓「成功 k 次以下」的機率等於 α/2 的那個成功率。"
+ },
+ "p_bold": {
+  "en": "Homogeneous coordinate vector of pixel (u, v), read as [u, v, 1]ᵀ. The paper does not write it out.",
+  "kind": "computed",
+  "shape": "3×1",
+  "src": "Eq. (4), p.4 right",
+  "tex": "\\boldsymbol{p}",
+  "zh": "pixel (u, v) 的齊次座標向量，讀作 [u, v, 1]ᵀ。論文沒有寫出來。"
+ },
+ "p_hat": {
+  "en": "Predicate of step i: the word for how the two parts join.",
+  "kind": "model",
+  "shape": "text",
+  "src": "Eq. (1), p.3 left",
+  "tex": "\\hat{p}_i",
+  "zh": "第 i 步的 predicate：寫「怎麼接」的那個詞。"
+ },
+ "p_hat_rate": {
+  "en": "Observed success rate k/n of a step. Not the predicate p̂_i of KP 03.",
+  "kind": "computed",
+  "shape": "0–1",
+  "src": "Derived from Table 3, p.7",
+  "tex": "\\hat{p}",
+  "zh": "一個步驟實際觀察到的成功率 k/n。不是 KP 03 的 predicate p̂_i。"
+ },
+ "p_i_point": {
+  "en": "In the ICP objective: one point of the disassembled cloud. Here i counts points.",
+  "kind": "data",
+  "shape": "3×1, m",
+  "src": "External, reference [32]",
+  "tex": "p_i",
+  "zh": "在 ICP 目標式裡：拆開點雲的一個點。這裡的 i 數的是點。"
+ },
+ "p_key": {
+  "en": "Predicate of a triple in the key (s, p, o): the relation word. Not the p-value of KP 04.",
+  "kind": "data",
+  "shape": "text",
+  "tex": "p",
+  "zh": "key (s, p, o) 裡 triple 的 predicate：關係詞。不是 KP 04 的 p 值。"
+ },
+ "q_i_point": {
+  "en": "In the ICP objective: the point of the assembled cloud closest to p_i under the current R and T.",
+  "kind": "computed",
+  "shape": "3×1, m",
+  "src": "External, reference [32]",
+  "tex": "q_i",
+  "zh": "在 ICP 目標式裡：照目前的 R、T，組好點雲裡離 p_i 最近的點。"
+ },
+ "r_chain": {
+  "en": "The chain of objects the Base Searcher returns, from r_1 to r_j. The paper does not define j.",
+  "kind": "model",
+  "shape": "list of names",
+  "src": "Eq. (2), p.3 right",
+  "tex": "r_1,\\dots,r_j",
+  "zh": "Base Searcher 回的那一串物體，從 r_1 到 r_j。論文沒有定義 j。"
+ },
+ "r_j": {
+  "en": "An object present in the visual input. The count j is not defined.",
+  "kind": "model",
+  "shape": "part name (text)",
+  "src": "Eq. (2) and the line under it, p.3 right",
+  "tex": "r_j",
+  "zh": "視覺輸入裡出現的一個物體。個數 j 沒有定義。"
+ },
+ "rightarrow": {
+  "cls": "rel",
+  "en": "An arrow. In Eq. (3), σ → ϱ means 'from the base σ along the path ϱ'. In Eq. (2) the arrows link the objects of a chain. In KP 07 it means 'becomes': a 3-number point becomes a 4-number point.",
+  "kind": "setting",
+  "shape": "operator",
+  "src": "Eq. (2)(3), p.3 right; the KP 07 arrow is ours",
+  "tex": "\\rightarrow",
+  "zh": "箭頭。式 (3) 的 σ → ϱ 是「從基準 σ 沿著路徑 ϱ」。式 (2) 的箭頭把一串物體連起來。KP 07 的箭頭是「變成」：3 個數的點變成 4 個數的點。"
+ },
+ "rxyz": {
+  "alt": [
+   "r^{y}_{t}",
+   "r^{z}_{t}",
+   "rx",
+   "ry",
+   "rz"
+  ],
+  "en": "Gripper rotation about x, y and z, as Euler angles: the three numbers of R. The axis order and the unit are not stated; our lab uses radians.",
+  "kind": "computed",
+  "shape": "scalar each, rad (lab)",
+  "src": "§3.2, p.5 left",
+  "tex": "r^{x}_{t}",
+  "zh": "夾爪繞 x、y、z 的轉角，用 Euler angles：R 的三個數。軸的順序和單位論文沒寫；我們的實驗室用 rad。"
+ },
+ "s_hat": {
+  "en": "Subject of step i: the part that is moved. The paper does not explain the hat; in common use it marks an estimate.",
+  "kind": "model",
+  "shape": "text",
+  "src": "Eq. (1), p.3 left",
+  "tex": "\\hat{s}_i",
+  "zh": "第 i 步的 subject：被移動的零件。論文沒有解釋帽子；一般用法是「估計出來的」。"
+ },
+ "s_key": {
+  "en": "Subject of a triple in the key (s, p, o): the part that is moved.",
+  "kind": "data",
+  "shape": "text",
+  "tex": "s",
+  "zh": "key (s, p, o) 裡 triple 的 subject：被移動的零件。"
+ },
+ "s_t": {
+  "en": "Binary grasping state: gripper open or closed.",
+  "kind": "computed",
+  "shape": "0 or 1",
+  "src": "§3.2, p.5 left",
+  "tex": "s_t",
+  "zh": "二值的夾取狀態：夾爪開或合。"
+ },
+ "sigma": {
+  "en": "The assembly benchmark: the part from which assembly starts.",
+  "kind": "model",
+  "shape": "one node; Fig. 2 shows three candidates",
+  "src": "p.3 right; Eq. (3)",
+  "tex": "\\sigma",
+  "zh": "assembly benchmark：開始組裝的那個零件。"
+ },
+ "spo_hat": {
+  "en": "Subject, predicate and object of step i. The hat is not explained in the paper; in common use it marks an estimate.",
+  "kind": "model",
+  "shape": "three pieces of text",
+  "src": "Eq. (1)(3), p.3",
+  "tex": "\\hat{s}_i,\\ \\hat{p}_i,\\ \\hat{o}_i",
+  "zh": "第 i 步的 subject、predicate、object。帽子論文沒有解釋；一般用法表示估計值。"
+ },
+ "sup_VLM": {
+  "alt": [
+   "^{VLM}",
+   "^{LLM}"
+  ],
+  "en": "Superscript, not a power. VLM marks a call that receives the picture; LLM marks a text-only call. This is our reading of Eq. (1) to (3).",
+  "kind": "setting",
+  "shape": "label",
+  "src": "Eq. (1)(2)(3), p.3",
+  "tex": "{}^{VLM}",
+  "zh": "上標，不是次方。VLM 標明這次呼叫有拿到圖；LLM 標明只給文字。這是我們對式 (1) 到 (3) 的讀法。"
+ },
+ "t_frame": {
+  "en": "Which camera observation or frame. Not the assembly step t of G_t in KP 02 and KP 05.",
+  "kind": "data",
+  "shape": "integer",
+  "src": "§3.2, p.4 left ('over time t')",
+  "tex": "t",
+  "zh": "第幾次相機觀測或第幾張畫面。不是 KP 02、KP 05 裡 G_t 的組裝步驟 t。"
+ },
+ "t_step": {
+  "en": "Time step of the plan: the number of the assembly step. Not seconds. The same letter marks camera time in §3.2.",
+  "kind": "model",
+  "shape": "whole number, no unit",
+  "src": "§3.1, p.4 left; compare O_t, p.4 left",
+  "tex": "t",
+  "zh": "計劃的時間步：第幾個組裝步驟，不是秒。§3.2 用同一個字母標相機的時間。"
+ },
+ "theta": {
+  "en": "Rotation angle about the vertical axis that our lab's ICP has found so far. The lab reads R ≈ R_vertical(θ). Not in the paper.",
+  "kind": "computed",
+  "shape": "scalar, degrees",
+  "tex": "\\theta",
+  "zh": "我們實驗室的 ICP 目前找到的、繞垂直軸的旋轉角。實驗室把 R 讀成 R_vertical(θ)。論文沒有。"
+ },
+ "times": {
+  "cls": "bin",
+  "en": "Multiplication sign. In Γ_obj = Γ^c_b × Γ_grasp it is a matrix product of two 4×4 matrices. In Eq. (7), P × R is not defined by the paper.",
+  "kind": "computed",
+  "shape": "operator",
+  "src": "§3.2, p.5 left; Eq. (7), p.5 left",
+  "tex": "\\times",
+  "zh": "乘號。Γ_obj = Γ^c_b × Γ_grasp 裡是兩個 4×4 矩陣相乘。式 (7) 的 P × R，論文沒有定義。"
+ },
+ "top": {
+  "alt": [
+   "^{\\top}"
+  ],
+  "en": "Transpose: turns a row into a column. [u, v, 1]^T is a column of three numbers. The paper does not write it; we add it to keep the shapes clear.",
+  "kind": "computed",
+  "shape": "operator",
+  "tex": "\\top",
+  "zh": "轉置：把一列變成一行。[u, v, 1]^T 是三個數排成一行。論文沒有寫，我們補上，讓形狀看得清楚。"
+ },
+ "trou_ex": {
+  "en": "Worked example: the second cloud was moved by (2, −1.5, 0.4), so the rough translation that brings it back is (−2.0, 1.5, −0.4). The numbers have no unit and were chosen to check the arithmetic.",
+  "kind": "computed",
+  "shape": "3×1, no unit",
+  "tex": "(-2.0,\\ 1.5,\\ -0.4)",
+  "zh": "例子：第二團點雲被平移 (2, −1.5, 0.4)，所以把它搬回來的粗平移是 (−2.0, 1.5, −0.4)。這些數沒有單位，是為了核對算術編的。"
+ },
+ "u_pix": {
+  "en": "Horizontal pixel coordinate (column), counted from the left. In the worked example u = 70 px.",
+  "kind": "data",
+  "shape": "scalar, px",
+  "tex": "u",
+  "zh": "pixel 的水平座標（欄），從左邊數起。例子裡 u = 70 px。"
+ },
+ "unit_deg": {
+  "en": "Degree. Our lab shows angles in degrees; it stores them in radians. The paper gives no unit.",
+  "kind": "setting",
+  "shape": "unit",
+  "tex": "^{\\circ}",
+  "zh": "度。我們的實驗室用度顯示角度，內部用 rad 存。論文沒有寫單位。"
+ },
+ "unit_m": {
+  "en": "Metre. The paper gives no unit; our lab and worked examples use metres.",
+  "kind": "setting",
+  "shape": "unit",
+  "tex": "\\mathrm{m}",
+  "zh": "公尺。論文沒有寫單位；我們的實驗室和例子用公尺。"
+ },
+ "unit_mm": {
+  "en": "Millimetre. Our lab shows ICP error and waypoint segments in mm. The paper gives no unit.",
+  "kind": "setting",
+  "shape": "unit",
+  "tex": "\\mathrm{mm}",
+  "zh": "毫米。我們的實驗室用 mm 顯示 ICP 誤差和路點每一段的長度。論文沒有寫單位。"
+ },
+ "unit_px": {
+  "en": "Pixel, as a unit: the entries of K are in pixels.",
+  "kind": "setting",
+  "shape": "unit",
+  "tex": "\\mathrm{px}",
+  "zh": "pixel 當單位：K 裡的元素單位是 pixel。"
+ },
+ "uv": {
+  "en": "Position of one pixel: u is the column and v is the row. Eq. (4) to (6) work one pixel at a time.",
+  "kind": "data",
+  "shape": "2, px",
+  "src": "§3.2, p.4 right; the column and row convention is External",
+  "tex": "(u,v)",
+  "zh": "一個 pixel 的位置：u 是第幾欄，v 是第幾列。式 (4) 到 (6) 一次算一個 pixel。"
+ },
+ "v_pix": {
+  "en": "Vertical pixel coordinate (row), counted from the top. In the worked example v = 60 px.",
+  "kind": "data",
+  "shape": "scalar, px",
+  "tex": "v",
+  "zh": "pixel 的垂直座標（列），從上面數起。例子裡 v = 60 px。"
+ },
+ "varrho": {
+  "en": "A path through the graph, retrieved by the Base Searcher. The paper's example alternates objects and predicates.",
+  "kind": "model",
+  "shape": "ordered list of names and predicates",
+  "src": "p.3 right; Eq. (3)",
+  "tex": "\\varrho",
+  "zh": "Base Searcher 從圖上取出的一條路徑。論文的例子是物體和 predicate 交替排列。"
+ },
+ "varrho_sigma": {
+  "en": "ϱ is the path through the stage-1 graph; σ is the base the path starts from.",
+  "kind": "model",
+  "shape": "path; node",
+  "src": "Eq. (3), p.3 right",
+  "tex": "\\varrho,\\ \\sigma",
+  "zh": "ϱ 是階段 1 的圖上的一條路徑；σ 是這條路徑開始的基準。"
+ },
+ "w_i": {
+  "alt": [
+   "w_0",
+   "w_2",
+   "w_3",
+   "w_4",
+   "w_5"
+  ],
+  "en": "The waypoints of Eq. (7), counted from w_0 = P to w_5 = P + T. The names w_i are ours. In the lab's counting w_1 is P × R as printed, with the position unchanged.",
+  "kind": "computed",
+  "shape": "3, m",
+  "src": "Eq. (7), p.5 left; the names are ours",
+  "tex": "w_1",
+  "zh": "式 (7) 的路點，從 w_0 = P 數到 w_5 = P + T。w_i 這些名字是我們取的。照實驗室的數法，w_1 是印刷的 P × R，位置不變。"
+ },
+ "w_img": {
+  "en": "Image width in pixels. The paper gives no value; our lab uses 640.",
+  "kind": "setting",
+  "shape": "scalar, px",
+  "src": "§3.2, p.4 left (the size h×w)",
+  "tex": "w",
+  "zh": "影像寬度，單位 pixel。論文沒有給數值；我們的實驗室用 640。"
+ },
+ "wp3_calc": {
+  "en": "Worked example: P + 0.8 T written coordinate by coordinate, with P = (0.10, −0.20, 0.30) m and T = (0, 0.05, −0.12) m.",
+  "kind": "computed",
+  "shape": "3, m",
+  "tex": "(0.10,\\ -0.20+0.04,\\ 0.30-0.096)",
+  "zh": "例子：P + 0.8 T 一個座標一個座標寫出來，P = (0.10, −0.20, 0.30) m，T = (0, 0.05, −0.12) m。"
+ },
+ "wp3_val": {
+  "en": "Worked example: the third waypoint P + 0.8 T.",
+  "kind": "computed",
+  "shape": "3, m",
+  "tex": "(0.10,\\ -0.16,\\ 0.204)",
+  "zh": "例子：第三個路點 P + 0.8 T。"
+ },
+ "wp4_val": {
+  "en": "Worked example: the fourth waypoint P + 0.92 T.",
+  "kind": "computed",
+  "shape": "3, m",
+  "tex": "(0.10,\\ -0.154,\\ 0.1896)",
+  "zh": "例子：第四個路點 P + 0.92 T。"
+ },
+ "wp5_val": {
+  "en": "Worked example: the fifth waypoint P + 0.96 T.",
+  "kind": "computed",
+  "shape": "3, m",
+  "tex": "(0.10,\\ -0.152,\\ 0.1848)",
+  "zh": "例子：第五個路點 P + 0.96 T。"
+ },
+ "wp6_val": {
+  "en": "Worked example: the sixth waypoint P + T, the grasp point itself.",
+  "kind": "computed",
+  "shape": "3, m",
+  "tex": "(0.10,\\ -0.15,\\ 0.18)",
+  "zh": "例子：第六個路點 P + T，也就是夾取點本身。"
+ },
+ "x_cam": {
+  "en": "First coordinate of the 3D point in camera coordinates: x = (u − c_x) d / f_x. x points right. Not the x of Fisher's test in KP 04.",
+  "kind": "computed",
+  "shape": "scalar, m",
+  "tex": "x",
+  "zh": "3D 點在相機座標裡的第一個座標：x = (u − c_x) d / f_x。x 向右。不是 KP 04 費雪檢定的 x。"
+ },
+ "x_fisher": {
+  "en": "A possible value of a: the successes that land in the 'without base' group when the a + c total successes are dealt at random to two groups of 20. For Product 5 it runs from 2 to 20.",
+  "kind": "computed",
+  "shape": "count",
+  "src": "Derived; not in the paper",
+  "tex": "x",
+  "zh": "a 可能出現的值：把 a + c 次成功隨機分給兩組（各 20 次）時，落在「沒有 base」那組的成功數。Product 5 是 2 到 20。"
+ },
+ "y_cam": {
+  "en": "Second coordinate of the 3D point in camera coordinates: y = (v − c_y) d / f_y. y points down.",
+  "kind": "computed",
+  "shape": "scalar, m",
+  "tex": "y",
+  "zh": "3D 點在相機座標裡的第二個座標：y = (v − c_y) d / f_y。y 向下。"
+ },
+ "z_cam": {
+  "en": "Third coordinate of the 3D point in camera coordinates. It equals the depth d, and points forward.",
+  "kind": "computed",
+  "shape": "scalar, m",
+  "tex": "z",
+  "zh": "3D 點在相機座標裡的第三個座標，等於深度 d，向前。"
+ },
+ "zeta_i": {
+  "en": "3D object instance of part i: its point cloud, its label and box, its mask. A node of the low-level graph.",
+  "kind": "computed",
+  "shape": "set of 3",
+  "src": "§3.2, p.4 right",
+  "tex": "\\zeta_i=\\{p_i,c_i,m_i\\}",
+  "zh": "零件 i 的 3D object instance：點雲、標籤與框、mask。是低層圖的節點。"
+ },
+ "zeta_i_alone": {
+  "en": "3D object instance of part i: its point cloud, its label with box, its mask.",
+  "kind": "computed",
+  "shape": "set of 3",
+  "src": "§3.2, p.4 right",
+  "tex": "\\zeta_i",
+  "zh": "零件 i 的 3D object instance：點雲、標籤與框、mask。"
+ },
+ "zeta_i_dis": {
+  "en": "Instance of part i in the disassembled state. The one that is moved.",
+  "kind": "data",
+  "shape": "set of 3",
+  "src": "§3.2, p.4 right",
+  "tex": "\\zeta_{i,dis}",
+  "zh": "零件 i 在拆開狀態的 instance。被搬動的那一個。"
+ },
+ "zeta_i_s": {
+  "en": "Instance of part i in the assembled state. Target of the alignment.",
+  "kind": "data",
+  "shape": "set of 3",
+  "src": "§3.2, p.4 right",
+  "tex": "\\zeta_{i,s}",
+  "zh": "零件 i 在組好狀態的 instance。對齊的目標。"
+ }
+}

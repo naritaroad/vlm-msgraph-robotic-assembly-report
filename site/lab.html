@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>VLM-MSGraph lab: xArm6 gear assembly</title>
+<meta name="description" content="A browser lab for the five-step gear assembly of VLM-MSGraph (Li et al., RCIM 2025): an xArm6 with rigid-body physics, a wrist RGB-D camera, back-projection, ICP and Eq. (7) waypoints. Teaching simulation.">
+<meta name="color-scheme" content="light dark">
+<script>
+/* Same theme and language as the report: read its saved choices, fall back to the system setting. */
+(function () {
+  var d = document.documentElement, q = new URLSearchParams(location.search), s = {};
+  try { s = JSON.parse(localStorage.getItem('msgraph.prefs') || '{}') || {}; } catch (e) {}
+  var pref = q.get('theme') || s.theme || 'system';
+  var dark = pref === 'dark' || (pref !== 'light' && window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches);
+  d.setAttribute('data-theme', dark ? 'dark' : 'light');
+  if (!q.get('lang') && (s.lang === 'zh' || s.lang === 'both')) d.setAttribute('data-lang', 'zh');
+})();
+</script>
+<link rel="stylesheet" href="vendor/katex/katex.min.css">
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/stage.css">
+<link rel="stylesheet" href="css/widgets-lab.css">
+<style>
+  :root { --labbar-h: 48px; --mainline-h: 0px; --hud-h: 0px; --rail-w: 0px; }
+  html, body { height: 100%; }
+  body { margin: 0; padding: 0; background: var(--bay); color: var(--bay-ink); overflow: hidden; }
+  .labbar { height: var(--labbar-h); display: flex; align-items: center; gap: var(--s-4); padding: 0 var(--s-4); border-bottom: 1px solid var(--bay-rule); background: var(--bay-2); font-family: var(--font-sans); font-size: var(--fs-small); white-space: nowrap; overflow-x: auto; }
+  .labbar > * { flex: none; }
+  .labbar h1 { margin: 0; font-family: var(--font-serif); font-size: 1.05rem; font-weight: 700; letter-spacing: .01em; }
+  .labbar a { color: var(--bay-ink); text-decoration: none; border-bottom: 1px solid var(--bay-rule-strong); }
+  .labbar a:hover { border-color: var(--bay-accent); }
+  .labbar .sp { flex: 1 1 auto; }
+  .labbar .note { color: var(--bay-muted); }
+  .labbar button { min-height: 32px; padding: 0 12px; border: 1px solid var(--bay-rule-strong); border-radius: var(--r-2); background: var(--bay-3); color: var(--bay-ink); font: inherit; cursor: pointer; }
+  .labbar button[aria-pressed="true"] { border-color: var(--bay-accent); color: var(--read); }
+  .labbar :focus-visible { outline: 2px solid var(--bay-focus); outline-offset: 2px; }
+  #stage { position: fixed; inset: var(--labbar-h) 0 0 0; height: auto; width: auto; display: flex; flex-direction: column; background: var(--bay); }
+  #pane-lab { flex: 1 1 auto; min-height: 0; display: block; }
+  .stage-status { position: absolute; left: -9999px; }
+  .labpanel { min-height: 0; }
+  .labpanel .lab-view { flex: 2.4 1 0; min-height: 300px; }
+  @media (max-width: 1279.98px) { .labbar .note { display: none; } }
+  /* phones: the bar keeps to one screen width (title, back link, language and theme) */
+  @media (max-width: 520px) {
+    .labbar { gap: 6px; padding: 0 var(--s-2); overflow: hidden; }
+    .labbar h1 { font-size: .9rem; }
+    .labbar .eq-link { display: none; }
+    .labbar button { min-width: 0; padding: 0 7px; }
+  }
+  @media (max-width: 400px) { .labbar h1 .h1-lab { display: none; } }
+</style>
+<script type="importmap">{"imports":{"three":"./vendor/three/build/three.module.js","three/addons/":"./vendor/three/addons/"}}</script>
+<script defer src="vendor/katex/katex.min.js"></script>
+</head>
+<body class="lab-page">
+<header class="labbar">
+  <h1>VLM-MSGraph<span class="h1-lab"> lab</span></h1>
+  <span class="note"><span class="en" lang="en">Teaching simulation. The computation is real, the data is synthetic.</span><span class="zh" lang="zh-Hant">教學模擬。計算是實算，資料是合成的。</span></span>
+  <span class="sp"></span>
+  <a href="index.html#kp10"><span class="en" lang="en">Back to the report</span><span class="zh" lang="zh-Hant">回到報告</span></a>
+  <a class="eq-link" href="index.html#kp07"><span class="en" lang="en">The equations</span><span class="zh" lang="zh-Hant">公式說明</span></a>
+  <button type="button" data-lang-btn="en" aria-pressed="true">EN</button>
+  <button type="button" data-lang-btn="zh" aria-pressed="false">中文</button>
+  <button type="button" id="lab-theme" aria-pressed="false"><span class="en" lang="en">Dark</span><span class="zh" lang="zh-Hant">深色</span></button>
+</header>
+<main>
+<aside id="stage" class="bay" aria-label="3D lab">
+  <section class="pane is-active" id="pane-lab" role="region" aria-label="Lab"></section>
+  <p class="stage-status" aria-live="polite"></p>
+</aside>
+</main>
+<script type="module">
+import { init as initFormulas, formatBind } from './js/stage/formulas.js';
+import { mount } from './js/stage/labpanel.js';
+
+const html = document.documentElement;
+const q = new URLSearchParams(location.search);
+const setLang = (l) => {
+  html.dataset.lang = l; html.lang = l === 'zh' ? 'zh-Hant' : 'en';
+  for (const b of document.querySelectorAll('[data-lang-btn]')) b.setAttribute('aria-pressed', String(b.dataset.langBtn === l));
+  try { localStorage.setItem('vlm.lang', l); } catch { /* private mode */ }
+};
+let saved = null; try { saved = localStorage.getItem('vlm.lang'); } catch { /* private mode */ }
+setLang(['en', 'zh'].includes(q.get('lang')) ? q.get('lang') : saved === 'zh' || (saved == null && html.dataset.lang === 'zh') ? 'zh' : 'en');
+const themeBtn = document.getElementById('lab-theme');
+const paintTheme = () => themeBtn.setAttribute('aria-pressed', String(html.dataset.theme === 'dark'));
+themeBtn.addEventListener('click', () => { html.dataset.theme = html.dataset.theme === 'dark' ? 'light' : 'dark'; paintTheme(); });
+paintTheme();
+for (const b of document.querySelectorAll('[data-lang-btn]')) b.addEventListener('click', () => setLang(b.dataset.langBtn));
+
+const listeners = new Map();
+const bus = {
+  on(type, fn) { if (!listeners.has(type)) listeners.set(type, new Set()); listeners.get(type).add(fn); return () => listeners.get(type).delete(fn); },
+  emit(type, data) { for (const fn of listeners.get(type) || []) { try { fn(data); } catch (e) { console.error(e); } } },
+};
+const ctx = {
+  bus,
+  bind(key, value) { for (const o of document.querySelectorAll(`output[data-bind="${CSS.escape(key)}"]`)) o.textContent = formatBind(value, { unit: o.dataset.unit || '', digits: o.dataset.digits != null ? +o.dataset.digits : undefined, key }); },
+  lang: () => html.dataset.lang,
+  katex: null,
+  setStatus(text) { document.querySelector('.stage-status').textContent = text; },
+};
+await new Promise((r) => (window.katex ? r() : addEventListener('DOMContentLoaded', r, { once: true })));
+ctx.katex = window.katex;
+
+// keep a handle for tools (tools/snap.py, tools/record_lab.py); not used by the page itself
+const { createLab } = await import('./js/lab/index.js').catch(() => ({}));
+if (createLab) ctx.createLab = async (...a) => { const lab = await createLab(...a); window.__lab = lab; return lab; };
+initFormulas(ctx);
+const panel = await mount(document.getElementById('pane-lab'), ctx);
+window.__panel = panel;
+panel.onShow?.();
+if (q.get('tab')) panel.showTab?.(q.get('tab'));
+if (q.get('act')) panel.act(...q.get('act').split(':').reduce((acc, s, i) => (i === 0 ? [s, []] : [acc[0], [...acc[1], s]]), []));
+</script>
+</body>
+</html>

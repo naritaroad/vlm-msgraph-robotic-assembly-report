@@ -1,0 +1,243 @@
+/* tokens.css — the only place colours, type sizes, spacing, radii, shadows and motion are defined.
+   Direction "launch page" (docs/design.md): large type, one tinted surface per theme, floating glass chrome.
+   Colours come from the cover of the journal the paper is in (Robotics and Computer-Integrated Manufacturing):
+   deep navy, cobalt photo tiles, welding-spark orange. Both themes are tinted: no pure black, no pure white.
+   The whole page is one theme: the stage ("bay") follows it. Other CSS and JS only use these variables. */
+
+:root {
+  color-scheme: light;
+
+  /* ── page ── */
+  --paper: #F5F7FA;          /* tinted white, cool grey-blue (user's choice, round 3) */
+  --paper-2: #EAEEF4;
+  --card: #FCFDFE;
+  --ink: #0E1A2D;            /* tinted black: navy, 15.6:1 on --paper */
+  --ink-2: #33415A;
+  --muted: #56657E;          /* 5.4:1 on --paper */
+  --rule: #D6DDE7;
+  --rule-strong: #9AAAC1;    /* 3:1 on --paper for control borders */
+
+  /* brand block: the journal's navy. Used as a flat field with white type on it. */
+  --brand: #1F3E79;
+  --brand-2: #16305F;
+  --brand-ink: #F4F7FC;
+  --brand-tile: #2D62B8;     /* the cobalt of the cover's photo tiles */
+
+  /* interaction colour (cobalt) */
+  --accent: #1D5BD8;
+  --accent-text: #1A4FBF;    /* as text on --paper, 6.3:1 */
+  --accent-ink: #FFFFFF;
+  --accent-wash: #DBE6FB;
+  --link: #1A4FBF;
+  --focus: #1D5BD8;
+
+  /* spark (orange): "this step, now" and flaw cards only */
+  --spark: #E0620F;
+  --spark-text: #B04708;     /* 5.2:1 on --paper */
+  --spark-ink: #FFFFFF;
+  --spark-wash: #FBE4D2;
+
+  --good: #17703A;
+  --warn: #B3261E;
+
+  /* ── stage (bay): same theme as the page, one step apart in tone ── */
+  --bay: #EEF2F7;
+  --bay-2: #FAFBFD;
+  --bay-3: #E2E8F0;
+  --bay-rule: #CFD8E4;
+  --bay-rule-strong: #93A4BC;
+  --bay-ink: #0E1A2D;
+  --bay-muted: #54637B;
+  --bay-accent: #1D5BD8;
+  --bay-focus: #1D5BD8;
+  --read: #A8480A;           /* readout numbers */
+  --read-dim: #F0D9C6;
+  --bay-good: #17703A;
+  --bay-warn: #B3261E;
+
+  /* ── glass: anything that floats ── */
+  --glass-bg: rgba(250, 251, 253, .74);
+  --glass-bg-strong: rgba(248, 250, 253, .9);
+  --glass-line: rgba(14, 26, 45, .12);
+  --glass-shine: rgba(255, 255, 255, .7);
+  --glass-blur: 18px;
+  --glass-shadow: 0 1px 0 rgba(255, 255, 255, .6) inset, 0 18px 48px -18px rgba(14, 26, 45, .38), 0 2px 8px -2px rgba(14, 26, 45, .12);
+
+  /* ── parts: the gear colours are the data category colours ── */
+  --gear-red: #D7263D;
+  --gear-green: #1E9E5A;
+  --gear-yellow: #E8A917;
+  --gear-blue: #1F6FD0;
+  --part-white: #E9E7E1;
+  --chip-ink: #0B1220;       /* text on a gear-coloured chip: dark in both themes, the fills do not change */
+
+  /* ── evidence tags (text / background) ── */
+  --t-paper-fg: #1A4FBF;     --t-paper-bg: #DBE6FB;
+  --t-derived-fg: #0F6B5C;   --t-derived-bg: #D3EEE8;
+  --t-notstated-fg: #4A566A; --t-notstated-bg: #E0E5EC;
+  --t-mismatch-fg: #A4161A;  --t-mismatch-bg: #F8DADB;
+  --t-loose-fg: #7A4F00;     --t-loose-bg: #F6E7C4;
+  --t-citation-fg: #6B3FA0;  --t-citation-bg: #E8DDF5;
+  --t-demo-fg: #9A3D0B;      --t-demo-bg: #FBE4D2;
+  --t-localrun-fg: #1B6B2F;  --t-localrun-bg: #D9F0DD;
+  --t-external-fg: #3D4B60;  --t-external-bg: #DAE1EA;
+  --t-myview-fg: #7A2E6E;    --t-myview-bg: #F3DAEE;
+
+  /* ── kinds of quantity in the symbol table ── */
+  --kind-data: #1A4FBF;
+  --kind-setting: #6B3FA0;
+  --kind-computed: #0F6B5C;
+  --kind-model: #9A3D0B;
+
+  /* ── type ──
+     Display: a DIN-like face that ships with the operating system (no font files, so the folder stays portable).
+     Windows: Bahnschrift. Apple: DIN Alternate / Avenir Next Condensed. Android: Roboto Condensed. */
+  --font-display: "Bahnschrift", "DIN Alternate", "Avenir Next Condensed", "Roboto Condensed", "Segoe UI Variable Display", "Segoe UI", "Microsoft JhengHei UI", "Microsoft JhengHei", "PingFang TC", "Noto Sans TC", sans-serif;
+  --font-serif: var(--font-display);    /* old name, kept so older rules pick up the display face */
+  --font-sans: "Segoe UI Variable Text", "Segoe UI", -apple-system, "SF Pro Text", "Helvetica Neue", "Microsoft JhengHei UI", "Microsoft JhengHei", "PingFang TC", "Noto Sans TC", sans-serif;
+  --font-mono: "Cascadia Mono", "Cascadia Code", Consolas, "SF Mono", Menlo, ui-monospace, monospace;
+
+  --fs-body: clamp(1.0625rem, 0.9rem + 0.3vw, 1.1875rem);   /* 17–19 px */
+  --fs-small: clamp(0.875rem, 0.8rem + 0.16vw, 0.9375rem);  /* 14–15 px */
+  --fs-note: 0.8125rem;                                     /* 13 px, the floor */
+  --fs-h2: clamp(1.875rem, 1.1rem + 1.5vw, 2.75rem);        /* 30–44 px */
+  --fs-h3: clamp(1.125rem, 1rem + 0.35vw, 1.3125rem);
+  --fs-lede: clamp(1.125rem, 0.98rem + 0.36vw, 1.3125rem);
+  --fs-eq: 1.25em;                                          /* relative to body */
+  --fs-read: clamp(0.9375rem, 0.75rem + 0.5vw, 1.375rem);   /* 15–22 px */
+  --fs-read-lg: clamp(1.25rem, 0.9rem + 0.9vw, 1.75rem);
+  --lh-body: 1.65;
+  --lh-zh: 1.8;
+  --lh-tight: 1.12;
+
+  /* ── space (4 px base) ── */
+  --s-1: 4px;
+  --s-2: 8px;
+  --s-3: 12px;
+  --s-4: 16px;
+  --s-5: 24px;
+  --s-6: 32px;
+  --s-7: 48px;
+  --s-8: 72px;
+  --gutter: clamp(16px, 3vw, 44px);
+
+  /* ── shape ── */
+  --r-1: 3px;
+  --r-2: 6px;
+  --r-3: 12px;
+  --r-4: 18px;
+  --r-pill: 999px;
+  --hit: 44px;               /* minimum touch target */
+
+  /* ── elevation: only things that float above the page ── */
+  --shadow-pop: var(--glass-shadow);
+  --shadow-rail: var(--glass-shadow);
+  --scrim: rgba(10, 17, 30, .55);
+
+  /* ── motion ── */
+  --ease: cubic-bezier(.2, .8, .2, 1);
+  --ease-out: cubic-bezier(.16, 1, .3, 1);
+  --t-press: 120ms;
+  --t-stage: 200ms;
+  --t-draw: 260ms;
+  --t-flash: 300ms;
+
+  /* ── layout ── */
+  --spine-w: 56px;           /* left strip: the KP index and the settings button */
+  --rail-w: var(--spine-w);  /* old name */
+  --rail-w-open: 320px;
+  --mainline-h: 64px;        /* nav.js overwrites this with the measured height */
+  --hud-h: 0px;              /* the bottom bar is gone; kept so older rules still compute */
+  --split: 0.42;             /* share of the width the article takes; split.js writes it */
+  --stage-dock-h: 46vh;
+  --stage-bar-h: 52px;
+  --reader-w: 760px;
+
+  --z-stage: 10;
+  --z-mainline: 30;
+  --z-rail: 40;
+  --z-full: 60;
+  --z-hud: 70;
+  --z-pop: 75;
+  --z-dialog: 80;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --paper: #0F172A;          /* tinted black, slate navy (user's choice, round 3) */
+  --paper-2: #131D33;
+  --card: #17223A;
+  --ink: #E6ECF5;            /* tinted white, 15.3:1 on --paper */
+  --ink-2: #B4C0D3;
+  --muted: #8493AB;          /* 6.1:1 on --paper */
+  --rule: #253350;
+  --rule-strong: #4B5D80;
+
+  --brand: #24478B;
+  --brand-2: #1A3568;
+  --brand-ink: #F4F7FC;
+  --brand-tile: #3C7BDD;
+
+  --accent: #5B9BFF;
+  --accent-text: #8DB9FF;
+  --accent-ink: #06101F;
+  --accent-wash: #15284A;
+  --link: #8DB9FF;
+  --focus: #8DB9FF;
+
+  --spark: #FF8A3D;
+  --spark-text: #FFA366;
+  --spark-ink: #1A0E04;
+  --spark-wash: #3A2110;
+
+  --good: #7FD694;
+  --warn: #FF9A9A;
+
+  --bay: #111A2E;
+  --bay-2: #17223A;
+  --bay-3: #1F2C49;
+  --bay-rule: #26365A;
+  --bay-rule-strong: #47597B;
+  --bay-ink: #E6ECF5;
+  --bay-muted: #8493AB;
+  --bay-accent: #5B9BFF;
+  --bay-focus: #8DB9FF;
+  --read: #FFB061;
+  --read-dim: #4A3118;
+  --bay-good: #7FD694;
+  --bay-warn: #FF9A9A;
+
+  --glass-bg: rgba(23, 34, 58, .66);
+  --glass-bg-strong: rgba(23, 34, 58, .9);
+  --glass-line: rgba(230, 236, 245, .14);
+  --glass-shine: rgba(230, 236, 245, .1);
+  --glass-shadow: 0 1px 0 rgba(230, 236, 245, .08) inset, 0 22px 56px -18px rgba(0, 0, 0, .75), 0 2px 10px -2px rgba(0, 0, 0, .5);
+
+  --t-paper-fg: #A9C8F5;     --t-paper-bg: #172B4D;
+  --t-derived-fg: #8FD9C9;   --t-derived-bg: #12332E;
+  --t-notstated-fg: #C3CBD8; --t-notstated-bg: #263247;
+  --t-mismatch-fg: #F3A6A8;  --t-mismatch-bg: #4A1A1C;
+  --t-loose-fg: #EBCB80;     --t-loose-bg: #3F2E0A;
+  --t-citation-fg: #CDB4EE;  --t-citation-bg: #33224D;
+  --t-demo-fg: #F7B98F;      --t-demo-bg: #472312;
+  --t-localrun-fg: #9EDCAB;  --t-localrun-bg: #17381F;
+  --t-external-fg: #BFCADB;  --t-external-bg: #233046;
+  --t-myview-fg: #E6ADDB;    --t-myview-bg: #452040;
+
+  --kind-data: #A9C8F5;
+  --kind-setting: #CDB4EE;
+  --kind-computed: #8FD9C9;
+  --kind-model: #F7B98F;
+
+  --scrim: rgba(3, 7, 14, .68);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --t-press: 0ms;
+    --t-stage: 0ms;
+    --t-draw: 0ms;
+    --t-flash: 0ms;
+  }
+}

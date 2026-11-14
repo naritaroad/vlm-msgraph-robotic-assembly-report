@@ -1,0 +1,28 @@
+WEBVTT
+
+NOTE
+Scene 1: handheld phone sweep over the desk. Silent video, 26.9 s. Perception only.
+The counts come from site/data/perception/scene1_tracks.json (54 frames sampled at 2 fps).
+
+00:00:00.000 --> 00:00:05.000
+Scene 1: a handheld phone sweeps over 8 silver tools, 6 hex nuts and a steel ruler.
+Perception only. Nothing is assembled, so there are no triples.
+
+00:00:05.000 --> 00:00:09.000
+Grounding DINO runs on 2 frames per second, one text prompt at a time.
+Each frame is detected on its own. Nothing is tracked.
+
+00:00:09.000 --> 00:00:13.000
+Four prompts (wrench, utility knife, nail clipper, metal clip)
+return the same top box in 48 of 54 sampled frames.
+
+00:00:13.000 --> 00:00:17.000
+13.5 to 16.0 s: “stapler” has no box above 0.35 in 5 of these 6 frames.
+
+00:00:17.000 --> 00:00:22.000
+“small silver hexagonal nut”: 6 expected.
+39 of 54 frames give exactly 6 boxes. The lowest count is 4.
+
+00:00:22.000 --> 00:00:26.900
+A phone gives RGB only: no depth and no calibrated intrinsics.
+So Eq. (4) cannot be computed on this footage.

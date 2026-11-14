@@ -1,0 +1,38 @@
+WEBVTT
+
+NOTE
+Scene 2: a hand assembles two gel pens and a fidget spinner. Silent video, 50.5 s.
+Step times and triples are copied from site/data/sceneB_gt.json (video_steps).
+
+00:00:00.000 --> 00:00:02.000
+Before assembly: 9 parts lie apart on the desk. G_0 has 9 nodes and no edges.
+
+00:00:02.000 --> 00:00:12.000
+t = 1  ⟨black ink refill, inserted into, pen barrel with black clip⟩
+A hand inserts the black ink refill into the pen barrel with black clip.
+
+00:00:12.000 --> 00:00:20.000
+t = 2  ⟨black rubber front grip, screw, pen barrel with black clip⟩
+The black rubber front grip is screwed onto the pen barrel with black clip.
+
+00:00:20.000 --> 00:00:26.000
+t = 3  ⟨purple ink refill, inserted into, pen barrel with red clip⟩
+The purple ink refill is inserted into the pen barrel with red clip.
+
+00:00:26.000 --> 00:00:34.500
+t = 4  ⟨red rubber front grip, screw, pen barrel with red clip⟩
+The red rubber front grip is screwed onto the pen barrel with red clip.
+
+00:00:34.500 --> 00:00:36.000
+Between steps: both pens are done. G_4 has 4 edges. The spinner is next.
+
+00:00:36.000 --> 00:00:41.000
+t = 5  ⟨stud cap, goes through, spinner body with bearing⟩
+The stud cap is pushed through the spinner body with bearing.
+
+00:00:41.000 --> 00:00:47.500
+t = 6  ⟨threaded cap, screw, stud cap⟩
+The threaded cap is screwed onto the stud cap.
+
+00:00:47.500 --> 00:00:50.500
+Assembled: G_6 has 6 edges. A human hand did the work, not a robot.

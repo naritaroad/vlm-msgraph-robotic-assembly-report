@@ -1,0 +1,134 @@
+{
+ "trials": 20,
+ "seeds": [
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7,
+  8,
+  9,
+  10,
+  11,
+  12,
+  13,
+  14,
+  15,
+  16,
+  17,
+  18,
+  19,
+  20
+ ],
+ "steps": [
+  "red large gear",
+  "green medium gear",
+  "yellow medium gear",
+  "blue large gear",
+  "white tiny hexagonal nut"
+ ],
+ "generated": "2026-11-12T15:26:10.345Z",
+ "perception": "oracle (tools/tests/README.md)",
+ "param": "depth.sigmaMm",
+ "unit": "mm",
+ "fixed": {
+  "views.k": 1
+ },
+ "note": "Per-pixel depth noise averages out over the thousands of pixels of a part, so it moves the top-face centre very little.",
+ "rows": [
+  {
+   "value": 0,
+   "success": [
+    20,
+    20,
+    20,
+    20,
+    20
+   ],
+   "all": 20,
+   "reasons": {}
+  },
+  {
+   "value": 1,
+   "success": [
+    20,
+    20,
+    20,
+    20,
+    20
+   ],
+   "all": 20,
+   "reasons": {}
+  },
+  {
+   "value": 2,
+   "success": [
+    20,
+    20,
+    20,
+    20,
+    19
+   ],
+   "all": 19,
+   "reasons": {
+    "not seated": 1
+   }
+  },
+  {
+   "value": 3,
+   "success": [
+    20,
+    20,
+    20,
+    20,
+    20
+   ],
+   "all": 20,
+   "reasons": {}
+  },
+  {
+   "value": 4,
+   "success": [
+    20,
+    20,
+    20,
+    20,
+    18
+   ],
+   "all": 18,
+   "reasons": {
+    "not seated": 2
+   }
+  },
+  {
+   "value": 5,
+   "success": [
+    20,
+    20,
+    20,
+    19,
+    17
+   ],
+   "all": 17,
+   "reasons": {
+    "not seated": 4
+   }
+  },
+  {
+   "value": 6,
+   "success": [
+    20,
+    20,
+    20,
+    20,
+    16
+   ],
+   "all": 16,
+   "reasons": {
+    "not seated": 4
+   }
+  }
+ ]
+}

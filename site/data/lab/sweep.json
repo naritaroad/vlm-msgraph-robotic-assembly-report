@@ -1,0 +1,168 @@
+{
+ "trials": 20,
+ "seeds": [
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7,
+  8,
+  9,
+  10,
+  11,
+  12,
+  13,
+  14,
+  15,
+  16,
+  17,
+  18,
+  19,
+  20
+ ],
+ "steps": [
+  "red large gear",
+  "green medium gear",
+  "yellow medium gear",
+  "blue large gear",
+  "white tiny hexagonal nut"
+ ],
+ "generated": "2026-11-12T15:26:10.345Z",
+ "perception": "oracle (tools/tests/README.md)",
+ "param": "handeye.errMm",
+ "unit": "mm",
+ "note": "Hand-eye error is a fixed offset of the camera frame. The gripper opens 85 mm and a large gear is 72 mm across, so a few millimetres decide whether both pads touch.",
+ "rows": [
+  {
+   "value": 0,
+   "success": [
+    20,
+    20,
+    20,
+    20,
+    20
+   ],
+   "all": 20,
+   "reasons": {}
+  },
+  {
+   "value": 1,
+   "success": [
+    20,
+    20,
+    20,
+    20,
+    20
+   ],
+   "all": 20,
+   "reasons": {}
+  },
+  {
+   "value": 2,
+   "success": [
+    18,
+    18,
+    18,
+    18,
+    17
+   ],
+   "all": 17,
+   "reasons": {
+    "no grasp": 8,
+    "not seated": 3
+   }
+  },
+  {
+   "value": 3,
+   "success": [
+    15,
+    14,
+    15,
+    14,
+    12
+   ],
+   "all": 12,
+   "reasons": {
+    "no grasp": 20,
+    "not seated": 10
+   }
+  },
+  {
+   "value": 4,
+   "success": [
+    9,
+    9,
+    9,
+    9,
+    8
+   ],
+   "all": 8,
+   "reasons": {
+    "no grasp": 44,
+    "not seated": 12
+   }
+  },
+  {
+   "value": 5,
+   "success": [
+    3,
+    3,
+    3,
+    3,
+    3
+   ],
+   "all": 3,
+   "reasons": {
+    "no grasp": 68,
+    "not seated": 17
+   }
+  },
+  {
+   "value": 6,
+   "success": [
+    3,
+    3,
+    3,
+    3,
+    3
+   ],
+   "all": 3,
+   "reasons": {
+    "no grasp": 68,
+    "not seated": 17
+   }
+  },
+  {
+   "value": 7,
+   "success": [
+    3,
+    3,
+    3,
+    3,
+    3
+   ],
+   "all": 3,
+   "reasons": {
+    "no grasp": 68,
+    "not seated": 17
+   }
+  },
+  {
+   "value": 8,
+   "success": [
+    3,
+    3,
+    3,
+    3,
+    2
+   ],
+   "all": 2,
+   "reasons": {
+    "no grasp": 72,
+    "not seated": 14
+   }
+  }
+ ]
+}

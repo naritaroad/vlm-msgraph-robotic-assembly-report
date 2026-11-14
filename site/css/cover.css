@@ -1,0 +1,234 @@
+/* cover.css — the first screen: the paper and the presenter on one side, the arm on the other.
+   The navy band and the framed tiles repeat the cover of the journal the paper is in. */
+
+.cover {
+  position: relative;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  min-height: 100vh;
+  min-height: 100svh;
+  background: var(--paper);
+  color: var(--ink);
+  overflow: hidden;
+}
+
+/* ── masthead band ── */
+.cover-band {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-4);
+  min-height: 56px;
+  padding: var(--s-2) var(--gutter);
+  background: var(--brand);
+  color: var(--brand-ink);
+}
+.cover-journal { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 var(--s-4); font-family: var(--font-display); font-size: clamp(1rem, 0.8rem + 0.6vw, 1.375rem); font-weight: 600; letter-spacing: .01em; line-height: 1.2; }
+.cover-vol { font-family: var(--font-mono); font-size: 0.75rem; font-weight: 400; opacity: .8; }
+.cover-kind { flex: none; padding: 4px var(--s-3); border: 1px solid color-mix(in srgb, var(--brand-ink) 55%, transparent); border-radius: var(--r-pill); font-size: var(--fs-note); font-weight: 600; letter-spacing: .06em; text-transform: uppercase; white-space: nowrap; }
+.cover-band .zh { color: inherit; }
+html[data-lang="both"] .cover-kind .zh { display: inline; margin-left: .5em; }
+
+/* ── main ── */
+.cover-main {
+  display: grid;
+  grid-template-columns: minmax(0, 46fr) minmax(0, 54fr);
+  align-items: stretch;
+  min-height: 0;
+}
+.cover-copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+  padding: clamp(16px, 3.2vh, 44px) var(--gutter) clamp(16px, 3vh, 36px) max(var(--gutter), 5vw);
+}
+.cover-course { font-family: var(--font-mono); font-size: var(--fs-note); letter-spacing: .08em; text-transform: uppercase; color: var(--accent-text); }
+.cover-course::before { content: ""; display: inline-block; width: 28px; height: 2px; margin-right: var(--s-3); vertical-align: .3em; background: var(--spark); }
+.cover h1 {
+  margin-top: var(--s-4);
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 1rem + 5.6vw, 6.75rem);
+  font-weight: 700;
+  font-stretch: 88%;
+  letter-spacing: -.015em;
+  line-height: .92;
+  white-space: nowrap;
+}
+.cover-sub {
+  max-width: 24em;
+  margin-top: var(--s-4);
+  font-family: var(--font-display);
+  font-size: clamp(1.125rem, 0.9rem + 0.9vw, 1.75rem);
+  font-weight: 400;
+  line-height: 1.25;
+  color: var(--ink-2);
+  text-wrap: balance;
+}
+.cover-meta { display: grid; margin-top: clamp(14px, 2.6vh, 30px); max-width: 44em; border-top: 1px solid var(--rule-strong); font-size: var(--fs-small); }
+.cover-meta > div { display: grid; grid-template-columns: 6.5em minmax(0, 1fr); gap: var(--s-3); align-items: baseline; padding: 5px 0; border-bottom: 1px solid var(--rule); }
+.cover-meta dt { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.cover-meta dd { min-width: 0; line-height: 1.4; overflow-wrap: anywhere; }
+.cover-meta a { color: var(--link); }
+.cover-meta .is-me dd { font-weight: 600; }
+.cover-meta .is-me:first-of-type, .cover-meta div:nth-child(5) { border-top: 2px solid var(--ink); margin-top: -1px; }
+.cover-id { margin-left: .6em; font-family: var(--font-mono); font-weight: 400; color: var(--ink-2); }
+html[data-lang="both"] .cover-meta dt .zh { display: inline; margin-left: .5em; letter-spacing: 0; }
+
+.cover-go { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-3) var(--s-5); margin-top: clamp(14px, 2.6vh, 28px); }
+.cover-start {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-3);
+  min-height: 48px;
+  padding: 0 var(--s-5) 0 var(--s-6);
+  border-radius: var(--r-pill);
+  background: var(--brand);
+  color: var(--brand-ink);
+  font-family: var(--font-display);
+  font-size: 1.125rem;
+  font-weight: 600;
+  letter-spacing: .02em;
+  text-decoration: none;
+  transition: background-color var(--t-press) var(--ease), transform var(--t-press) var(--ease);
+}
+.cover-start:hover { background: var(--accent); color: var(--accent-ink); }
+.cover-start:active { transform: scale(.97); }
+.cover-start svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; animation: nudge 1.8s var(--ease) infinite; }
+@keyframes nudge { 50% { transform: translateY(4px); } }
+.cover-start .zh { color: inherit; }
+.cover-lab { font-size: var(--fs-small); font-weight: 600; color: var(--accent-text); text-underline-offset: .25em; }
+
+/* ── visual: tiles behind, the arm in front, the QR in the corner ── */
+.cover-visual { position: relative; min-width: 0; min-height: 320px; }
+.cover-tiles {
+  position: absolute;
+  inset: 7% 6% 16% 4%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: clamp(8px, 1.2vw, 18px);
+  pointer-events: none;
+}
+.cover-tiles i { border: 2px solid color-mix(in srgb, var(--brand-tile) 34%, transparent); background: color-mix(in srgb, var(--brand-tile) 9%, transparent); }
+.cover-tiles i:nth-child(1) { grid-area: 1 / 2; }
+.cover-tiles i:nth-child(2) { grid-area: 1 / 3; }
+.cover-tiles i:nth-child(3) { grid-area: 2 / 1; }
+.cover-tiles i:nth-child(4) { grid-area: 2 / 2; background: color-mix(in srgb, var(--brand-tile) 16%, transparent); }
+.cover-tiles i:nth-child(5) { grid-area: 2 / 3; }
+.cover-tiles i:nth-child(6) { grid-area: 3 / 2; }
+.cover-3d { position: absolute; inset: 0; }
+.cover-3d canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; opacity: 0; transition: opacity 600ms var(--ease); }
+/* the bench runs past the canvas: fade the left and bottom edges into the page instead of a hard cut */
+.cover-3d canvas { -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 14%), linear-gradient(0deg, transparent 0, #000 16%); -webkit-mask-composite: source-in; mask-image: linear-gradient(90deg, transparent 0, #000 14%), linear-gradient(0deg, transparent 0, #000 16%); mask-composite: intersect; }
+.cover-3d.is-ready canvas { opacity: 1; }
+.cover-poster { position: absolute; inset: 12% 10% 20% 8%; width: 82%; height: 68%; object-fit: cover; border: 2px solid var(--card); box-shadow: var(--glass-shadow); opacity: 0; transition: opacity 400ms var(--ease); }
+.cover-3d.is-fallback .cover-poster { opacity: 1; }
+.cover-caption {
+  position: absolute;
+  left: 4%;
+  bottom: var(--s-4);
+  max-width: min(30em, calc(100% - 190px));
+  font-size: var(--fs-note);
+  line-height: 1.45;
+  color: var(--ink-2);
+}
+.cover-qr {
+  position: absolute;
+  right: var(--gutter);
+  bottom: var(--s-4);
+  display: grid;
+  justify-items: center;
+  gap: 6px;
+  width: 132px;
+  padding: var(--s-2);
+  border: 1px solid var(--glass-line);
+  border-radius: var(--r-3);
+  background: var(--glass-bg);
+  box-shadow: var(--glass-shadow);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(1.5);
+  backdrop-filter: blur(var(--glass-blur)) saturate(1.5);
+}
+.qr-box { position: relative; display: grid; place-items: center; width: 114px; height: 114px; border-radius: var(--r-2); background: #FBFCFE; }
+.qr-box img { width: 100%; height: 100%; image-rendering: pixelated; border-radius: inherit; }
+.qr-empty { position: absolute; inset: 0; display: grid; place-items: center; border: 2px dashed #9AAAC1; border-radius: inherit; color: #56657E; font-family: var(--font-mono); font-size: 1.125rem; font-weight: 700; letter-spacing: .1em; }
+.qr-box img + .qr-empty { display: none; }
+.cover-qr figcaption { font-size: 0.6875rem; line-height: 1.3; text-align: center; color: var(--ink-2); }
+.qr-url { display: block; font-family: var(--font-mono); font-size: 0.625rem; color: var(--muted); overflow-wrap: anywhere; }
+.qr-url:empty { display: none; }
+
+/* ── the numbers strip ── */
+.cover-stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border-top: 1px solid var(--rule-strong);
+  background: var(--paper-2);
+}
+.cover-stats li { display: flex; align-items: baseline; gap: var(--s-3); padding: var(--s-3) var(--s-5); min-width: 0; }
+.cover-stats li:first-child { padding-left: max(var(--gutter), 5vw); }
+.cover-stats li + li { border-left: 1px solid var(--rule); }
+.cover-stats b { flex: none; font-family: var(--font-display); font-size: clamp(1.75rem, 1rem + 1.8vw, 2.75rem); font-weight: 700; font-stretch: 88%; line-height: 1; letter-spacing: -.01em; color: var(--brand); font-variant-numeric: tabular-nums; }
+html[data-theme="dark"] .cover-stats b { color: var(--accent-text); }
+.cover-stats span { font-size: var(--fs-note); line-height: 1.35; color: var(--ink-2); }
+
+/* ── smaller screens ── */
+@media (max-width: 899.98px) {   /* side by side down to 900 px, so a 1024×768 projector shows the 3D on the first screen */
+  .cover-main { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto minmax(300px, 46vh); }
+  .cover-copy { padding-inline: var(--gutter); }
+  .cover-tiles { inset: 4% 14% 12% 14%; }
+}
+@media (max-width: 767.98px) {
+  .cover-band { min-height: 48px; }
+  .cover-vol { display: none; }
+  .cover h1 { font-size: clamp(2.4rem, 13vw, 5rem); }
+  .cover-meta > div { grid-template-columns: 5.2em minmax(0, 1fr); gap: var(--s-2); }
+  .cover-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .cover-stats li { padding: var(--s-3) var(--s-4); }
+  .cover-stats li:nth-child(3) { border-left: 0; }
+  .cover-stats li:nth-child(n + 3) { border-top: 1px solid var(--rule); }
+  .cover-qr { width: 104px; right: var(--s-3); }
+  .qr-box { width: 86px; height: 86px; }
+  .cover-caption { max-width: calc(100% - 140px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cover-start svg { animation: none; }
+}
+@media print {
+  .cover { min-height: 0; break-after: page; }
+  .cover-visual, .cover-go { display: none; }
+  .cover-main { grid-template-columns: 1fr; }
+}
+
+/* ── the light behind the cover (after the Unitree G1+ page): soft colour fields and a horizon arc ── */
+.cover { isolation: isolate; }
+.cover::before, .cover::after { content: ""; position: absolute; pointer-events: none; z-index: -1; }
+.cover::before {
+  inset: 0;
+  background:
+    radial-gradient(60% 55% at 78% 30%, color-mix(in srgb, #7C5CFF 34%, transparent) 0%, transparent 70%),
+    radial-gradient(45% 50% at 18% 70%, color-mix(in srgb, var(--brand-tile) 30%, transparent) 0%, transparent 72%),
+    radial-gradient(35% 40% at 92% 85%, color-mix(in srgb, var(--spark) 18%, transparent) 0%, transparent 70%),
+    linear-gradient(180deg, transparent 0%, color-mix(in srgb, var(--paper-2) 60%, transparent) 100%);
+  animation: cover-breathe 16s ease-in-out infinite alternate;
+}
+.cover::after {                       /* the arc: a huge ellipse rising behind the stats strip */
+  left: 50%; bottom: -118vh;
+  width: 210vw; height: 140vh;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: radial-gradient(closest-side, transparent 96%, color-mix(in srgb, #8E7CFF 55%, transparent) 99%, transparent 100%);
+  box-shadow: 0 -40px 120px -30px color-mix(in srgb, #6F5CFF 45%, transparent), inset 0 40px 140px -40px color-mix(in srgb, #4E8BFF 35%, transparent);
+  opacity: .8;
+}
+html[data-theme="light"] .cover::before {
+  background:
+    radial-gradient(60% 55% at 78% 28%, color-mix(in srgb, #8B7CFF 20%, transparent) 0%, transparent 70%),
+    radial-gradient(45% 50% at 16% 72%, color-mix(in srgb, #4E8BFF 16%, transparent) 0%, transparent 72%),
+    radial-gradient(35% 40% at 92% 88%, color-mix(in srgb, var(--spark) 12%, transparent) 0%, transparent 70%);
+}
+html[data-theme="light"] .cover::after { opacity: .45; }
+@keyframes cover-breathe { from { transform: scale(1) translate3d(0, 0, 0); } to { transform: scale(1.06) translate3d(-1.5%, 1%, 0); } }
+@media (prefers-reduced-motion: reduce) { .cover::before { animation: none; } }
+.cover-band, .cover-stats { position: relative; }
+.cover-stats { background: color-mix(in srgb, var(--paper-2) 70%, transparent); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
+.cover-tiles i { border-color: color-mix(in srgb, var(--brand-tile) 26%, transparent); background: color-mix(in srgb, var(--brand-tile) 6%, transparent); }

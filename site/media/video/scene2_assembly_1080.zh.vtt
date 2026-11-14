@@ -1,0 +1,38 @@
+WEBVTT
+
+NOTE
+場景 2：人手組裝兩支中性筆與一個指尖陀螺。無聲影片，50.5 秒。
+各步的時間與 triple 抄自 site/data/sceneB_gt.json（video_steps）。
+
+00:00:00.000 --> 00:00:02.000
+組裝前：9 個零件分開放在桌上。G_0 有 9 個節點，沒有邊。
+
+00:00:02.000 --> 00:00:12.000
+t = 1  ⟨black ink refill, inserted into, pen barrel with black clip⟩
+手把黑色筆芯插進黑夾筆管。
+
+00:00:12.000 --> 00:00:20.000
+t = 2  ⟨black rubber front grip, screw, pen barrel with black clip⟩
+黑色橡膠握把旋上黑夾筆管。
+
+00:00:20.000 --> 00:00:26.000
+t = 3  ⟨purple ink refill, inserted into, pen barrel with red clip⟩
+紫色筆芯插進紅夾筆管。
+
+00:00:26.000 --> 00:00:34.500
+t = 4  ⟨red rubber front grip, screw, pen barrel with red clip⟩
+紅色橡膠握把旋上紅夾筆管。
+
+00:00:34.500 --> 00:00:36.000
+步驟之間：兩支筆都組好了，G_4 有 4 條邊。接著是陀螺。
+
+00:00:36.000 --> 00:00:41.000
+t = 5  ⟨stud cap, goes through, spinner body with bearing⟩
+stud cap 穿過帶軸承的陀螺本體。
+
+00:00:41.000 --> 00:00:47.500
+t = 6  ⟨threaded cap, screw, stud cap⟩
+threaded cap 旋上 stud cap。
+
+00:00:47.500 --> 00:00:50.500
+組好了：G_6 有 6 條邊。動手的是人，不是機器人。

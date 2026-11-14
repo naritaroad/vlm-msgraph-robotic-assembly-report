@@ -1,0 +1,1060 @@
+{
+ "ablation": {
+  "en": "A test that removes one piece of a system and measures the result again, to see what that piece contributes.",
+  "src": "Not a word in the paper; common usage. Table 2, p.7 is the only such test",
+  "zh": "把系統的一個部件拿掉、再量一次結果，看那個部件貢獻多少。"
+ },
+ "accuracy": {
+  "en": "The share of answers that are correct. The text says 'accuracy performance of approximately 60%', but the table header says Recall and no column is named.",
+  "name": "Accuracy",
+  "src": "§4.1, p.6 left",
+  "zh": "答案裡正確的比例。正文寫「accuracy performance of approximately 60%」，但表頭寫 Recall，也沒有指是哪一欄。"
+ },
+ "action-narrator": {
+  "en": "Stage-2 agent that reorders the assembly steps so that they start from the benchmark. Fig. 2 labels the same box Image narrator.",
+  "src": "§3.1, p.3 right; Eq. (3); prompt in Fig. 5 bottom middle, p.6",
+  "zh": "階段 2 的 agent：把組裝步驟重排成從基準開始。圖 2 把同一個框標成 Image narrator。"
+ },
+ "agent": {
+  "en": "Here: one call to a model with its own prompt and one fixed job, for example the Base Searcher. The paper does not say whether the calls share memory.",
+  "src": "Fig. 2, p.3; Fig. 5, p.6. Paper does not define; my reading",
+  "zh": "在這裡是指：帶著自己那份 prompt、只做一件固定工作的一次模型呼叫，例如 Base Searcher。這些呼叫之間有沒有共用記憶，論文沒寫。"
+ },
+ "analysis-agent": {
+  "en": "Stage-3 checker that compares the triples with the picture, the allowed relations and the part list, and corrects them. The paper shows three; their number, model and prompts are not stated.",
+  "src": "§3.1, p.4 left; Fig. 2, p.3",
+  "zh": "階段 3 的檢查者：拿 triple 去對圖、允許的關係詞和 part list，再修正。論文舉了三個；實際幾個、用什麼模型、prompt 是什麼，都沒寫。"
+ },
+ "annotation": {
+  "en": "Writing the answer labels for data. Here GPT-4o drafts the part names and relations, then human reviewers correct them. How many triples the humans changed is not stated.",
+  "name": "Annotation",
+  "src": "§4.1, p.5 right",
+  "zh": "替資料寫上答案標籤。這裡是 GPT-4o 先起稿零件名稱與關係，再由人檢查修改。人改了多少條，論文沒寫。"
+ },
+ "anygrasp": {
+  "en": "A released model that looks at an RGB-D view and proposes grasp poses for the objects in it.",
+  "src": "§2.3, p.2 right; p.5 left; [26]",
+  "zh": "現成的模型，看一張 RGB-D 畫面，替裡面的物體提出 grasp pose。"
+ },
+ "api": {
+  "en": "A way for one program to call another, here over the network. 'The API reported gpt-4o-2024-08-06' means the OpenAI service sent back that model version with its reply. The paper gives no version.",
+  "name": "API",
+  "zh": "一個程式呼叫另一個程式的方式，這裡是透過網路。「API 回報 gpt-4o-2024-08-06」是指 OpenAI 的服務在回覆裡附上了這個模型版本。論文沒有寫版本。"
+ },
+ "argument": {
+  "en": "An input listed inside the brackets of a function. In Nar_2(ν, ϱ, Prompt), ν, ϱ and Prompt are arguments; σ is not.",
+  "name": "Argument",
+  "src": "Eq. (3), p.3 right",
+  "zh": "寫在函數括號裡的輸入。Nar_2(ν, ϱ, Prompt) 裡的 ν、ϱ、Prompt 是引數，σ 不是。"
+ },
+ "assembled-state": {
+  "en": "The product put together. O_s are the pictures of the parts in this state; ζ_{i,s} is the target the disassembled parts are aligned to. Who assembled it and when is not stated.",
+  "name": "Assembled state",
+  "src": "§3.2, p.4 right",
+  "zh": "產品組好的樣子。O_s 是零件在這個狀態的影像；ζ_{i,s} 是拆開的零件要對齊的目標。誰組好的、什麼時候拍的，論文沒寫。"
+ },
+ "assembly-benchmark": {
+  "en": "The paper's word for the base: the part from which assembly starts, written σ. Fig. 2 and Fig. 5 also call it the base node.",
+  "src": "§3.1, p.3 right; Fig. 2, p.3; Fig. 5, p.6",
+  "zh": "論文對「基準」的用詞：組裝從它開始的那個零件，記成 σ。圖 2、圖 5 也叫它 base node。"
+ },
+ "assembly-drawing": {
+  "en": "A drawing that shows how the parts of a product go together, often an exploded view. Fig. 4 shows that some of the paper's drawings are coloured cut-away or rendered pictures, not line drawings.",
+  "name": "Assembly drawing",
+  "src": "§4.1, p.5 right; Fig. 4, p.5",
+  "zh": "畫出產品零件怎麼組起來的圖，常常是爆炸圖。圖 4 看得出論文的有些圖是彩色剖視或渲染圖，不是線圖。"
+ },
+ "assembly-drawing-dataset": {
+  "en": "The paper's own set of 127 assembly drawings, found by Google searches on key terms such as ball screws, bearings and springs. Per-class counts and licences are not stated; the data are 'available on request'.",
+  "name": "Assembly drawing dataset",
+  "src": "§4.1, p.5 right; Data availability, p.8 left",
+  "zh": "論文自己做的 127 張組裝圖，用 ball screws、bearings、springs 等關鍵詞在 Google 搜尋蒐集。每類張數和授權沒寫；資料是「available on request」。"
+ },
+ "assembly-sequence": {
+  "en": "The order in which the parts are put together. The method infers it from a picture and writes it as a list of triples. A reversed order can still work in real life, but the metric counts it as wrong (p.6 left).",
+  "name": "Assembly sequence",
+  "src": "§3, p.2 right; §3.1, p.2 right; §4.1, p.6 left",
+  "zh": "零件組起來的先後順序。這個方法從圖推出順序，寫成一串 triple。順序倒過來在現實中也可能行得通，但指標會算它錯（p.6 左欄）。"
+ },
+ "assembly-sequence-learning": {
+  "en": "The paper's name for its high-level method: three stages of prompted model calls that turn a picture into ordered triples. No weights are updated.",
+  "src": "§3.1, p.2 right; Fig. 2, p.3",
+  "zh": "論文替 high-level 方法取的名字：三個階段、帶 prompt 的模型呼叫，把一張圖變成有順序的 triple。沒有更新任何權重。"
+ },
+ "back-projection": {
+  "en": "Going from a pixel and its depth back to a 3D point. It is the reverse of projecting a 3D point onto the image.",
+  "src": "Eq. (4), p.4 right; the name is External",
+  "zh": "從一個 pixel 和它的深度回推出 3D 點。是把 3D 點投影到影像上的反方向。"
+ },
+ "base-searcher": {
+  "en": "Stage-2 agent that reads the stage-1 graph, produces paths through it, and names the assembly benchmark. Its equation carries the superscript LLM.",
+  "src": "§3.1, p.3 left to right; Eq. (2); prompt in Fig. 5 top middle, p.6",
+  "zh": "階段 2 的 agent：讀階段 1 的圖，產生圖上的路徑，指出 assembly benchmark。它的式子上標是 LLM。"
+ },
+ "baseline": {
+  "en": "A reference method to compare against. Table 1 has none: its four rows are four models inside the same method.",
+  "name": "Baseline",
+  "src": "Table 1, p.6",
+  "zh": "拿來比較的參考方法。表 1 沒有：四列是同一個方法裡的四個模型。"
+ },
+ "binomial-coefficient": {
+  "en": "'n choose k': the number of ways to pick k items out of n. It is used in Fisher's exact test and in the Clopper–Pearson interval. For example C(20, 7) = 77520.",
+  "name": "Binomial coefficient",
+  "zh": "「n 取 k」：從 n 個裡挑 k 個有幾種挑法。Fisher's exact test 和 Clopper–Pearson 區間都會用到。例如 C(20, 7) = 77520。"
+ },
+ "bounding-box": {
+  "en": "A rectangle around a detected object, given by four pixel numbers: left, top, right, bottom.",
+  "src": "§3.2, p.4 left; External for the four-number format",
+  "zh": "圍住被偵測物體的矩形，用四個 pixel 座標表示：左、上、右、下。"
+ },
+ "breadth-first-search": {
+  "en": "A search that tries all moves one step away, then all moves two steps away, and so on. The paper uses it to plan a path from the disassembled state to the assembled state in the simulator.",
+  "name": "Breadth-first search (BFS)",
+  "src": "§4.1, p.6 right to p.7 left; reference [34]",
+  "zh": "一種搜尋法：先試所有走一步能到的位置，再試走兩步的，依此類推。論文用它在模擬器裡找從拆開狀態到組好狀態的路徑。"
+ },
+ "calibration": {
+  "en": "Measuring the fixed numbers of a camera setup: the intrinsic matrix K, and where the camera sits on the arm. Hand-eye calibration is one kind. The paper gives no method or error for any of them.",
+  "name": "Camera calibration",
+  "src": "§3.2, p.5 left",
+  "zh": "量出相機配置裡固定不變的數：內參矩陣 K，以及相機裝在手臂的哪裡。hand-eye calibration 是其中一種。論文對這些都沒有給方法或誤差。"
+ },
+ "camera-pose": {
+  "en": "Where the camera is and how it is turned, as a 4×4 matrix that maps camera coordinates to a common frame. Also called the extrinsics. The paper writes it Γ_t and does not say how it is obtained.",
+  "src": "Eq. (5), p.4 right",
+  "zh": "相機在哪、朝哪，寫成 4×4 矩陣，把相機座標換到共同座標。也叫 extrinsics。論文寫成 Γ_t，沒有說怎麼得到。"
+ },
+ "camera-view": {
+  "en": "One image taken from one camera position. Several views show several sides of a part. The paper uses k views and does not give k (audit A21).",
+  "name": "Camera view",
+  "src": "§3.2, p.4 right",
+  "zh": "從一個相機位置拍的一張影像。多個視角看得到零件的多個面。論文用 k 個視角，沒有給 k 的值（audit A21）。"
+ },
+ "cartesian-space": {
+  "en": "Ordinary 3D space with x, y, z axes at right angles. The paper writes the gripper movement [dx, dy, dz] 'in Cartesian space'. The other way to describe the arm is by joint angles.",
+  "name": "Cartesian space",
+  "src": "§3.2, p.5 left",
+  "zh": "一般的 3D 空間，x、y、z 三軸互相垂直。論文把夾爪位移 [dx, dy, dz] 寫成「in Cartesian space」。描述手臂的另一種方式是用關節角。"
+ },
+ "centroid": {
+  "en": "The mean position of all points in a cloud: add the points and divide by how many there are.",
+  "src": "§3.2, p.4 right; Fig. 3 (the formula is External)",
+  "zh": "一團點雲所有點的平均位置：把點加起來，除以點數。"
+ },
+ "chain-of-thought": {
+  "en": "In [21]: asking a model to write its reasoning step by step before the answer. In this paper the word goes with three stages run one after another.",
+  "src": "§2.2, p.2 left, citing [21]; §3.1, p.2 right. Paper does not define",
+  "zh": "在 [21] 裡：要模型先一步一步寫出推理，再給答案。這篇論文裡，對應這個詞的是三個階段前後串接。"
+ },
+ "clopper-pearson": {
+  "en": "An exact way to build a confidence interval for a success rate from k successes in n trials, using the binomial distribution. We compute it from Table 3 (Derived). It is not in the paper.",
+  "name": "Clopper–Pearson",
+  "zh": "從 n 次裡 k 次成功，用二項分配精確算出成功率信賴區間的方法。我們用表 3 的次數算（Derived）。論文沒有。"
+ },
+ "closed-loop-control": {
+  "en": "Control that measures the result while moving and corrects the error. The authors list it as future work; the reported run does not describe such a correction.",
+  "src": "§5, p.8 left",
+  "zh": "邊動邊量結果、再修正誤差的控制方式。作者把它列為未來工作；論文報告的執行沒有描述這種修正。"
+ },
+ "collision-free": {
+  "en": "A grasp where the gripper does not hit other objects. The paper says AnyGrasp generates 'collision-free grasp poses'; its source [26] says obstacle-aware, which is weaker (our citation check).",
+  "name": "Collision-free grasp",
+  "src": "§3.2, p.5 left; reference [26]",
+  "zh": "夾爪不會撞到其他東西的夾法。論文說 AnyGrasp 產生「collision-free grasp poses」；它的來源 [26] 寫的是 obstacle-aware，比較弱（我們的引用核對）。"
+ },
+ "confidence-interval": {
+  "en": "A range of true success rates that still fit the count we observed. The 95% Clopper–Pearson interval used here is exact for k successes in n independent trials. It is not in the paper.",
+  "src": "External (Clopper–Pearson); numbers Derived from Table 3, p.7",
+  "zh": "和觀察到的次數還說得通的真實成功率範圍。這裡用的 95% Clopper–Pearson 區間，對「n 次獨立試驗中 k 次成功」是精確的。論文裡沒有。"
+ },
+ "convergence": {
+  "en": "An iterative method has converged when another round no longer changes the result much. The paper says ICP runs 'until convergence' and gives no threshold or round limit (audit A21). Our lab stops after at most 30 rounds or when it reports converged (Demo).",
+  "name": "Convergence",
+  "src": "§3.2, p.4 right",
+  "zh": "迭代的方法再多跑一輪也幾乎不再改變結果，就叫收斂。論文說 ICP 跑到「until convergence」，沒有給門檻或輪數上限（audit A21）。我們的實驗室最多跑 30 輪，或回報 converged 就停（Demo）。"
+ },
+ "coordinate-frame": {
+  "en": "A set of axes with an origin, used to write positions. One point has different numbers in the camera frame, the robot base frame and a shared world frame. Eq. (5) moves points into one common frame; the paper does not say which (audit A22).",
+  "name": "Coordinate frame",
+  "src": "§3.2, p.4 right ('common reference coordinate system'); p.5 left ('world-coordinate')",
+  "zh": "一組座標軸加原點，用來寫位置。同一個點在相機座標、機器人底座座標、共同的世界座標裡數字都不同。式 (5) 把點搬進同一個共同座標；是哪一個，論文沒有說（audit A22）。"
+ },
+ "degrees-of-freedom": {
+  "en": "The number of independent ways something can move. A free rigid body has 3 for position and 3 for rotation. The paper says the simulator's action space has six translational and six rotational degrees of freedom (wording taken from [34]), and calls AnyGrasp's output 7-DoF.",
+  "name": "Degrees of freedom (DoF)",
+  "src": "§2.3, p.2 right; §4.1, p.7 left (top)",
+  "zh": "物體能獨立動的方式有幾種。一個自由的剛體有 3 個位置、3 個旋轉。論文說模擬器的動作空間有六個平移、六個旋轉自由度（說法沿用 [34]），並說 AnyGrasp 輸出 7-DoF。"
+ },
+ "depth-camera": {
+  "en": "A camera that gives a distance for every pixel as well as colour. The paper's RGB-D camera is one. Our phone has none, so Eq. (4) onward could not be run on our photos.",
+  "name": "Depth camera",
+  "src": "§3.2, p.4 left; §4.2, p.7 left",
+  "zh": "除了顏色，還給每個 pixel 一個距離的相機。論文的 RGB-D 相機就是。我們的手機沒有，所以式 (4) 以後沒辦法在我們的照片上算。"
+ },
+ "depth-map": {
+  "en": "An image with one number per pixel: the distance from the camera to the surface seen at that pixel. The paper writes it I_depth, of size h×w, and gives no unit.",
+  "src": "§3.2, p.4 left",
+  "zh": "每個 pixel 存一個數的影像：相機到那個 pixel 看到的表面有多遠。論文寫成 I_depth，大小 h×w，沒有寫單位。"
+ },
+ "diffredmax": {
+  "en": "A physics simulator for rigid bodies that can also give gradients. The paper uses it to run the plans of five products (Table 2). It cites [33], which is released with it, but the name is not in [33]'s text (our citation note). We did not run it.",
+  "name": "DiffRedMax",
+  "src": "§4.1, p.6 right; reference [33]",
+  "zh": "模擬剛體的物理模擬器，也能算梯度。論文用它跑五件產品的計劃（表 2）。引用 [33]，那是跟它一起公開的論文，但名字不在 [33] 的正文裡（我們的引用筆記）。我們沒有跑它。"
+ },
+ "disassembled-state": {
+  "en": "The parts lying apart, before assembly. O_dis are the pictures in this state; ζ_{i,dis} is the cloud that gets moved onto the assembled one.",
+  "name": "Disassembled state",
+  "src": "§3.2, p.4 right",
+  "zh": "零件散開、還沒組的樣子。O_dis 是這個狀態的影像；ζ_{i,dis} 是要被搬到組好那一團上的點雲。"
+ },
+ "domain-knowledge": {
+  "en": "Facts that belong to one field, here manufacturing and assembly. The paper says VLMs lack it, and its agents and part list are meant to supply it.",
+  "name": "Domain knowledge",
+  "src": "§1, p.1 right; §3.1, p.2 right",
+  "zh": "屬於某個領域的知識，這裡指製造和組裝。論文說 VLM 缺少這種知識，多個 agent 和 part list 就是要補上。"
+ },
+ "edge": {
+  "en": "An arrow between two nodes. In the high-level graph an edge is the action predicate between two objects at a time step.",
+  "src": "p.4 left",
+  "zh": "兩個 node 之間的一條箭頭。在 high-level 的圖裡，edge 是某個時間步、兩個物體之間的動作 predicate。"
+ },
+ "end-effector": {
+  "en": "The last link of a robot arm, where the tool is mounted. In the paper it carries the gripper and the RGB-D camera.",
+  "src": "§3.2, p.4 left",
+  "zh": "機器手臂最末端、裝工具的那一節。論文裡它帶著夾爪和 RGB-D 相機。"
+ },
+ "euler-angles": {
+  "en": "Three angles that describe an orientation as three turns about axes, one after another. The order of the axes changes the result; the paper does not state the order.",
+  "src": "§3.2, p.5 left (the name); the definition is External",
+  "zh": "用三個角描述朝向：依序繞三個軸各轉一次。軸的順序不同，結果就不同；論文沒有寫順序。"
+ },
+ "f1": {
+  "en": "The harmonic mean of precision and recall: one number that drops when either one is low. The paper reports neither precision nor F1.",
+  "name": "F1 score",
+  "zh": "precision 和 recall 的調和平均：任何一個低，這個數就跟著降。論文沒有報 precision，也沒有報 F1。"
+ },
+ "few-shot": {
+  "en": "Doing a task after seeing a few worked examples, usually placed inside the prompt.",
+  "src": "§1, p.1 (“few-shot reasoning”, citing [6]). Paper does not define; common usage",
+  "zh": "先看幾個做好的例子再做任務，例子通常直接放在 prompt 裡。"
+ },
+ "fisher-exact-test": {
+  "en": "A test for two groups with success and failure counts. It gives the probability of a gap at least as large as the one seen, if the two groups really had the same success rate.",
+  "src": "Not in the paper; our calculation from Table 2, p.7",
+  "zh": "比較兩組「成功、失敗次數」的檢定。它算的是：假如兩組的成功率其實一樣，差距至少像觀察到的這麼大的機率。"
+ },
+ "fitness": {
+  "en": "In an Open3D ICP result: the share of source points that have a partner within the distance limit. 1.0 means every point has one. Not in the paper.",
+  "name": "Fitness (Open3D)",
+  "zh": "Open3D 的 ICP 結果裡：移動那團點雲中，在距離上限內找得到對應點的比例。1.0 表示每一點都找得到。論文沒有。"
+ },
+ "focal-length": {
+  "en": "How strongly a lens zooms. In K it is written in pixels as f_x and f_y: a larger value means a narrower field of view. The paper prints no value.",
+  "name": "Focal length",
+  "zh": "鏡頭拉近的程度。在 K 裡以 pixel 為單位寫成 f_x、f_y：數值越大，視野越窄。論文沒有印數值。"
+ },
+ "frustum": {
+  "en": "The pyramid-shaped volume that a camera can see. Our lab draws it as lines so you can see what the wrist camera covers.",
+  "name": "Viewing frustum",
+  "zh": "相機看得到的那個角錐形空間。我們的實驗室把它畫成線，看得出腕部相機涵蓋哪裡。"
+ },
+ "function": {
+  "en": "A rule that takes inputs and gives one output. Eq. (1) writes the Narrator as one function: picture, part list and prompt in, text out.",
+  "name": "Function",
+  "src": "Eq. (1), p.3 left",
+  "zh": "一條規則：吃進輸入，給出一個輸出。式 (1) 把 Narrator 寫成一個函數：進圖、part list、prompt，出文字。"
+ },
+ "gear": {
+  "en": "A wheel with teeth that fit into the teeth of another wheel. The lab test uses red large, green medium, yellow medium and blue large gears (Table 3).",
+  "name": "Gear",
+  "src": "§4.2, p.7 left to right; Table 3",
+  "zh": "有齒、能和另一個輪的齒咬合的輪子。真機實驗用紅色大、綠色中、黃色中、藍色大四個齒輪（表 3）。"
+ },
+ "gearbox": {
+  "en": "A housing with gears that changes speed and force. The paper's real test assembles part of one: five steps put red, green, yellow and blue gears and a white nut onto a white cover.",
+  "name": "Gearbox",
+  "src": "§4.2, p.7 left",
+  "zh": "裡面有齒輪、用來改變轉速和力量的機構。論文的真機實驗組一個部分齒輪箱：五步把紅、綠、黃、藍齒輪和一顆白色螺帽裝到白色蓋板上。"
+ },
+ "gemma3": {
+  "en": "A small open-weight language model from Google with about 4 billion parameters; '4b' is the size tag. We ran it on this computer to write plans for the 3D lab (Local run). The paper does not use it.",
+  "name": "gemma3:4b",
+  "zh": "Google 的小型開放權重語言模型，約 40 億個參數，4b 是尺寸標記。我們在這台電腦上跑它，替 3D 實驗室寫計劃（Local run）。論文沒有用它。"
+ },
+ "generalization": {
+  "en": "How well a method works on cases it was not built for. The paper uses both words without a definition or a number. In §4.2 it says five text prompts 'demonstrate' it for perception.",
+  "name": "Generalization and transferability",
+  "src": "Abstract, p.1; §1; §4.2, p.7 right",
+  "zh": "方法在沒針對過的情況下還能不能用。論文兩個詞都用，沒有定義，也沒有數字。§4.2 說五句文字提示「demonstrate」了感知上的這件事。"
+ },
+ "gpt-4o": {
+  "en": "A model from OpenAI that accepts pictures and text. In §3 it is named for one role only: the two stage-1 Narrators are “based on GPT-4o” (p.3 left). §4.1 compares GPT-4o, GPT-4omini and Llama models as “VLM agents” without saying which agent each one played.",
+  "src": "p.3 left (“based on GPT-4o”); Table 1, p.6. No reference entry for GPT-4o in the paper",
+  "zh": "OpenAI 的模型，圖和文字都能輸入。§3 只替一個角色寫了這個模型名：階段 1 的兩個 Narrator「based on GPT-4o」（p.3 左欄）。§4.1 把 GPT-4o、GPT-4omini 和 Llama 系列都叫「VLM agents」來比較，沒有說各自扮演哪個 agent。"
+ },
+ "gpt-4o-mini": {
+  "en": "A smaller and cheaper OpenAI model than GPT-4o. Table 1 prints it as GPT-4omini and gives no version. We also ran it in our own tests (Local run).",
+  "name": "GPT-4o-mini",
+  "src": "§4.1, p.5 right; Table 1, p.6",
+  "zh": "OpenAI 比 GPT-4o 小、比較便宜的模型。表 1 印成 GPT-4omini，沒有寫版本。我們自己的測試也跑了它（Local run）。"
+ },
+ "grasp-pose": {
+  "en": "Where the gripper should be and which way it should point in order to hold a part: a position plus an orientation.",
+  "src": "§3.2, p.5 left",
+  "zh": "夾爪要夾住零件時該在哪裡、朝哪個方向：一個位置加一個朝向。"
+ },
+ "gripper": {
+  "en": "The hand at the end of the arm: two fingers close to hold a part. The gripper movement is [dx, dy, dz], its rotation is [rx, ry, rz], and s_t says open or closed. The paper does not name the gripper model.",
+  "name": "Gripper",
+  "src": "§3.2, p.5 left",
+  "zh": "手臂末端的手：兩根指頭合起來夾住零件。夾爪的位移是 [dx, dy, dz]，轉向是 [rx, ry, rz]，s_t 表示開或合。論文沒有寫夾爪型號。"
+ },
+ "ground-truth": {
+  "en": "The answer key: the triples that count as correct, written by people. In the paper it is drafted by GPT-4o and then corrected by human reviewers.",
+  "src": "§4.1, p.5 right; Fig. 6, p.6. Ours: site/data/sceneB_gt.json",
+  "zh": "標準答案：算正確的那些 triple，由人寫定。論文的做法是 GPT-4o 先起稿，再由人修改。"
+ },
+ "grounding-dino": {
+  "en": "A released detector: you give it a picture and a few words, and it returns a box around each thing that matches the words.",
+  "src": "§3.2, p.4 left; [30]",
+  "zh": "現成的偵測模型：給它一張圖和幾個字，它把符合那幾個字的東西各框出來。"
+ },
+ "hallucination": {
+  "en": "Content a model states that is not supported by its input, for example a part that is not in the picture. The paper says VLMs produce such content but does not measure it.",
+  "src": "§1, p.1 right; §3.1, p.2 right. Paper does not define; common usage",
+  "zh": "模型說出輸入裡沒有根據的內容，例如圖上沒有的零件。論文說 VLM 會產生這種內容，但沒有量過。"
+ },
+ "hand-eye-calibration": {
+  "en": "A one-time measurement of the fixed transform between a camera and the robot. With the camera on the arm, it gives camera to end-effector. The paper says it gives camera to robot base and names no method.",
+  "src": "§3.2, p.5 left; the eye-in-hand remark is External",
+  "zh": "事先量一次相機和機器人之間固定的轉換。相機裝在手臂上時，量到的是相機到 end-effector。論文說它給出相機到機器人底座，沒有寫用什麼方法。"
+ },
+ "hat-notation": {
+  "en": "A ^ over a letter. In common use it marks an estimate or a predicted value. The paper does not explain the hat on ŝ_i, p̂_i and ô_i.",
+  "name": "Hat notation",
+  "src": "Eq. (1), p.3 left; the paper does not explain it",
+  "zh": "字母上面的 ^。一般用法是「估計出來的」或「預測的」。論文沒有解釋 ŝ_i、p̂_i、ô_i 的帽子。"
+ },
+ "hexagonal-nut": {
+  "en": "A nut with six flat sides that screws onto a bolt. The last step of the real test puts a white tiny hexagonal nut onto the blue large gear.",
+  "name": "Hexagonal nut",
+  "src": "§4.2, p.7 right; Table 3; Fig. 7",
+  "zh": "有六個平面、會旋進螺栓的螺帽。真機實驗最後一步把白色小六角螺帽裝到藍色大齒輪上。"
+ },
+ "high-level-planning": {
+  "en": "The upper layer of the MSGraph: the ordered triples that say which part is attached to which, step by step. The paper also writes high-level planning. It is text only, with no 3D data.",
+  "name": "High-level task planning",
+  "src": "Abstract, p.1; §3, p.2 right; §3.1, p.4 left",
+  "zh": "MSGraph 的上層：一串有順序的 triple，寫出每一步哪個零件接到哪個零件。論文也寫成 high-level planning。它只有文字，沒有 3D 資料。"
+ },
+ "hit": {
+  "en": "A predicted triple that matches an answer triple at the chosen match level. Recall is hits divided by the number of answers. Extra wrong triples are not hits and are not penalised.",
+  "name": "Hit",
+  "src": "§4.1, p.6 left; the count formula is Derived",
+  "zh": "預測的 triple 在選定的比對層級上和某條答案對上，就是一次命中。Recall 是命中數除以答案條數。多寫的錯 triple 不是命中，也不扣分。"
+ },
+ "homogeneous-coordinates": {
+  "en": "A point written with one extra number, usually 1: a pixel becomes [u, v, 1], a 3D point becomes [x, y, z, 1]. Then one matrix can rotate and shift it.",
+  "src": "External; the paper uses the word at Eq. (4) and Eq. (5), p.4 right",
+  "zh": "多帶一個數（通常是 1）來寫一個點：pixel 變成 [u, v, 1]，3D 點變成 [x, y, z, 1]。這樣一個矩陣就能同時旋轉和平移。"
+ },
+ "hook-marks": {
+  "en": "The coloured ticks beside each predicted line in Fig. 6. By the text: purple means a different relation word, green means subject and object swapped, gray means a reversed order. Cyan is not named. In the figure the green ticks sit on exact matches, which the text does not say.",
+  "name": "Hook marks of Fig. 6",
+  "src": "§4.1, p.6 left; Fig. 6, p.6",
+  "zh": "圖 6 每條預測旁邊的彩色勾。依正文：紫色是關係詞不同，綠色是主詞與受詞弄混，灰色是順序相反；青色沒有說明。圖上的綠勾卻落在完全相符的列，正文沒有這樣寫。"
+ },
+ "icp": {
+  "en": "Iterative Closest Point: a method that moves one point cloud step by step until it lies on another, and returns the rotation and translation it used.",
+  "src": "§3.2, p.4 right; [32]",
+  "zh": "Iterative Closest Point：把一團點雲一步一步挪到和另一團疊在一起的方法，回傳用掉的旋轉與平移。"
+ },
+ "image-centre": {
+  "en": "The pixel where the optical axis meets the image: c_x and c_y in K. It is near the middle of the picture but not exactly at it.",
+  "name": "Principal point (image centre)",
+  "zh": "光軸穿過影像的那個 pixel，也就是 K 裡的 c_x、c_y。它在影像中間附近，但不一定剛好在正中。"
+ },
+ "image-narrator": {
+  "en": "Stage-1 agent that describes the assembly steps, with words such as attach to, screw, go through, wrap.",
+  "src": "§3.1, p.2 right; prompt in Fig. 5 top left, p.6",
+  "zh": "階段 1 的 agent，寫組裝步驟，用 attach to、screw、go through、wrap 這類詞。"
+ },
+ "implication-arrow": {
+  "en": "⟹ reads 'implies'. Eq. (2) uses it where the paper seems to mean 'produces': the Base Searcher produces a chain of objects. The paper does not define it.",
+  "name": "Implication arrow (⟹)",
+  "src": "Eq. (2), p.3 right",
+  "zh": "⟹ 讀作「蘊涵」。式 (2) 用在論文似乎想說「產生」的地方：Base Searcher 產生一串物體。論文沒有定義它。"
+ },
+ "inference": {
+  "en": "Running an already trained model on new input to get its output. The paper says VLMs produce wrong content 'during inference processes' for manufacturing tasks.",
+  "name": "Inference",
+  "src": "§1, p.1 right",
+  "zh": "拿訓練好的模型處理新的輸入、得到輸出。論文說 VLM 在製造任務的 inference processes 裡會產生錯的內容。"
+ },
+ "interpretability": {
+  "en": "How easily a person can see why a system gave its result. The paper says the Analysis agents 'enhance the interpretability'. It reports no test of this.",
+  "name": "Interpretability",
+  "src": "§3.1, p.4 left",
+  "zh": "一個人多容易看懂系統為什麼給出這個結果。論文說 Analysis agent「enhance the interpretability」，沒有報任何檢驗。"
+ },
+ "intrinsic-matrix": {
+  "en": "The 3×3 matrix K of a camera: focal lengths f_x, f_y and image centre c_x, c_y, all in pixels. It maps a 3D point in the camera frame to a pixel. The paper uses K and prints no values.",
+  "src": "External (pinhole camera model); K is named in §3.2, p.4 right",
+  "zh": "相機的 3×3 矩陣 K：焦距 f_x、f_y 與影像中心 c_x、c_y，單位都是 pixel。它把相機座標裡的 3D 點對到 pixel。論文用了 K，沒有印數值。"
+ },
+ "inverse-dynamics": {
+  "en": "Given a motion of the joints, find the torques that produce it. The paper says its trajectories are generated through inverse dynamics and gives no further detail.",
+  "src": "§3.2, p.5 left (the phrase); the definition is External",
+  "zh": "給定關節的運動，求出產生這個運動的力矩。論文說軌跡由 inverse dynamics 產生，沒有再多寫。"
+ },
+ "inverse-kinematics": {
+  "en": "Given a target pose of the gripper, find the joint angles that reach it. The lab uses a damped least-squares solver.",
+  "src": "External; lab: docs/lab.md §4 (Demo)",
+  "zh": "給定夾爪的目標姿態，求出到得了的關節角。實驗室用阻尼最小平方法解。"
+ },
+ "joint-angle": {
+  "en": "The angle of one joint of the arm. xARM6 has six, so the arm's pose is six numbers. Inverse kinematics finds them from a target gripper pose. The paper prints no joint angles; our 3D lab computes them (Demo).",
+  "name": "Joint angle",
+  "zh": "手臂某一個關節的角度。xARM6 有六個，所以手臂的姿態是六個數。inverse kinematics 從目標夾爪姿態求出它們。論文沒有印關節角；我們的 3D 實驗室會算（Demo）。"
+ },
+ "label": {
+  "en": "The text name of a detected thing, such as 'hexagonal nut'. The paper's c_i holds the label and the box together. Labels are matched to the nodes of the high-level graph by their text.",
+  "name": "Label",
+  "src": "§3.2, p.4 left",
+  "zh": "偵測到的東西的文字名稱，例如 hexagonal nut。論文的 c_i 把標籤和框裝在一起。標籤靠文字對回高層圖的 node。"
+ },
+ "llama-adapter": {
+  "en": "The second image reader in Table 1. A published method of this name (LLaMA-Adapter V2) adds small trained layers to a LLaMA model so it can follow instructions about images. The paper gives no reference or version and writes both Llama-adapter and Llama-adapter2.",
+  "name": "Llama-adapter2",
+  "src": "§4.1, p.5 right; Table 1, p.6",
+  "zh": "表 1 的第二個讀圖模型。有一個公開的方法叫這個名字（LLaMA-Adapter V2），在 LLaMA 模型上加小的訓練層，讓它能依指示處理影像。論文沒有給書目或版本，並且 Llama-adapter 與 Llama-adapter2 兩種寫法都出現。"
+ },
+ "llama3-1": {
+  "en": "A text-only language model from Meta with open weights. It is one of the compared agents. Because it cannot read images, Llama3V or Llama-adapter2 first pulls language out of the picture. Version and size are not stated.",
+  "name": "Llama3.1",
+  "src": "§4.1, p.5 right; Table 1, p.6",
+  "zh": "Meta 的純文字語言模型，權重公開。它是被比較的 agent 之一。因為它讀不了影像，要先由 Llama3V 或 Llama-adapter2 從圖中取出語言。版本和大小論文沒寫。"
+ },
+ "llama3v": {
+  "en": "The paper does not say what Llama3V is: no reference, version or size. It reads the picture and hands language to Llama3.1, which takes text only.",
+  "name": "Llama3V",
+  "src": "§4.1, p.5 right; Table 1, p.6",
+  "zh": "論文沒有說 Llama3V 是什麼：沒有書目、版本、大小。它讀圖，把語言資訊交給只收文字的 Llama3.1。"
+ },
+ "llm": {
+  "en": "Large language model: a model that takes text and answers in text. In this paper, the superscript LLM appears on the Base Searcher, whose inputs contain no picture.",
+  "src": "Eq. (2), p.3 right; Fig. 1, p.3. Paper does not define; common usage",
+  "zh": "Large language model：輸入文字、輸出文字的模型。這篇論文裡，上標 LLM 出現在 Base Searcher，它的輸入沒有圖。"
+ },
+ "loss": {
+  "en": "In training, the number that measures how wrong the model is; training changes the weights W to make it smaller. This paper has none.",
+  "src": "Paper does not use the term; common usage",
+  "zh": "訓練時用來量模型錯多少的那個數；訓練就是調整權重 W 讓它變小。這篇論文沒有 loss。"
+ },
+ "low-level-memory": {
+  "en": "The lower layer of the MSGraph. For each part it keeps a 3D object instance (point cloud, label with box, mask) and the rotation and translation between the disassembled and assembled states.",
+  "name": "Low-level memory",
+  "src": "Abstract, p.1; §3, p.2 right; §3.2, p.4 right; §5, p.8 left",
+  "zh": "MSGraph 的下層。每個零件存一個 3D object instance（點雲、標籤與框、mask），以及拆開和組好兩個狀態之間的旋轉與平移。"
+ },
+ "manipulation": {
+  "en": "Picking and placing: AnyGrasp proposes grasp poses, the pose stored in memory says where the part goes, and Eq. (7) gives the waypoints of the move.",
+  "name": "Manipulation",
+  "src": "§3.2, p.5; Fig. 3, p.4",
+  "zh": "拿起與放下：AnyGrasp 提出夾取姿態，記憶裡存的位姿說明零件要放哪裡，式 (7) 給出移動的路點。"
+ },
+ "mask": {
+  "en": "The set of pixels in an image that belong to one object.",
+  "src": "§3.2, p.4 left (m_i)",
+  "zh": "影像上屬於某一個物體的那些像素。"
+ },
+ "match-level": {
+  "en": "How much of a triple must be equal to count as a hit. @Triple: the whole triple. @Pair: the two objects. @Action: the objects and the relation. The paper gives these names in text; the exact keys on this page are my reading.",
+  "src": "§4.1, p.6 left",
+  "zh": "triple 要對到什麼程度才算命中。@Triple：整條。@Pair：兩個物體。@Action：物體加關係。論文只用文字給了這三個名字；這一頁寫的 key 是我的讀法。"
+ },
+ "matrix": {
+  "en": "A grid of numbers with rows and columns. A 3×3 matrix can turn a 3D point; a 4×4 matrix can also shift it.",
+  "name": "Matrix",
+  "zh": "有列有行的一格一格的數。3×3 的矩陣可以轉動 3D 的點；4×4 的矩陣還能平移它。"
+ },
+ "mean-recall": {
+  "en": "mR: the paper says it averages R over tasks and does not say what a task is. Scene-graph papers usually mean the average over predicate classes by mR@K; whether this paper does the same is not stated.",
+  "src": "§4.1, p.5 right – p.6 left",
+  "zh": "mR：論文說是對任務取 R 的平均，沒有說任務是什麼。scene graph 論文裡的 mR@K 通常是對 predicate 類別取平均；這篇是不是同一種，論文沒寫。"
+ },
+ "meshing": {
+  "en": "Two gears mesh when their teeth fit into each other, so turning one turns the other. 'meshed with' is one of the ten relation words of Fig. 5. Our lab turns the red gear to check the meshing.",
+  "name": "Meshing (gears)",
+  "src": "Fig. 5 (top right), p.6",
+  "zh": "兩個齒輪的齒互相卡進去，轉一個另一個就跟著轉，叫咬合。meshed with 是圖 5 十個關係詞之一。我們的實驗室轉動紅齒輪來檢查咬合。"
+ },
+ "minimisation": {
+  "en": "Finding the unknowns that make a function as small as possible. The only minimisation in the paper is inside ICP: R and T that make the summed squared distance smallest. The objective comes from [32] and is not printed.",
+  "name": "Minimisation (min)",
+  "src": "§3.2, p.4 right; the objective is External [32]",
+  "zh": "找出讓某個函數最小的未知數。全文唯一的最小化在 ICP 裡：找出讓距離平方總和最小的 R 與 T。目標式出自 [32]，論文沒有印。"
+ },
+ "mobile-base": {
+  "en": "A wheeled platform that carries the arm. The paper names an Agilex Ranger Mini 3; whether it moved during the five steps is not stated.",
+  "src": "§4.2, p.7 left",
+  "zh": "載著手臂的輪式平台。論文寫的是 Agilex Ranger Mini 3；五步裡它有沒有移動，論文沒寫。"
+ },
+ "msgraph": {
+  "en": "Multi-hierarchical Scene Graph, the paper's name for its two levels: a high-level graph of assembly steps and a low-level memory of 3D parts.",
+  "src": "§1, p.1 right; §3, p.2 right; p.4 left",
+  "zh": "Multi-hierarchical Scene Graph，論文給兩層結構取的名字：high-level 是組裝步驟的圖，low-level 是零件的 3D 記憶。"
+ },
+ "narrator": {
+  "en": "A model call that writes text about the picture. Stage 1 has two (Relation Narrator, Image Narrator). Stage 2 has the Action Narrator.",
+  "name": "Narrator",
+  "src": "§3.1, p.2 right to p.3 right",
+  "zh": "寫出圖片描述文字的一次模型呼叫。階段 1 有兩個（Relation Narrator、Image Narrator），階段 2 有 Action Narrator。"
+ },
+ "nearest-point": {
+  "en": "The first half of an ICP round: for every point of the moving cloud, find the closest point of the other cloud. With these pairs fixed, R and T are solved. The paper does not describe the steps.",
+  "name": "Nearest-point matching",
+  "zh": "ICP 一輪的前半：替移動的那團點雲的每一點，找另一團裡離它最近的點。配對固定後再解 R 與 T。論文沒有描述這些步驟。"
+ },
+ "node": {
+  "en": "A dot in the graph. In the high-level graph one node is one object named in the triples.",
+  "src": "p.4 left",
+  "zh": "圖上的一個點。在 high-level 的圖裡，一個 node 是 triple 裡出現的一個物體。"
+ },
+ "noise": {
+  "en": "Random error in a measurement. Real depth cameras give noisy depth. The paper does not mention noise; our lab adds Gaussian noise to depth to show what it does (Demo).",
+  "name": "Noise",
+  "zh": "量測裡的隨機誤差。真的深度相機給的深度有雜訊。論文沒有提到雜訊；我們的實驗室替深度加高斯雜訊，看它造成什麼（Demo）。"
+ },
+ "object": {
+  "en": "Third slot of a triple: the part that the subject is joined onto. §4.2 calls it the target object; Fig. 5 calls it Tail Entity.",
+  "src": "p.3 left; p.7 right; Fig. 5, p.6",
+  "zh": "triple 的第 3 格：subject 要接上去的那個零件。§4.2 叫 target object，圖 5 叫 Tail Entity。"
+ },
+ "object-detection": {
+  "en": "Finding objects in an image and drawing a box around each. In the paper Grounding DINO 'detects and identifies objects in images based on text prompts' and returns labels and boxes.",
+  "name": "Object detection",
+  "src": "§3.2, p.4 left",
+  "zh": "在影像裡找出物體，並在每個物體外畫框。論文裡 Grounding DINO「detects and identifies objects in images based on text prompts」，輸出標籤和框。"
+ },
+ "object-instance": {
+  "en": "One part found in the scene, stored as ζ_i = {p_i, c_i, m_i}: its 3D point cloud, its label with box, and its mask. It is a node of the low-level graph. Table 3 counts how often it was produced accurately.",
+  "name": "3D object instance",
+  "src": "§3.2, p.4 right; Table 3, p.7",
+  "zh": "場景裡找出來的一個零件，存成 ζ_i = {p_i, c_i, m_i}：它的 3D 點雲、標籤與框、mask。是低層圖的 node。表 3 數的就是它被準確做出來幾次。"
+ },
+ "open-loop": {
+  "en": "The robot carries out planned moves without measuring the result and correcting. The paper does not use the word. It lists closed-loop control as future work, so we read the reported run as open loop.",
+  "name": "Open-loop control",
+  "src": "§5, p.8 left (future work); the word is ours",
+  "zh": "機器人照計劃的動作執行，不量結果也不修正。論文沒有用這個詞。它把 closed-loop control 列為未來工作，所以我們把報告的那次執行讀成開迴路。"
+ },
+ "open-vocabulary-detection": {
+  "en": "Detection where the classes are given as words at run time, so the detector need not be retrained for new part names.",
+  "src": "§3.2, p.4 left; p.7 left. Paper does not define; common usage, see [30]",
+  "zh": "類別在執行時用文字給定的偵測方式，換了新的零件名稱也不必重新訓練偵測模型。"
+ },
+ "open-weight-model": {
+  "en": "A model whose trained weights are published, so anyone can download it and run it on their own computer. Llama and Gemma are examples. GPT-4o is not one: it can only be reached through OpenAI's service.",
+  "name": "Open-weight model",
+  "zh": "訓練好的權重有公開的模型，任何人都能下載、在自己的電腦上跑。Llama、Gemma 都是。GPT-4o 不是：只能透過 OpenAI 的服務使用。"
+ },
+ "open3d": {
+  "en": "An open-source library for 3D data, including point-cloud registration (ICP). The paper does not say which library it used for ICP. In KP 08 we ran Open3D 0.20.0 on the five-point example (Local run).",
+  "name": "Open3D",
+  "zh": "處理 3D 資料的開源函式庫，包含點雲對齊（ICP）。論文沒有說 ICP 用哪個函式庫。KP 08 我們用 Open3D 0.20.0 跑了那組五個點的例子（Local run）。"
+ },
+ "optical-axis": {
+  "en": "The straight line through the lens along which the camera looks. Depth is often measured along it, which is a little shorter than the straight-line distance. The paper does not say how its depth is measured; our lab measures it along the optical axis.",
+  "name": "Optical axis",
+  "zh": "穿過鏡頭、相機往前看的那條直線。深度常常沿這條線量，比直線距離短一點。論文沒說它的深度怎麼量；我們的實驗室是沿光軸量。"
+ },
+ "order-matching": {
+  "en": "Two ways to read the metric; the paper does not say which it uses. Order ignored: a predicted triple counts if it equals any answer. Order kept: it must also stand at the same position.",
+  "name": "Order ignored / order kept",
+  "zh": "指標的兩種讀法，論文沒有說用哪一種。不看順序：預測的 triple 和任何一條答案相同就算。看順序：位置也要相同。"
+ },
+ "parallel-jaw-gripper": {
+  "en": "A gripper with two flat fingers that move toward each other. The paper says irregular parts are hard for it to hold; the gripper model is not stated.",
+  "src": "§3.2, p.5 left",
+  "zh": "兩片平指互相靠攏的夾爪。論文說形狀不規則的零件它不好夾；夾爪型號沒寫。"
+ },
+ "part-list": {
+  "en": "A list of the product's parts: each name and how many. A factory calls such a list a BOM, bill of materials; the paper says part list.",
+  "src": "§3.1, p.2 right. Where the list comes from: not stated",
+  "zh": "產品的零件清單：每個零件的名稱和數量。工廠裡這種清單叫 BOM（bill of materials）；論文用的詞是 part list。"
+ },
+ "perception": {
+  "en": "Finding the parts a triple names in the camera images: Grounding DINO gives boxes from the part names, GroundedSAM-v2 gives masks, and Eq. (4)–(6) turn the masked pixels into 3D points.",
+  "name": "Perception",
+  "src": "§3.2, p.4; Fig. 3, p.4",
+  "zh": "在相機影像裡找出 triple 點名的零件：Grounding DINO 依零件名稱給框，GroundedSAM-v2 給遮罩，式 (4)–(6) 把遮罩裡的像素變成 3D 點。"
+ },
+ "pixel": {
+  "en": "The smallest unit of a digital image. It has a position (u, v) and holds three numbers for colour or one number for depth. Eq. (4) lifts one pixel into a 3D point.",
+  "name": "Pixel",
+  "src": "§3.2, p.4 left to right",
+  "zh": "數位影像的最小單位。有位置 (u, v)，裡面是三個顏色數字或一個深度數字。式 (4) 把一個 pixel 抬成 3D 點。"
+ },
+ "point-cloud": {
+  "en": "A set of 3D points, each with x, y, z, that samples the surface of an object.",
+  "src": "§3.2, p.4 right; Eq. (6)",
+  "zh": "一堆 3D 點，每個點有 x、y、z，取樣自物體的表面。"
+ },
+ "pose": {
+  "en": "Position plus orientation: where something is and which way it points. In 3D that is six numbers. The paper writes camera pose, grasp pose and '6D pose' for each part.",
+  "name": "Pose",
+  "src": "§3, p.2 right; §3.2, p.4 right",
+  "zh": "位置加朝向：東西在哪、朝向哪裡。在 3D 裡是六個數。論文寫了 camera pose、grasp pose，也替每個零件寫 6D pose。"
+ },
+ "precision": {
+  "en": "Hits divided by the number of predictions: of what the model wrote, the share that is right. The paper does not report it.",
+  "src": "External; Table 1 (p.6) reports Recall only",
+  "zh": "命中數除以預測數：模型寫出來的東西裡，對的佔幾成。論文沒有報這個數。"
+ },
+ "predicate": {
+  "en": "Middle slot of a triple: the word for how the two parts join, for example inserted into. Also called relation or action in the paper.",
+  "src": "p.3 left; p.4 left; Fig. 5, p.6",
+  "zh": "triple 的中間那格：寫兩個零件怎麼接的那個詞，例如 inserted into。論文也叫它 relation 或 action。"
+ },
+ "pretrained": {
+  "en": "Already trained by its makers on other data and used here as released, with no further training.",
+  "src": "p.5 left (AnyGrasp is called “pre-trained”); §2.2, p.2 left",
+  "zh": "原作者已經用別的資料訓練好，這裡直接拿來用，沒有再訓練。"
+ },
+ "prompt": {
+  "en": "The instruction text sent to the model together with the picture. The paper prints the body of six prompts in Fig. 5.",
+  "src": "Eq. (1), p.3 left; Fig. 5, p.6",
+  "zh": "跟圖一起送給模型的指示文字。論文在圖 5 印出六份 prompt 的主體。"
+ },
+ "r-at-action": {
+  "en": "Recall where the objects and the relation must match, in the paper's words 'object-relation'. In Table 1, GPT-4o has R@Action 58.11 and mR@Action 59.95 (percent).",
+  "name": "R@Action and mR@Action",
+  "src": "Table 1, p.6; §4.1, p.6 left",
+  "zh": "物體和關係都要對上的 Recall，論文的說法是 object-relation。表 1 裡 GPT-4o 的 R@Action 是 58.11，mR@Action 是 59.95（%）。"
+ },
+ "r-at-pair": {
+  "en": "Recall where only the two objects must match; the relation word is ignored. In Table 1, GPT-4o has R@Pair 58.03 and mR@Pair 62.49 (percent).",
+  "name": "R@Pair and mR@Pair",
+  "src": "Table 1, p.6; §4.1, p.6 left",
+  "zh": "只要兩個物體對上的 Recall，不看關係詞。表 1 裡 GPT-4o 的 R@Pair 是 58.03，mR@Pair 是 62.49（%）。"
+ },
+ "r-at-triple": {
+  "en": "Recall at the strictest level: the whole triple (subject, predicate, object) must match. In Table 1, GPT-4o has R@Triple 30.25 and mR@Triple 28.35 (percent).",
+  "name": "R@Triple and mR@Triple",
+  "src": "Table 1, p.6; §4.1, p.6 left",
+  "zh": "最嚴格那一層的 Recall：整條 triple（subject、predicate、object）都要對上。表 1 裡 GPT-4o 的 R@Triple 是 30.25，mR@Triple 是 28.35（%）。"
+ },
+ "radian": {
+  "en": "A unit of angle: 180° is π rad, about 3.14 rad. Our lab stores Euler angles in radians and shows them in degrees. The paper gives no unit.",
+  "name": "Radian (rad)",
+  "zh": "角度的單位：180° 是 π rad，約 3.14 rad。我們的實驗室用 rad 存 Euler angles，顯示時換成度。論文沒有寫單位。"
+ },
+ "rag": {
+  "en": "Retrieval-augmented generation: first fetch relevant text from a store, then let the model answer using it. In this paper the fetched text is the given part list.",
+  "src": "§2.2, p.2 left, citing [22]; §3.1, p.2 right. Paper does not define",
+  "zh": "Retrieval-augmented generation：先從資料庫取出相關文字，再讓模型根據它回答。這篇論文裡取用的文字就是給定的 part list。"
+ },
+ "realsense": {
+  "en": "A depth camera from Intel's RealSense line. §4.2 names it as the visual sensor of the real arm. The paper does not give its resolution, its mounting or its calibration.",
+  "name": "RealSense D455",
+  "src": "§4.2, p.7 left",
+  "zh": "Intel RealSense 系列的深度相機。§4.2 把它列為真機的視覺感測器。解析度、安裝位置、標定，論文都沒寫。"
+ },
+ "recall": {
+  "en": "Of the triples in the answer key, the share that the model's output contains. The paper writes R and gives no formula; KP 06 writes one out.",
+  "src": "§4.1, p.5 right to p.6 left",
+  "zh": "標準答案的 triple 裡，模型輸出有對到的比例。論文記成 R，沒有給公式；KP 06 把式子補出來。"
+ },
+ "relation-narrator": {
+  "en": "Stage-1 agent that describes where the parts are relative to each other, with words such as above, below, right, left.",
+  "src": "§3.1, p.2 right; prompt in Fig. 5 bottom left, p.6",
+  "zh": "階段 1 的 agent，寫零件彼此的位置關係，用 above、below、right、left 這類詞。"
+ },
+ "relation-word": {
+  "en": "The word in the middle slot of a triple. Fig. 5 allows ten: attached to, wrapping, inside, screw, hanging from, goes through, inserted into, meshed with, below, above. The running text spells some differently (attach to, go through, wrap).",
+  "name": "Relation word",
+  "src": "Fig. 5 (top right), p.6; §3.1, p.2 right",
+  "zh": "triple 中間那一格的詞。圖 5 只准十個：attached to、wrapping、inside、screw、hanging from、goes through、inserted into、meshed with、below、above。正文有幾個拼法不同（attach to、go through、wrap）。"
+ },
+ "rendering": {
+  "en": "A program turning a 3D model into a flat picture. The pictures in our lab are rendered; they stand in for real camera images.",
+  "name": "Rendering",
+  "zh": "用程式把 3D 模型變成平面圖片。我們實驗室的畫面是渲染出來的，用來代替真的相機影像。"
+ },
+ "retrieval": {
+  "en": "Looking up relevant information before answering. In this paper the part list is called 'retrieval information', and the Base Searcher 'acts as a retriever' on the stage-1 graph.",
+  "name": "Retrieval",
+  "src": "§3.1, p.2 right; p.3 left",
+  "zh": "回答之前先查相關資料。論文把 part list 叫 retrieval information，Base Searcher 對階段 1 的圖「acting as a retriever」。"
+ },
+ "rgb-d": {
+  "en": "A colour image (RGB, 3 numbers per pixel) together with a depth map (D, 1 number per pixel: the distance from the camera).",
+  "src": "§3.2, p.4 left",
+  "zh": "彩色影像（RGB，每個像素 3 個數）加上深度圖（D，每個像素 1 個數：離相機多遠）。"
+ },
+ "rigid-body": {
+  "en": "An object that never bends: all distances inside it stay the same, so six numbers (3 position, 3 rotation) say where it is. The paper's R and T describe 'rigid body motion'. Our lab's physics also treats the parts as rigid bodies (Demo).",
+  "name": "Rigid body",
+  "src": "§3.2, p.4 right",
+  "zh": "不會彎曲的物體：裡面所有距離都不變，所以六個數（3 個位置、3 個旋轉）就說得出它在哪。論文的 R、T 描述 rigid body motion。我們實驗室的物理也把零件當剛體（Demo）。"
+ },
+ "rigid-transform": {
+  "en": "A move that keeps every distance inside the object: one rotation and one translation. The paper calls it rigid body motion and stores it as {R, T}.",
+  "src": "§3.2, p.4 right",
+  "zh": "物體內部每個距離都不變的搬動：一個旋轉加一個平移。論文稱 rigid body motion，存成 {R, T}。"
+ },
+ "rmse": {
+  "en": "Root mean square error: take the distance of every matched point pair, square it, average, then take the square root. It has the unit of the points (mm in our lab). The paper does not use RMSE; the lab uses it to show ICP progress.",
+  "name": "RMSE",
+  "zh": "均方根誤差：把每一對配對點的距離平方、取平均、再開根號。單位和點的單位相同（我們的實驗室是 mm）。論文沒有用 RMSE；實驗室拿它顯示 ICP 的進度。"
+ },
+ "robot-assembly": {
+  "en": "The lower half of the system: the robot finds the parts a triple names (perception), then picks and places them (manipulation), using the low-level memory of the scene graph for where each part goes.",
+  "name": "Robot assembly (Fig. 1, right column)",
+  "src": "Fig. 1, p.3; §3.2, p.4",
+  "zh": "系統的下半段：機器人先找到 triple 點名的零件（perception，感知），再拿起、放好（manipulation，操作）；每個零件要放哪裡，靠場景圖的 low-level memory。"
+ },
+ "robot-base": {
+  "en": "The fixed foot of the arm. Γ^c_b gives the camera in the coordinates of this base. Not the 'base' part of Table 2, and not the assembly base σ.",
+  "name": "Robot base (base frame)",
+  "src": "§3.2, p.5 left",
+  "zh": "手臂固定不動的底座。Γ^c_b 給的是相機在這個底座座標裡的位置。不是表 2 的 base，也不是組裝基準 σ。"
+ },
+ "rotation-matrix": {
+  "en": "A 3×3 matrix that turns points around the origin and keeps all distances. It satisfies R^T R = I and det R = 1. The paper's R is one, written R ∈ ℝ^{3×3} in the special orthogonal group.",
+  "name": "Rotation matrix",
+  "src": "§3.2, p.4 right",
+  "zh": "3×3 的矩陣，把點繞原點轉動，所有距離不變。它滿足 R^T R = I 與 det R = 1。論文的 R 就是，寫成 R ∈ ℝ^{3×3}，屬於 special orthogonal group。"
+ },
+ "rotational-symmetry": {
+  "en": "A shape that looks the same after turning by some angle. A gear looks the same after one tooth. ICP can then stop at a wrong angle with a small error. The paper does not discuss this (My view).",
+  "name": "Rotational symmetry",
+  "zh": "轉過某個角度後看起來一樣的形狀。齒輪轉過一齒看起來沒變。ICP 可能因此停在錯的角度，誤差卻很小。論文沒有討論這件事（My view）。"
+ },
+ "rough-translation": {
+  "en": "The first guess of T, made from the two centroids before ICP runs. The paper says it is 'based on the distance between the centroids'; a distance is one number, so we read it as the difference of the two centroids.",
+  "name": "Rough translation",
+  "src": "§3.2, p.4 right",
+  "zh": "ICP 開始之前，由兩個質心算出的 T 的初值。論文寫「based on the distance between the centroids」；距離只是一個數，所以我們讀成兩個質心的差。"
+ },
+ "sam": {
+  "en": "Segment Anything: a released model that turns a box into a mask, the exact set of pixels of that object. We ran SAM 2.1; the paper writes GroundedSAM-v2 [31].",
+  "src": "§3.2, p.4 left; [31]. Our run: docs/results.md",
+  "zh": "Segment Anything：現成的分割模型，把一個框變成 mask，也就是那個物體確切佔了哪些像素。我們跑的是 SAM 2.1；論文寫的是 GroundedSAM-v2 [31]。"
+ },
+ "sampling-error": {
+  "en": "A gap that appears by chance because only a few trials were run. With 20 trials per cell, two counts can differ without any real difference.",
+  "name": "Sampling error",
+  "zh": "只試了幾次，單靠運氣就出現的差距。每格只有 20 次時，兩個次數沒有真的差別也可能不一樣。"
+ },
+ "scalar": {
+  "en": "A single number, not a list. The depth d_t(u, v) is a scalar; the point P_t is three numbers.",
+  "name": "Scalar",
+  "zh": "單一個數，不是一串。深度 d_t(u, v) 是純量；點 P_t 是三個數。"
+ },
+ "scene-graph": {
+  "en": "A graph that describes a scene: each object is a node (a dot) and each relation between two objects is an edge (an arrow).",
+  "src": "p.4 left. Paper does not define; common usage, see [4], [24]",
+  "zh": "描述一個場景的圖：每個物體是一個 node（點），兩個物體之間的關係是一條 edge（箭頭）。"
+ },
+ "segmentation": {
+  "en": "Marking which pixels belong to which object. GroundedSAM-v2 does it here: it turns each box into a mask. The word 'segmentation' is not in the paper; §3.2 says it 'segments and tracks objects'.",
+  "name": "Segmentation",
+  "src": "§3.2, p.4 left",
+  "zh": "標出每個 pixel 屬於哪個物體。這裡由 GroundedSAM-v2 做：把每個框變成 mask。論文沒有用 segmentation 這個字；§3.2 寫的是它「segments and tracks objects」。"
+ },
+ "semantic-feature": {
+  "en": "The paper's name for the mask m_i. A mask is a set of pixels, not a feature vector in the usual sense; the paper says no more.",
+  "name": "Semantic feature",
+  "src": "§3.2, p.4 left to right",
+  "zh": "論文替 mask m_i 取的名字。mask 是 pixel 的集合，不是一般說的特徵向量；論文沒有再說明。"
+ },
+ "set": {
+  "en": "A collection where order and repeats do not matter: {a, b} is the same set as {b, a}. Eq. (1) writes each step in set braces, so the slot order is lost (our note, KP 02).",
+  "name": "Set",
+  "src": "Eq. (1), p.3 left",
+  "zh": "一堆東西放在一起，不看順序、不看重複：{a, b} 和 {b, a} 是同一個集合。式 (1) 把每一步寫在集合的大括號裡，所以格子的順序就不見了（我們在 KP 02 的筆記）。"
+ },
+ "signed-distance-field": {
+  "en": "A way to describe a shape: every point in space stores its distance to the nearest surface, negative inside the object. A simulator can use it to test contact between parts.",
+  "name": "Signed distance field (SDF)",
+  "src": "§4.1, p.6 right; the definition is External",
+  "zh": "描述形狀的一種方式：空間裡每一點記下到最近表面的距離，在物體裡面是負的。模擬器可以拿它判斷零件有沒有碰到。"
+ },
+ "simulation": {
+  "en": "A physics program that moves the parts and checks contact instead of a real robot. The paper names the simulator DiffRedMax [33] and plans each part's path with breadth-first search [34], a search that tries all short move sequences before longer ones.",
+  "src": "§4.1, p.6 right to p.7 left",
+  "zh": "不用真的機器人，改用物理程式移動零件並檢查接觸。論文寫的模擬器是 DiffRedMax [33]，零件的路徑用 breadth-first search [34] 規劃，這種搜尋會先試完短的移動序列，再試長的。"
+ },
+ "so3": {
+  "en": "The special orthogonal group: all 3×3 matrices R with RᵀR = I and det R = 1. These are exactly the rotations of 3D space.",
+  "src": "§3.2, p.4 right (the name); the two conditions are External",
+  "zh": "special orthogonal group：所有滿足 RᵀR = I 且 det R = 1 的 3×3 矩陣 R，剛好就是三維空間的所有旋轉。"
+ },
+ "standard-deviation": {
+  "en": "How far values typically fall from their mean. In our desk-photo runs it shows how much repeated runs differ. The paper reports no measure of variation at all.",
+  "name": "Standard deviation",
+  "zh": "數值平常離平均有多遠。我們桌面照片的實跑用它表示重複跑之間差多少。論文完全沒有報變異量。"
+ },
+ "statistical-test": {
+  "en": "A calculation that asks whether a gap could come from chance alone. The paper gives no statistical test for Table 2; we ran Fisher's exact test ourselves.",
+  "name": "Statistical test",
+  "zh": "判斷差距會不會光靠運氣就出現的計算。論文沒有替表 2 做統計檢定；我們自己做了 Fisher's exact test。"
+ },
+ "string-comparison": {
+  "en": "Checking whether two pieces of text are the same letter by letter. If Table 1 is scored this way, 'attach to' against 'attached to' counts as wrong. The paper does not say how a hit is decided.",
+  "name": "String comparison",
+  "zh": "逐字檢查兩段文字是否一模一樣。如果表 1 是這樣計分，attach to 對 attached to 就算錯。論文沒有說怎麼判定命中。"
+ },
+ "subject": {
+  "en": "First slot of a triple: the part that is moved. §4.2 calls it the manipulated object; Fig. 5 calls it Head Entity.",
+  "src": "p.3 left; p.7 right; Fig. 5, p.6",
+  "zh": "triple 的第 1 格：拿起來移動的那個零件。§4.2 叫 manipulated object，圖 5 叫 Head Entity。"
+ },
+ "subscript": {
+  "en": "A small mark below a symbol. Here it is mostly an index: the i of ŝ_i or c_i is the number of the step or the part, and t is a time or a frame.",
+  "name": "Subscript",
+  "zh": "寫在符號下方的小標記。這裡多半是編號：ŝ_i、c_i 的 i 是第幾步或第幾個零件，t 是時間或影格。"
+ },
+ "success-rate": {
+  "en": "Successes divided by trials. The paper prints counts such as 12/20, not rates. Its text says 'high success rate' with no threshold. Table 3 counts memory and perception successes, not assembly success.",
+  "name": "Success rate",
+  "src": "§4.1, p.7 left; §4.2, p.7 right",
+  "zh": "成功次數除以試驗次數。論文印的是 12/20 這類次數，不是比率。正文寫 high success rate，沒有門檻。表 3 數的是記憶與感知的成功，不是組裝成功。"
+ },
+ "summation": {
+  "en": "Adding terms up: Σ with i = 1 below and N above means add the term for i = 1, 2, …, N. It is used in the centroid and in the ICP objective, neither printed in the paper.",
+  "name": "Summation (Σ)",
+  "zh": "把各項加起來：Σ 下面寫 i = 1、上面寫 N，表示把 i = 1、2、……、N 各項加總。質心和 ICP 目標式都用到，論文兩者都沒有印。"
+ },
+ "superscript": {
+  "en": "A small mark above and to the right of a symbol. In Eq. (1) to (3), VLM or LLM is such a mark. It is a label saying whether the call receives the picture, not a power.",
+  "name": "Superscript",
+  "src": "Eq. (1)(2)(3), p.3",
+  "zh": "寫在符號右上方的小標記。式 (1) 到 (3) 的 VLM、LLM 就是。它是標籤，說明這次呼叫有沒有拿到圖，不是次方。"
+ },
+ "synthetic-data": {
+  "en": "Data made by a program and not measured in the real world. Our lab's pictures, gearbox and noise are synthetic, so its numbers are not results of the paper (Demo).",
+  "name": "Synthetic data",
+  "zh": "由程式做出來、不是在真實世界量到的資料。我們實驗室的畫面、齒輪箱、雜訊都是合成的，所以它的數字不是論文的結果（Demo）。"
+ },
+ "tag-citation": {
+  "en": "A problem with a cited work, or with how it is cited.",
+  "name": "Evidence tag: Citation",
+  "zh": "引用的文獻，或引用的方式，有問題。"
+ },
+ "tag-demo": {
+  "en": "A teaching simulation in the browser. The calculation is real and the data are synthetic. Not a result of the paper.",
+  "name": "Evidence tag: Demo",
+  "zh": "瀏覽器裡的教學模擬。計算是真的算，資料是合成的。不是論文的結果。"
+ },
+ "tag-derived": {
+  "en": "Worked out from numbers or statements of the paper. The steps are on the page. The paper does not print the result.",
+  "name": "Evidence tag: Derived",
+  "zh": "從論文的數字或陳述推出來的，推導步驟在頁面上。論文沒有印這個結果。"
+ },
+ "tag-external": {
+  "en": "From outside the paper: general background or a published method.",
+  "name": "Evidence tag: External",
+  "zh": "來自論文以外：一般背景知識，或已發表的方法。"
+ },
+ "tag-local-run": {
+  "en": "Something we ran on this computer. Model version, photos, number of runs and time are given. Not the paper's setting.",
+  "name": "Evidence tag: Local run",
+  "zh": "我們在這台電腦上實際跑的結果。模型版本、照片、次數和時間都有寫。不是論文的設定。"
+ },
+ "tag-loose": {
+  "en": "Not wrong, but worded loosely.",
+  "name": "Evidence tag: Loose",
+  "zh": "不算錯，但說法不嚴謹。"
+ },
+ "tag-mismatch": {
+  "en": "The paper disagrees with itself: text against figure, or the shapes in an equation do not fit.",
+  "name": "Evidence tag: Mismatch",
+  "zh": "論文前後對不上：正文和圖不一致，或式子的形狀對不起來。"
+ },
+ "tag-my-view": {
+  "en": "The report author's own reading or judgement.",
+  "name": "Evidence tag: My view",
+  "zh": "報告者自己的讀法或判斷。"
+ },
+ "tag-not-stated": {
+  "en": "The paper does not say. We write 'not stated' and do not fill the gap.",
+  "name": "Evidence tag: Not stated",
+  "zh": "論文沒有寫。我們寫「沒寫」，不替它補。"
+ },
+ "tag-paper": {
+  "en": "The paper itself states this, at the place written next to the tag.",
+  "name": "Evidence tag: Paper",
+  "zh": "論文原文寫了這件事，位置標在標籤旁邊。"
+ },
+ "taxonomy": {
+  "en": "A fixed list of allowed categories. In Fig. 2, Analysis 3 says an action 'is not assembly taxonomy'. I read this as the list of allowed relation words; the paper does not define the taxonomy.",
+  "name": "Assembly taxonomy",
+  "src": "Fig. 2, p.3",
+  "zh": "一份固定的允許類別表。圖 2 的 Analysis 3 說某個動作「is not assembly taxonomy」。我讀成允許的關係詞清單；論文沒有定義這份 taxonomy。"
+ },
+ "tcp": {
+  "en": "Tool centre point: the reference point at the tip of the tool that the arm is commanded to move. In the lab it lies 172 mm in front of the gripper base.",
+  "src": "External; lab value from site/js/lab/config.js (Demo)",
+  "zh": "tool centre point：工具前端的參考點，手臂被命令移動的就是它。實驗室裡它在夾爪座前方 172 mm。"
+ },
+ "temperature": {
+  "en": "A sampling setting of a language model: higher values make repeated runs differ more.",
+  "src": "Not in the paper; common usage. Our runs used the API default",
+  "zh": "語言模型取樣時的一個設定：值越高，重複跑的結果差得越多。"
+ },
+ "text-prompt": {
+  "en": "A short phrase that names the part to find, such as 'red large gear'. It is the input of Grounding DINO. It is not the long instruction text sent to the VLM agents; Table 3 lists the five phrases of the lab test.",
+  "name": "Text prompt (for detection)",
+  "src": "§3.2, p.4 left; §4.2, p.7 right; Table 3",
+  "zh": "寫出要找哪個零件的一小句話，例如 red large gear。它是 Grounding DINO 的輸入，不是送給 VLM agent 的那份長指示；表 3 列出真機實驗用的五句。"
+ },
+ "threshold": {
+  "en": "A cut-off value: above it counts as yes, below as no. The paper uses 'high' and 'accurate' with no threshold. Our runs use a box threshold of 0.35 for detection, and 2 mm, 2 mm, 3° for a pass in the lab.",
+  "name": "Threshold",
+  "zh": "一個分界值：高於它算是，低於它算不是。論文用 high、accurate 這些詞，沒有給門檻。我們的實跑偵測用 box 門檻 0.35，實驗室的通過條件是 2 mm、2 mm、3°。"
+ },
+ "tick-c": {
+  "en": "Not named in the text.",
+  "name": "Cyan tick (Fig. 6)",
+  "src": "Fig. 6, p.6; text p.6",
+  "zh": "正文沒有說明。"
+ },
+ "tick-g": {
+  "en": "The text (p.6) says green marks a subject–object mix-up. In the figure every green tick sits on a line identical to the answer (P53).",
+  "name": "Green tick (Fig. 6)",
+  "src": "Fig. 6, p.6; text p.6",
+  "zh": "正文（p.6）說綠勾表示主詞、受詞弄反。圖上每個綠勾所在的那一行都和答案一模一樣（P53）。"
+ },
+ "tick-p": {
+  "en": "The text says purple marks a relation that describes the same operation in other words and still counts as wrong.",
+  "name": "Purple tick (Fig. 6)",
+  "src": "Fig. 6, p.6; text p.6",
+  "zh": "正文說紫勾表示關係詞換了說法、描述同一個動作，但仍算錯。"
+ },
+ "tick-y": {
+  "en": "The text says grey marks a reversed sequence; here it is one triple moved two lines up (P55).",
+  "name": "Grey tick (Fig. 6)",
+  "src": "Fig. 6, p.6; text p.6",
+  "zh": "正文說灰勾表示順序倒過來；這裡其實是一條 triple 往上移了兩行（P55）。"
+ },
+ "time-step": {
+  "en": "Which assembly step we are at: 1, 2, 3 and so on. It is not seconds. The paper only says 'in time step t' for the graph G_t. The t of O_t and P_t is a camera frame or time, a different use of the letter.",
+  "name": "Time step",
+  "src": "§3.1, p.4 left; §3.2, p.4 left",
+  "zh": "目前是第幾個組裝步驟：1、2、3……，不是秒數。論文只寫「in time step t」，指圖 G_t。O_t、P_t 的 t 是相機畫面或時間，同一個字母另一種用法。"
+ },
+ "training": {
+  "en": "Adjusting a model's weights on data so that its loss gets smaller. The paper describes no training step; AnyGrasp is called 'pre-trained' and the VLMs are used as released.",
+  "name": "Training",
+  "src": "§3.2, p.5 left ('pre-trained'); no training step is described",
+  "zh": "用資料調整模型的權重，讓 loss 變小。論文沒有描述任何訓練步驟；AnyGrasp 寫的是 pre-trained，VLM 也是拿現成的來用。"
+ },
+ "trajectory": {
+  "en": "The path of the gripper over time. The paper says continuous trajectories are generated 'through inverse dynamics' and gives no controller (audit A26). Eq. (7) fixes only the last stretch.",
+  "name": "Trajectory",
+  "src": "§3.2, p.5 left",
+  "zh": "夾爪隨時間走過的路徑。論文說連續軌跡是「through inverse dynamics」產生的，沒有給控制器（audit A26）。式 (7) 只定了最後一段。"
+ },
+ "transformation-matrix": {
+  "en": "A 4×4 matrix that holds one rotation and one translation, so a single multiplication turns and shifts a point. Γ_t, Γ_any, Γ_grasp, Γ^c_b and Γ_obj are all of this kind. The paper's own text calls Γ_any a transformation matrix.",
+  "name": "Transformation matrix (4×4)",
+  "src": "§3.2, p.4 right; p.5 left",
+  "zh": "4×4 的矩陣，同時裝一個旋轉和一個平移，一次相乘就能把點轉動並平移。Γ_t、Γ_any、Γ_grasp、Γ^c_b、Γ_obj 都是這一類。論文正文也把 Γ_any 叫 transformation matrix。"
+ },
+ "translation": {
+  "en": "A shift without turning: three numbers, one per axis. The memory's T is a 3×1 column vector. The gripper move [dx, dy, dz] in Eq. (7) is also a translation.",
+  "name": "Translation",
+  "src": "§3.2, p.4 right; p.5 left",
+  "zh": "只移動、不轉動：三個數，一個軸一個。記憶裡的 T 是 3×1 的行向量。式 (7) 夾爪的位移 [dx, dy, dz] 也是平移。"
+ },
+ "trial": {
+  "en": "One run of an experiment that ends in success or failure. Table 2 has 20 per cell and Table 3 has 10. The paper does not say how success is judged for Table 2 (audit A19).",
+  "name": "Trial",
+  "src": "§4.1, p.7 left; §4.2, p.7 right",
+  "zh": "一次實驗，結果是成功或失敗。表 2 每格 20 次，表 3 每格 10 次。表 2 怎麼判成功，論文沒寫（audit A19）。"
+ },
+ "triple": {
+  "en": "One assembly step written as three slots: subject, predicate, object. The paper also writes triplet.",
+  "src": "§3.1, p.3 left; Fig. 5, p.6; §4.1, p.5 right",
+  "zh": "把一個組裝步驟寫成三格：subject、predicate、object。論文有時寫成 triplet。"
+ },
+ "triple-extractor": {
+  "en": "Stage-3 agent that divides the assembly description into triples. Fig. 5 shows two extraction prompts, both text only; the upper one limits the Relation to ten words.",
+  "src": "§3.1, p.4 left; Fig. 2, p.3; prompts in Fig. 5 right, p.6",
+  "zh": "階段 3 的 agent：把組裝描述切成 triple。圖 5 有兩份抽取 prompt，都只收文字；上面那份把 Relation 限制在十個詞。"
+ },
+ "two-sided": {
+  "en": "A test that counts a gap in either direction: the base searcher could help or hurt. A one-sided test counts one direction only and gives a smaller p.",
+  "name": "Two-sided test",
+  "zh": "兩個方向的差距都算：Base Searcher 可能有幫助，也可能有害。單尾檢定只算一個方向，p 會比較小。"
+ },
+ "union": {
+  "en": "Putting sets together into one set; ⋃ is the symbol. Eq. (1), (3) and (6) use it to collect steps or points. A set has no order, so the union alone cannot say which step comes first.",
+  "name": "Union (⋃)",
+  "src": "Eq. (1)(3), p.3; Eq. (6), p.4 right",
+  "zh": "把幾個集合併成一個集合，符號是 ⋃。式 (1)(3)(6) 用它收集步驟或點。集合沒有順序，所以只靠聯集分不出哪一步在前。"
+ },
+ "vector": {
+  "en": "A list of numbers. T and P are vectors of three numbers. The paper calls T 'a column vector': the three numbers are written in one column.",
+  "name": "Vector",
+  "src": "§3.2, p.4 right",
+  "zh": "一串數。T、P 都是三個數的向量。論文把 T 叫 column vector：三個數寫成一直行。"
+ },
+ "video-frame": {
+  "en": "One still picture of a video. The t of the camera equations numbers camera frames; it is not the assembly step t of G_t.",
+  "name": "Video frame",
+  "zh": "影片裡的一張靜止畫面。相機那幾條式子的 t 是在數影格，不是 G_t 的組裝步驟 t。"
+ },
+ "vlm": {
+  "en": "Vision language model: a model that takes a picture and text as input and answers in text. In this paper, a superscript VLM on a function means that call receives the picture.",
+  "src": "§2.2, p.2 left; Eq. (1)(3), p.3. Paper does not define; common usage, see [15]–[17]",
+  "zh": "Vision language model：輸入一張圖和一段文字、用文字回答的模型。這篇論文裡，函數上標寫 VLM，表示那次呼叫有拿到圖。"
+ },
+ "voxel-downsampling": {
+  "en": "Thinning a point cloud: cut space into small cubes (voxels) and keep one point per cube. The shape stays, with fewer points. The paper does not say whether it does this (audit A21); our lab does after merging the views (Demo).",
+  "name": "Voxel down-sampling",
+  "zh": "把點雲抽稀：把空間切成小方塊（voxel），每個方塊留一個點。形狀留著，點變少。論文沒有說有沒有這一步（audit A21）；我們的實驗室在合併視角之後有做（Demo）。"
+ },
+ "waypoint": {
+  "en": "A point the gripper passes on its way. Eq. (7) lists six of them for the last stretch before a pick or a place.",
+  "src": "Eq. (7), p.5 left; the word is ours",
+  "zh": "夾爪途中要經過的點。式 (7) 替拾取或放置前的最後一段列了六個。"
+ },
+ "weights": {
+  "en": "The numbers inside a model that training sets. 'No trained weight' here means the paper describes no training step: the models are used as released.",
+  "name": "Weights",
+  "zh": "模型裡由訓練決定的那些數。這裡說「沒有要訓練的權重」，是因為論文沒有描述任何訓練步驟：模型都是拿現成的來用。"
+ },
+ "white-cover": {
+  "en": "The white part the gears are fitted onto in the real test. It is the target of steps 1 to 3 (Fig. 7).",
+  "name": "White cover",
+  "src": "§4.2, p.7 left; Fig. 7",
+  "zh": "真機實驗裡齒輪裝上去的那塊白色零件。它是第 1 到第 3 步的目標（圖 7）。"
+ },
+ "with-base": {
+  "en": "The two conditions of Table 2. 'With base' means the Base Searcher agent is used; 'without base' means it is taken out. It has nothing to do with the robot base.",
+  "name": "With base / without base",
+  "src": "§4.1, p.7 left; Table 2",
+  "zh": "表 2 的兩種條件。「有 base」是用了 Base Searcher agent，「沒有 base」是把它拿掉。和機器人底座無關。"
+ },
+ "workspace": {
+  "en": "The region a robot can reach and work in. The paper's test is a desktop setup; its future work is a larger workspace with a mobile robot.",
+  "name": "Workspace",
+  "src": "§4.2, p.7 left; §5, p.8 left",
+  "zh": "機器人手臂構得到、可以工作的範圍。論文的實驗是桌面配置；未來工作要擴大到有移動機器人的較大 workspace。"
+ },
+ "xarm6": {
+  "en": "UFACTORY xARM6: the robot arm with six joints used in the paper's laboratory test. Ours is a 3D model of it in the browser, not a real arm.",
+  "src": "§4.2, p.7 left",
+  "zh": "UFACTORY xARM6：論文實驗室測試用的六軸機械手臂。我們用的是瀏覽器裡的 3D 模型，不是真的手臂。"
+ },
+ "zero-shot": {
+  "en": "Doing a task with no example of that task. The paper uses the word for its method but does not define it.",
+  "src": "Abstract, p.1; §2.2, p.2 left; §5, p.8 left. Paper does not define; common usage",
+  "zh": "沒有看過這個任務的任何例子就去做。論文用這個詞形容自己的方法，但沒有定義。"
+ }
+}

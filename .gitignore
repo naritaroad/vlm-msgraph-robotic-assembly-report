@@ -1,0 +1,14 @@
+# secrets never belong here
+.env
+.env.*
+
+# presenter-only material lives in the private source repo
+site/script.html
+site/qa.html
+site/data/cues.json
+
+# OS and editor files
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/

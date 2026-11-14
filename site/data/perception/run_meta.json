@@ -1,0 +1,346 @@
+{
+ "run_at": "2026-11-12T04:27:55",
+ "models": {
+  "detector": {
+   "id": "IDEA-Research/grounding-dino-tiny",
+   "revision": "a2bb814dd30d776dcf7e30523b00659f4f141c71"
+  },
+  "segmenter": {
+   "id": "facebook/sam2.1-hiera-small",
+   "revision": "ee5bba1d82bb8749febdf90f45e84b687142ba03",
+   "mode": "box prompt, multimask_output=False"
+  }
+ },
+ "thresholds": {
+  "box_threshold": 0.35,
+  "text_threshold": 0.25,
+  "nms_iou": 0.5,
+  "fallback_box_threshold_stills_only": 0.25
+ },
+ "env": {
+  "python": "3.10.9",
+  "torch": "2.14.1+cu126",
+  "torchvision": "0.29.1+cu126",
+  "transformers": "5.20.2",
+  "opencv": "5.0.0",
+  "device": "NVIDIA GeForce RTX 3070",
+  "cuda": "12.6"
+ },
+ "model_load_s": 3.2,
+ "count_tables": {
+  "sceneA_still": [
+   [
+    "scissors",
+    1,
+    3,
+    0.35,
+    3,
+    [
+     0.754,
+     0.544,
+     0.47
+    ]
+   ],
+   [
+    "silver adjustable wrench",
+    1,
+    1,
+    0.35,
+    1,
+    [
+     0.532
+    ]
+   ],
+   [
+    "silver utility knife",
+    1,
+    1,
+    0.35,
+    1,
+    [
+     0.422
+    ]
+   ],
+   [
+    "thin metal rod",
+    1,
+    1,
+    0.35,
+    1,
+    [
+     0.743
+    ]
+   ],
+   [
+    "nail clipper",
+    1,
+    6,
+    0.35,
+    6,
+    [
+     0.471,
+     0.422,
+     0.393,
+     0.384,
+     0.353,
+     0.351
+    ]
+   ],
+   [
+    "stapler",
+    1,
+    0,
+    0.25,
+    1,
+    [
+     0.276
+    ]
+   ],
+   [
+    "metal clip",
+    2,
+    5,
+    0.35,
+    5,
+    [
+     0.476,
+     0.458,
+     0.419,
+     0.381,
+     0.378
+    ]
+   ],
+   [
+    "small silver hexagonal nut",
+    6,
+    6,
+    0.35,
+    6,
+    [
+     0.387,
+     0.384,
+     0.374,
+     0.367,
+     0.356,
+     0.356
+    ]
+   ],
+   [
+    "steel ruler",
+    1,
+    1,
+    0.35,
+    1,
+    [
+     0.613
+    ]
+   ]
+  ],
+  "sceneB_disassembled": [
+   [
+    "transparent pen barrel with black clip",
+    1,
+    3,
+    0.35,
+    3,
+    [
+     0.39,
+     0.382,
+     0.378
+    ]
+   ],
+   [
+    "transparent pen barrel with red clip",
+    1,
+    2,
+    0.35,
+    2,
+    [
+     0.495,
+     0.488
+    ]
+   ],
+   [
+    "black pen refill",
+    1,
+    3,
+    0.35,
+    3,
+    [
+     0.638,
+     0.634,
+     0.383
+    ]
+   ],
+   [
+    "purple pen refill",
+    1,
+    6,
+    0.35,
+    6,
+    [
+     0.698,
+     0.662,
+     0.552,
+     0.518,
+     0.482,
+     0.479
+    ]
+   ],
+   [
+    "black rubber pen grip",
+    1,
+    4,
+    0.35,
+    4,
+    [
+     0.626,
+     0.598,
+     0.499,
+     0.453
+    ]
+   ],
+   [
+    "red rubber pen grip",
+    1,
+    6,
+    0.35,
+    6,
+    [
+     0.659,
+     0.598,
+     0.554,
+     0.527,
+     0.485,
+     0.438
+    ]
+   ],
+   [
+    "silver three-lobed spinner",
+    1,
+    3,
+    0.35,
+    3,
+    [
+     0.466,
+     0.447,
+     0.414
+    ]
+   ],
+   [
+    "small round metal cap",
+    2,
+    2,
+    0.35,
+    2,
+    [
+     0.649,
+     0.616
+    ]
+   ]
+  ],
+  "sceneB_assembled": [
+   [
+    "transparent pen barrel with black clip",
+    1,
+    3,
+    0.35,
+    3,
+    [
+     0.636,
+     0.424,
+     0.369
+    ]
+   ],
+   [
+    "transparent pen barrel with red clip",
+    1,
+    4,
+    0.35,
+    4,
+    [
+     0.515,
+     0.501,
+     0.438,
+     0.4
+    ]
+   ],
+   [
+    "black pen refill",
+    1,
+    2,
+    0.35,
+    2,
+    [
+     0.716,
+     0.559
+    ]
+   ],
+   [
+    "purple pen refill",
+    1,
+    2,
+    0.35,
+    2,
+    [
+     0.711,
+     0.711
+    ]
+   ],
+   [
+    "black rubber pen grip",
+    1,
+    2,
+    0.35,
+    2,
+    [
+     0.632,
+     0.589
+    ]
+   ],
+   [
+    "red rubber pen grip",
+    1,
+    2,
+    0.35,
+    2,
+    [
+     0.693,
+     0.623
+    ]
+   ],
+   [
+    "silver three-lobed spinner",
+    1,
+    1,
+    0.35,
+    1,
+    [
+     0.679
+    ]
+   ],
+   [
+    "small round metal cap",
+    2,
+    1,
+    0.35,
+    1,
+    [
+     0.694
+    ]
+   ]
+  ]
+ },
+ "videos": {
+  "scene1_tracks": {
+   "n_frames": 54,
+   "timing_s": 124.3,
+   "sample_fps": 2.0
+  },
+  "scene2_tracks": {
+   "n_frames": 102,
+   "timing_s": 208.0,
+   "sample_fps": 2.0
+  }
+ }
+}

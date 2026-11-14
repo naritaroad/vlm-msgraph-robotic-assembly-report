@@ -1,0 +1,53 @@
+/* print.css — the article (or the script / questions page) on paper: no rail, no stage, no HUD.
+   Black on white, every block whole, the language that is on screen. */
+
+@page { size: A4; margin: 16mm 14mm 18mm; }
+
+:root {
+  --paper: #fff; --paper-2: #f2f2f2; --card: #fff;
+  --ink: #000; --ink-2: #222; --muted: #444;
+  --rule: #bbb; --rule-strong: #777;
+  --accent: #000; --accent-text: #000; --accent-ink: #fff; --accent-wash: #eee; --link: #000;
+  --fs-body: 10.5pt; --fs-small: 9.5pt; --fs-note: 8.5pt; --fs-h2: 17pt; --fs-h3: 12pt; --fs-lede: 11.5pt; --fs-read: 10pt;
+}
+
+html, body { background: #fff !important; color: #000; }
+body { padding: 0 !important; }
+
+#rail, #rail-scrim, #stage, .hud, .cuebar, .skip, .menu-open, .timeline, dialog,
+.r-sticky, .r-prefs, .r-home, .r-count, .gloss-close, .fig-zoom::after, .act-dest { display: none !important; }
+
+#mainline { position: static; display: block; padding: 0 0 6pt; border-bottom: 1pt solid #000; }
+.paperline p { display: flex !important; }
+.paperline-doi { display: inline !important; }
+.pipe { justify-content: flex-start; padding-top: 6pt; }
+.pipe-sub { display: none; }
+.pipe li .pipe-label { border-color: #000 !important; background: #fff !important; color: #000 !important; height: auto; padding: 1pt 6pt; }
+.pipe li.is-current .pipe-label { background: #000 !important; color: #fff !important; }
+
+#layout { display: block; }
+.paper { padding: 0; container-type: normal; }
+.kp { padding-block: 14pt 10pt; border-top: 1.5pt solid #000; break-before: auto; }
+.kp-head { break-after: avoid; }
+h2, h3 { break-after: avoid; }
+.eq, .flaw, .good, .note, .whynot, .pair, .do, .fig, .io > div, .steps > li, table.sym tr, .r-item, .r-do, .r-flag, .r-short { break-inside: avoid; }
+.eq-body { overflow: visible; -webkit-mask-image: none !important; mask-image: none !important; }
+.eq::before { animation: none !important; }
+
+/* the instrument strips print as plain boxes */
+.pair, .r-do { background: #fff !important; color: #000 !important; border: 1pt solid #000; }
+.pair small, .pair output[data-bind], .pair[data-ref]::before, .r-do h3, .r-do dt, .r-do h3 code { color: #000 !important; }
+.pair > div + div, .pair[data-ref]::before { border-color: #000; }
+output[data-bind] { background: none; box-shadow: none; }
+
+.act { border: 1pt solid #000; background: #fff; color: #000; }
+.tag { border: .75pt solid currentColor; background: #fff !important; }
+a { color: #000; text-decoration: none; }
+.term, .sym-ref { color: #000; border-bottom: .5pt dotted #000; }
+.fig img { max-height: 90mm; width: auto; }
+
+.reader { padding: 0; }
+.r-bar, .r-main { width: auto; padding-inline: 0; }
+.r-sec > summary::after, .r-item > summary::after { display: none; }
+.r-sec { border-top: 1.5pt solid #000; }
+.is-filtered-out { display: revert !important; }
