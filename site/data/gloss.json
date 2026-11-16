@@ -249,6 +249,12 @@
   "name": "Fitness (Open3D)",
   "zh": "Open3D 的 ICP 結果裡：移動那團點雲中，在距離上限內找得到對應點的比例。1.0 表示每一點都找得到。論文沒有。"
  },
+ "flexible-automation": {
+  "en": "Manufacturing systems that adapt to diverse, customized products and variable batch sizes, contrasting with rigid mass-production lines driven by pre-programmed robot routines.",
+  "name": "Flexible automation",
+  "src": "§1, p.1 left; §2.1, p.2 left",
+  "zh": "能適應多樣化、客製化產品與變動批量的製造自動化系統；相對於依賴寫死程序與預編軌跡的傳統大規模固定產線。"
+ },
  "focal-length": {
   "en": "How strongly a lens zooms. In K it is written in pixels as f_x and f_y: a larger value means a narrower field of view. The paper prints no value.",
   "name": "Focal length",
@@ -423,6 +429,12 @@
   "name": "Label",
   "src": "§3.2, p.4 left",
   "zh": "偵測到的東西的文字名稱，例如 hexagonal nut。論文的 c_i 把標籤和框裝在一起。標籤靠文字對回高層圖的 node。"
+ },
+ "learning-from-demonstration": {
+  "en": "A robot learning paradigm where manipulation policies are acquired from human demonstrations (e.g. via teleoperation or kinesthetic teaching) rather than explicit geometric programming, but often requiring per-task training data.",
+  "name": "Learning from demonstration",
+  "src": "§1, p.1 left; §2.1, p.2 left",
+  "zh": "一種機器人學習範式，透過人類示範（如雙邊遙控或引導示教）習得操作策略，而非手動編寫幾何程序；但面對新產品時通常需要重新收集訓練資料。"
  },
  "llama-adapter": {
   "en": "The second image reader in Table 1. A published method of this name (LLaMA-Adapter V2) adds small trained layers to a LLaMA model so it can follow instructions about images. The paper gives no reference or version and writes both Llama-adapter and Llama-adapter2.",
@@ -1008,6 +1020,12 @@
   "en": "One still picture of a video. The t of the camera equations numbers camera frames; it is not the assembly step t of G_t.",
   "name": "Video frame",
   "zh": "影片裡的一張靜止畫面。相機那幾條式子的 t 是在數影格，不是 G_t 的組裝步驟 t。"
+ },
+ "vision-language-action": {
+  "en": "End-to-end multimodal foundation models (e.g. RT-2) that directly predict robot action tokens from camera images and language instructions, transferring web-scale visual and semantic knowledge to control.",
+  "name": "Vision-Language-Action (VLA)",
+  "src": "§2.2, p.2 right",
+  "zh": "端對端多模態基礎模型（如 RT-2），直接由相機影像與語言指令預測機器人動作 token，將大規模網路視覺與語意知識轉移至控制。"
  },
  "vlm": {
   "en": "Vision language model: a model that takes a picture and text as input and answers in text. In this paper, a superscript VLM on a function means that call receives the picture.",

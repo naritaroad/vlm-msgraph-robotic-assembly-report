@@ -13,10 +13,10 @@
 const KEY = 'msgraph.prefs';
 const root = document.documentElement;
 
-export const DEFAULTS = Object.freeze({ lang: 'en', theme: 'system', swap: 0, sync: 'kp', live: 1, big: 0, timer: 0, split: 0.42 });
+export const DEFAULTS = Object.freeze({ lang: 'en', theme: 'system', swap: 0, sync: 'kp', live: 1, eqopen: 0, big: 0, timer: 0, split: 0.42 });
 export const CHOICES = Object.freeze({
   lang: ['en', 'zh', 'both'], theme: ['system', 'light', 'dark'], swap: [0, 1],
-  sync: ['off', 'kp', 'precise'], live: [0, 1], big: [0, 1], timer: [0, 1],
+  sync: ['off', 'kp', 'precise'], live: [0, 1], eqopen: [0, 1], big: [0, 1], timer: [0, 1],
 });
 export const SPLIT_MIN = 0.28, SPLIT_MAX = 0.72;
 
@@ -36,7 +36,7 @@ const state = { ...DEFAULTS };
   const saved = load();
   for (const k of Object.keys(DEFAULTS)) if (k in saved) state[k] = clean(k, saved[k]);
   const q = new URLSearchParams(location.search);
-  for (const k of ['lang', 'theme', 'sync']) if (q.get(k)) state[k] = clean(k, q.get(k));
+  for (const k of ['lang', 'theme', 'sync', 'eqopen']) if (q.get(k)) state[k] = clean(k, q.get(k));
   if (q.get('swap') === '1') state.swap = 1;
 }
 
@@ -51,6 +51,7 @@ function apply(key) {
     case 'swap': if (v) root.dataset.swap = '1'; else delete root.dataset.swap; break;
     case 'sync': root.dataset.sync = v; break;
     case 'live': root.dataset.live = String(v); break;
+    case 'eqopen': root.dataset.eqopen = String(v); break;
     case 'big': root.toggleAttribute('data-present', !!v); break;
     case 'split': root.style.setProperty('--split', String(v)); break;
     default:

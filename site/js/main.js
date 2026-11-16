@@ -10,7 +10,7 @@
 import { $$, readJSON } from './ui/dom.js';
 import * as prefs from './ui/prefs.js';
 import { createBus, createBind, format } from './ui/bind.js';
-import { typeset, refit, refitOne, tagTex, valTex, renderTex } from './ui/math.js';
+import { typeset, refit, refitOne, tagTex, valTex, renderTex, getSymbol } from './ui/math.js';
 import { createStage, parseAct } from './ui/stage.js';
 import { createNav } from './ui/nav.js';
 import { createTimer } from './ui/timer.js';
@@ -59,7 +59,7 @@ async function boot() {
   // Not a view: fills every .eq-live[data-live] and .shapes. Skipped when the build says the file is absent.
   if (info.formulas !== false) {
     import(new URL('./stage/formulas.js', import.meta.url).href)
-      .then((m) => m.init?.({ ...stage.ctx, tagTex, valTex, renderTex, refitOne, prefs }))
+      .then((m) => m.init?.({ ...stage.ctx, tagTex, valTex, renderTex, refitOne, prefs, getSymbol }))
       .catch((e) => console.warn('[main] formulas.js not loaded:', e.message));
   }
 
@@ -93,6 +93,60 @@ async function boot() {
       void b.offsetWidth;
       b.classList.add('is-sent');
       stage.run(b.dataset.act, { user: true, trigger: b });
+    });
+  });
+
+  // Fold each formula's .eq-live, dl.io, and table.sym into a collapsible <details class="eq-drawer">.
+  attempt('eqDrawers', () => {
+    const isOpen = String(prefs.get('eqopen') ?? '0') === '1';
+    const drawers = [];
+    for (const fig of $$('figure.eq')) {
+      const live = fig.querySelector(':scope > .eq-live');
+      const extras = [];
+      let cur = fig.nextElementSibling;
+      for (let step = 0; cur && step < 4; step++) {
+        const next = cur.nextElementSibling;
+        if (cur.matches('figure.eq, section, h2, h3, h4, article.flaw, aside.good, aside.whynot, ol.steps, div.do, div.pair')) break;
+        if (cur.matches('dl.io, table.sym')) extras.push(cur);
+        else if (cur.matches('.table-wrap') && cur.querySelector('table.sym')) extras.push(cur);
+        cur = next;
+      }
+      if (!live && !extras.length) continue;
+      const symTable = extras.find((x) => x.matches('table.sym')) || extras.find((x) => x.querySelector?.('table.sym'))?.querySelector('table.sym');
+      const symCount = symTable ? symTable.querySelectorAll('tbody tr').length : 0;
+      const hasIo = extras.some((x) => x.matches('dl.io'));
+      const d = document.createElement('details');
+      d.className = 'eq-drawer';
+      d.open = isOpen;
+      const sum = document.createElement('summary');
+      sum.className = 'eq-drawer-bar';
+      const labelEn = hasIo && symCount
+        ? `Formula details · Purpose, I/O &amp; ${symCount} symbols`
+        : symCount
+          ? `Formula details · ${symCount} symbols &amp; values`
+          : hasIo
+            ? 'Formula details · Purpose &amp; I/O'
+            : 'Formula details · Substituted values';
+      const labelZh = hasIo && symCount
+        ? `公式明細 · 用途、輸入輸出與 ${symCount} 個符號`
+        : symCount
+          ? `公式明細 · ${symCount} 個符號與數值`
+          : hasIo
+            ? '公式明細 · 用途與輸入輸出'
+            : '公式明細 · 代入數值';
+      sum.innerHTML = `<span class="eq-drawer-title"><span class="en">${labelEn}</span><span class="zh">${labelZh}</span></span>`
+        + `<span class="eq-drawer-hint"><span class="en" data-open="Collapse" data-closed="Expand">Expand</span><span class="zh" data-open="收合" data-closed="展開">展開</span></span>`;
+      const body = document.createElement('div');
+      body.className = 'eq-drawer-body';
+      if (live) body.append(live);
+      for (const ex of extras) body.append(ex);
+      d.append(sum, body);
+      fig.append(d);
+      drawers.push(d);
+    }
+    prefs.on('eqopen', (v) => {
+      const open = String(v) === '1';
+      for (const d of drawers) d.open = open;
     });
   });
 

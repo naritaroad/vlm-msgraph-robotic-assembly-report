@@ -79,6 +79,22 @@
   "tex": "\\Gamma_t",
   "zh": "畫面 t 的相機姿態：把相機座標換到共同參考座標。"
  },
+ "I_depth": {
+  "en": "The depth image in one observation: one distance per pixel. The paper writes the shape h×w and does not state the unit. The lab image is 640×480, metres along the optical axis.",
+  "kind": "data",
+  "shape": "h×w",
+  "src": "§3.2, p.4 left",
+  "tex": "I^{depth}",
+  "zh": "一次觀測裡的深度影像：每個 pixel 一個距離。論文寫的形狀是 h×w，沒有寫單位。實驗室的影像是 640×480，沿光軸量，單位公尺。"
+ },
+ "I_rgb": {
+  "en": "The colour image in one observation. The paper writes the shape h×w×3 and does not state h, w, or what the 3 stands for. The lab image is 640×480.",
+  "kind": "data",
+  "shape": "h×w×3",
+  "src": "§3.2, p.4 left",
+  "tex": "I^{rgb}",
+  "zh": "一次觀測裡的彩色影像。論文寫的形狀是 h×w×3，沒有寫 h、w，也沒有寫那個 3 是什麼。實驗室的影像是 640×480。"
+ },
  "I_rgb_j": {
   "en": "Colour value of pixel (u, v) in view j. In Eq. (6) it is tested against the mask, which does not fit by type.",
   "kind": "data",
@@ -343,14 +359,6 @@
   "tex": "SO(3)",
   "zh": "所有 3D 旋轉矩陣的集合。R ∈ SO(3) 表示 R 是旋轉：R^T R = I 且 det R = 1。"
  },
- "T_hat": {
-  "en": "The list of triples the model predicted for one task.",
-  "kind": "model",
-  "shape": "list of triples",
-  "src": "Derived from §4.1, p.5–6",
-  "tex": "\\hat{\\mathcal{T}}",
-  "zh": "模型替一個任務預測的那串 triple。"
- },
  "T_rou": {
   "en": "Rough translation vector. The paper bases it on the distance between the two centroids; read here as their difference.",
   "kind": "computed",
@@ -358,14 +366,6 @@
   "src": "§3.2, p.4 right (text); formula Derived",
   "tex": "T_{rou}",
   "zh": "粗平移向量。論文說由兩個質心的距離算出；這裡讀成兩個質心的差。"
- },
- "T_star": {
-  "en": "The ground-truth list of triples for the same task.",
-  "kind": "data",
-  "shape": "list of triples",
-  "src": "§4.1, p.5 right; Fig. 6",
-  "tex": "\\mathcal{T}^{*}",
-  "zh": "同一個任務的 ground truth triple。"
  },
  "T_trans": {
   "en": "Translation, a column vector. Not the time index t and not the gripper move of Eq. (7).",
@@ -413,8 +413,6 @@
    "sigma",
    "Nar_2",
    "i_set",
-   "fisher_abcd",
-   "fisher_p",
    "sup_VLM",
    "s_hat",
    "p_hat",
@@ -439,10 +437,7 @@
    "f_0106"
   ],
   "kp06": [
-   "T_hat",
-   "T_star",
    "k_level",
-   "match_k",
    "R_at_k",
    "M_tasks",
    "mR_at_k",
@@ -460,6 +455,8 @@
   ],
   "kp07": [
    "O_t",
+   "I_rgb",
+   "I_depth",
    "c_i",
    "m_i",
    "eta",
@@ -580,21 +577,10 @@
   "kp10": [
    "n_trials",
    "k_success",
-   "alpha",
-   "p_L",
-   "p_U",
    "i_sum_ci",
    "alpha_half",
    "p_hat_rate"
   ]
- },
- "alpha": {
-  "en": "Error level of the interval; 0.05 gives a 95% interval.",
-  "kind": "setting",
-  "shape": "0.05",
-  "src": "Derived; not in the paper",
-  "tex": "\\alpha",
-  "zh": "區間的錯誤水準；0.05 對應 95% 區間。"
  },
  "alpha_half": {
   "en": "Probability allowed in each tail: α/2 = 0.025 for a 95% interval.",
@@ -892,14 +878,6 @@
   "tex": "a,\\ b",
   "zh": "沒有 Base Searcher 時，20 次裡 a 次成功、b 次失敗。Product 5：a = 7、b = 13（表 2）。"
  },
- "fisher_abcd": {
-  "en": "Counts in a 2×2 table: successes and failures without the base (a, b) and with it (c, d).",
-  "kind": "data",
-  "shape": "counts",
-  "src": "Table 2, p.7; failures are 20 minus successes",
-  "tex": "a,\\ b,\\ c,\\ d",
-  "zh": "2×2 表的四個次數：沒有 base 的成功、失敗（a、b），有 base 的成功、失敗（c、d）。"
- },
  "fisher_cd": {
   "en": "c successes and d failures with the Base Searcher, out of 20 trials. Product 5: c = 15, d = 5 (Table 2).",
   "kind": "data",
@@ -907,14 +885,6 @@
   "src": "Table 2, p.7",
   "tex": "c,\\ d",
   "zh": "有 Base Searcher 時，20 次裡 c 次成功、d 次失敗。Product 5：c = 15、d = 5（表 2）。"
- },
- "fisher_p": {
-  "en": "Two-sided p-value of Fisher's exact test. Not the predicate p̂ of Eq. (1).",
-  "kind": "computed",
-  "shape": "probability, 0 to 1",
-  "src": "Our calculation; not in the paper",
-  "tex": "p",
-  "zh": "Fisher's exact test 的雙尾 p 值。不是式 (1) 的 predicate p̂。"
  },
  "h_img": {
   "en": "Image height in pixels. The paper gives no value; our lab uses 480.",
@@ -1123,14 +1093,6 @@
   "tex": "m",
   "zh": "任務編號，從 1 到 M，用在平均 mR@k。不是 KP 07 的 mask m_i。"
  },
- "match_k": {
-  "en": "Number of ground-truth triples matched one to one by a predicted triple at level k.",
-  "kind": "computed",
-  "shape": "count",
-  "src": "Derived; the paper does not say how a hit is decided",
-  "tex": "\\mathrm{match}_k",
-  "zh": "在層級 k 下，被預測一對一配到的 ground truth triple 條數。"
- },
  "mid": {
   "cls": "rel",
   "en": "Read 'such that' or 'where'. In {x | condition} the part after the bar is the condition each item must meet: in Eq. (3), steps i on the path; in Eq. (6), points whose pixel lies in the mask.",
@@ -1201,22 +1163,6 @@
   "src": "Eq. (4)(5), p.4 right; the homogeneous 1 itself is External",
   "tex": "1",
   "zh": "加在向量或矩陣裡的那個 1：p = [u, v, 1]、[x, y, z, 1] 的最後一個數、Γ_t 的右下角。有了它，一個 4×4 矩陣就能平移一個點。例子的 Γ_t 右欄那個 1，是沿 x 平移 1 m。"
- },
- "p_L": {
-  "en": "Lower end of the interval: the rate at which k or more successes have probability α/2.",
-  "kind": "computed",
-  "shape": "0–1",
-  "src": "Derived from Table 3",
-  "tex": "p_L",
-  "zh": "區間下限：讓「成功 k 次以上」的機率等於 α/2 的那個成功率。"
- },
- "p_U": {
-  "en": "Upper end of the interval: the rate at which k or fewer successes have probability α/2.",
-  "kind": "computed",
-  "shape": "0–1",
-  "src": "Derived from Table 3",
-  "tex": "p_U",
-  "zh": "區間上限：讓「成功 k 次以下」的機率等於 α/2 的那個成功率。"
  },
  "p_bold": {
   "en": "Homogeneous coordinate vector of pixel (u, v), read as [u, v, 1]ᵀ. The paper does not write it out.",

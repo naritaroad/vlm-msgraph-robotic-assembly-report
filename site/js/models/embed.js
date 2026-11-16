@@ -30,6 +30,85 @@ function loadLibs() {
   return libs;
 }
 
+const REF_MAP = {
+  product1: {
+    src: 'media/figures/crops/ref_product1.png',
+    en: 'Paper Fig. 4 · Product 1',
+    zh: '原圖對照 · Product 1',
+    alt: 'Paper Fig. 4 Product 1 drawing / 論文圖 4 Product 1 原圖',
+  },
+  product2: {
+    src: 'media/figures/crops/ref_product2.png',
+    en: 'Paper Fig. 4 · Product 2',
+    zh: '原圖對照 · Product 2',
+    alt: 'Paper Fig. 4 Product 2 drawing / 論文圖 4 Product 2 原圖',
+  },
+  product3: {
+    src: 'media/figures/crops/ref_product3.png',
+    en: 'Paper Fig. 4 · Product 3',
+    zh: '原圖對照 · Product 3',
+    alt: 'Paper Fig. 4 Product 3 drawing / 論文圖 4 Product 3 原圖',
+  },
+  product4: {
+    src: 'media/figures/crops/ref_product4.png',
+    en: 'Paper Fig. 4 · Product 4',
+    zh: '原圖對照 · Product 4',
+    alt: 'Paper Fig. 4 Product 4 drawing / 論文圖 4 Product 4 原圖',
+  },
+  product5: {
+    src: 'media/figures/crops/ref_product5.png',
+    en: 'Paper Fig. 4 · Product 5',
+    zh: '原圖對照 · Product 5',
+    alt: 'Paper Fig. 4 Product 5 drawing / 論文圖 4 Product 5 原圖',
+  },
+  ballscrew: {
+    src: 'media/figures/crops/ref_ballscrew.png',
+    en: 'Paper Fig. 6',
+    zh: '原圖對照 · 圖 6',
+    alt: 'Paper Fig. 6 ball-screw drawing / 論文圖 6 滾珠螺桿原圖',
+  },
+};
+
+function createRefCard(initialId) {
+  const card = document.createElement('div');
+  card.className = 'm3-ref';
+  card.innerHTML = `<div class="m3-ref-head">`
+    + `<span class="m3-ref-title"></span>`
+    + `<button type="button" class="m3-ref-toggle" aria-expanded="true" aria-label="Toggle reference / 切換對照圖收合" title="Toggle reference">−</button>`
+    + `</div>`
+    + `<div class="m3-ref-body">`
+    + `<button type="button" class="m3-ref-zoom fig-zoom" aria-label="Zoom reference image / 放大檢視原圖對照">`
+    + `<img class="m3-ref-img" src="" alt="" loading="lazy">`
+    + `</button>`
+    + `</div>`;
+  const titleEl = card.querySelector('.m3-ref-title');
+  const toggleBtn = card.querySelector('.m3-ref-toggle');
+  const imgEl = card.querySelector('.m3-ref-img');
+
+  toggleBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const isCollapsed = card.classList.toggle('is-collapsed');
+    const expanded = !isCollapsed;
+    toggleBtn.setAttribute('aria-expanded', String(expanded));
+    toggleBtn.textContent = expanded ? '−' : '+';
+  });
+
+  function update(id) {
+    const meta = REF_MAP[id];
+    if (!meta) {
+      card.hidden = true;
+      return;
+    }
+    card.hidden = false;
+    titleEl.innerHTML = bi(meta.en, meta.zh);
+    imgEl.src = meta.src;
+    imgEl.alt = meta.alt;
+  }
+
+  update(initialId);
+  return { el: card, update };
+}
+
 /** Build the frame of one slot. Returns the controller that `load()` fills in later. */
 function frame(slot) {
   const ids = (slot.dataset.models || '').split(/\s+/).filter(Boolean);
@@ -46,6 +125,7 @@ function frame(slot) {
   slot.append(bar, stage, info, cap);
 
   const st = { ids, current: ids[0], exploded: false, viewer: null, models: [] };
+  const refCard = createRefCard(st.current);
   let tabs = null;
   if (ids.length > 1) {
     tabs = document.createElement('div');
@@ -79,6 +159,7 @@ function frame(slot) {
     st.current = id; st.exploded = false; paintX();
     tabs?.querySelectorAll('button').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.model === id)));
     info.innerHTML = pair('hint');
+    refCard.update(id);
     await st.viewer.setModel(id);
     label(id);
   }
@@ -102,9 +183,13 @@ function frame(slot) {
         onPick: showPick,
         reducedMotion: window.matchMedia('(prefers-reduced-motion: reduce)').matches,
       });
+      stage.append(refCard.el);
+      refCard.update(st.current);
     } catch (err) {
       console.warn('[model3d]', err);
       stage.innerHTML = `<div class="m3-off">${pair('off')}</div>`;
+      stage.append(refCard.el);
+      refCard.update(st.current);
       bar.hidden = true; info.hidden = true;
       return;
     }

@@ -7,6 +7,45 @@ import { PAPER_PLAN, PARTS, FIXTURES } from '../lab/config.js';
 
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 const bi = (en, zh) => `<span class="en" lang="en">${en}</span><span class="zh" lang="zh-Hant">${zh}</span>`;
+const lang = () => document.documentElement.getAttribute('data-lang') || 'en';
+const ui = (en, zh) => lang() === 'zh' ? zh : lang() === 'both' ? `${en}／${zh}` : en;
+
+// Display names for the drawn graph. Ids stay English: scoring and the raw triples still use them.
+const NAME_ZH = {
+  'black ink refill': '黑墨芯', 'purple ink refill': '紫墨芯',
+  'black rubber front grip': '黑前握', 'red rubber front grip': '紅前握',
+  'pen barrel with black clip': '黑夾筆管', 'pen barrel with red clip': '紅夾筆管',
+  'threaded cap': '螺紋蓋', 'stud cap': '帶柱蓋', 'spinner body with bearing': '陀螺本體',
+  'pen barrel': '筆管', 'pen barrels': '筆管',
+  'red large gear': '紅大齒輪', 'green medium gear': '綠中齒輪', 'yellow medium gear': '黃中齒輪',
+  'blue large gear': '藍大齒輪', 'white tiny hexagonal nut': '白螺帽', 'white cover': '白蓋',
+};
+const REL_ZH = {
+  'attached to': '裝在', wrapping: '包住', inside: '在內', screw: '旋上', 'hanging from': '掛在',
+  'goes through': '穿過', 'inserted into': '插入', 'meshed with': '咬合', below: '在下', above: '在上',
+};
+const nameZh = id => NAME_ZH[norm(id)] || '';
+const relZh = id => REL_ZH[norm(id)] || '';
+const showTok = s => {
+  const zh = nameZh(s) || relZh(s);
+  if (!zh || lang() === 'en') return esc(s);
+  return lang() === 'zh' ? esc(zh) : `${esc(zh)}（${esc(s)}）`;
+};
+function triBi(raw) {
+  const en = tri(raw);
+  if (!Array.isArray(raw) || raw.length < 3) return en;
+  const H = nameZh(raw[0]), R = relZh(raw[1]), T = nameZh(raw[2]);
+  if (!H && !R && !T) return en;
+  return `<span class="en" lang="en">${en}</span><span class="zh" lang="zh-Hant">⟨${esc(H || raw[0])}，<b>${esc(R || raw[1])}</b>，${esc(T || raw[2])}⟩</span>`;
+}
+function nodeLines(id, narrow, nw) {
+  const max = Math.floor((nw - (narrow ? 48 : 50)) / (narrow ? 6.6 : 7.3));
+  const enLines = wrap(id, max, narrow ? 3 : 2);
+  const zh = nameZh(id);
+  if (!zh || lang() === 'en') return enLines;
+  if (lang() === 'both' && id.length <= max) return [zh, id];
+  return [zh];
+}
 const tag = t => `<span class="tag" data-tag="${t}">${t}</span>`;
 const tri = t => `<span class="w-t">⟨${esc(t[0])}, <b>${esc(t[1])}</b>, ${esc(t[2])}⟩</span>`;
 const getJSON = async p => { const r = await fetch(new URL(`../../data/${p}`, import.meta.url)); if (!r.ok) throw new Error(`${p}: HTTP ${r.status}`); return r.json(); };
@@ -147,8 +186,9 @@ export async function mount(el, ctx = {}) {
       const off = !RELATIONS.includes(norm(t.canon[1]));
       const n = ns.join(', ');
       const numbered = !state.asSet && !pens && state.mode !== 'base';
-      const label = status === 'missing' ? `GT ${n} −` : `${numbered ? `${n}  ` : ''}${t.canon[1]}${status === 'ok' ? ' ✓' : status === 'extra' ? ' +' : ''}`;
-      const lw = label.length * 8.6 + 10, lh = 22;
+      const relShown = lang() === 'en' ? t.canon[1] : (relZh(t.canon[1]) || t.canon[1]);
+      const label = status === 'missing' ? `GT ${n} −` : `${numbered ? `${n}  ` : ''}${relShown}${status === 'ok' ? ' ✓' : status === 'extra' ? ' +' : ''}`;
+      const lw = [...label].reduce((w, ch) => w + (ch.codePointAt(0) > 255 ? 15 : 8.2), 14), lh = 22;
       const rectAt = (x, y) => [x - lw / 2, y - lh / 2, x + lw / 2, y + lh / 2];
       const clampX = x => Math.max(lw / 2 + 4, Math.min(L.W - lw / 2 - 4, x));
       let d, lx, ly, ax, ay, ang;
@@ -192,7 +232,7 @@ export async function mount(el, ctx = {}) {
     let nodesSvg = '';
     for (const n of nodes.values()) {
       const [x, y] = n.c, x0 = x - L.nw / 2, y0 = y - L.nh / 2;
-      const lines = state.narrow ? wrap(n.id, Math.floor((L.nw - 48) / 6.6), 3) : wrap(n.id, Math.floor((L.nw - 50) / 7.3));
+      const lines = nodeLines(n.id, state.narrow, L.nw);
       const lineY = k => y + 5 + (k - (lines.length - 1) / 2) * (state.narrow ? 15 : 19);
       const isS = pens && state.pens === 0 && n.id === T[0].canon[0], isO = pens && state.pens === 2 && n.id === T[0].canon[2];
       const hl = isS || isO || (pens && state.pens === 3) || ((state.mode === 'base' || state.mode === 'path') && n.base);
@@ -207,13 +247,15 @@ export async function mount(el, ctx = {}) {
         ${badge ? `<g class="w-badge"><circle cx="${x0 + L.nw - 6}" cy="${y0 + 4}" r="14"/><text x="${x0 + L.nw - 6}" y="${y0 + 9}" text-anchor="middle">${badge}</text></g>` : ''}
         ${rk ? `<text class="w-rk" x="${x0 + 4}" y="${rk === 1 ? y0 + L.nh + 17 : y0 - 7}">r${rk}${rk === 1 ? ' = σ' : ''}</text>` : ''}
         ${role ? `<text class="w-rk" x="${x}" y="${y0 - 8}" text-anchor="middle">${role}</text>` : ''}
-        <title>${esc(n.id)}${n.extra ? ' (name from the model reply; maps to no single part)' : ''}</title></g>`;
+        <title>${esc(nameZh(n.id) && lang() !== 'en' ? (lang() === 'zh' ? nameZh(n.id) : `${nameZh(n.id)} · ${n.id}`) : n.id)}${n.extra ? esc(ui(' (name from the model reply; maps to no single part)', '（模型回覆裡的名稱，對不上單一零件）')) : ''}</title></g>`;
     }
     const svg = $('svg');
     H = Math.max(H, loopBottom);
     svg.setAttribute('viewBox', `0 0 ${L.W} ${H}`);
     svg.toggleAttribute('data-narrow', state.narrow);
-    svg.setAttribute('aria-label', `Scene graph with ${nodes.size} nodes and ${shown.length} edges: ${shown.map(t => t.canon.join(' ')).join('; ')}`);
+    svg.setAttribute('aria-label', ui(
+      `Scene graph with ${nodes.size} nodes and ${shown.length} edges`,
+      `場景圖，${nodes.size} 個節點、${shown.length} 條邊`));
     svg.innerHTML = pathSvg + edgesSvg + nodesSvg;
     return { T, shown, nodes };
   }
@@ -231,20 +273,22 @@ export async function mount(el, ctx = {}) {
     $('tags').innerHTML = gear ? tag('Paper') : (m === 'build' && state.source === 'gt') || pens ? tag('Local run') + tag('My view') : tag('Local run');
     const n = triples().length;
     if (state.t > n) state.t = n;
-    const opts = `<option value="gt"${state.source === 'gt' ? ' selected' : ''}>Ground truth (sceneB_gt.json)</option>` + runs.map(r => `<option value="${runId(r)}">${esc(r.model)} · ${r.variant === 'with_base' ? 'with base' : 'without base'} · run ${r.run}</option>`).join('');
-    const runOpts = sel => runs.filter(r => m !== 'base' && m !== 'path' || r.base).map(r => `<option value="${runId(r)}"${runId(r) === sel ? ' selected' : ''}>${esc(r.model)} · ${r.variant === 'with_base' ? 'with base' : 'without base'} · run ${r.run}</option>`).join('');
+    const variantOf = v => v === 'with_base' ? ui('with base', '有基準') : ui('without base', '沒有基準');
+    const runBit = r => `${esc(r.model)} · ${variantOf(r.variant)} · ${ui(`run ${r.run}`, `第 ${r.run} 次`)}`;
+    const opts = `<option value="gt"${state.source === 'gt' ? ' selected' : ''}>${esc(ui('Ground truth (sceneB_gt.json)', '標準答案（sceneB_gt.json）'))}</option>` + runs.map(r => `<option value="${runId(r)}">${runBit(r)}</option>`).join('');
+    const runOpts = sel => runs.filter(r => m !== 'base' && m !== 'path' || r.base).map(r => `<option value="${runId(r)}"${runId(r) === sel ? ' selected' : ''}>${runBit(r)}</option>`).join('');
     let c = '';
-    if (m === 'build') c += `<label class="w-field"><span>${bi('Source', '來源')}</span><select data-ctl="source" aria-label="Triple source">${opts}</select></label>`;
-    if (m === 'gt' || m === 'base' || m === 'path') c += `<label class="w-field"><span>${bi('Run', '實跑')}</span><select data-ctl="run" aria-label="Run">${runOpts(state.run)}</select></label>`;
+    if (m === 'build') c += `<label class="w-field"><span>${bi('Source', '來源')}</span><select data-ctl="source" aria-label="${esc(ui('Triple source', 'triple 來源'))}">${opts}</select></label>`;
+    if (m === 'gt' || m === 'base' || m === 'path') c += `<label class="w-field"><span>${bi('Run', '實跑')}</span><select data-ctl="run" aria-label="${esc(ui('Run', '實跑'))}">${runOpts(state.run)}</select></label>`;
     if (stepped) c += `<span class="w-field"><span>t</span><span class="w-stepper">
-        <button type="button" data-ctl="prev" aria-label="Previous step">‹</button>
-        <input type="range" data-ctl="t" min="0" max="${n}" step="1" value="${state.t}" aria-label="Time step t" aria-valuetext="t = ${state.t} of ${n}"${state.asSet ? ' disabled' : ''}>
-        <button type="button" data-ctl="next" aria-label="Next step">›</button>
-        <button type="button" data-ctl="play" class="btn">${timer ? 'Pause' : 'Play'}</button></span></span>`;
-    if (stepped) c += `<span class="w-field"><span>Eq. (1)</span><span class="w-seg" role="group" aria-label="Read Eq. (1) as">
+        <button type="button" data-ctl="prev" aria-label="${esc(ui('Previous step', '上一步'))}">‹</button>
+        <input type="range" data-ctl="t" min="0" max="${n}" step="1" value="${state.t}" aria-label="${esc(ui('Time step t', '時間步 t'))}" aria-valuetext="t = ${state.t} / ${n}"${state.asSet ? ' disabled' : ''}>
+        <button type="button" data-ctl="next" aria-label="${esc(ui('Next step', '下一步'))}">›</button>
+        <button type="button" data-ctl="play" class="btn">${esc(timer ? ui('Pause', '暫停') : ui('Play', '播放'))}</button></span></span>`;
+    if (stepped) c += `<span class="w-field"><span>Eq. (1)</span><span class="w-seg" role="group" aria-label="${esc(ui('Read Eq. (1) as', '式 (1) 的讀法'))}">
         <button type="button" data-ctl="seq" aria-pressed="${!state.asSet}">${bi('as a sequence', '當序列')}</button>
         <button type="button" data-ctl="set" aria-pressed="${state.asSet}">${bi('as a set', '當集合')}</button></span></span>`;
-    if (pens) c += `<span class="w-seg" role="group" aria-label="Highlight">${[['ŝ subject', 'ŝ 主詞'], ['p̂ predicate', 'p̂ 謂詞'], ['ô object', 'ô 受詞'], ['N nodes', 'N 節點'], ['E edges', 'E 邊']].map(([en, zh], i) =>
+    if (pens) c += `<span class="w-seg" role="group" aria-label="${esc(ui('Highlight', '標出'))}">${[['ŝ subject', 'ŝ 主詞'], ['p̂ predicate', 'p̂ 謂詞'], ['ô object', 'ô 受詞'], ['N nodes', 'N 節點'], ['E edges', 'E 邊']].map(([en, zh], i) =>
       `<button type="button" data-ctl="pens" data-i="${i}" aria-pressed="${state.pens === i}">${bi(en, zh)}</button>`).join('')}</span>`;
     $('controls').innerHTML = c;
     if (m === 'build') $('controls').querySelector('[data-ctl="source"]').value = state.source;
@@ -255,8 +299,8 @@ export async function mount(el, ctx = {}) {
     if (pens) {
       const t0 = T[0].canon, part = ['ŝ', 'p̂', 'ô'];
       $('gline').innerHTML = state.pens < 3
-        ? `⟨ŝ, p̂, ô⟩ = ⟨${t0.map((s, i) => i === state.pens ? `<mark>${esc(s)}</mark>` : esc(s)).join(', ')}⟩ &nbsp; ${part[state.pens]} = <b>${esc(t0[state.pens])}</b>`
-        : state.pens === 3 ? `N = {${N.map(esc).join(', ')}} &nbsp; |N| = ${N.length}` : `E = {${T.map(t => `${esc(t.canon[0])} →[${esc(t.canon[1])}] ${esc(t.canon[2])}`).join(', ')}} &nbsp; |E| = ${T.length}`;
+        ? `⟨ŝ, p̂, ô⟩ = ⟨${t0.map((s, i) => i === state.pens ? `<mark>${showTok(s)}</mark>` : showTok(s)).join(', ')}⟩ &nbsp; ${part[state.pens]} = <b>${showTok(t0[state.pens])}</b>`
+        : state.pens === 3 ? `N = {${N.map(showTok).join(', ')}} &nbsp; |N| = ${N.length}` : `E = {${T.map(t => `${showTok(t.canon[0])} →[${showTok(t.canon[1])}] ${showTok(t.canon[2])}`).join(', ')}} &nbsp; |E| = ${T.length}`;
     } else {
       const tt = stepped && !state.asSet ? state.t : shown.length;
       $('gline').innerHTML = stepped ? `G<sub>${state.asSet ? '' : tt}</sub> = (N, E) &nbsp; |N| = ${N.length} &nbsp; |E<sub>${state.asSet ? '' : tt}</sub>| = ${shown.length}`
@@ -268,7 +312,7 @@ export async function mount(el, ctx = {}) {
     if (m === 'gt') {
       const cnt = s => T.filter(t => t.status === s).length;
       side = `<div class="w-legend"><span class="w-key"><i class="w-sw w-st-ok"></i>✓ ${bi(`in both (${cnt('ok')})`, `兩邊都有（${cnt('ok')}）`)}</span><span class="w-key"><i class="w-sw w-st-extra"></i>+ ${bi(`predicted only (${cnt('extra')})`, `只有預測有（${cnt('extra')}）`)}</span><span class="w-key"><i class="w-sw w-st-missing"></i>− ${bi(`ground truth only (${cnt('missing')})`, `只有標準答案有（${cnt('missing')}）`)}</span></div>
-        <ol class="w-list w-tlist">${T.map(t => `<li data-status="${t.status}"><span class="w-mono">${t.status === 'missing' ? 'GT ' : ''}${t.n}</span> ${tri(t.raw)}</li>`).join('')}</ol>`;
+        <ol class="w-list w-tlist">${T.map(t => `<li data-status="${t.status}"><span class="w-mono">${t.status === 'missing' ? 'GT ' : ''}${t.n}</span> ${triBi(t.raw)}</li>`).join('')}</ol>`;
     } else if (m === 'base' || m === 'path') {
       const run = runOf(state.run), reply = run?.base || '';
       const names = [...DESK.map(d => d.id)].sort((a, b) => b.length - a.length);
@@ -282,7 +326,7 @@ export async function mount(el, ctx = {}) {
       side = `<${tagName} class="w-list w-tlist${state.asSet && stepped ? ' w-unordered' : ''}">${items.map(t => {
         const i = T.indexOf(t), on = !stepped || state.asSet || i < state.t, cur = stepped && !state.asSet && i === state.t - 1;
         const off = !RELATIONS.includes(norm(t.canon[1]));
-        return `<li${on ? '' : ' data-pending'}${cur ? ' aria-current="step"' : ''}>${state.asSet && stepped ? '' : `<span class="w-mono">t = ${i + 1}</span> `}${tri(t.raw)}${off ? ` <mark class="w-ool">${bi('off-list', '清單外')}</mark>` : ''}</li>`;
+        return `<li${on ? '' : ' data-pending'}${cur ? ' aria-current="step"' : ''}>${state.asSet && stepped ? '' : `<span class="w-mono">t = ${i + 1}</span> `}${triBi(t.raw)}${off ? ` <mark class="w-ool">${bi('off-list', '清單外')}</mark>` : ''}</li>`;
       }).join('')}</${tagName}>`;
     }
     $('side').innerHTML = side;
@@ -300,7 +344,7 @@ export async function mount(el, ctx = {}) {
     if (m === 'path') notes.push(bi('ϱ is the order in which objects are visited from the base: r1 = σ, then r2, r3. Eq. (2) prints it as {r1, → …, → r_j}; Eq. (3) then re-narrates the steps along σ → ϱ.',
       'ϱ 是從基準出發依序走到的物件：r1 = σ，接著 r2、r3。式 (2) 印成 {r1, → …, → r_j}；式 (3) 再沿 σ → ϱ 重排步驟。'));
     if (m === 'gt') notes.push(bi('Strict names, set reading, @Triple. An edge counts only when subject, relation and object all match. Switch names or order on the Scores tab.', '嚴格名稱、集合讀法、@Triple：主詞、關係、受詞全對才算。名稱與順序的其他讀法在 Scores 分頁切換。'));
-    if (gear) notes.push(bi('Steps 1–3 attach to the white cover. Step 4 attaches the blue gear to the green gear, and step 5 the nut to the blue gear (Fig. 7, top row).', '第 1–3 步接到 white cover；第 4 步把藍齒輪接到綠齒輪；第 5 步把螺帽接到藍齒輪（圖 7 最上列）。'));
+    if (gear) notes.push(bi('Steps 1–3 attach to the white cover. Step 4 attaches the blue gear to the green gear, and step 5 the nut to the blue gear (Fig. 7, top row).', '第 1–3 步裝到白蓋；第 4 步把藍齒輪裝到綠齒輪；第 5 步把螺帽裝到藍齒輪（圖 7 最上列）。'));
     $('notes').innerHTML = notes.map(s => `<p class="w-note">${s}</p>`).join('');
     $('src').innerHTML = gear ? bi('Source: PAPER_PLAN in js/lab/config.js, copied from Fig. 7 (p.7).', '來源：js/lab/config.js 的 PAPER_PLAN，抄自圖 7（p.7）。')
       : m === 'build' && state.source !== 'gt' || m === 'gt' ? bi(`Source: ${esc(runOf(m === 'gt' ? state.run : state.source).file)} · data/sceneB_gt.json`, `來源：${esc(runOf(m === 'gt' ? state.run : state.source).file)}、data/sceneB_gt.json`)
@@ -368,6 +412,7 @@ export async function mount(el, ctx = {}) {
     setT(d.status === 'success' ? d.index + 1 : Math.min(state.t, d.index + 1), { fresh: d.status === 'success' });
   });
   ctx.bus?.on?.('score:update', d => { const id = d && `${d.model}/${d.variant}/${d.run}`; if (id && runOf(id)) { state.run = id; if (state.mode === 'gt') render(); } });
+  ctx.bus?.on?.('lang', () => render());
 
   function act(action, args) {
     const [a, ...rest] = [action, ...(Array.isArray(args) ? args : args != null ? [args] : [])].join(':').split(':');

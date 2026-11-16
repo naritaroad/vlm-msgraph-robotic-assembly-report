@@ -11,8 +11,8 @@
 // the ones above. Esc closes the top box. Pressing outside every box closes them all. Each box follows its anchor
 // while the page scrolls and closes when the anchor leaves the screen.
 
-import { $$, L, esc, fetchJSON } from './dom.js';
-import { renderTex, getSymbol, setSymbols, getElement, symbolByTex } from './math.js';
+import { $$, L, esc, fetchJSON, readJSON } from './dom.js';
+import { renderTex, getSymbol, setSymbols, getElement, symbolByTex, kpOf } from './math.js';
 import { createAutoTerm } from './autoterm.js';
 
 const KIND = { data: ['data', '資料'], setting: ['setting', '設定值'], computed: ['computed', '算出來的'], model: ['model output', '模型輸出'] };
@@ -54,32 +54,56 @@ const MAX_LAYERS = 8;
 const CLOSE = '<button type="button" class="pop-close"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>'
   + `<span class="vh">${L('Close', '關閉')}</span></button>`;
 const firstSentence = (s) => { const m = String(s || '').match(/^.*?[.。](?=\s|$)/); return m ? m[0] : String(s || ''); };
-const kpOf = (el) => el?.closest?.('section.kp')?.id || el?.closest?.('[data-kp-scope]')?.dataset.kpScope || '';
 
 export function createPop({ katex } = {}) {
   const first = document.getElementById('pop');
   if (!first) return null;
   let terms = {};
+  let forms = {};
   let auto = null;
   const layers = [];               // { box, anchor, kind, point, kp }
+  // Chinese match forms with no English spelling of their own. The box still names the English word.
+  const ORIG = { subject: 'subject', object: 'object' };
 
-  const ready = Promise.all([
-    fetchJSON('data/gloss.json').catch(() => ({})),
-    fetchJSON('data/symbols.json').catch(() => ({})),
-    fetchJSON('data/match.json').catch(() => ({})),
-  ]).then(([g, s, m]) => { terms = g || {}; setSymbols(s || {}); auto = createAutoTerm(m || {}); return true; });
+  const inlineGloss = readJSON('reader-gloss');
+  const ready = (inlineGloss
+    ? Promise.resolve([inlineGloss.terms, inlineGloss.symbols, inlineGloss.match])
+    : Promise.all([
+        fetchJSON('data/gloss.json').catch(() => ({})),
+        fetchJSON('data/symbols.json').catch(() => ({})),
+        fetchJSON('data/match.json').catch(() => ({})),
+      ])
+  ).then(([g, s, m]) => { terms = g || {}; forms = m || {}; setSymbols(s || {}); auto = createAutoTerm(m || {}); return true; });
 
   // ── content ──
 
   const tex = (t, kp) => `<span class="pop-tex" data-tex="${esc(t)}" data-kp-scope="${esc(kp || '')}"></span>`;
+  const pageLang = () => document.documentElement.dataset.lang || 'en';
+
+  // The English word, when the title the reader sees is only the Chinese click.
+  function termOrig(key, entry) {
+    const named = (entry && entry.name) || '';
+    if (/[A-Za-z]/.test(named)) return named.trim();
+    for (const f of forms[key] || []) if (/[A-Za-z]/.test(f)) return String(f).trim();
+    return ORIG[key] || '';
+  }
+  function origLine(title, orig) {
+    const lang = pageLang();
+    if ((lang !== 'zh' && lang !== 'both') || !orig) return '';
+    const t = title.trim().toLowerCase();
+    const o = orig.trim().toLowerCase();
+    if (!o || t === o || t.includes(o)) return '';
+    return `<p class="pop-orig" lang="en">${esc(orig)}</p>`;
+  }
 
   function termCard(el) {
     const key = el.dataset.term;
     const e = terms[key];
     const shown = el.textContent.trim();
     if (!e) return `<p class="pop-name">${esc(shown)}</p><p class="pop-def">${L('No entry for this one yet.', '這個詞還沒有說明。')}</p>`;
+    const title = e.name || shown;
     const kicker = [L('Term', '詞'), e.src ? `<span>${esc(e.src)}</span>` : `<span class="tag" data-tag="External">External</span>`].join(' ');
-    return `<p class="pop-kicker">${kicker}</p><p class="pop-name">${esc(e.name || shown)}</p>`
+    return `<p class="pop-kicker">${kicker}</p><p class="pop-name">${esc(title)}</p>${origLine(title, termOrig(key, e))}`
       + `<p class="pop-def">${L(e.en || '', e.zh || e.en || '')}</p>`
       + (e.paper ? `<p class="pop-def">${L(e.paper.en || '', e.paper.zh || e.paper.en || '')}</p>` : '');
   }
@@ -129,7 +153,8 @@ export function createPop({ katex } = {}) {
     const norm = piece.replace(/\\(?:mathrm|text|mathit)\{([^}]*)\}/g, '$1').replace(/[{}\s]/g, '');
     const hint = HINT[norm];
     let h = `<p class="pop-kicker">${L(en, zh)}${ownerSym ? ` <span>${L('of', '屬於')} </span><span class="pop-tex-inline" data-tex="${esc(ownerSym.tex || owner.dataset.sym)}" data-kp-scope="${esc(kp)}"></span>` : ''}</p>`
-      + `<p class="pop-name">${tex(piece, kp)}</p>`;
+      + `<p class="pop-name">${tex(piece, kp)}</p>`
+      + (pageLang() === 'zh' ? `<p class="pop-orig" lang="en">${esc(en)}</p>` : '');
     if (sym) h += `<p class="pop-def">${L(sym.en || '', sym.zh || sym.en || '')}</p>`;
     else if (hint) h += `<p class="pop-def">${L(`Here: ${hint[0]}.`, `這裡：${hint[1]}。`)}</p>`;
     h += `<p class="pop-def pop-role">${L(den, dzh)}</p>`;
@@ -141,6 +166,8 @@ export function createPop({ katex } = {}) {
   }
 
   function ioOf(fig) {
+    const inside = fig.querySelector('dl.io');
+    if (inside) return inside;
     let n = fig.nextElementSibling;
     for (let i = 0; n && i < 4; i++, n = n.nextElementSibling) {
       if (n.matches('dl.io')) return n;

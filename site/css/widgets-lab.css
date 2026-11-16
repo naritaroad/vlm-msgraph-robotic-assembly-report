@@ -416,8 +416,8 @@ html[data-lang="both"] .lab-hud > .hud-tl { flex-direction: column; align-items:
 
 /* data shapes (KP7) */
 .shapes.lv-shapes { padding: var(--s-3); border-style: solid; border-color: var(--rule); background: var(--card); }
-.shapes-scroll { overflow-x: auto; scrollbar-width: thin; outline-offset: 2px; }
-.shapes-svg { display: block; width: 100%; min-width: 470px; height: auto; }
+.shapes-scroll { overflow-x: auto; overflow-y: hidden; scrollbar-width: thin; padding-bottom: 2px; }
+.shapes-svg { display: block; width: 100%; height: auto; }
 .shapes-svg text { font-family: var(--font-mono); font-size: 14px; fill: var(--ink-2); }
 .shapes-svg .sh-sym { font-family: var(--font-serif); font-size: 19px; font-style: italic; fill: var(--ink); }
 .shapes-svg .sh-cal { font-style: normal; }
@@ -441,11 +441,54 @@ html[data-lang="both"] .lab-hud > .hud-tl { flex-direction: column; align-items:
 .sh-at-s rect { stroke: var(--kind-model); }
 .sh-arrow { stroke: var(--ink-2); stroke-width: 1.5; fill: none; }
 .sh-ahp { fill: var(--ink-2); }
-.shapes-legend { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr)); gap: var(--s-1) var(--s-4); margin-top: var(--s-3); padding-top: var(--s-2); border-top: 1px solid var(--rule); font-size: var(--fs-note); }
-.shapes-legend > div { display: grid; grid-template-columns: 4.2em minmax(0, 1fr); gap: var(--s-2); align-items: baseline; }
-.shapes-legend dt { font-family: var(--font-serif); font-style: italic; font-size: 1.15em; line-height: 1.2; color: var(--ink); white-space: nowrap; }
-.shapes-legend dt :is(sub, sup) { font-size: .8em; font-style: normal; line-height: 0; }
-.shapes-legend dd { color: var(--ink-2); line-height: 1.45; }
+/* every label in the diagram opens its symbol card (pop.js); the box behind it lights on hover, focus and open */
+.shapes-svg [data-sym] { cursor: pointer; }
+.shapes-svg .sh-hot { outline: none; }
+.shapes-svg .sh-hitbox { fill: transparent; stroke: transparent; stroke-width: 1.5; transition: fill var(--t-press) var(--ease); }
+.shapes-svg .sh-ul { stroke: var(--accent); stroke-width: 1.2; stroke-dasharray: 1.5 2.5; stroke-linecap: round; opacity: .75; }
+.shapes-svg .sh-hot:hover .sh-hitbox, .shapes-svg .sh-hot.is-same .sh-hitbox { fill: var(--accent-wash); }
+.shapes-svg .sh-hot:focus-visible .sh-hitbox, .shapes-svg .sh-hot.is-open .sh-hitbox { fill: var(--accent-wash); stroke: var(--accent); }
+.shapes-svg .sh-hot:hover .sh-ul, .shapes-svg .sh-hot.is-open .sh-ul { opacity: 0; }
+.shapes-svg g.sh-grid[data-sym]:hover rect, .shapes-svg g.sh-grid.is-same rect, .shapes-svg .sh-sheet.is-same,
+.shapes-svg g[data-sym]:not(.sh-hot):hover .sh-sheet { stroke: var(--accent); }
+.shapes-svg g[data-sym].is-same .sh-sheet { stroke: var(--accent); }
+.shapes-svg g[data-sym="uv"]:hover .sh-px, .shapes-svg g[data-sym="uv"].is-same .sh-px { stroke: var(--accent-text); stroke-width: 3; }
+
+/* the table under the diagram: symbol and size are the same buttons as in the diagram */
+.shapes-table-wrap { margin-top: var(--s-3); padding-top: var(--s-3); border-top: 1px solid var(--rule); overflow-x: auto; scrollbar-width: thin; }
+.shapes-table { width: 100%; border-collapse: collapse; font-size: var(--fs-note); line-height: 1.45; }
+.shapes-table thead th { padding: 0 var(--s-3) var(--s-2) 0; font-family: var(--font-mono); font-size: 0.75rem; font-weight: 600; letter-spacing: .04em; text-align: left; text-transform: uppercase; color: var(--muted); }
+.shapes-table thead th .zh { letter-spacing: 0; }
+.shapes-table tbody :is(th, td) { padding: 3px var(--s-3) 3px 0; border-top: 1px solid var(--rule); text-align: left; vertical-align: baseline; font-weight: 400; }
+.shapes-table tbody th { width: 4.6em; white-space: nowrap; }
+.shapes-table tbody td:nth-child(2) { width: 8.5em; white-space: nowrap; }
+.shapes-table td:last-child { color: var(--ink-2); }
+.sh-ref {
+  display: inline-flex;
+  align-items: baseline;
+  min-height: 30px;
+  padding: 2px 6px;
+  margin-left: -6px;
+  border-radius: var(--r-1);
+  color: var(--ink);
+  background-image: linear-gradient(to right, var(--accent) 50%, transparent 50%);
+  background-size: 4px 1px;
+  background-repeat: repeat-x;
+  background-position: 6px calc(100% - 4px);
+  transition: background-color var(--t-press) var(--ease);
+}
+.sh-ref:not(.sh-ref-val) { font-family: var(--font-serif); font-style: italic; font-size: 1.15em; }
+.sh-ref :is(sub, sup) { font-size: .72em; font-style: normal; line-height: 0; }
+.sh-ref-val { font-family: var(--font-mono); font-variant-numeric: tabular-nums; font-weight: 600; }
+.sh-ref:hover, .sh-ref.is-same { background-color: var(--accent-wash); }
+.sh-ref.is-open { background-color: var(--accent-wash); box-shadow: inset 0 0 0 1.5px var(--accent); background-image: none; }
+@container paper (max-width: 520px) {
+  .shapes-table thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+  .shapes-table, .shapes-table tbody { display: block; }
+  .shapes-table tbody tr { display: grid; grid-template-columns: auto minmax(0, 1fr); column-gap: var(--s-3); padding: 4px 0; border-top: 1px solid var(--rule); }
+  .shapes-table tbody :is(th, td) { display: block; width: auto !important; padding: 0; border: 0; }
+  .shapes-table tbody td:last-child { grid-column: 1 / -1; }
+}
 
 /* ── the bar under the 3D view: drag it to change the view's height ── */
 .lab-resizer {

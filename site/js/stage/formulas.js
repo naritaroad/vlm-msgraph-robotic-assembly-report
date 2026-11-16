@@ -288,7 +288,7 @@ export function texADeg(A) {
 export function texEq7(wp, { reading = 'printed' } = {}) {
   const { P, T, coeffs = [0.8, 0.92, 0.96], index } = wp;
   const pts = waypoints(P, T, coeffs);
-  const w = (i) => (i === index ? R`\htmlClass{lv-cur}{\blacktriangleright\,w_${i}}` : R`w_${i}`);
+  const w = (i) => (i === index ? R`\htmlClass{lv-cur}{\blacktriangleright\,w_${i}}` : R`\phantom{\blacktriangleright\,}w_${i}`);
   const second = reading === 'printed'
     ? R`${w(1)}&=\vec{P}\times\vec{R}&&\text{same position }${texRow(pts[1], 3)}\ \mathrm{m}`
     : R`${w(1)}&=(\vec{P},\ R_{grasp})&&\text{same position, gripper turned}`;
@@ -365,57 +365,105 @@ const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&l
 /**
  * Shapes of the data that flow through Eq. (4)–(6): I^rgb h×w×3, I^depth h×w, one pixel (u,v), K 3×3,
  * Γ_t 4×4, one 3D point, the cloud N×3, and A_t with 7 numbers.
- * s = { h, w, u, v, d, N, k }. Colours come from CSS classes (widgets-lab.css); no colour is hard-coded here.
+ * s = { h, w, u, v, d, N, k, keys }. Colours come from CSS classes (widgets-lab.css); no colour is hard-coded here.
+ *
+ * Every symbol, dimension label and value is a hot spot: <g data-sym="key" tabindex="0" role="button">, so pop.js
+ * opens the same symbol card as in the formulas (a value or a size adds data-val: the card then shows "Now").
+ * The box behind each label (.sh-hitbox) gives the hover and focus ring; the dotted line under it says it can be
+ * pressed, like a term in the text. keys = { rgb, depth } names the cards for the two images (see SHAPE_KEYS).
  */
+export const SHAPE_KEYS = Object.freeze({ rgb: 'O_t', depth: 'O_t' });
 export function shapesSvg(s = {}) {
   const h = s.h ?? CAMERA.height, w = s.w ?? CAMERA.width;
   const u = s.u ?? Math.round(w * 0.64), v = s.v ?? Math.round(h * 0.41);
   const Np = s.N, k = s.k ?? CAMERA.defaultViews;
+  const keys = { ...SHAPE_KEYS, ...(s.keys || {}) };
   const sym = (base, x, y, { sup, sub: sb, cls = 'sh-sym' } = {}) => `<text class="${cls}" x="${x}" y="${y}">${base}${sup ? `<tspan class="sh-sup" dy="-8">${esc(sup)}</tspan>` : ''}${sb ? `<tspan class="sh-sub" dy="5">${esc(sb)}</tspan>` : ''}</text>`;
-  const grid = (x, y, n, m, c, cls) => {
-    let g = `<g class="${cls}"><rect x="${x}" y="${y}" width="${m * c}" height="${n * c}"/>`;
+  const grid = (x, y, n, m, c, cls, key = '') => {
+    let g = `<g class="${cls}"${key ? ` data-sym="${key}"` : ''}><rect x="${x}" y="${y}" width="${m * c}" height="${n * c}"/>`;
     for (let i = 1; i < n; i++) g += `<line x1="${x}" y1="${y + i * c}" x2="${x + m * c}" y2="${y + i * c}"/>`;
     for (let j = 1; j < m; j++) g += `<line x1="${x + j * c}" y1="${y}" x2="${x + j * c}" y2="${y + n * c}"/>`;
     return g + '</g>';
   };
+  // a pressable label: box [x, y, bw, bh] behind it, dotted underline at its foot
+  const hot = (key, [x, y, bw, bh], label, inner, { val = false, line = true } = {}) =>
+    `<g class="sh-hot" data-sym="${key}"${val ? ' data-val="1"' : ''} tabindex="0" role="button" aria-label="${esc(label)}">`
+    + `<rect class="sh-hitbox" x="${x}" y="${y}" width="${bw}" height="${bh}" rx="4"/>${inner}`
+    + (line ? `<line class="sh-ul" x1="${x + 3}" y1="${y + bh - 1.5}" x2="${x + bw - 3}" y2="${y + bh - 1.5}"/>` : '') + '</g>';
   const arrow = (x1, y1, x2, y2) => `<line class="sh-arrow" x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" marker-end="url(#sh-ah)"/>`;
   // two image sheets, 140 wide, same aspect as the camera image
   const iw = 140, ih = Math.round((iw * h) / w);
   const rgbX = 16, depX = 200, imgY = 52;
   const px = (x0) => +(x0 + (u / w) * iw).toFixed(1), py = +(imgY + (v / h) * ih).toFixed(1);
   const C = 22, rowY = 236;                       // cell size and top of the 3-row grids
-  let o = `<svg class="shapes-svg" viewBox="0 0 560 420" role="img" aria-label="Data shapes: RGB image ${h} by ${w} by 3, depth image ${h} by ${w}, K 3 by 3, camera pose 4 by 4, one 3D point, point cloud N by 3, action 7">`;
+  const uv = `(${fmtM(u, 0)}, ${fmtM(v, 0)}) px`;
+  const nPts = Np != null ? fmtM(Np, 0) : 'N';
+  let o = `<svg class="shapes-svg" viewBox="0 0 560 420" role="group" aria-label="Data shapes: RGB image ${h} by ${w} by 3, depth image ${h} by ${w}, K 3 by 3, camera pose 4 by 4, one 3D point, point cloud N by 3, action 7. Each label opens its explanation.">`;
   o += '<defs><marker id="sh-ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="sh-ahp" d="M0 0L10 5L0 10z"/></marker></defs>';
   // I^rgb: three stacked sheets; I^depth: one sheet
-  o += `<rect class="sh-sheet sh-ch3" x="${rgbX + 12}" y="${imgY - 12}" width="${iw}" height="${ih}"/><rect class="sh-sheet sh-ch2" x="${rgbX + 6}" y="${imgY - 6}" width="${iw}" height="${ih}"/><rect class="sh-sheet sh-ch1" x="${rgbX}" y="${imgY}" width="${iw}" height="${ih}"/>`;
-  o += sym('I', rgbX, 26, { sup: 'rgb' }) + `<text class="sh-dim" x="${rgbX + 44}" y="26">${h} × ${w} × 3</text>`;
-  o += `<rect class="sh-sheet sh-depth" x="${depX}" y="${imgY}" width="${iw}" height="${ih}"/>`;
-  o += sym('I', depX, 26, { sup: 'depth' }) + `<text class="sh-dim" x="${depX + 58}" y="26">${h} × ${w}</text>`;
-  o += `<circle class="sh-px" cx="${px(rgbX)}" cy="${py}" r="5"/><circle class="sh-px" cx="${px(depX)}" cy="${py}" r="5"/>`;
-  o += `<text class="sh-val" x="362" y="76">(u, v) =</text><text class="sh-val" x="362" y="96">(${fmtM(u, 0)}, ${fmtM(v, 0)}) px</text>`;
-  o += `<text class="sh-val" x="362" y="124">${s.d != null ? `d = ${fmt(s.d, 3)} m` : 'd in metres'}</text>`;
+  o += `<g data-sym="${keys.rgb}"><rect class="sh-sheet sh-ch3" x="${rgbX + 12}" y="${imgY - 12}" width="${iw}" height="${ih}"/><rect class="sh-sheet sh-ch2" x="${rgbX + 6}" y="${imgY - 6}" width="${iw}" height="${ih}"/><rect class="sh-sheet sh-ch1" x="${rgbX}" y="${imgY}" width="${iw}" height="${ih}"/></g>`;
+  o += hot(keys.rgb, [rgbX - 4, 5, 44, 28], 'I rgb, the colour image', sym('I', rgbX, 26, { sup: 'rgb' }));
+  o += hot(keys.rgb, [rgbX + 40, 10, 120, 23], `I rgb size: ${h} × ${w} × 3`, `<text class="sh-dim" x="${rgbX + 44}" y="26">${h} × ${w} × 3</text>`, { val: true });
+  o += `<rect class="sh-sheet sh-depth" x="${depX}" y="${imgY}" width="${iw}" height="${ih}" data-sym="${keys.depth}"/>`;
+  o += hot(keys.depth, [depX - 4, 5, 58, 28], 'I depth, the depth image', sym('I', depX, 26, { sup: 'depth' }));
+  o += hot(keys.depth, [depX + 54, 10, 86, 23], `I depth size: ${h} × ${w}`, `<text class="sh-dim" x="${depX + 58}" y="26">${h} × ${w}</text>`, { val: true });
+  o += `<g data-sym="uv"><circle class="sh-px" cx="${px(rgbX)}" cy="${py}" r="5"/><circle class="sh-px" cx="${px(depX)}" cy="${py}" r="5"/></g>`;
+  o += hot('uv', [357, 60, 124, 43], `pixel (u, v) = ${uv}`, `<text class="sh-val" x="362" y="76">(u, v) =</text><text class="sh-val" x="362" y="96">${uv}</text>`, { val: true });
+  o += s.d != null
+    ? hot('d_t', [357, 108, 100, 23], `depth d = ${fmt(s.d, 3)} m`, `<text class="sh-val" x="362" y="124">d = ${fmt(s.d, 3)} m</text>`, { val: true })
+    : hot('d_t', [357, 108, 100, 23], 'depth d, in metres', '<text class="sh-val" x="362" y="124">d in metres</text>');
   // the pixel and its depth go into Eq. (4)
   o += arrow(px(rgbX), py + 7, 40, rowY - 28) + arrow(px(depX), py + 7, 66, rowY - 28);
   // K -> P_t -> Γ_t -> P^w -> cloud
-  o += grid(16, rowY, 3, 3, C, 'sh-grid sh-k') + sym('K', 16, rowY - 10) + `<text class="sh-dim" x="36" y="${rowY - 10}">3 × 3</text>`;
+  o += grid(16, rowY, 3, 3, C, 'sh-grid sh-k', 'K') + hot('K', [12, rowY - 30, 22, 27], 'K, the intrinsic matrix', sym('K', 16, rowY - 10))
+    + hot('K', [33, rowY - 25, 48, 22], 'K size: 3 × 3', `<text class="sh-dim" x="36" y="${rowY - 10}">3 × 3</text>`, { val: true });
   o += arrow(86, rowY + 33, 124, rowY + 33);
-  o += grid(130, rowY, 3, 1, C, 'sh-grid sh-pt') + sym('P', 124, rowY - 10, { sub: 't' }) + `<text class="sh-dim" x="150" y="${rowY - 10}">3</text>`;
+  o += grid(130, rowY, 3, 1, C, 'sh-grid sh-pt', 'P_t_short') + hot('P_t_short', [120, rowY - 30, 27, 27], 'P t, the point in the camera frame', sym('P', 124, rowY - 10, { sub: 't' }))
+    + hot('P_t_short', [146, rowY - 25, 17, 22], 'P t size: 3', `<text class="sh-dim" x="150" y="${rowY - 10}">3</text>`, { val: true });
   o += arrow(156, rowY + 33, 198, rowY + 33);
-  o += grid(204, rowY - 11, 4, 4, C, 'sh-grid sh-gamma') + sym('Γ', 204, rowY - 21, { sub: 't' }) + `<text class="sh-dim" x="230" y="${rowY - 21}">4 × 4</text>`;
+  o += grid(204, rowY - 11, 4, 4, C, 'sh-grid sh-gamma', 'Gamma_t') + hot('Gamma_t', [200, rowY - 41, 27, 27], 'Gamma t, the camera pose', sym('Γ', 204, rowY - 21, { sub: 't' }))
+    + hot('Gamma_t', [227, rowY - 36, 48, 22], 'Gamma t size: 4 × 4', `<text class="sh-dim" x="230" y="${rowY - 21}">4 × 4</text>`, { val: true });
   o += arrow(296, rowY + 33, 338, rowY + 33);
-  o += grid(344, rowY, 3, 1, C, 'sh-grid sh-pw') + sym('P', 338, rowY - 10, { sup: 'w' }) + `<text class="sh-dim" x="366" y="${rowY - 10}">3</text>`;
+  o += grid(344, rowY, 3, 1, C, 'sh-grid sh-pw', 'P_w_t') + hot('P_w_t', [334, rowY - 33, 29, 30], 'P w, the point in world coordinates', sym('P', 338, rowY - 10, { sup: 'w' }))
+    + hot('P_w_t', [362, rowY - 25, 17, 22], 'P w size: 3', `<text class="sh-dim" x="366" y="${rowY - 10}">3</text>`, { val: true });
   o += arrow(370, rowY + 33, 420, rowY + 33);
-  o += grid(426, rowY - 22, 5, 3, C, 'sh-grid sh-cloud') + sym('𝒫', 426, rowY - 32, { sub: 'i', cls: 'sh-sym sh-cal' }) + `<text class="sh-dim" x="452" y="${rowY - 32}">${Np != null ? fmtM(Np, 0) : 'N'} × 3</text>`;
+  o += grid(426, rowY - 22, 5, 3, C, 'sh-grid sh-cloud', 'P_cal_i') + hot('P_cal_i', [422, rowY - 52, 28, 27], 'script P i, the point cloud of part i', sym('𝒫', 426, rowY - 32, { sub: 'i', cls: 'sh-sym sh-cal' }))
+    + hot('P_cal_i', [449, rowY - 47, 18 + 8.4 * (nPts.length + 4), 22], `script P i size: ${nPts} × 3`, `<text class="sh-dim" x="452" y="${rowY - 32}">${nPts} × 3</text>`, { val: true });
   o += ['x', 'y', 'z'].map((c, j) => `<text class="sh-cell" x="${437 + j * C}" y="${rowY - 6}">${c}</text>`).join('');
   o += `<text class="sh-dots" x="459" y="${rowY + 108}">⋮</text>`;
-  o += `<text class="sh-eq" x="16" y="${rowY + 92}">Eq. (4)</text><text class="sh-eq" x="204" y="${rowY + 100}">Eq. (5)</text><text class="sh-eq" x="426" y="${rowY + 126}">Eq. (6), k = ${fmtM(k, 0)}</text>`;
+  o += `<text class="sh-eq" x="16" y="${rowY + 92}">Eq. (4)</text><text class="sh-eq" x="204" y="${rowY + 100}">Eq. (5)</text><text class="sh-eq" x="426" y="${rowY + 126}">Eq. (6),</text>`;
+  o += hot('k_views', [491, rowY + 111, 54, 21], `k = ${fmtM(k, 0)} views`, `<text class="sh-eq" x="495" y="${rowY + 126}">k = ${fmtM(k, 0)}</text>`, { val: true });
   // A_t
   const ay = 372, ax = 96, ac = 32;
-  o += sym('A', 16, ay + 21, { sub: 't' }) + `<text class="sh-dim" x="46" y="${ay + 21}">7 =</text>`;
-  o += grid(ax, ay, 1, 3, ac, 'sh-grid sh-at-t') + grid(ax + 3 * ac + 8, ay, 1, 3, ac, 'sh-grid sh-at-r') + grid(ax + 6 * ac + 16, ay, 1, 1, ac, 'sh-grid sh-at-s');
-  o += ['dx', 'dy', 'dz', 'rx', 'ry', 'rz', 's'].map((c, j) => `<text class="sh-cell" x="${ax + ac / 2 + j * ac + (j > 5 ? 16 : j > 2 ? 8 : 0)}" y="${ay + 21}">${c}</text>`).join('');
+  o += hot('A_t', [12, ay, 30, 28], 'A t, the low-level action', sym('A', 16, ay + 21, { sub: 't' }));
+  o += hot('A_t', [43, ay + 5, 16, 22], 'A t size: 7', `<text class="sh-dim" x="46" y="${ay + 21}">7</text>`, { val: true }) + `<text class="sh-dim" x="62" y="${ay + 21}">=</text>`;
+  const cells = (from, to, x0) => ['dx', 'dy', 'dz', 'rx', 'ry', 'rz', 's'].slice(from, to).map((c, j) => `<text class="sh-cell" x="${x0 + ac / 2 + j * ac}" y="${ay + 21}">${c}</text>`).join('');
+  o += hot('dxyz', [ax - 2, ay - 2, 3 * ac + 4, ac + 4], 'dx, dy, dz: translation', grid(ax, ay, 1, 3, ac, 'sh-grid sh-at-t') + cells(0, 3, ax), { line: false });
+  o += hot('rxyz', [ax + 3 * ac + 6, ay - 2, 3 * ac + 4, ac + 4], 'rx, ry, rz: Euler angles', grid(ax + 3 * ac + 8, ay, 1, 3, ac, 'sh-grid sh-at-r') + cells(3, 6, ax + 3 * ac + 8), { line: false });
+  o += hot('s_t', [ax + 6 * ac + 14, ay - 2, ac + 4, ac + 4], 's: gripper state', grid(ax + 6 * ac + 16, ay, 1, 1, ac, 'sh-grid sh-at-s') + cells(6, 7, ax + 6 * ac + 16), { line: false });
   o += `<text class="sh-val" x="${ax + 6 * ac + 60}" y="${ay + 14}">T: m, R: rad,</text><text class="sh-val" x="${ax + 6 * ac + 60}" y="${ay + 32}">s: gripper</text>`;
   return o + '</svg>';
+}
+
+/**
+ * The table under the diagram: symbol, size in the lab, meaning. Symbol and size are buttons that open the same
+ * cards as the diagram. Returns HTML; rows of SHAPES_ROWS, values from the same s as shapesSvg.
+ */
+export function shapesTable(s = {}) {
+  const h = s.h ?? CAMERA.height, w = s.w ?? CAMERA.width;
+  const keys = { ...SHAPE_KEYS, ...(s.keys || {}) };
+  const size = {
+    rgb: `${h} × ${w} × 3`, depth: `${h} × ${w}`,
+    uv: s.u != null && s.v != null ? `(${fmtM(s.u, 0)}, ${fmtM(s.v, 0)}) px` : '2 × px',
+    d: s.d != null ? `${fmt(s.d, 3)} m` : 'm',
+    K: '3 × 3', Pt: '3', G: '4 × 4', Pw: '3', cloud: `${s.N != null ? fmtM(s.N, 0) : 'N'} × 3`, A: '7',
+  };
+  const btn = (key, html, label, val) => `<button type="button" class="sh-ref${val ? ' sh-ref-val' : ''}" data-sym="${key}"${val ? ' data-val="1"' : ''} aria-expanded="false" aria-label="${esc(label)}">${html}</button>`;
+  const rows = SHAPES_ROWS.map(([id, key0, symHtml, symLabel, t]) => {
+    const key = keys[id] || key0;
+    return `<tr><th scope="row">${btn(key, symHtml, symLabel, false)}</th><td>${btn(key, esc(size[id]), `${symLabel}: ${size[id]}`, true)}</td><td>${biHtml(t)}</td></tr>`;
+  }).join('');
+  return `<table class="shapes-table"><thead><tr><th scope="col">${biHtml(bi('Symbol', '符號'))}</th><th scope="col">${biHtml(bi('Size in the lab', '實驗室裡的大小'))}</th><th scope="col">${biHtml(bi('Meaning', '意思'))}</th></tr></thead><tbody>${rows}</tbody></table>`;
 }
 
 // ───────────────────────────────────────────────────────────── block models (pure)
@@ -423,7 +471,7 @@ export function shapesSvg(s = {}) {
 /** Worked examples from docs/facts.md ("local check"), used until the lab sends real events. */
 export const EXAMPLE = Object.freeze({
   capture: { K: [100, 0, 50, 0, 100, 40, 0, 0, 1], camToWorld: [1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1], pixel: { u: 70, v: 60, d: 2 }, example: true },
-  waypoints: { P: [0.10, -0.20, 0.30], T: [0, 0.05, -0.12], coeffs: [0.8, 0.92, 0.96], index: null, example: true },
+  waypoints: { P: [0.10, -0.20, 0.30], T: [0, 0.05, -0.12], coeffs: [0.8, 0.92, 0.96], index: 0, phase: 'approach', example: true },
 });
 
 export function createState() {
@@ -554,7 +602,10 @@ export function buildModel(code, st) {
       notes.push(equalTail
         ? bi(`Segment lengths as fractions of |T|: ${fr.map((f) => fmt(f, 2)).join(' : ')}. The last two are equal.`, `各段占 |T| 的比例：${fr.map((f) => fmt(f, 2)).join(' : ')}。最後兩段一樣長。`)
         : bi(`Segment lengths as fractions of |T|: ${fr.map((f) => fmt(f, 2)).join(' : ')}.`, `各段占 |T| 的比例：${fr.map((f) => fmt(f, 2)).join(' : ')}。`));
-      if (wp.index != null) notes.push(bi(`Now at w${wp.index} (${wp.phase ?? 'approach'}).`, `目前走到 w${wp.index}（${wp.phase ?? 'approach'}）。`));
+      const wpNote = wp.index != null
+        ? bi(`Now at w${wp.index} (${wp.phase ?? 'approach'}).`, `目前走到 w${wp.index}（${wp.phase ?? 'approach'}）。`)
+        : bi('Waypoints w0 to w5 ready.', '路點 w0 到 w5 已就緒。');
+      notes.push(wpNote);
       return { tag: wp.example ? 'Local run' : 'Demo', src: wp.example ? SRC_EXAMPLE : bi(`lab:waypoints, phase: ${wp.phase ?? '–'}`, `lab:waypoints，階段：${wp.phase ?? '–'}`), rows: [
         { tex: texEq7(wp, { reading: code === 'eq7' ? 'printed' : 'rotate' }), lab: bi('The six waypoints', '六個路點') },
         { tex: texEq7Segments(wp), lab: bi('Length of each moving segment', '每一段移動多長') },
@@ -630,17 +681,36 @@ function loadKatex(ctx) {
 }
 const KATEX_OPTS = { displayMode: true, throwOnError: false, strict: false, output: 'html', trust: (c) => c.command === '\\htmlClass' || c.command === '\\htmlData' };
 
-/** Shrink a row to its column (down to 76 %); below that it scrolls sideways and becomes focusable. */
+/** Shrink a row to its column (down to 76 %); below that it scrolls sideways and becomes focusable.
+ *  Locks scale and min-height per width so live value updates never make the block jump vertically. */
 function fitRow(math) {
   math.style.fontSize = '';
   math.removeAttribute('tabindex');
   const avail = math.clientWidth;
   if (!avail) return;
+  const key = String(Math.round(avail));
+  if (math.__fitKey !== key) {
+    math.__fitKey = key;
+    math.__minScale = 1;
+    math.style.minHeight = '';
+    math.__lockedH = 0;
+  }
   const need = math.scrollWidth;
-  if (need <= avail + 1) return;
-  const k = Math.max(0.76, (avail - 2) / need);
-  math.style.fontSize = `calc(var(--lv-fs) * ${k.toFixed(3)})`;
+  let k = 1;
+  if (need > avail + 1) {
+    k = Math.max(0.76, (avail - 2) / need);
+  }
+  k = Math.min(math.__minScale ?? 1, k);
+  math.__minScale = k;
+  if (k < 1) {
+    math.style.fontSize = `calc(var(--lv-fs) * ${k.toFixed(3)})`;
+  }
   if (math.scrollWidth > math.clientWidth + 1) math.tabIndex = 0;
+  const h = math.offsetHeight;
+  if (h > (math.__lockedH || 0)) {
+    math.__lockedH = h;
+    math.style.minHeight = `${h}px`;
+  }
 }
 
 function renderBlock(b, model, katex, tag = (x) => x) {
@@ -693,18 +763,36 @@ function renderBlock(b, model, katex, tag = (x) => x) {
   if (notes !== b.notesHtml) { b.notesEl.innerHTML = notes; b.notesHtml = notes; }
 }
 
-// The first item of each pair is trusted markup written here (sub and sup only).
-const SHAPES_LEGEND = [
-  ['I<sup>rgb</sup>', bi('colour image: height × width × 3 channels', '彩色影像：高 × 寬 × 3 個色版')],
-  ['I<sup>depth</sup>', bi('depth image: one distance in metres per pixel', '深度影像：每個像素一個距離（公尺）')],
-  ['(u, v)', bi('one pixel; the dot marks the same pixel in both images', '一個像素；圓點在兩張影像上標的是同一個像素')],
-  ['K', bi('camera intrinsics, 3 × 3 (setting)', '相機內參，3 × 3（設定值）')],
-  ['P<sub>t</sub>', bi('that pixel as a 3D point in the camera frame, Eq. (4)', '這個像素在相機座標裡的 3D 點，式 (4)')],
-  ['Γ<sub>t</sub>', bi('camera pose at time t, 4 × 4 (from the arm)', '時間 t 的相機姿態，4 × 4（由手臂讀到）')],
-  ['P<sup>w</sup>', bi('the same point in world coordinates, Eq. (5)', '同一個點換到世界座標，式 (5)')],
-  ['𝒫<sub>i</sub>', bi('point cloud of part i: N points × 3 coordinates, from k views, Eq. (6)', '零件 i 的點雲：N 個點 × 3 個座標，來自 k 個視角，式 (6)')],
-  ['A<sub>t</sub>', bi('low-level action: 3 translations, 3 Euler angles, 1 gripper state', '低層動作：3 個平移、3 個歐拉角、1 個夾爪狀態')],
+// Rows of the table under the shape diagram: [id, card key, symbol (trusted markup: sub and sup only), spoken name, meaning].
+const SHAPES_ROWS = [
+  ['rgb', 'O_t', 'I<sup>rgb</sup>', 'I rgb', bi('colour image: height × width × 3 channels', '彩色影像：高 × 寬 × 3 個色版')],
+  ['depth', 'O_t', 'I<sup>depth</sup>', 'I depth', bi('depth image: one distance in metres per pixel', '深度影像：每個像素一個距離（公尺）')],
+  ['uv', 'uv', '(u, v)', 'pixel (u, v)', bi('one pixel; the dot marks the same pixel in both images', '一個像素；圓點在兩張影像上標的是同一個像素')],
+  ['d', 'd_t', 'd', 'depth d', bi('depth of that pixel, read from the depth image', '這個像素的深度，從深度影像讀出')],
+  ['K', 'K', 'K', 'K', bi('camera intrinsics, 3 × 3 (setting)', '相機內參，3 × 3（設定值）')],
+  ['Pt', 'P_t_short', 'P<sub>t</sub>', 'P t', bi('that pixel as a 3D point in the camera frame, Eq. (4)', '這個像素在相機座標裡的 3D 點，式 (4)')],
+  ['G', 'Gamma_t', 'Γ<sub>t</sub>', 'Gamma t', bi('camera pose at time t, 4 × 4 (from the arm)', '時間 t 的相機姿態，4 × 4（由手臂讀到）')],
+  ['Pw', 'P_w_t', 'P<sup>w</sup>', 'P w', bi('the same point in world coordinates, Eq. (5)', '同一個點換到世界座標，式 (5)')],
+  ['cloud', 'P_cal_i', '𝒫<sub>i</sub>', 'script P i', bi('point cloud of part i: N points × 3 coordinates, from k views, Eq. (6)', '零件 i 的點雲：N 個點 × 3 個座標，來自 k 個視角，式 (6)')],
+  ['A', 'A_t', 'A<sub>t</sub>', 'A t', bi('low-level action: 3 translations, 3 Euler angles, 1 gripper state', '低層動作：3 個平移、3 個歐拉角、1 個夾爪狀態')],
 ];
+
+/** Make `el` look like `next` while keeping the nodes that did not change, so focus and an open card survive. */
+function morph(el, next) {
+  if (el.nodeType !== next.nodeType || el.nodeName !== next.nodeName) { el.replaceWith(next.cloneNode(true)); return; }
+  if (el.nodeType === 3) { if (el.nodeValue !== next.nodeValue) el.nodeValue = next.nodeValue; return; }
+  if (el.nodeType !== 1) return;
+  for (const { name, value } of [...next.attributes]) {
+    if (name === 'class' || name === 'aria-expanded') continue;      // pop.js marks open and same-symbol labels
+    if (el.getAttribute(name) !== value) el.setAttribute(name, value);
+  }
+  for (const { name } of [...el.attributes]) if (!next.hasAttribute(name) && !['class', 'aria-expanded', 'tabindex'].includes(name)) el.removeAttribute(name);
+  const want = next.getAttribute('class');
+  if (want !== null) for (const c of want.split(/\s+/)) if (c) el.classList.add(c);
+  const a = [...el.childNodes], b = [...next.childNodes];
+  if (a.length !== b.length) { el.replaceChildren(...b.map((n) => n.cloneNode(true))); return; }
+  a.forEach((n, i) => morph(n, b[i]));
+}
 
 /**
  * Scan the page and keep every live block current.
@@ -756,6 +844,22 @@ export function init(ctx = {}) {
     if (ctx.renderTex) { ctx.renderTex(b.body, tex, katex, { display: true, kp: b.kp, numbers: !values }); ctx.refitOne?.(b.body); }
   }
   const shapes = [...doc.querySelectorAll('.shapes[data-shapes]')].map((el) => ({ el, dirty: true, html: '' }));
+  // the two images get their own cards once the symbol table has them; until then the observation O_t stands in
+  const shapeKeys = () => {
+    const has = (k) => !!ctx.getSymbol?.(k);
+    return { rgb: has('I_rgb') ? 'I_rgb' : SHAPE_KEYS.rgb, depth: has('I_depth') ? 'I_depth' : SHAPE_KEYS.depth };
+  };
+  // SVG labels are not buttons: Enter and Space press them like one
+  const onShapeKey = (e) => {
+    if (e.key !== 'Enter' && e.key !== ' ') return;
+    const g = e.target instanceof Element ? e.target.closest('.shapes .sh-hot') : null;
+    if (!g || g !== e.target) return;
+    e.preventDefault();
+    e.stopPropagation();
+    const r = g.getBoundingClientRect();
+    g.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true, clientX: r.left + 4, clientY: r.top + 4 }));
+  };
+  doc.addEventListener('keydown', onShapeKey, true);
   let katex = null, raf = 0, lastPaint = 0, dead = false;
   const MIN_GAP = 120; // ms between repaints; telemetry arrives 15 times a second
 
@@ -785,11 +889,13 @@ export function init(ctx = {}) {
       if (s.el.dataset.shapes !== 'rgbd') continue;
       const cap = st.capture.example ? null : st.capture;
       const cloud = st.clouds[st.lastCloudPart];
-      const svg = shapesSvg({ h: CAMERA.height, w: CAMERA.width, u: cap?.pixel.u, v: cap?.pixel.v, d: cap?.pixel.d, N: cloud?.nPoints, k: st.params['views.k'] });
-      if (svg === s.html) continue;
-      s.html = svg;
+      const arg = { h: CAMERA.height, w: CAMERA.width, u: cap?.pixel.u, v: cap?.pixel.v, d: cap?.pixel.d, N: cloud?.nPoints, k: st.params['views.k'], keys: shapeKeys() };
+      const html = `<div class="shapes-scroll">${shapesSvg(arg)}</div><div class="shapes-table-wrap">${shapesTable(arg)}</div>`;
+      if (html === s.html) continue;
       s.el.classList.add('lv-shapes');
-      s.el.innerHTML = `<div class="shapes-scroll" tabindex="0">${svg}</div><dl class="shapes-legend">${SHAPES_LEGEND.map(([k, t]) => `<div><dt>${k}</dt><dd>${biHtml(t)}</dd></div>`).join('')}</dl>`;
+      if (!s.html) s.el.innerHTML = html;
+      else { const t = doc.createElement('div'); t.innerHTML = html; morph(s.el, Object.assign(s.el.cloneNode(false), { innerHTML: t.innerHTML })); }
+      s.html = html;
     }
   }
   function schedule() {
@@ -852,7 +958,13 @@ export function init(ctx = {}) {
   const onResize = () => { clearTimeout(fitTimer); fitTimer = setTimeout(() => { for (const b of blocks) if (b.built && b.visible) b.rowsEl.querySelectorAll('.lv-math').forEach(fitRow); }, 150); };
   globalThis.addEventListener?.('resize', onResize);
   const onAnimEnd = (e) => { if (e.target.classList?.contains('lv-chg')) e.target.classList.remove('lv-chg'); };
+  const onToggle = (e) => {
+    if (e.target instanceof Element && e.target.matches('details.eq-drawer[open]')) {
+      e.target.querySelectorAll('.lv-math').forEach(fitRow);
+    }
+  };
   doc.addEventListener('animationend', onAnimEnd, true);
+  doc.addEventListener('toggle', onToggle, true);
 
   loadKatex(ctx).then((k) => { katex = k; schedule(); }).catch((e) => {
     for (const b of blocks) { b.el.textContent = 'KaTeX did not load: ' + e.message; }
@@ -866,6 +978,6 @@ export function init(ctx = {}) {
     state: st,
     update,
     refresh() { blocks.forEach((b) => { b.dirty = true; }); shapes.forEach((s) => { s.dirty = true; }); schedule(); },
-    destroy() { dead = true; io?.disconnect(); globalThis.removeEventListener?.('resize', onResize); doc.removeEventListener('animationend', onAnimEnd, true); clearTimeout(raf); },
+    destroy() { dead = true; io?.disconnect(); globalThis.removeEventListener?.('resize', onResize); doc.removeEventListener('animationend', onAnimEnd, true); doc.removeEventListener('toggle', onToggle, true); doc.removeEventListener('keydown', onShapeKey, true); clearTimeout(raf); },
   };
 }

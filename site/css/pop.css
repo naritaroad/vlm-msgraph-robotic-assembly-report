@@ -1,0 +1,142 @@
+/* pop.css — term / symbol / formula popover overlay for presenter and reader pages */
+
+.term, .sym-ref, .gl {
+  display: inline;
+  padding: 0;
+  border-radius: 2px;
+  color: inherit;
+  font: inherit;
+  line-height: inherit;
+  text-align: inherit;
+  text-decoration: underline dotted color-mix(in srgb, var(--accent) 70%, transparent);
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: .22em;
+  cursor: help;
+  transition: background-color var(--t-press) var(--ease);
+}
+.term:hover, .sym-ref:hover, .gl:hover { background: var(--accent-wash); text-decoration-style: solid; }
+.term[aria-expanded="true"], .sym-ref[aria-expanded="true"], .gl[aria-expanded="true"] { background: var(--accent-wash); text-decoration-style: solid; }
+.sym-ref { padding-inline: .1em; }
+
+/* formulas: every tagged symbol or number, and the formula itself, opens the box */
+.katex [data-el] { cursor: help; border-radius: 2px; transition: background-color var(--t-press) var(--ease), box-shadow var(--t-press) var(--ease); }
+.katex [data-el]:hover { background: color-mix(in srgb, var(--spark) 16%, transparent); box-shadow: 0 0 0 1px color-mix(in srgb, var(--spark) 45%, transparent); }
+.katex [data-el].is-open { background: color-mix(in srgb, var(--spark) 22%, transparent); box-shadow: 0 0 0 2px var(--spark); }
+.katex [data-sym]:has([data-el]:hover) { background: transparent; box-shadow: none; }
+.katex [data-sym] { cursor: help; border-radius: 3px; transition: background-color var(--t-press) var(--ease), box-shadow var(--t-press) var(--ease); }
+.katex [data-sym]:hover, .katex [data-sym].is-same { background: var(--accent-wash); box-shadow: 0 0 0 2px var(--accent-wash); }
+.katex [data-sym].is-open { background: var(--accent-wash); box-shadow: 0 0 0 2px var(--accent); }
+.katex [data-val] { color: var(--spark-text); }
+.eq-body, .eq-inline, td[data-tex], .lv-math { cursor: help; }
+.eq-body.is-open, .eq-inline.is-open { box-shadow: 0 0 0 2px var(--accent); border-radius: var(--r-2); }
+.eq-body:focus-visible, .eq-inline:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+
+/* ════════ the explanation box: one layer above the page, never pushes the text ════════ */
+
+.pop {
+  position: fixed;
+  top: 0; left: 0;
+  z-index: var(--z-pop);
+  width: min(400px, calc(100vw - 24px));
+  max-height: min(60vh, 520px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: var(--s-3) calc(var(--s-4) + 28px) var(--s-3) var(--s-4);
+  border-radius: var(--r-3);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: var(--fs-small);
+  line-height: 1.55;
+  transform-origin: var(--ax, 50%) 0;
+  animation: pop-in 160ms var(--ease-out);
+}
+.pop[data-side="above"] { transform-origin: var(--ax, 50%) 100%; }
+@keyframes pop-in { from { opacity: 0; transform: translateY(4px) scale(.97); } }
+@media (prefers-reduced-motion: reduce) { .pop { animation: none; } }
+.pop::before {
+  content: "";
+  position: absolute;
+  left: clamp(14px, var(--ax, 24px), calc(100% - 26px));
+  top: -6px;
+  width: 11px; height: 11px;
+  border-top: 1px solid var(--glass-line);
+  border-left: 1px solid var(--glass-line);
+  background: var(--glass-bg-strong);
+  transform: rotate(45deg);
+}
+.pop[data-side="above"]::before { top: auto; bottom: -6px; transform: rotate(225deg); }
+.pop-close { position: absolute; top: 4px; right: 4px; width: 32px; height: 32px; border-radius: 50%; color: var(--muted); }
+.pop-close:hover { background: color-mix(in srgb, var(--ink) 9%, transparent); color: var(--ink); }
+.pop-kicker { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-1) var(--s-2); margin-bottom: 2px; font-family: var(--font-mono); font-size: 0.6875rem; letter-spacing: .04em; text-transform: uppercase; color: var(--muted); }
+.pop-kicker .kind { text-transform: none; letter-spacing: 0; }
+.pop-name { font-family: var(--font-display); font-size: 1.1875rem; font-weight: 700; line-height: 1.25; }
+.pop-name .katex { font-size: 1.05em; }
+.pop-orig { margin-top: 2px; font-family: var(--font-sans); font-size: 0.95rem; font-weight: 600; line-height: 1.35; color: var(--ink-2); }
+.pop-def { margin-top: var(--s-2); }
+.pop-def + .pop-def { margin-top: var(--s-1); color: var(--ink-2); }
+html[data-lang="both"] .pop-def .zh { display: block; margin-top: 2px; }
+.pop-now {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 2px var(--s-3);
+  margin-top: var(--s-3);
+  padding: var(--s-2) var(--s-3);
+  border-radius: var(--r-2);
+  background: color-mix(in srgb, var(--spark) 12%, transparent);
+  font-size: var(--fs-note);
+}
+.pop-now dt { color: var(--muted); }
+.pop-now dd { font-family: var(--font-mono); font-variant-numeric: tabular-nums; color: var(--spark-text); overflow-wrap: anywhere; }
+.pop-src { margin-top: var(--s-2); font-family: var(--font-mono); font-size: 0.75rem; color: var(--muted); }
+.pop-also { margin-top: var(--s-2); font-size: var(--fs-note); color: var(--muted); }
+.pop-also a { color: var(--accent-text); }
+.pop-io { display: grid; gap: var(--s-2); margin-top: var(--s-2); }
+.pop-io > div { display: grid; grid-template-columns: 4.6em minmax(0, 1fr); gap: var(--s-2); }
+.pop-io dt { font-size: var(--fs-note); font-weight: 600; color: var(--muted); }
+.pop-formula { margin-top: var(--s-2); padding: var(--s-2) var(--s-3); overflow-x: auto; border-radius: var(--r-2); background: color-mix(in srgb, var(--ink) 5%, transparent); }
+.pop-formula .katex-display { margin: 0; }
+.pop-tex-inline .katex { font-size: 1em; }
+.pop-role { font-size: var(--fs-note); color: var(--muted); }
+.pop[data-depth="1"], .pop[data-depth="2"], .pop[data-depth="3"], .pop[data-depth="4"], .pop[data-depth="5"], .pop[data-depth="6"], .pop[data-depth="7"] { box-shadow: var(--glass-shadow), 0 0 0 1px color-mix(in srgb, var(--accent) 35%, transparent); }
+.pop-syms { display: grid; gap: 6px; margin-top: var(--s-3); padding-top: var(--s-2); border-top: 1px solid var(--glass-line); }
+.pop-syms > div { display: grid; grid-template-columns: minmax(3.2em, auto) minmax(0, 1fr); gap: var(--s-3); align-items: baseline; }
+.pop-syms dt { font-size: 1.02em; }
+.pop-syms dd { font-size: var(--fs-note); color: var(--ink-2); }
+
+/* ════════ script and Q&A pages (body.reader) ════════
+   These pages do not load chrome.css, where .glass lives, so the box had no surface at all and the script showed
+   through it. Here it is a solid card: opaque fill, a visible edge and a lifted shadow, in both themes. A box opened
+   from inside another box sits a little further forward and carries an accent edge so the stack reads as layers. */
+
+body.reader .pop {
+  background: var(--card);
+  border: 1px solid var(--rule-strong);
+  box-shadow: 0 18px 44px -16px rgba(14, 26, 45, .42), 0 3px 10px -3px rgba(14, 26, 45, .2);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  max-height: min(64vh, 540px);
+  max-height: min(64dvh, 540px);
+}
+html[data-theme="dark"] body.reader .pop {
+  box-shadow: 0 22px 52px -14px rgba(0, 0, 0, .8), 0 3px 12px -2px rgba(0, 0, 0, .55), 0 0 0 1px rgba(230, 236, 245, .04);
+}
+body.reader .pop::before {
+  border-top-color: var(--rule-strong);
+  border-left-color: var(--rule-strong);
+  background: var(--card);
+}
+body.reader .pop[data-depth]:not([data-depth="0"]) {
+  border-color: color-mix(in srgb, var(--accent) 55%, var(--rule-strong));
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--accent) 30%, transparent),
+    0 24px 56px -14px rgba(14, 26, 45, .5), 0 4px 12px -3px rgba(14, 26, 45, .24);
+}
+html[data-theme="dark"] body.reader .pop[data-depth]:not([data-depth="0"]) {
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--accent) 35%, transparent),
+    0 26px 60px -12px rgba(0, 0, 0, .85), 0 4px 14px -2px rgba(0, 0, 0, .6);
+}
+body.reader .pop-syms { border-top-color: var(--rule); }
+body.reader .pop-formula { background: var(--paper-2); }
+body.reader .pop-now { background: color-mix(in srgb, var(--spark) 12%, var(--card)); }
+@media (max-width: 480px) {
+  body.reader .pop { width: calc(100vw - 16px); padding-inline: var(--s-3) calc(var(--s-3) + 28px); }
+}

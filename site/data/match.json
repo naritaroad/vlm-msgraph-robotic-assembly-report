@@ -197,6 +197,12 @@
  "fitness": [
   "fitness"
  ],
+ "flexible-automation": [
+  "flexible automation",
+  "彈性自動化",
+  "彈性生產",
+  "flexible production"
+ ],
  "focal-length": [
   "focal length",
   "focal lengths",
@@ -350,6 +356,12 @@
   "標籤",
   "detection label",
   "detection labels"
+ ],
+ "learning-from-demonstration": [
+  "learning from demonstration",
+  "示範學習",
+  "imitation learning",
+  "模仿學習"
  ],
  "llama-adapter": [
   "Llama-adapter2",
@@ -762,6 +774,11 @@
  "video-frame": [
   "影格",
   "video frame"
+ ],
+ "vision-language-action": [
+  "Vision-Language-Action",
+  "視覺語言動作",
+  "VLA"
  ],
  "vlm": [
   "VLM",

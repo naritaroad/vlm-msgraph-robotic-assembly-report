@@ -181,7 +181,7 @@ html[data-lang="both"] .w :is(button, th, small, h4, h5, caption, .w-frac) .zh {
 .w-stepper { display: inline-flex; align-items: center; gap: var(--s-1); }
 .w-stepper > button:not(.btn) { width: var(--hit); height: var(--hit); border: 1px solid var(--bay-rule-strong); border-radius: var(--r-2); background: var(--bay-3); color: var(--bay-ink); font-size: 1.4em; line-height: 1; text-align: center; }
 .w-stepper input[type="range"] { width: clamp(80px, 15cqi, 170px); }
-.w-graph .w-controls select { max-width: 15.5em; }
+.w-graph .w-controls select { max-width: 28em; }
 .w-stepper .btn { min-width: 5.5em; }
 
 .w-node rect { fill: var(--bay-3); stroke: var(--nc, var(--bay-muted)); stroke-width: 2; }
